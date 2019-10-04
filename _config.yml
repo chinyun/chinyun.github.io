@@ -13,8 +13,8 @@ timezone:
 
 # URL
 ## If your site is put in a subdirectory, set url as 'http://yoursite.com/child' and root as '/child/'
-url: https://chinyun.github.io/myblog
-root: /myblog/
+url: /
+root: /
 permalink: :year/:month/:day/:title/
 permalink_defaults:
 
@@ -78,6 +78,6 @@ theme: next
 # Deployment
 ## Docs: https://hexo.io/docs/deployment.html
 deploy:
-  type: git
-  repo: https://github.com/chinyun/myblog.git
-  branch: gh-page
+  type:  
+  # repo: https://github.com/chinyun/myblog.git
+  # branch: gh-page
