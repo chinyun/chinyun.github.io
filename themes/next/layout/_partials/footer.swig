@@ -65,13 +65,13 @@
   </div>
 {%- endif %}
 
-{% if theme.mermaid.enable %}
+{{- next_inject('footer') }}
+
+{%- if theme.mermaid.enable %}
   <script src='https://unpkg.com/mermaid@{{ theme.mermaid.version }}/dist/mermaid.min.js'></script>
   <script>
     if (window.mermaid) {
       mermaid.initialize({{ JSON.stringify(theme.mermaid.options) }});
     }
   </script>
-{% endif %}
-
-{{- next_inject('footer') }}
+{%- endif %}
