@@ -63,7 +63,7 @@
 <meta property="og:site_name" content="Jinny&#39;s blog">
 <meta property="og:description" content="How React manage StateReact 使用單向數據流，父元件會把自身的 state 作為 props 傳遞給子元件，以此來共享資料。 根據官方文件描述：「 React Componenet 除了接收資料外（ 透過 this.props 存取 ），也可以保存自身的 state （透過 this.state 存取）。當一個 component 的 state 改變的時候，產生的標記語">
 <meta property="og:locale" content="zh-tw">
-<meta property="og:updated_time" content="2019-10-09T10:34:25.264Z">
+<meta property="og:updated_time" content="2019-10-09T10:52:01.134Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="React State Management &amp; Redux">
 <meta name="twitter:description" content="How React manage StateReact 使用單向數據流，父元件會把自身的 state 作為 props 傳遞給子元件，以此來共享資料。 根據官方文件描述：「 React Componenet 除了接收資料外（ 透過 this.props 存取 ），也可以保存自身的 state （透過 this.state 存取）。當一個 component 的 state 改變的時候，產生的標記語">
@@ -226,7 +226,7 @@
                 
               
 
-              <time title="Created: 2019-10-09 15:42:37 / Modified: 10:34:25" itemprop="dateCreated datePublished" datetime="2019-10-09T15:42:37+00:00">2019-10-09</time>
+              <time title="Created: 2019-10-09 15:42:37 / Modified: 10:52:01" itemprop="dateCreated datePublished" datetime="2019-10-09T15:42:37+00:00">2019-10-09</time>
             </span>
           
             
@@ -254,14 +254,29 @@
 <p>如此一來，使用者操作應用程式改變資料等不同的 functions 被分散在各個元件，不僅不好維護，也容易因為 state 更新先後的問題引起錯誤。</p>
 <h1 id="Why-Redux"><a href="#Why-Redux" class="headerlink" title="Why Redux"></a>Why Redux</h1><p>Redux 由 Dan Abramov 開發：<br>「 ..Redux provides a solid, stable and mature solution to managing state in your React application. Through a handful of small, useful patterns, Redux can transform your application from a total mess of confusing and scattered state, into a delightfully organized, easy to understand modern JavaScript powerhouse. ..」</p>
 <p>Redux 受到幾個 Flux Pattern 重要特質的影響，過去的 MVC(Model-View-Controller) Pattern 是這樣的：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">graph LR</span><br><span class="line">A(Action) --&gt; B(Controller)</span><br><span class="line">B --&gt; C(Model)</span><br><span class="line">C --&gt; D(View)</span><br><span class="line">C --&gt; G(View)</span><br><span class="line">B --&gt; E(Model)</span><br><span class="line">E --&gt; G(View)</span><br><span class="line">B --&gt; F(Model)</span><br><span class="line">F --&gt; G(View)</span><br><span class="line">E --&gt; H(View)</span><br></pre></td></tr></table></figure>
+<pre class="mermaid">graph LR
+A(Action) --> B(Controller)
+B --> C(Model)
+C --> D(View)
+C --> G(View)
+B --> E(Model)
+E --> G(View)
+B --> F(Model)
+F --> G(View)
+E --> H(View)</pre>
 
 <p>而 Flux Pattern 是這樣的：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">graph LR</span><br><span class="line">A(Action) --&gt; B(Dispatcher)</span><br><span class="line">B --&gt; C(Store)</span><br><span class="line">C --&gt; D(View)</span><br></pre></td></tr></table></figure>
+<pre class="mermaid">graph LR
+A(Action) --> B(Dispatcher)
+B --> C(Store)
+C --> D(View)</pre>
 
 <p>隨著 App 成長， state management 越來越複雜，所以我們會發現使用 Flux Pattern 這樣的邏輯是有效率的。</p>
 <p>Redux Pattern:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">graph LR</span><br><span class="line">A(Action) -- Middleware --&gt; B(Reducer)</span><br><span class="line">B --&gt; C(Store)</span><br><span class="line">C --&gt; D(Make changes)</span><br></pre></td></tr></table></figure>
+<pre class="mermaid">graph LR
+A(Action) -- Middleware --> B(Reducer)
+B --> C(Store)
+C --> D(Make changes)</pre>
 
 <p>Redux 的優點：</p>
 <ul>
@@ -410,6 +425,8 @@
   <div class="powered-by">Powered by <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> v3.9.0</div>
   <span class="post-meta-divider">|</span>
   <div class="theme-info">Theme – <a href="https://theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Pisces</a> v7.4.1</div>
+
+
 
         
 
