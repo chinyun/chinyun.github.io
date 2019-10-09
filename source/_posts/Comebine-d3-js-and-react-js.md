@@ -11,9 +11,9 @@ D3 是一個利用資料集來操作文件的 JavaScript 函式庫，可以讓�
 
 D3 特色包括：
 
-1. Flexibility: 可以創造特殊圖形，語法彈性大
-2. Elegance： 流暢的動態轉場效果，簡潔的程式碼
-3. Community： 有龐大使用者社群支援，有許多開放資源
+1. Flexibility：可以創造特殊圖形，語法彈性大
+2. Elegance：流暢的動態轉場效果，簡潔的程式碼
+3. Community：有龐大使用者社群支援，有許多開放資源
 
 # How do D3 work
 
@@ -57,9 +57,10 @@ D3 透過 enter() 和 exit() 來動態控制網頁上元素：
 
 ### 分工合作，做各自擅長的
 
-React 負責 Render，D3 負責 SVG 繪圖：
-- 運用 React Refs 屬性和 Lifecycle Method 來操作 DOM
-- 將 SVG 繪圖交給 D3，當資料更新時由 React 重繪 UI 
+React 負責 DOM Render，D3 負責 SVG 繪圖：
+- 運用 React Refs 屬性操作 DOM 節點
+- 當資料更新時由 React 重繪 UI：Lifecycle Method（componentDidMount、 componentDidUpdate）
+- 將 SVG 繪圖交給 D3，負責 attribute & style 
 
 Assign the reference of the DOM element to a component property.
 ```
