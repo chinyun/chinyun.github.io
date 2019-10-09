@@ -63,7 +63,7 @@
 <meta property="og:site_name" content="Jinny&#39;s blog">
 <meta property="og:description" content="Overview About how to use Hexo build up my blog and deploy on GitHub Pages. How to use Travis CI to set up automatically deployment.  Why use Hexo run on Node.js fast build up many plugins and big com">
 <meta property="og:locale" content="zh-tw">
-<meta property="og:updated_time" content="2019-10-09T11:33:36.308Z">
+<meta property="og:updated_time" content="2019-10-09T12:41:37.232Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Hexo+GitHubPage+TravisCI">
 <meta name="twitter:description" content="Overview About how to use Hexo build up my blog and deploy on GitHub Pages. How to use Travis CI to set up automatically deployment.  Why use Hexo run on Node.js fast build up many plugins and big com">
@@ -237,7 +237,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2019-10-09 11:33:36" itemprop="dateModified" datetime="2019-10-09T11:33:36+00:00">2019-10-09</time>
+                <time title="Modified: 2019-10-09 12:41:37" itemprop="dateModified" datetime="2019-10-09T12:41:37+00:00">2019-10-09</time>
               </span>
             
           
@@ -254,8 +254,8 @@
 
       
         <h2 id="Overview"><a href="#Overview" class="headerlink" title="Overview"></a>Overview</h2><ol>
-<li>About how to use <a href="https://hexo.io/">Hexo</a> build up my blog and deploy on <a href="">GitHub Pages</a>.</li>
-<li>How to use <a href="https://travis-ci.com/">Travis</a> CI to set up automatically deployment.</li>
+<li>About how to use <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a> build up my blog and deploy on <a href>GitHub Pages</a>.</li>
+<li>How to use <a href="https://travis-ci.com/" target="_blank" rel="noopener">Travis</a> CI to set up automatically deployment.</li>
 </ol>
 <h2 id="Why-use-Hexo"><a href="#Why-use-Hexo" class="headerlink" title="Why use Hexo"></a>Why use Hexo</h2><ol>
 <li>run on Node.js</li>
@@ -281,7 +281,7 @@
 <blockquote>
 <p>Notes: It is essensial to set <strong><code>root</code></strong> to <strong><code>/&lt;repo-name&gt;/</code></strong> otherwise it could led to CSS file generating failed.</p>
 </blockquote>
-<p>More details: Hexo document <a href="https://hexo.io/docs/configuration.html">Configuration</a></p>
+<p>More details: Hexo document <a href="https://hexo.io/docs/configuration.html" target="_blank" rel="noopener">Configuration</a></p>
 <h3 id="Deployment"><a href="#Deployment" class="headerlink" title="Deployment"></a>Deployment</h3><p>In official document tutorial, it recommends to use <code>Travis CI</code> to deploy <code>Github Pages</code>. It is free for open source repository, meaning your repository’s master branch has to be public.</p>
 <h4 id="Two-options-of-GitHub-Pages-Url-Choosing"><a href="#Two-options-of-GitHub-Pages-Url-Choosing" class="headerlink" title="Two options of GitHub Pages Url Choosing"></a>Two options of GitHub Pages Url Choosing</h4><ol>
 <li><p>Create a repo named <code>username.github.io</code>, where username is your username on GitHub. </p>
@@ -323,7 +323,7 @@
 <li><p>Now you can check the webpage at the url you set.</p>
 </li>
 </ol>
-<h2 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h2><p><a href="https://hexo.io/docs/configuration.html">Hexo Docs</a><br><a href="https://help.github.com/en/articles/getting-started-with-github-pages">GitHub Pages</a><br><a href="https://docs.travis-ci.com/user/tutorial/">Travis CI Docs</a></p>
+<h2 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h2><p><a href="https://hexo.io/docs/configuration.html" target="_blank" rel="noopener">Hexo Docs</a><br><a href="https://help.github.com/en/articles/getting-started-with-github-pages" target="_blank" rel="noopener">GitHub Pages</a><br><a href="https://docs.travis-ci.com/user/tutorial/" target="_blank" rel="noopener">Travis CI Docs</a></p>
 
     </div>
 
@@ -442,8 +442,12 @@
   <div class="powered-by">Powered by <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> v3.9.0</div>
   <span class="post-meta-divider">|</span>
   <div class="theme-info">Theme – <a href="https://theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Pisces</a> v7.4.1</div>
-
-
+  <script src='https://unpkg.com/mermaid@7.1.2/dist/mermaid.min.js'></script>
+  <script>
+    if (window.mermaid) {
+      mermaid.initialize("");
+    }
+  </script>
 
         
 
@@ -491,6 +495,19 @@
 
 
 
+<script>
+if (document.querySelectorAll('pre.mermaid').length) {
+  NexT.utils.getScript('//cdn.jsdelivr.net/npm/mermaid@8/dist/mermaid.min.js', () => {
+    mermaid.initialize({
+      theme: 'forest',
+      logLevel: 3,
+      flowchart: { curve: 'linear' },
+      gantt: { axisFormat: '%m/%d/%Y' },
+      sequence: { actorMargin: 50 }
+    });
+  }, window.mermaid);
+}
+</script>
 
 
 
