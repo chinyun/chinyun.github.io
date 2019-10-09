@@ -193,6 +193,110 @@
   
   
   <div class="post-block home">
+    <link itemprop="mainEntityOfPage" href="https://chinyun.github.io/myblog/myblog/2019/10/09/Hexo-mermaid/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="chinyun">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/myblog/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Jinny's blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+            
+            <a href="/myblog/2019/10/09/Hexo-mermaid/" class="post-title-link" itemprop="url">Hexo+mermaid</a>
+          
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              
+                
+              
+
+              <time title="Created: 2019-10-09 20:49:14 / Modified: 13:28:04" itemprop="dateCreated datePublished" datetime="2019-10-09T20:49:14+00:00">2019-10-09</time>
+            </span>
+          
+            
+
+            
+          
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>在 hexo (theme/next)架構下使用 mermaid 繪製流程圖</p>
+<h1 id="How-to"><a href="#How-to" class="headerlink" title="How-to"></a>How-to</h1><p>安裝 package</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install hexo-filter-mermaid-diagrams</span><br></pre></td></tr></table></figure>
+
+<p>在 hexo blog 的根目錄修改 <code>_config.yml</code>:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">external_link: false</span><br></pre></td></tr></table></figure>
+
+<p>在 <code>themes/next/_config.yml</code> 檔案內有一處標記 mermaid 為 <code>enable: false</code> 需要改成 true，<br>以下是我的設定：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"># Mermaid tag</span><br><span class="line">mermaid:</span><br><span class="line">  enable: true</span><br><span class="line">  version: &quot;7.1.2&quot;</span><br><span class="line">  # Available themes: default | dark | forest | neutral</span><br><span class="line">  theme: forest</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>如果用 sublime text 編輯，可以用 <code>command + F</code>(mac) 直接搜尋 <code>mermaid</code> 比較快</p>
+</blockquote>
+<p>同檔案內，往下拉有一區塊專門設置 CDN address，將 mermaid 的部分反註解：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"># Script Vendors. Set a CDN address for the vendor you want to customize.</span><br><span class="line">.</span><br><span class="line">.</span><br><span class="line">.</span><br><span class="line"># Mermaid</span><br><span class="line">  # Example:</span><br><span class="line">  mermaid: //cdn.jsdelivr.net/npm/mermaid@8/dist/mermaid.min.js</span><br><span class="line">  # mermaid: //cdnjs.cloudflare.com/ajax/libs/mermaid/8.0.0/mermaid.min.js</span><br><span class="line">.</span><br><span class="line">.</span><br><span class="line">.</span><br></pre></td></tr></table></figure>
+
+<p>最後在 <code>themes/next/layout/_partials/footer.swig</code> 檔案中最後面加上：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">&#123;%- if theme.mermaid.enable %&#125;</span><br><span class="line">  &lt;script src=&apos;https://unpkg.com/mermaid@&#123;&#123; theme.mermaid.version &#125;&#125;/dist/mermaid.min.js&apos;&gt;&lt;/script&gt;</span><br><span class="line">  &lt;script&gt;</span><br><span class="line">    if (window.mermaid) &#123;</span><br><span class="line">      mermaid.initialize(&#123;&#123; JSON.stringify(theme.mermaid.options) &#125;&#125;);</span><br><span class="line">    &#125;</span><br><span class="line">  &lt;/script&gt;</span><br><span class="line">&#123;%- endif %&#125;</span><br></pre></td></tr></table></figure>
+
+<p>以上就設置完成，可以使用 mermaid 語法了，流程圖示例如下：</p>
+<pre class="mermaid">graph LR;
+  A(hexo) -- npm install hexo-filter-mermaid-diagrams --> B(set root/_config.yml)
+  B --> C(set themes/next/_config.yml)
+  C --> D(set themes/next/layout/_partials/footer.swig)</pre>
+
+<p>流程圖示例代碼如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&lt;pre class=&quot;mermaid&quot;&gt;graph LR;</span><br><span class="line">  A(hexo) -- npm install hexo-filter-mermaid-diagrams --&gt; B(set root/_config.yml)</span><br><span class="line">  B --&gt; C(set themes/next/_config.yml)</span><br><span class="line">  C --&gt; D(set themes/next/layout/_partials/footer.swig)&lt;/pre&gt;</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>若使用其他 theme 設置方法不太相同需要查看官方文件</p>
+</blockquote>
+<h1 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h1><p><a href="https://mermaidjs.github.io/#/" target="_blank" rel="noopener">mermaid</a><br><a href="https://github.com/webappdevelp/hexo-filter-mermaid-diagrams" target="_blank" rel="noopener">hexo-filter-mermaid-diagrams</a></p>
+
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+          <div class="post-eof"></div>
+        
+      </footer>
+  </div>
+  
+  
+  
+  </article>
+
+    
+        <article itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block home">
     <link itemprop="mainEntityOfPage" href="https://chinyun.github.io/myblog/myblog/2019/10/09/React-State-Management-Redux/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -222,7 +326,7 @@
                 
               
 
-              <time title="Created: 2019-10-09 15:42:37 / Modified: 12:41:37" itemprop="dateCreated datePublished" datetime="2019-10-09T15:42:37+00:00">2019-10-09</time>
+              <time title="Created: 2019-10-09 15:42:37 / Modified: 13:28:04" itemprop="dateCreated datePublished" datetime="2019-10-09T15:42:37+00:00">2019-10-09</time>
             </span>
           
             
@@ -356,7 +460,7 @@ C --> D(Make changes);</pre>
                 
               
 
-              <time title="Created: 2019-10-09 12:41:37" itemprop="dateCreated datePublished" datetime="2019-10-09T12:41:37+00:00">2019-10-09</time>
+              <time title="Created: 2019-10-09 13:28:04" itemprop="dateCreated datePublished" datetime="2019-10-09T13:28:04+00:00">2019-10-09</time>
             </span>
           
 
@@ -448,7 +552,7 @@ C --> D(Make changes);</pre>
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2019-10-09 12:41:37" itemprop="dateModified" datetime="2019-10-09T12:41:37+00:00">2019-10-09</time>
+                <time title="Modified: 2019-10-09 13:28:04" itemprop="dateModified" datetime="2019-10-09T13:28:04+00:00">2019-10-09</time>
               </span>
             
           
@@ -579,7 +683,7 @@ C --> D(Make changes);</pre>
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2019-10-09 12:41:37" itemprop="dateModified" datetime="2019-10-09T12:41:37+00:00">2019-10-09</time>
+                <time title="Modified: 2019-10-09 13:28:04" itemprop="dateModified" datetime="2019-10-09T13:28:04+00:00">2019-10-09</time>
               </span>
             
           
@@ -730,7 +834,7 @@ C --> D(Make changes);</pre>
         
           <a href="/myblog/archives/">
         
-          <span class="site-state-item-count">4</span>
+          <span class="site-state-item-count">5</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
