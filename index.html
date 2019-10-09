@@ -193,6 +193,206 @@
   
   
   <div class="post-block home">
+    <link itemprop="mainEntityOfPage" href="https://chinyun.github.io/myblog/myblog/2019/10/09/React-State-Management-Redux/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="chinyun">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/myblog/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Jinny's blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+            
+            <a href="/myblog/2019/10/09/React-State-Management-Redux/" class="post-title-link" itemprop="url">React State Management & Redux</a>
+          
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              
+                
+              
+
+              <time title="Created: 2019-10-09 15:42:37 / Modified: 10:20:51" itemprop="dateCreated datePublished" datetime="2019-10-09T15:42:37+00:00">2019-10-09</time>
+            </span>
+          
+            
+
+            
+          
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="How-React-manage-State"><a href="#How-React-manage-State" class="headerlink" title="How React manage State"></a>How React manage State</h1><p>React 使用單向數據流，父元件會把自身的 state 作為 props 傳遞給子元件，以此來共享資料。</p>
+<p>根據官方文件描述：<br>「 React Componenet 除了接收資料外（ 透過 <code>this.props</code> 存取 ），也可以保存自身的 state （透過 <code>this.state</code> 存取）。當一個 component 的 state 改變的時候，產生的標記語法將會透過自動重新呼叫 <code>render()</code> 更新。」</p>
+<p>React Componenet 變更 state 的唯一方法是用 <code>this.setState()</code>，而且 state 只能在自身的 Componenet 內變更，所以當應用程式的規模越來越大、元件越來越多，需要共通使用的 state 也會越來越多。 </p>
+<h1 id="Lifting-State-Up"><a href="#Lifting-State-Up" class="headerlink" title="Lifting State Up"></a>Lifting State Up</h1><p>隨著應用程式增加更多功能，同一個 state 可能需要被多個同層級或非父子關係的元件使用，以反應相同的資料變化。<br>此時這個 state 必須被<strong>提升</strong>到最靠近他們的共同上層元件(ancestor)，再以 props 的形式傳遞給其他元件使用，這個過程稱為<strong>狀態提升</strong>(Lifting State Up)。</p>
+<p>根據官方文件：<br>「 在 React 應用程式中，對於資料的變化只能有一個唯一的「真相來源」。通常來說，state 會優先被加入到需要 render 的 component。接著，如果其他的 component 也需要的話，你可以提升 state 到共同最靠近的 ancestor。你應該依賴<strong>上至下的資料流</strong>，而不是嘗試在不同 component 之間同步 state。」</p>
+<p>但不斷提升 state 的結果可能是許多 state 被以 props 形式不斷傳遞到子元件，而需要改變 state 時也必須將 function 以 props 傳遞到子元件，在子元件被觸發後，在上層元件內呼叫 <code>this.setState()</code>。</p>
+<p>如此一來，使用者操作應用程式改變資料等不同的 functions 被分散在各個元件，不僅不好維護，也容易因為 state 更新先後的問題引起錯誤。</p>
+<h1 id="Why-Redux"><a href="#Why-Redux" class="headerlink" title="Why Redux"></a>Why Redux</h1><p>Redux 由 Dan Abramov 開發：<br>「 ..Redux provides a solid, stable and mature solution to managing state in your React application. Through a handful of small, useful patterns, Redux can transform your application from a total mess of confusing and scattered state, into a delightfully organized, easy to understand modern JavaScript powerhouse. ..」</p>
+<p>Redux 受到幾個 Flux Pattern 重要特質的影響，過去的 MVC(Model-View-Controller) Pattern 是這樣的：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">graph LR</span><br><span class="line">A(Action) --&gt; B(Controller)</span><br><span class="line">B --&gt; C(Model)</span><br><span class="line">C --&gt; D(View)</span><br><span class="line">C --&gt; G(View)</span><br><span class="line">B --&gt; E(Model)</span><br><span class="line">E --&gt; G(View)</span><br><span class="line">B --&gt; F(Model)</span><br><span class="line">F --&gt; G(View)</span><br><span class="line">E --&gt; H(View)</span><br></pre></td></tr></table></figure>
+
+<p>而 Flux Pattern 是這樣的：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">graph LR</span><br><span class="line">A(Action) --&gt; B(Dispatcher)</span><br><span class="line">B --&gt; C(Store)</span><br><span class="line">C --&gt; D(View)</span><br></pre></td></tr></table></figure>
+
+<p>隨著 App 成長， state management 越來越複雜，所以我們會發現使用 Flux Pattern 這樣的邏輯是有效率的。</p>
+<p>Redux Pattern:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">graph LR</span><br><span class="line">A(Action) -- Middleware --&gt; B(Reducer)</span><br><span class="line">B --&gt; C(Store)</span><br><span class="line">C --&gt; D(Make changes)</span><br></pre></td></tr></table></figure>
+
+<p>Redux 的優點：</p>
+<ul>
+<li>Good for managing large state.</li>
+<li>Useful for sharing data between containers.</li>
+<li>Predictable state management using the 3 principles:<ol>
+<li>Single source of truth - have one big object that describes the entire state<br>唯一真相來源 </li>
+<li>State is read only - can only be modified by dispatching actions.<br>state 是唯讀的，改變 state 的唯一方式是發出一個 action</li>
+<li>Changes using pure function - receives an input and always return s an output that is predictable.<br>變更必須是 pure function，要指定 state tree 如何藉由 action 來轉變，需要寫成 pure reducer<br>To dispatch state mutations you have to write a function that takes the previous state of the app and the action being dispatched, then return the next state of the app. This function is called the <strong>Reducer</strong>.<br>Pure function are those whose return values depend only upon the values of their arguments. Pure functions don’t have side effects like network or database calls. Also, pure functions don’t override the values of anything.</li>
+</ol>
+</li>
+</ul>
+<p>Redux help developer thinking in a way of “how can we build an app that is able to scale with thousands of user interactions” and “how can we make it that the information flows from one to another into a predictable view, a system that is predictable.”</p>
+<h1 id="Conclusion"><a href="#Conclusion" class="headerlink" title="Conclusion"></a>Conclusion</h1><p>關於為什麼使用 Redux + React 的方式來管理 state，以及不使用和使用的差異是什麼，統整為以下三點：</p>
+<ol>
+<li><p>更有效率的管理 state：<br>Redux 採集中管理 state，再分配給需要該 state 的元件，因此不需要一直傳遞 props。</p>
+</li>
+<li><p>更有邏輯的管理 state：<br>在 Redux 管理下，一律透過 action 描述更新動作，經過 Reducer 來變更 state。</p>
+</li>
+<li><p>更好維護：<br>使用上結合兩者，將 UI 的 state 交給 React，將 Data 的 state 交給 Redux，當需要修改時，可以更快找到需要修改的地方。</p>
+</li>
+</ol>
+<p>但並不是所有 React 應用程式都需要 Redux，需要判斷 state tree 是否很複雜：</p>
+<ol>
+<li>應用程式需要經常變化 UI</li>
+<li>許多非父子關係的元件共用相同資料或以相同方式更新 state</li>
+<li>同一個 state 受到多種不同方式更新</li>
+</ol>
+<p>如果有這些狀況可以使用 Redux 來管理 state。</p>
+<h1 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h1><p><a href="https://zh-hant.reactjs.org/docs/lifting-state-up.html" target="_blank" rel="noopener">React Docs</a><br><a href="https://egghead.io/courses/getting-started-with-redux" target="_blank" rel="noopener">Redux Docs</a></p>
+
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+          <div class="post-eof"></div>
+        
+      </footer>
+  </div>
+  
+  
+  
+  </article>
+
+    
+        <article itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block home">
+    <link itemprop="mainEntityOfPage" href="https://chinyun.github.io/myblog/myblog/2019/10/09/hello-world/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="chinyun">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/myblog/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Jinny's blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+            
+            <a href="/myblog/2019/10/09/hello-world/" class="post-title-link" itemprop="url">Hello World</a>
+          
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              
+                
+              
+
+              <time title="Created: 2019-10-09 10:20:51" itemprop="dateCreated datePublished" datetime="2019-10-09T10:20:51+00:00">2019-10-09</time>
+            </span>
+          
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>Welcome to <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="noopener">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="noopener">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="noopener">GitHub</a>.</p>
+<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">"My New Post"</span></span><br></pre></td></tr></table></figure>
+
+<p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="noopener">Writing</a></p>
+<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
+
+<p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="noopener">Server</a></p>
+<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
+
+<p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="noopener">Generating</a></p>
+<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
+
+<p>More info: <a href="https://hexo.io/docs/deployment.html" target="_blank" rel="noopener">Deployment</a></p>
+
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+          <div class="post-eof"></div>
+        
+      </footer>
+  </div>
+  
+  
+  
+  </article>
+
+    
+        <article itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block home">
     <link itemprop="mainEntityOfPage" href="https://chinyun.github.io/myblog/myblog/2019/10/08/Comebine-d3-js-and-react-js/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -222,11 +422,19 @@
                 
               
 
-              <time title="Created: 2019-10-08 16:09:54 / Modified: 14:03:24" itemprop="dateCreated datePublished" datetime="2019-10-08T16:09:54+00:00">2019-10-08</time>
+              <time title="Created: 2019-10-08 16:09:54" itemprop="dateCreated datePublished" datetime="2019-10-08T16:09:54+00:00">2019-10-08</time>
             </span>
           
             
 
+            
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2019-10-09 10:20:51" itemprop="dateModified" datetime="2019-10-09T10:20:51+00:00">2019-10-09</time>
+              </span>
             
           
 
@@ -244,9 +452,9 @@
           <h1 id="Why-use-D3"><a href="#Why-use-D3" class="headerlink" title="Why use D3"></a>Why use D3</h1><p>D3 is a JavaScript library for visualizing data with HTML, SVG, and CSS.<br>D3 是一個利用資料集來操作文件的 JavaScript 函式庫，可以讓你繪製出用 HTML、SVG 及 CSS 做出來的多元化動態資料圖形，D3 遵照著網頁標準，因此現今的瀏覽器皆可直接支援瀏覽，不需要另外安裝任何框架或是套件，D3 很強大的一個功能就是資料視覺化和資料驅動(Data-Driven) 的 DOM 操作。<br>以資料驅動（ Data-Driven ）的方式在網頁上動態地操作 DOM，可以更有效率的處理巨量資料。</p>
 <p>D3 特色包括：</p>
 <ol>
-<li>Flexibility: 可以創造特殊圖形，語法彈性大</li>
-<li>Elegance： 流暢的動態轉場效果，簡潔的程式碼</li>
-<li>Community： 有龐大使用者社群支援，有許多開放資源</li>
+<li>Flexibility：可以創造特殊圖形，語法彈性大</li>
+<li>Elegance：流暢的動態轉場效果，簡潔的程式碼</li>
+<li>Community：有龐大使用者社群支援，有許多開放資源</li>
 </ol>
 <h1 id="How-do-D3-work"><a href="#How-do-D3-work" class="headerlink" title="How do D3 work"></a>How do D3 work</h1><ul>
 <li>Use D3 Select to grab hold of elements on the screen.</li>
@@ -276,10 +484,11 @@
 <li>D3：透過觸發 Update Function 來載入新 Data ，根據 Data 產生 UI </li>
 </ul>
 <p>如果想要在 React 元件中寫 D3 視覺圖表，就需要思考如何將兩者結合，使資料更新時，<br>能夠同時在畫面上動態呈現視覺圖表變化。</p>
-<h3 id="分工合作，做各自擅長的"><a href="#分工合作，做各自擅長的" class="headerlink" title="分工合作，做各自擅長的"></a>分工合作，做各自擅長的</h3><p>React 負責 Render，D3 負責 SVG 繪圖：</p>
+<h3 id="分工合作，做各自擅長的"><a href="#分工合作，做各自擅長的" class="headerlink" title="分工合作，做各自擅長的"></a>分工合作，做各自擅長的</h3><p>React 負責 DOM Render，D3 負責 SVG 繪圖：</p>
 <ul>
-<li>運用 React Refs 屬性和 Lifecycle Method 來操作 DOM</li>
-<li>將 SVG 繪圖交給 D3，當資料更新時由 React 重繪 UI </li>
+<li>運用 React Refs 屬性操作 DOM 節點</li>
+<li>當資料更新時由 React 重繪 UI：Lifecycle Method（componentDidMount、 componentDidUpdate）</li>
+<li>將 SVG 繪圖交給 D3，負責 attribute &amp; style </li>
 </ul>
 <p>Assign the reference of the DOM element to a component property.</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"># in the react component</span><br><span class="line">...</span><br><span class="line">render() &#123;</span><br><span class="line">  const paths = this.props.data.map(d =&gt; &lt;path key=&#123;d.name&#125;/&gt;);</span><br><span class="line">  return (</span><br><span class="line">    ...</span><br><span class="line">    &lt;div&gt;</span><br><span class="line">      &lt;svg ref=&#123;el =&gt; this.svgEl = el&#125;&gt;</span><br><span class="line">        &#123;paths&#125;</span><br><span class="line">      &lt;/svg&gt;</span><br><span class="line">    &lt;/div&gt;</span><br><span class="line">    ...</span><br><span class="line">  )</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
@@ -291,87 +500,6 @@
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">componentDidMount = () =&gt; &#123;</span><br><span class="line">  this.updateStyleAndAttrs();</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">componentDidUpdate = () =&gt; &#123;</span><br><span class="line">  this.updateStyleAndAttrs();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 <h1 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h1><p><a href="https://github.com/d3/d3/wiki/TW-Home" target="_blank" rel="noopener">D3 Docs</a><br><a href="https://github.com/d3/d3/wiki/Gallery" target="_blank" rel="noopener">D3 Gallery</a><br><a href="https://reurl.cc/k5EY23" target="_blank" rel="noopener">D3.js Quick Start Guide</a><br><a href="https://codepen.io/thecraftycoderpdx/pen/jZyzKo" target="_blank" rel="noopener">Codepen</a><br><a href="http://shubo.io/react-d3/" target="_blank" rel="noopener">Shubo’s Notes</a></p>
-
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-          <div class="post-eof"></div>
-        
-      </footer>
-  </div>
-  
-  
-  
-  </article>
-
-    
-        <article itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block home">
-    <link itemprop="mainEntityOfPage" href="https://chinyun.github.io/myblog/myblog/2019/10/08/hello-world/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="chinyun">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/myblog/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Jinny's blog">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-            
-            <a href="/myblog/2019/10/08/hello-world/" class="post-title-link" itemprop="url">Hello World</a>
-          
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              
-                
-              
-
-              <time title="Created: 2019-10-08 14:03:24" itemprop="dateCreated datePublished" datetime="2019-10-08T14:03:24+00:00">2019-10-08</time>
-            </span>
-          
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>Welcome to <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="noopener">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="noopener">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="noopener">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">"My New Post"</span></span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="noopener">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="noopener">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="noopener">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/deployment.html" target="_blank" rel="noopener">Deployment</a></p>
 
         
       
@@ -436,7 +564,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2019-10-08 14:03:24" itemprop="dateModified" datetime="2019-10-08T14:03:24+00:00">2019-10-08</time>
+                <time title="Modified: 2019-10-09 10:20:51" itemprop="dateModified" datetime="2019-10-09T10:20:51+00:00">2019-10-09</time>
               </span>
             
           
@@ -587,7 +715,7 @@
         
           <a href="/myblog/archives/">
         
-          <span class="site-state-item-count">3</span>
+          <span class="site-state-item-count">4</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>

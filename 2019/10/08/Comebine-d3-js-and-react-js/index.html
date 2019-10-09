@@ -63,7 +63,7 @@
 <meta property="og:site_name" content="Jinny&#39;s blog">
 <meta property="og:description" content="Why use D3D3 is a JavaScript library for visualizing data with HTML, SVG, and CSS.D3 是一個利用資料集來操作文件的 JavaScript 函式庫，可以讓你繪製出用 HTML、SVG 及 CSS 做出來的多元化動態資料圖形，D3 遵照著網頁標準，因此現今的瀏覽器皆可直接支援瀏覽，不需要另外安裝任何框架或是套件，D3">
 <meta property="og:locale" content="zh-tw">
-<meta property="og:updated_time" content="2019-10-08T14:03:24.855Z">
+<meta property="og:updated_time" content="2019-10-09T10:20:51.548Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Comebine d3.js and react.js">
 <meta name="twitter:description" content="Why use D3D3 is a JavaScript library for visualizing data with HTML, SVG, and CSS.D3 是一個利用資料集來操作文件的 JavaScript 函式庫，可以讓你繪製出用 HTML、SVG 及 CSS 做出來的多元化動態資料圖形，D3 遵照著網頁標準，因此現今的瀏覽器皆可直接支援瀏覽，不需要另外安裝任何框架或是套件，D3">
@@ -226,11 +226,19 @@
                 
               
 
-              <time title="Created: 2019-10-08 16:09:54 / Modified: 14:03:24" itemprop="dateCreated datePublished" datetime="2019-10-08T16:09:54+00:00">2019-10-08</time>
+              <time title="Created: 2019-10-08 16:09:54" itemprop="dateCreated datePublished" datetime="2019-10-08T16:09:54+00:00">2019-10-08</time>
             </span>
           
             
 
+            
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2019-10-09 10:20:51" itemprop="dateModified" datetime="2019-10-09T10:20:51+00:00">2019-10-09</time>
+              </span>
             
           
 
@@ -248,9 +256,9 @@
         <h1 id="Why-use-D3"><a href="#Why-use-D3" class="headerlink" title="Why use D3"></a>Why use D3</h1><p>D3 is a JavaScript library for visualizing data with HTML, SVG, and CSS.<br>D3 是一個利用資料集來操作文件的 JavaScript 函式庫，可以讓你繪製出用 HTML、SVG 及 CSS 做出來的多元化動態資料圖形，D3 遵照著網頁標準，因此現今的瀏覽器皆可直接支援瀏覽，不需要另外安裝任何框架或是套件，D3 很強大的一個功能就是資料視覺化和資料驅動(Data-Driven) 的 DOM 操作。<br>以資料驅動（ Data-Driven ）的方式在網頁上動態地操作 DOM，可以更有效率的處理巨量資料。</p>
 <p>D3 特色包括：</p>
 <ol>
-<li>Flexibility: 可以創造特殊圖形，語法彈性大</li>
-<li>Elegance： 流暢的動態轉場效果，簡潔的程式碼</li>
-<li>Community： 有龐大使用者社群支援，有許多開放資源</li>
+<li>Flexibility：可以創造特殊圖形，語法彈性大</li>
+<li>Elegance：流暢的動態轉場效果，簡潔的程式碼</li>
+<li>Community：有龐大使用者社群支援，有許多開放資源</li>
 </ol>
 <h1 id="How-do-D3-work"><a href="#How-do-D3-work" class="headerlink" title="How do D3 work"></a>How do D3 work</h1><ul>
 <li>Use D3 Select to grab hold of elements on the screen.</li>
@@ -280,10 +288,11 @@
 <li>D3：透過觸發 Update Function 來載入新 Data ，根據 Data 產生 UI </li>
 </ul>
 <p>如果想要在 React 元件中寫 D3 視覺圖表，就需要思考如何將兩者結合，使資料更新時，<br>能夠同時在畫面上動態呈現視覺圖表變化。</p>
-<h3 id="分工合作，做各自擅長的"><a href="#分工合作，做各自擅長的" class="headerlink" title="分工合作，做各自擅長的"></a>分工合作，做各自擅長的</h3><p>React 負責 Render，D3 負責 SVG 繪圖：</p>
+<h3 id="分工合作，做各自擅長的"><a href="#分工合作，做各自擅長的" class="headerlink" title="分工合作，做各自擅長的"></a>分工合作，做各自擅長的</h3><p>React 負責 DOM Render，D3 負責 SVG 繪圖：</p>
 <ul>
-<li>運用 React Refs 屬性和 Lifecycle Method 來操作 DOM</li>
-<li>將 SVG 繪圖交給 D3，當資料更新時由 React 重繪 UI </li>
+<li>運用 React Refs 屬性操作 DOM 節點</li>
+<li>當資料更新時由 React 重繪 UI：Lifecycle Method（componentDidMount、 componentDidUpdate）</li>
+<li>將 SVG 繪圖交給 D3，負責 attribute &amp; style </li>
 </ul>
 <p>Assign the reference of the DOM element to a component property.</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"># in the react component</span><br><span class="line">...</span><br><span class="line">render() &#123;</span><br><span class="line">  const paths = this.props.data.map(d =&gt; &lt;path key=&#123;d.name&#125;/&gt;);</span><br><span class="line">  return (</span><br><span class="line">    ...</span><br><span class="line">    &lt;div&gt;</span><br><span class="line">      &lt;svg ref=&#123;el =&gt; this.svgEl = el&#125;&gt;</span><br><span class="line">        &#123;paths&#125;</span><br><span class="line">      &lt;/svg&gt;</span><br><span class="line">    &lt;/div&gt;</span><br><span class="line">    ...</span><br><span class="line">  )</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
@@ -311,8 +320,8 @@
           <div class="post-nav">
             <div class="post-nav-next post-nav-item">
               
-                <a href="/myblog/2019/10/08/hello-world/" rel="next" title="Hello World">
-                  <i class="fa fa-chevron-left"></i> Hello World
+                <a href="/myblog/2019/10/04/Hexo-GitHubPage-TravisCI/" rel="next" title="Hexo+GitHubPage+TravisCI">
+                  <i class="fa fa-chevron-left"></i> Hexo+GitHubPage+TravisCI
                 </a>
               
             </div>
@@ -320,6 +329,10 @@
             <span class="post-nav-divider"></span>
 
             <div class="post-nav-prev post-nav-item">
+              
+                <a href="/myblog/2019/10/09/hello-world/" rel="prev" title="Hello World">
+                  Hello World <i class="fa fa-chevron-right"></i>
+                </a>
               
             </div>
           </div>
@@ -382,7 +395,7 @@
         
           <a href="/myblog/archives/">
         
-          <span class="site-state-item-count">3</span>
+          <span class="site-state-item-count">4</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>

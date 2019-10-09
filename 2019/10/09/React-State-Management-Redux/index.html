@@ -1,0 +1,471 @@
+<!DOCTYPE html>
+
+
+
+
+
+<html lang="zh-tw">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 3.9.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/myblog/images/apple-touch-icon-next.png?v=7.4.1">
+  <link rel="icon" type="image/png" sizes="32x32" href="/myblog/images/favicon-32x32-next.png?v=7.4.1">
+  <link rel="icon" type="image/png" sizes="16x16" href="/myblog/images/favicon-16x16-next.png?v=7.4.1">
+  <link rel="mask-icon" href="/myblog/images/logo.svg?v=7.4.1" color="#222">
+
+<link rel="stylesheet" href="/myblog/css/main.css?v=7.4.1">
+
+
+<link rel="stylesheet" href="/myblog/lib/font-awesome/css/font-awesome.min.css?v=4.7.0">
+
+
+<script id="hexo-configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/myblog/',
+    scheme: 'Pisces',
+    version: '7.4.1',
+    exturl: false,
+    sidebar: {"position":"left","display":"post","offset":12,"onmobile":false},
+    copycode: {"enable":false,"show_result":false,"style":null},
+    back2top: {"enable":true,"sidebar":false,"scrollpercent":false},
+    bookmark: {"enable":false,"color":"#222","save":"auto"},
+    fancybox: false,
+    mediumzoom: false,
+    lazyload: false,
+    pangu: false,
+    algolia: {
+      appID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    },
+    localsearch: {"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},
+    path: '',
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    translation: {
+      copy_button: 'Copy',
+      copy_success: 'Copied',
+      copy_failure: 'Copy failed'
+    },
+    sidebarPadding: 40
+  };
+</script>
+
+  <meta name="description" content="How React manage StateReact 使用單向數據流，父元件會把自身的 state 作為 props 傳遞給子元件，以此來共享資料。 根據官方文件描述：「 React Componenet 除了接收資料外（ 透過 this.props 存取 ），也可以保存自身的 state （透過 this.state 存取）。當一個 component 的 state 改變的時候，產生的標記語">
+<meta name="keywords" content="JavaScript, React, d3, NodeJS, Web">
+<meta property="og:type" content="article">
+<meta property="og:title" content="React State Management &amp; Redux">
+<meta property="og:url" content="https://chinyun.github.io/myblog/2019/10/09/React-State-Management-Redux/index.html">
+<meta property="og:site_name" content="Jinny&#39;s blog">
+<meta property="og:description" content="How React manage StateReact 使用單向數據流，父元件會把自身的 state 作為 props 傳遞給子元件，以此來共享資料。 根據官方文件描述：「 React Componenet 除了接收資料外（ 透過 this.props 存取 ），也可以保存自身的 state （透過 this.state 存取）。當一個 component 的 state 改變的時候，產生的標記語">
+<meta property="og:locale" content="zh-tw">
+<meta property="og:updated_time" content="2019-10-09T10:20:51.548Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="React State Management &amp; Redux">
+<meta name="twitter:description" content="How React manage StateReact 使用單向數據流，父元件會把自身的 state 作為 props 傳遞給子元件，以此來共享資料。 根據官方文件描述：「 React Componenet 除了接收資料外（ 透過 this.props 存取 ），也可以保存自身的 state （透過 this.state 存取）。當一個 component 的 state 改變的時候，產生的標記語">
+  <link rel="canonical" href="https://chinyun.github.io/myblog/2019/10/09/React-State-Management-Redux/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome: false,
+    isPost: true,
+    isPage: false,
+    isArchive: false
+  };
+</script>
+
+  <title>React State Management & Redux | Jinny's blog</title>
+  
+
+
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .logo,
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-tw">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-meta">
+
+    <div>
+      <a href="/myblog/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Jinny's blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+        <p class="site-subtitle">Writing For Sharing</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+      
+      
+      
+        
+        <li class="menu-item menu-item-home">
+      
+    
+
+    <a href="/myblog/" rel="section"><i class="fa fa-fw fa-home"></i>Home</a>
+
+  </li>
+      
+      
+      
+        
+        <li class="menu-item menu-item-archives">
+      
+    
+
+    <a href="/myblog/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>Archives</a>
+
+  </li>
+  </ul>
+
+</nav>
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+            
+
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+      <article itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block post">
+    <link itemprop="mainEntityOfPage" href="https://chinyun.github.io/myblog/myblog/2019/10/09/React-State-Management-Redux/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="chinyun">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/myblog/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Jinny's blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">React State Management & Redux
+
+          
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              
+                
+              
+
+              <time title="Created: 2019-10-09 15:42:37 / Modified: 10:20:51" itemprop="dateCreated datePublished" datetime="2019-10-09T15:42:37+00:00">2019-10-09</time>
+            </span>
+          
+            
+
+            
+          
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h1 id="How-React-manage-State"><a href="#How-React-manage-State" class="headerlink" title="How React manage State"></a>How React manage State</h1><p>React 使用單向數據流，父元件會把自身的 state 作為 props 傳遞給子元件，以此來共享資料。</p>
+<p>根據官方文件描述：<br>「 React Componenet 除了接收資料外（ 透過 <code>this.props</code> 存取 ），也可以保存自身的 state （透過 <code>this.state</code> 存取）。當一個 component 的 state 改變的時候，產生的標記語法將會透過自動重新呼叫 <code>render()</code> 更新。」</p>
+<p>React Componenet 變更 state 的唯一方法是用 <code>this.setState()</code>，而且 state 只能在自身的 Componenet 內變更，所以當應用程式的規模越來越大、元件越來越多，需要共通使用的 state 也會越來越多。 </p>
+<h1 id="Lifting-State-Up"><a href="#Lifting-State-Up" class="headerlink" title="Lifting State Up"></a>Lifting State Up</h1><p>隨著應用程式增加更多功能，同一個 state 可能需要被多個同層級或非父子關係的元件使用，以反應相同的資料變化。<br>此時這個 state 必須被<strong>提升</strong>到最靠近他們的共同上層元件(ancestor)，再以 props 的形式傳遞給其他元件使用，這個過程稱為<strong>狀態提升</strong>(Lifting State Up)。</p>
+<p>根據官方文件：<br>「 在 React 應用程式中，對於資料的變化只能有一個唯一的「真相來源」。通常來說，state 會優先被加入到需要 render 的 component。接著，如果其他的 component 也需要的話，你可以提升 state 到共同最靠近的 ancestor。你應該依賴<strong>上至下的資料流</strong>，而不是嘗試在不同 component 之間同步 state。」</p>
+<p>但不斷提升 state 的結果可能是許多 state 被以 props 形式不斷傳遞到子元件，而需要改變 state 時也必須將 function 以 props 傳遞到子元件，在子元件被觸發後，在上層元件內呼叫 <code>this.setState()</code>。</p>
+<p>如此一來，使用者操作應用程式改變資料等不同的 functions 被分散在各個元件，不僅不好維護，也容易因為 state 更新先後的問題引起錯誤。</p>
+<h1 id="Why-Redux"><a href="#Why-Redux" class="headerlink" title="Why Redux"></a>Why Redux</h1><p>Redux 由 Dan Abramov 開發：<br>「 ..Redux provides a solid, stable and mature solution to managing state in your React application. Through a handful of small, useful patterns, Redux can transform your application from a total mess of confusing and scattered state, into a delightfully organized, easy to understand modern JavaScript powerhouse. ..」</p>
+<p>Redux 受到幾個 Flux Pattern 重要特質的影響，過去的 MVC(Model-View-Controller) Pattern 是這樣的：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">graph LR</span><br><span class="line">A(Action) --&gt; B(Controller)</span><br><span class="line">B --&gt; C(Model)</span><br><span class="line">C --&gt; D(View)</span><br><span class="line">C --&gt; G(View)</span><br><span class="line">B --&gt; E(Model)</span><br><span class="line">E --&gt; G(View)</span><br><span class="line">B --&gt; F(Model)</span><br><span class="line">F --&gt; G(View)</span><br><span class="line">E --&gt; H(View)</span><br></pre></td></tr></table></figure>
+
+<p>而 Flux Pattern 是這樣的：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">graph LR</span><br><span class="line">A(Action) --&gt; B(Dispatcher)</span><br><span class="line">B --&gt; C(Store)</span><br><span class="line">C --&gt; D(View)</span><br></pre></td></tr></table></figure>
+
+<p>隨著 App 成長， state management 越來越複雜，所以我們會發現使用 Flux Pattern 這樣的邏輯是有效率的。</p>
+<p>Redux Pattern:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">graph LR</span><br><span class="line">A(Action) -- Middleware --&gt; B(Reducer)</span><br><span class="line">B --&gt; C(Store)</span><br><span class="line">C --&gt; D(Make changes)</span><br></pre></td></tr></table></figure>
+
+<p>Redux 的優點：</p>
+<ul>
+<li>Good for managing large state.</li>
+<li>Useful for sharing data between containers.</li>
+<li>Predictable state management using the 3 principles:<ol>
+<li>Single source of truth - have one big object that describes the entire state<br>唯一真相來源 </li>
+<li>State is read only - can only be modified by dispatching actions.<br>state 是唯讀的，改變 state 的唯一方式是發出一個 action</li>
+<li>Changes using pure function - receives an input and always return s an output that is predictable.<br>變更必須是 pure function，要指定 state tree 如何藉由 action 來轉變，需要寫成 pure reducer<br>To dispatch state mutations you have to write a function that takes the previous state of the app and the action being dispatched, then return the next state of the app. This function is called the <strong>Reducer</strong>.<br>Pure function are those whose return values depend only upon the values of their arguments. Pure functions don’t have side effects like network or database calls. Also, pure functions don’t override the values of anything.</li>
+</ol>
+</li>
+</ul>
+<p>Redux help developer thinking in a way of “how can we build an app that is able to scale with thousands of user interactions” and “how can we make it that the information flows from one to another into a predictable view, a system that is predictable.”</p>
+<h1 id="Conclusion"><a href="#Conclusion" class="headerlink" title="Conclusion"></a>Conclusion</h1><p>關於為什麼使用 Redux + React 的方式來管理 state，以及不使用和使用的差異是什麼，統整為以下三點：</p>
+<ol>
+<li><p>更有效率的管理 state：<br>Redux 採集中管理 state，再分配給需要該 state 的元件，因此不需要一直傳遞 props。</p>
+</li>
+<li><p>更有邏輯的管理 state：<br>在 Redux 管理下，一律透過 action 描述更新動作，經過 Reducer 來變更 state。</p>
+</li>
+<li><p>更好維護：<br>使用上結合兩者，將 UI 的 state 交給 React，將 Data 的 state 交給 Redux，當需要修改時，可以更快找到需要修改的地方。</p>
+</li>
+</ol>
+<p>但並不是所有 React 應用程式都需要 Redux，需要判斷 state tree 是否很複雜：</p>
+<ol>
+<li>應用程式需要經常變化 UI</li>
+<li>許多非父子關係的元件共用相同資料或以相同方式更新 state</li>
+<li>同一個 state 受到多種不同方式更新</li>
+</ol>
+<p>如果有這些狀況可以使用 Redux 來管理 state。</p>
+<h1 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h1><p><a href="https://zh-hant.reactjs.org/docs/lifting-state-up.html" target="_blank" rel="noopener">React Docs</a><br><a href="https://egghead.io/courses/getting-started-with-redux" target="_blank" rel="noopener">Redux Docs</a></p>
+
+    </div>
+
+    
+    
+    
+        
+      
+
+      <footer class="post-footer">
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-next post-nav-item">
+              
+                <a href="/myblog/2019/10/09/hello-world/" rel="next" title="Hello World">
+                  <i class="fa fa-chevron-left"></i> Hello World
+                </a>
+              
+            </div>
+
+            <span class="post-nav-divider"></span>
+
+            <div class="post-nav-prev post-nav-item">
+              
+            </div>
+          </div>
+        
+      </footer>
+    
+  </div>
+  
+  
+  
+  </article>
+
+  </div>
+
+
+          </div>
+          
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+        
+        
+        
+        
+      
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#How-React-manage-State"><span class="nav-number">1.</span> <span class="nav-text">How React manage State</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Lifting-State-Up"><span class="nav-number">2.</span> <span class="nav-text">Lifting State Up</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Why-Redux"><span class="nav-number">3.</span> <span class="nav-text">Why Redux</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Conclusion"><span class="nav-number">4.</span> <span class="nav-text">Conclusion</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Reference"><span class="nav-number">5.</span> <span class="nav-text">Reference</span></a></li></ol></div>
+        
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">chinyun</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        
+          <a href="/myblog/archives/">
+        
+          <span class="site-state-item-count">4</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+    
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">chinyun</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> v3.9.0</div>
+  <span class="post-meta-divider">|</span>
+  <div class="theme-info">Theme – <a href="https://theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Pisces</a> v7.4.1</div>
+
+        
+
+
+
+
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/myblog/lib/anime.min.js?v=3.1.0"></script>
+  <script src="/myblog/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  <script src="/myblog/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+<script src="/myblog/js/utils.js?v=7.4.1"></script><script src="/myblog/js/motion.js?v=7.4.1"></script>
+<script src="/myblog/js/schemes/pisces.js?v=7.4.1"></script>
+<script src="/myblog/js/next-boot.js?v=7.4.1"></script>
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+  
+
+</body>
+</html>
