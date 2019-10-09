@@ -18,14 +18,12 @@ npm install hexo-filter-mermaid-diagrams
 external_link: false
 ```
 
-在 `themes/next/_config.yml` 檔案內有一處標記 mermaid 為 `enable: false` 需要改成 true，
-以下是我的設定：
-
+在 `themes/next/_config.yml` 檔案內有一處標記 mermaid 為 `enable: false` 需要改成 true：
 ```
 # Mermaid tag
-mermaid:
+mermaid:  ## mermaid url https://github.com/knsv/mermaid
   enable: true
-  version: "7.1.2"
+  version: "7.1.2" # default v7.1.2
   # Available themes: default | dark | forest | neutral
   theme: forest
 ```
@@ -60,7 +58,7 @@ mermaid:
 
 以上就設置完成，可以使用 mermaid 語法了，流程圖示例如下：
 ```mermaid
-graph LR;
+graph TD;
   A(hexo) -- npm install hexo-filter-mermaid-diagrams --> B(set root/_config.yml)
   B --> C(set themes/next/_config.yml)
   C --> D(set themes/next/layout/_partials/footer.swig)
@@ -69,7 +67,7 @@ graph LR;
 流程圖示例代碼如下：
 ```
 ```mermaid
-graph LR;
+graph TD;
   A(hexo) -- npm install hexo-filter-mermaid-diagrams --> B(set root/_config.yml)
   B --> C(set themes/next/_config.yml)
   C --> D(set themes/next/layout/_partials/footer.swig)
