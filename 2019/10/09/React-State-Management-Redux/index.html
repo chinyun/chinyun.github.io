@@ -63,7 +63,7 @@
 <meta property="og:site_name" content="Jinny&#39;s blog">
 <meta property="og:description" content="How React manage StateReact 使用單向數據流，父元件會把自身的 state 作為 props 傳遞給子元件，以此來共享資料。 根據官方文件描述：「 React Componenet 除了接收資料外（ 透過 this.props 存取 ），也可以保存自身的 state （透過 this.state 存取）。當一個 component 的 state 改變的時候，產生的標記語">
 <meta property="og:locale" content="zh-tw">
-<meta property="og:updated_time" content="2019-10-09T11:20:25.300Z">
+<meta property="og:updated_time" content="2019-10-09T11:33:36.308Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="React State Management &amp; Redux">
 <meta name="twitter:description" content="How React manage StateReact 使用單向數據流，父元件會把自身的 state 作為 props 傳遞給子元件，以此來共享資料。 根據官方文件描述：「 React Componenet 除了接收資料外（ 透過 this.props 存取 ），也可以保存自身的 state （透過 this.state 存取）。當一個 component 的 state 改變的時候，產生的標記語">
@@ -226,7 +226,7 @@
                 
               
 
-              <time title="Created: 2019-10-09 15:42:37 / Modified: 11:20:25" itemprop="dateCreated datePublished" datetime="2019-10-09T15:42:37+00:00">2019-10-09</time>
+              <time title="Created: 2019-10-09 15:42:37 / Modified: 11:33:36" itemprop="dateCreated datePublished" datetime="2019-10-09T15:42:37+00:00">2019-10-09</time>
             </span>
           
             
@@ -290,7 +290,7 @@ C --> D(Make changes);</pre>
 <p>To dispatch state mutations you have to write a function that takes the previous state of the app and the action being dispatched, then return the next state of the app. This function is called the <strong>Reducer</strong>.</p>
 </blockquote>
 <p>Redux help developer thinking in a way of “how can we build an app that is able to scale with thousands of user interactions” and “how can we make it that the information flows from one to another into a predictable view, a system that is predictable.”</p>
-<h1 id="Conclusion"><a href="#Conclusion" class="headerlink" title="Conclusion"></a>Conclusion</h1><p>整理為什麼使用 Redux + React 的方式管理 state 的理由：</p>
+<h3 id="Conclusion"><a href="#Conclusion" class="headerlink" title="Conclusion"></a>Conclusion</h3><p>整理為什麼使用 Redux + React 的方式管理 state 的理由：</p>
 <ol>
 <li><p>更有效率的管理 state：<br>Redux 採集中管理 state，再分配給需要該 state 的元件，因此不需要一直傳遞 props。</p>
 </li>
@@ -378,7 +378,7 @@ C --> D(Make changes);</pre>
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#How-React-manage-State"><span class="nav-number">1.</span> <span class="nav-text">How React manage State</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Lifting-State-Up"><span class="nav-number">2.</span> <span class="nav-text">Lifting State Up</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Why-Redux"><span class="nav-number">3.</span> <span class="nav-text">Why Redux</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Redux-Pattern"><span class="nav-number">3.0.1.</span> <span class="nav-text">Redux Pattern</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Redux-的優點"><span class="nav-number">3.0.2.</span> <span class="nav-text">Redux 的優點</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Conclusion"><span class="nav-number">4.</span> <span class="nav-text">Conclusion</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Reference"><span class="nav-number">5.</span> <span class="nav-text">Reference</span></a></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#How-React-manage-State"><span class="nav-number">1.</span> <span class="nav-text">How React manage State</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Lifting-State-Up"><span class="nav-number">2.</span> <span class="nav-text">Lifting State Up</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Why-Redux"><span class="nav-number">3.</span> <span class="nav-text">Why Redux</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Redux-Pattern"><span class="nav-number">3.0.1.</span> <span class="nav-text">Redux Pattern</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Redux-的優點"><span class="nav-number">3.0.2.</span> <span class="nav-text">Redux 的優點</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Conclusion"><span class="nav-number">3.0.3.</span> <span class="nav-text">Conclusion</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Reference"><span class="nav-number">4.</span> <span class="nav-text">Reference</span></a></li></ol></div>
         
       </div>
       <!--/noindex-->
