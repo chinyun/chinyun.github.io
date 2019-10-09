@@ -71,8 +71,7 @@ C --> D(Make changes);
 
 Redux help developer thinking in a way of "how can we build an app that is able to scale with thousands of user interactions" and "how can we make it that the information flows from one to another into a predictable view, a system that is predictable."
 
-
-# Conclusion
+### Conclusion
 
 整理為什麼使用 Redux + React 的方式管理 state 的理由：
 
@@ -92,6 +91,7 @@ Redux 採集中管理 state，再分配給需要該 state 的元件，因此不�
 3. 同一個 state 受到多種不同方式更新
 
 如果有這些狀況可以使用 Redux 來管理 state。
+
 
 # Reference
 
