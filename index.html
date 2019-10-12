@@ -193,6 +193,117 @@
   
   
   <div class="post-block home">
+    <link itemprop="mainEntityOfPage" href="https://chinyun.github.io/myblog/myblog/2019/10/12/React-Updating-state-when-state-is-an-array-of-objects/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="chinyun">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/myblog/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Jinny's blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+            
+            <a href="/myblog/2019/10/12/React-Updating-state-when-state-is-an-array-of-objects/" class="post-title-link" itemprop="url">React: Updating state when state is an array of objects</a>
+          
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              
+                
+              
+
+              <time title="Created: 2019-10-12 19:06:41 / Modified: 12:53:44" itemprop="dateCreated datePublished" datetime="2019-10-12T19:06:41+00:00">2019-10-12</time>
+            </span>
+          
+            
+
+            
+          
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>當 state 的結構是 array of objects 的時候，更新 state 的方法需要考慮到 data structure 和 react update 機制。</p>
+<h1 id="Immutable-Data-Structures"><a href="#Immutable-Data-Structures" class="headerlink" title="Immutable Data Structures"></a>Immutable Data Structures</h1><p>由於 react 的 state update 機制是觸發 render function 後會讓 virtual dom 和 real dom 比對只重繪有更新的部分，做出最低必要的更新。<br>因此每次變動 state 的時候需要這樣寫：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">this.setState(&#123;</span><br><span class="line">  obj: &#123;</span><br><span class="line">    ...this.state.obj,</span><br><span class="line">    id: 2</span><br><span class="line">  &#125;</span><br><span class="line">&#125;)</span><br><span class="line">  </span><br><span class="line">this.setState(&#123;</span><br><span class="line">  list: [...this.state.arr, 123]</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<p>而不能這樣寫：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">#wrong</span><br><span class="line">const newObject = this.state.obj</span><br><span class="line">newObject.id = 2;</span><br><span class="line">this.setState(&#123;</span><br><span class="line">  obj: newObject</span><br><span class="line">&#125;)</span><br><span class="line">  </span><br><span class="line">#wrong</span><br><span class="line">const arr = this.state.arr;</span><br><span class="line">arr.push(123);</span><br><span class="line">this.setState(&#123;</span><br><span class="line">  list: arr</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<p>也就是說每次改動 state 的時候，都是產生一個新的物件，而不是直接對現有的 object 進行變更，這就是 Immutable data 的概念。</p>
+<h1 id="如何正確的更新-state？"><a href="#如何正確的更新-state？" class="headerlink" title="如何正確的更新 state？"></a>如何正確的更新 state？</h1><p>由於 JavaScript 的資料結構特性，我們需要用 <code>Object Spread Operator</code> 和 <code>Object.assign({}, defaults, options)</code> 等方法在 React 中更新 state。</p>
+<ul>
+<li>Objects, Array 深、淺拷貝</li>
+</ul>
+<p>由於在 JavaScript 中 Objects, Array 的資料型別在賦值的時候，是用 pass by reference 的方法，與原始型別（primitive type）的直接傳值（pass by value）是不一樣的。</p>
+<p>所以我們在複製 Objects, Array 的時候會利用函式處理，而不會直接用等號賦值。<br>但賦值的時候因為傳值的差異，有 淺拷貝（Shallow copies）和深拷貝（Deep copies）的差異。</p>
+<p>淺拷貝:<br>Shallow copies duplicate as little as possible. A shallow copy of a collection is a copy of the collection structure, not the elements. With a shallow copy, two collections now share the individual elements.</p>
+<p>深拷貝:<br>Deep copies duplicate everything. A deep copy of a collection is two collections with all of the elements in the original collection duplicated.</p>
+<p>對 Shallow copy 來說，只是複製 collection structure，而不是 element。<strong>所以在指派第二層物件時會出現問題。</strong></p>
+<p>而 Deep Copy 是整個複製，包含 element。<strong>所以當我們在使用多層物件時，要用 deep copy。</strong></p>
+<ul>
+<li>正確的更新 state</li>
+</ul>
+<p>當我的 state 如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">this.state = &#123;</span><br><span class="line">  journeyList: [</span><br><span class="line">    &#123;id: 1, name: &quot;Japan, Tokyo&quot;&#125;,</span><br><span class="line">    &#123;id: 2, name: &quot;Japan, Kyoto&quot;&#125;,</span><br><span class="line">    &#123;id: 3, name: &quot;Europe 12 DAYS Travel&quot;&#125;</span><br><span class="line">  ]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>Update function would look like this:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">updateJourney = (journey) =&gt; &#123;</span><br><span class="line">    const index = this.state.journeyList.findIndex((item)=&gt; item.id === journey[0].id);</span><br><span class="line">    if (index !== -1) &#123;</span><br><span class="line">      this.setState(&#123;</span><br><span class="line">        journeyList: [</span><br><span class="line">          ...this.state.journeyList.slice(0, index),</span><br><span class="line">           Object.assign(&#123;&#125;, this.state.journeyList[index], journey[0]),</span><br><span class="line">           ...this.state.journeyList.slice(index + 1)</span><br><span class="line">        ]</span><br><span class="line">      &#125;);</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;;</span><br></pre></td></tr></table></figure>
+
+<p>若 journey 為：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[&#123;id: 4, name: &apos;Singapore 7 days trip&apos;&#125;]</span><br></pre></td></tr></table></figure>
+
+<p>則我的 state 就會變成：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">this.state = &#123;</span><br><span class="line">  journeyList: [</span><br><span class="line">    &#123;id: 1, name: &quot;Japan, Tokyo&quot;&#125;,</span><br><span class="line">    &#123;id: 2, name: &quot;Japan, Kyoto&quot;&#125;,</span><br><span class="line">    &#123;id: 3, name: &quot;Europe 12 DAYS Travel&quot;&#125;,</span><br><span class="line">    &#123;id: 4, name: &apos;Singapore 7 days trip&apos;&#125;</span><br><span class="line">  ]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h1 id="Use-Redux-to-update-state"><a href="#Use-Redux-to-update-state" class="headerlink" title="Use Redux to update state"></a>Use Redux to update state</h1><p>上述寫法當開發規模拓展的時候，每一次操作都需要深拷貝一次 state 並 assign 內容， code 維護上會較困難，因此可以考慮使用 Redux 的 state update pattern。</p>
+<p>Redux uses a concept of state reducers which each work on a specific slice of the state of your application. That way you don’t have to manually dig through your entire state each time you want to affect a deep change.</p>
+<p>相關文章可以參考：<a href="https://chinyun.github.io/myblog/2019/10/09/React-State-Management-Redux/">React State Management &amp; Redux</a></p>
+<h1 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h1><p><a href="https://stackoverflow.com/questions/37662708/react-updating-state-when-state-is-an-array-of-objects" target="_blank" rel="noopener">StackOverflow</a></p>
+<p><a href="https://blog.techbridge.cc/2018/01/05/react-render-optimization/" target="_blank" rel="noopener">React 性能優化大挑戰</a></p>
+<p><a href="https://dustinhsiao21.com/2018/01/07/javascript-shallow-copy-and-deep-copy/" target="_blank" rel="noopener">關於JAVASCRIPT中的SHALLOW COPY(淺拷貝)及DEEP COPY(深拷貝)</a></p>
+
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+          <div class="post-eof"></div>
+        
+      </footer>
+  </div>
+  
+  
+  
+  </article>
+
+    
+        <article itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block home">
     <link itemprop="mainEntityOfPage" href="https://chinyun.github.io/myblog/myblog/2019/10/12/UI-variation-and-dynamic-feedback/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -222,7 +333,7 @@
                 
               
 
-              <time title="Created: 2019-10-12 14:47:37 / Modified: 10:25:59" itemprop="dateCreated datePublished" datetime="2019-10-12T14:47:37+00:00">2019-10-12</time>
+              <time title="Created: 2019-10-12 14:47:37 / Modified: 12:53:44" itemprop="dateCreated datePublished" datetime="2019-10-12T14:47:37+00:00">2019-10-12</time>
             </span>
           
             
@@ -323,7 +434,7 @@
                 
               
 
-              <time title="Created: 2019-10-12 10:25:59" itemprop="dateCreated datePublished" datetime="2019-10-12T10:25:59+00:00">2019-10-12</time>
+              <time title="Created: 2019-10-12 12:53:44" itemprop="dateCreated datePublished" datetime="2019-10-12T12:53:44+00:00">2019-10-12</time>
             </span>
           
 
@@ -415,7 +526,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2019-10-12 10:25:59" itemprop="dateModified" datetime="2019-10-12T10:25:59+00:00">2019-10-12</time>
+                <time title="Modified: 2019-10-12 12:53:44" itemprop="dateModified" datetime="2019-10-12T12:53:44+00:00">2019-10-12</time>
               </span>
             
           
@@ -527,7 +638,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2019-10-12 10:25:59" itemprop="dateModified" datetime="2019-10-12T10:25:59+00:00">2019-10-12</time>
+                <time title="Modified: 2019-10-12 12:53:44" itemprop="dateModified" datetime="2019-10-12T12:53:44+00:00">2019-10-12</time>
               </span>
             
           
@@ -669,7 +780,7 @@ C --> D(Make changes);</pre>
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2019-10-12 10:25:59" itemprop="dateModified" datetime="2019-10-12T10:25:59+00:00">2019-10-12</time>
+                <time title="Modified: 2019-10-12 12:53:44" itemprop="dateModified" datetime="2019-10-12T12:53:44+00:00">2019-10-12</time>
               </span>
             
           
@@ -800,7 +911,7 @@ C --> D(Make changes);</pre>
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2019-10-12 10:25:59" itemprop="dateModified" datetime="2019-10-12T10:25:59+00:00">2019-10-12</time>
+                <time title="Modified: 2019-10-12 12:53:44" itemprop="dateModified" datetime="2019-10-12T12:53:44+00:00">2019-10-12</time>
               </span>
             
           
@@ -951,7 +1062,7 @@ C --> D(Make changes);</pre>
         
           <a href="/myblog/archives/">
         
-          <span class="site-state-item-count">6</span>
+          <span class="site-state-item-count">7</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
