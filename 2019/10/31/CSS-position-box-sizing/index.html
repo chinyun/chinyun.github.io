@@ -55,19 +55,19 @@
   };
 </script>
 
-  <meta name="description" content="React lifecycle method &amp;amp; state updating提升 React 效能：保持 virtual DOM 的一致 DOM (Document Object Model)是什麼？  DOM 文件物件模型，是 Html, XML, SVG 等文件的程式介面，提供一種文件樹的結構化表示方法，可以讓程式存取並改變文件架構、風格（style）和內容，透過 DOM 結構，文件">
+  <meta name="description" content="CSS positionstatic 預設，只有套用此預設的元素屬於「不會被特別定位」 relative 表現與 static 一樣，除非有設定 top, right, bottom, left 等其他屬性，會使元素相對的調整其原本該出現的所在位置，不管「相對定位」過的元素如何在頁面上移動位置或增加多少空間，都不會影響到原本其他元素所在的位置。 fixed 相對於瀏覽器視窗來定位，表示即便頁面捲動">
 <meta name="keywords" content="JavaScript, React, d3, NodeJS, Web">
 <meta property="og:type" content="article">
-<meta property="og:title" content="React lifecycle and state">
-<meta property="og:url" content="https://chinyun.github.io/myblog/2019/10/12/React-lifecycle-and-state/index.html">
+<meta property="og:title" content="CSS position &amp; box-sizing">
+<meta property="og:url" content="https://chinyun.github.io/myblog/2019/10/31/CSS-position-box-sizing/index.html">
 <meta property="og:site_name" content="Jinny&#39;s blog">
-<meta property="og:description" content="React lifecycle method &amp;amp; state updating提升 React 效能：保持 virtual DOM 的一致 DOM (Document Object Model)是什麼？  DOM 文件物件模型，是 Html, XML, SVG 等文件的程式介面，提供一種文件樹的結構化表示方法，可以讓程式存取並改變文件架構、風格（style）和內容，透過 DOM 結構，文件">
+<meta property="og:description" content="CSS positionstatic 預設，只有套用此預設的元素屬於「不會被特別定位」 relative 表現與 static 一樣，除非有設定 top, right, bottom, left 等其他屬性，會使元素相對的調整其原本該出現的所在位置，不管「相對定位」過的元素如何在頁面上移動位置或增加多少空間，都不會影響到原本其他元素所在的位置。 fixed 相對於瀏覽器視窗來定位，表示即便頁面捲動">
 <meta property="og:locale" content="zh-tw">
 <meta property="og:updated_time" content="2019-10-31T11:37:13.512Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="React lifecycle and state">
-<meta name="twitter:description" content="React lifecycle method &amp;amp; state updating提升 React 效能：保持 virtual DOM 的一致 DOM (Document Object Model)是什麼？  DOM 文件物件模型，是 Html, XML, SVG 等文件的程式介面，提供一種文件樹的結構化表示方法，可以讓程式存取並改變文件架構、風格（style）和內容，透過 DOM 結構，文件">
-  <link rel="canonical" href="https://chinyun.github.io/myblog/2019/10/12/React-lifecycle-and-state/">
+<meta name="twitter:title" content="CSS position &amp; box-sizing">
+<meta name="twitter:description" content="CSS positionstatic 預設，只有套用此預設的元素屬於「不會被特別定位」 relative 表現與 static 一樣，除非有設定 top, right, bottom, left 等其他屬性，會使元素相對的調整其原本該出現的所在位置，不管「相對定位」過的元素如何在頁面上移動位置或增加多少空間，都不會影響到原本其他元素所在的位置。 fixed 相對於瀏覽器視窗來定位，表示即便頁面捲動">
+  <link rel="canonical" href="https://chinyun.github.io/myblog/2019/10/31/CSS-position-box-sizing/">
 
 
 <script id="page-configurations">
@@ -81,7 +81,7 @@
   };
 </script>
 
-  <title>React lifecycle and state | Jinny's blog</title>
+  <title>CSS position & box-sizing | Jinny's blog</title>
   
 
 
@@ -198,7 +198,7 @@
   
   
   <div class="post-block post">
-    <link itemprop="mainEntityOfPage" href="https://chinyun.github.io/myblog/myblog/2019/10/12/React-lifecycle-and-state/">
+    <link itemprop="mainEntityOfPage" href="https://chinyun.github.io/myblog/myblog/2019/10/31/CSS-position-box-sizing/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="chinyun">
@@ -210,7 +210,7 @@
       <meta itemprop="name" content="Jinny's blog">
     </span>
       <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">React lifecycle and state
+        <h1 class="post-title" itemprop="name headline">CSS position & box-sizing
 
           
         </h1>
@@ -226,19 +226,11 @@
                 
               
 
-              <time title="Created: 2019-10-12 20:15:41" itemprop="dateCreated datePublished" datetime="2019-10-12T20:15:41+00:00">2019-10-12</time>
+              <time title="Created: 2019-10-31 18:48:51 / Modified: 11:37:13" itemprop="dateCreated datePublished" datetime="2019-10-31T18:48:51+00:00">2019-10-31</time>
             </span>
           
             
 
-            
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2019-10-31 11:37:13" itemprop="dateModified" datetime="2019-10-31T11:37:13+00:00">2019-10-31</time>
-              </span>
             
           
 
@@ -253,19 +245,25 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <h1 id="React-lifecycle-method-amp-state-updating"><a href="#React-lifecycle-method-amp-state-updating" class="headerlink" title="React lifecycle method &amp; state updating"></a>React lifecycle method &amp; state updating</h1><h1 id="提升-React-效能：保持-virtual-DOM-的一致"><a href="#提升-React-效能：保持-virtual-DOM-的一致" class="headerlink" title="提升 React 效能：保持 virtual DOM 的一致"></a>提升 React 效能：保持 virtual DOM 的一致</h1><ul>
-<li>DOM (Document Object Model)是什麼？</li>
+        <h1 id="CSS-position"><a href="#CSS-position" class="headerlink" title="CSS position"></a>CSS position</h1><p><strong>static</strong> 預設，只有套用此預設的元素屬於「不會被特別定位」</p>
+<p><strong>relative</strong> 表現與 static 一樣，除非有設定 top, right, bottom, left 等其他屬性，會使元素相對的調整其原本該出現的所在位置，不管「相對定位」過的元素如何在頁面上移動位置或增加多少空間，都不會影響到原本其他元素所在的位置。</p>
+<p><strong>fixed</strong> 相對於瀏覽器視窗來定位，表示即便頁面捲動他還是會固定在相同位置，使用 top, right, bottom, left 來定位，固定元素不會保留它原本在頁面上應有的空間，不會跟其他元素的配置相干擾。</p>
+<p><strong>absolute</strong> 元素的定位是他所屬的上層容器的相對位置，若元素的上層沒有可以被定位的元素，那就會以相對於整個網頁，也就是 <code>&lt;body&gt;</code> 的相對位置。當畫面捲動時元素會隨頁面捲動。</p>
+<h1 id="box-sizing"><a href="#box-sizing" class="headerlink" title="box-sizing"></a>box-sizing</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">-webkit-box-sizing: border-box;</span><br><span class="line">-moz-box-sizing: border-box;</span><br><span class="line">box-sizing: border-box;</span><br></pre></td></tr></table></figure>
+
+<p>元素的內距和邊框不會增加元素本身的寬度。</p>
+<p>其他屬性值：<br><strong>content-box</strong> 預設，長寬值只包含 content，不包括 border 和 padding。<br><strong>inherit</strong> 從上層元素繼承</p>
+<h1 id="display"><a href="#display" class="headerlink" title="display"></a>display</h1><ul>
+<li><strong>none</strong> The element is completely removed.</li>
+<li><strong>inline</strong> Displays an element as an inline element (like <span>). Any height and width properties will have <strong>no effect</strong>.</span></li>
+<li><strong>block</strong> Displays an element as a block element (like <p>). It starts on a new line, and takes up the whole width.</p></li>
+<li><strong>inline-block</strong> Displays an element as an inline-level block container. The element itself is formatted as an inline element, but you can apply height and width values.</li>
+<li><strong>flex</strong> Displays an element as a block-level flex container.</li>
+<li><strong>table</strong> Let the element behave like a <table> element</table></li>
+<li><strong>table-cell</strong> Let the element behave like a <td> element</td></li>
+<li><strong>table-row</strong> Let the element behave like a <tr> element</tr></li>
 </ul>
-<p>DOM 文件物件模型，是 Html, XML, SVG 等文件的程式介面，提供一種文件樹的結構化表示方法，可以讓程式存取並改變文件架構、風格（style）和內容，透過 DOM 結構，文件擁有屬性、函式節點，物件可以和事件處理程序連結，當事件被觸發，執行處理程序來存取或改變文件。</p>
-<ul>
-<li>React 如何改變 DOM 以及如何提升效能？</li>
-</ul>
-<p>由於讀取更新 DOM 損耗 browser 的執行率，每一次改變便 render 整個頁面在 JavaScript 是很慢的，React 使用 Virtual DOM 虛擬 DOM 的一個強大的 Render 系統，只需更新 DOM 而不需要從 DOM 讀取，以減少運算。<br>同時， React 的 diff 演算法，當 render function running 得時候，讓 virtual dom 和 real dom 比對只重繪有更新的部分，做出最低必要的更新。</p>
-<p>官方文件：<br>When you use React, at a single point in time you can think of the render() function as creating a tree of React elements. On the next state or props update, that render() function will return a different tree of React elements. React then needs to figure out how to efficiently update the UI to match the most recent tree.</p>
-<ul>
-<li>開發者提升 React 應用程式的方法</li>
-</ul>
-<p>盡可能的減少讀取和更新 DOM<br>We must minimize the amount of work that we do to the DOM.</p>
+<h1 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h1><p><a href="https://zh-tw.learnlayout.com/toc.html" target="_blank" rel="noopener">https://zh-tw.learnlayout.com/toc.html</a><br><a href="https://www.w3schools.com/cssref/pr_class_display.asp" target="_blank" rel="noopener">https://www.w3schools.com/cssref/pr_class_display.asp</a></p>
 
     </div>
 
@@ -282,8 +280,8 @@
           <div class="post-nav">
             <div class="post-nav-next post-nav-item">
               
-                <a href="/myblog/2019/10/12/React-Updating-state-when-state-is-an-array-of-objects/" rel="next" title="React: Updating state when state is an array of objects">
-                  <i class="fa fa-chevron-left"></i> React: Updating state when state is an array of objects
+                <a href="/myblog/2019/10/31/git-push-fatal-please-verify-email-address/" rel="next" title="git push fatal-please verify email address">
+                  <i class="fa fa-chevron-left"></i> git push fatal-please verify email address
                 </a>
               
             </div>
@@ -291,10 +289,6 @@
             <span class="post-nav-divider"></span>
 
             <div class="post-nav-prev post-nav-item">
-              
-                <a href="/myblog/2019/10/29/Scrum-敏捷開發/" rel="prev" title="Scrum 敏捷開發">
-                  Scrum 敏捷開發 <i class="fa fa-chevron-right"></i>
-                </a>
               
             </div>
           </div>
@@ -341,7 +335,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#React-lifecycle-method-amp-state-updating"><span class="nav-number">1.</span> <span class="nav-text">React lifecycle method &amp; state updating</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#提升-React-效能：保持-virtual-DOM-的一致"><span class="nav-number">2.</span> <span class="nav-text">提升 React 效能：保持 virtual DOM 的一致</span></a></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#CSS-position"><span class="nav-number">1.</span> <span class="nav-text">CSS position</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#box-sizing"><span class="nav-number">2.</span> <span class="nav-text">box-sizing</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#display"><span class="nav-number">3.</span> <span class="nav-text">display</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Reference"><span class="nav-number">4.</span> <span class="nav-text">Reference</span></a></li></ol></div>
         
       </div>
       <!--/noindex-->

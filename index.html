@@ -193,6 +193,97 @@
   
   
   <div class="post-block home">
+    <link itemprop="mainEntityOfPage" href="https://chinyun.github.io/myblog/myblog/2019/10/31/CSS-position-box-sizing/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="chinyun">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/myblog/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Jinny's blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+            
+            <a href="/myblog/2019/10/31/CSS-position-box-sizing/" class="post-title-link" itemprop="url">CSS position & box-sizing</a>
+          
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              
+                
+              
+
+              <time title="Created: 2019-10-31 18:48:51 / Modified: 11:37:13" itemprop="dateCreated datePublished" datetime="2019-10-31T18:48:51+00:00">2019-10-31</time>
+            </span>
+          
+            
+
+            
+          
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="CSS-position"><a href="#CSS-position" class="headerlink" title="CSS position"></a>CSS position</h1><p><strong>static</strong> 預設，只有套用此預設的元素屬於「不會被特別定位」</p>
+<p><strong>relative</strong> 表現與 static 一樣，除非有設定 top, right, bottom, left 等其他屬性，會使元素相對的調整其原本該出現的所在位置，不管「相對定位」過的元素如何在頁面上移動位置或增加多少空間，都不會影響到原本其他元素所在的位置。</p>
+<p><strong>fixed</strong> 相對於瀏覽器視窗來定位，表示即便頁面捲動他還是會固定在相同位置，使用 top, right, bottom, left 來定位，固定元素不會保留它原本在頁面上應有的空間，不會跟其他元素的配置相干擾。</p>
+<p><strong>absolute</strong> 元素的定位是他所屬的上層容器的相對位置，若元素的上層沒有可以被定位的元素，那就會以相對於整個網頁，也就是 <code>&lt;body&gt;</code> 的相對位置。當畫面捲動時元素會隨頁面捲動。</p>
+<h1 id="box-sizing"><a href="#box-sizing" class="headerlink" title="box-sizing"></a>box-sizing</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">-webkit-box-sizing: border-box;</span><br><span class="line">-moz-box-sizing: border-box;</span><br><span class="line">box-sizing: border-box;</span><br></pre></td></tr></table></figure>
+
+<p>元素的內距和邊框不會增加元素本身的寬度。</p>
+<p>其他屬性值：<br><strong>content-box</strong> 預設，長寬值只包含 content，不包括 border 和 padding。<br><strong>inherit</strong> 從上層元素繼承</p>
+<h1 id="display"><a href="#display" class="headerlink" title="display"></a>display</h1><ul>
+<li><strong>none</strong> The element is completely removed.</li>
+<li><strong>inline</strong> Displays an element as an inline element (like <span>). Any height and width properties will have <strong>no effect</strong>.</span></li>
+<li><strong>block</strong> Displays an element as a block element (like <p>). It starts on a new line, and takes up the whole width.</p></li>
+<li><strong>inline-block</strong> Displays an element as an inline-level block container. The element itself is formatted as an inline element, but you can apply height and width values.</li>
+<li><strong>flex</strong> Displays an element as a block-level flex container.</li>
+<li><strong>table</strong> Let the element behave like a <table> element</table></li>
+<li><strong>table-cell</strong> Let the element behave like a <td> element</td></li>
+<li><strong>table-row</strong> Let the element behave like a <tr> element</tr></li>
+</ul>
+<h1 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h1><p><a href="https://zh-tw.learnlayout.com/toc.html" target="_blank" rel="noopener">https://zh-tw.learnlayout.com/toc.html</a><br><a href="https://www.w3schools.com/cssref/pr_class_display.asp" target="_blank" rel="noopener">https://www.w3schools.com/cssref/pr_class_display.asp</a></p>
+
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+          <div class="post-eof"></div>
+        
+      </footer>
+  </div>
+  
+  
+  
+  </article>
+
+    
+        <article itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block home">
     <link itemprop="mainEntityOfPage" href="https://chinyun.github.io/myblog/myblog/2019/10/31/git-push-fatal-please-verify-email-address/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -222,7 +313,7 @@
                 
               
 
-              <time title="Created: 2019-10-31 16:48:41 / Modified: 09:08:23" itemprop="dateCreated datePublished" datetime="2019-10-31T16:48:41+00:00">2019-10-31</time>
+              <time title="Created: 2019-10-31 16:48:41 / Modified: 11:37:13" itemprop="dateCreated datePublished" datetime="2019-10-31T16:48:41+00:00">2019-10-31</time>
             </span>
           
             
@@ -339,7 +430,7 @@
                 
               
 
-              <time title="Created: 2019-10-31 09:08:23" itemprop="dateCreated datePublished" datetime="2019-10-31T09:08:23+00:00">2019-10-31</time>
+              <time title="Created: 2019-10-31 11:37:13" itemprop="dateCreated datePublished" datetime="2019-10-31T11:37:13+00:00">2019-10-31</time>
             </span>
           
 
@@ -431,7 +522,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2019-10-31 09:08:23" itemprop="dateModified" datetime="2019-10-31T09:08:23+00:00">2019-10-31</time>
+                <time title="Modified: 2019-10-31 11:37:13" itemprop="dateModified" datetime="2019-10-31T11:37:13+00:00">2019-10-31</time>
               </span>
             
           
@@ -552,7 +643,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2019-10-31 09:08:23" itemprop="dateModified" datetime="2019-10-31T09:08:23+00:00">2019-10-31</time>
+                <time title="Modified: 2019-10-31 11:37:13" itemprop="dateModified" datetime="2019-10-31T11:37:13+00:00">2019-10-31</time>
               </span>
             
           
@@ -645,7 +736,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2019-10-31 09:08:23" itemprop="dateModified" datetime="2019-10-31T09:08:23+00:00">2019-10-31</time>
+                <time title="Modified: 2019-10-31 11:37:13" itemprop="dateModified" datetime="2019-10-31T11:37:13+00:00">2019-10-31</time>
               </span>
             
           
@@ -764,7 +855,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2019-10-31 09:08:23" itemprop="dateModified" datetime="2019-10-31T09:08:23+00:00">2019-10-31</time>
+                <time title="Modified: 2019-10-31 11:37:13" itemprop="dateModified" datetime="2019-10-31T11:37:13+00:00">2019-10-31</time>
               </span>
             
           
@@ -873,7 +964,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2019-10-31 09:08:23" itemprop="dateModified" datetime="2019-10-31T09:08:23+00:00">2019-10-31</time>
+                <time title="Modified: 2019-10-31 11:37:13" itemprop="dateModified" datetime="2019-10-31T11:37:13+00:00">2019-10-31</time>
               </span>
             
           
@@ -985,7 +1076,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2019-10-31 09:08:23" itemprop="dateModified" datetime="2019-10-31T09:08:23+00:00">2019-10-31</time>
+                <time title="Modified: 2019-10-31 11:37:13" itemprop="dateModified" datetime="2019-10-31T11:37:13+00:00">2019-10-31</time>
               </span>
             
           
@@ -1127,7 +1218,7 @@ C --> D(Make changes);</pre>
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2019-10-31 09:08:23" itemprop="dateModified" datetime="2019-10-31T09:08:23+00:00">2019-10-31</time>
+                <time title="Modified: 2019-10-31 11:37:13" itemprop="dateModified" datetime="2019-10-31T11:37:13+00:00">2019-10-31</time>
               </span>
             
           
@@ -1213,160 +1304,12 @@ C --> D(Make changes);</pre>
   </article>
 
     
-        <article itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block home">
-    <link itemprop="mainEntityOfPage" href="https://chinyun.github.io/myblog/myblog/2019/10/04/Hexo-GitHubPage-TravisCI/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="chinyun">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/myblog/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Jinny's blog">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-            
-            <a href="/myblog/2019/10/04/Hexo-GitHubPage-TravisCI/" class="post-title-link" itemprop="url">Hexo+GitHubPage+TravisCI</a>
-          
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              
-                
-              
-
-              <time title="Created: 2019-10-04 14:50:40" itemprop="dateCreated datePublished" datetime="2019-10-04T14:50:40+00:00">2019-10-04</time>
-            </span>
-          
-            
-
-            
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2019-10-31 09:08:23" itemprop="dateModified" datetime="2019-10-31T09:08:23+00:00">2019-10-31</time>
-              </span>
-            
-          
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h2 id="Overview"><a href="#Overview" class="headerlink" title="Overview"></a>Overview</h2><ol>
-<li>About how to use <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a> build up my blog and deploy on <a href>GitHub Pages</a>.</li>
-<li>How to use <a href="https://travis-ci.com/" target="_blank" rel="noopener">Travis</a> CI to set up automatically deployment.</li>
-</ol>
-<h2 id="Why-use-Hexo"><a href="#Why-use-Hexo" class="headerlink" title="Why use Hexo"></a>Why use Hexo</h2><ol>
-<li>run on Node.js</li>
-<li>fast build up</li>
-<li>many plugins and big community</li>
-</ol>
-<h2 id="Start"><a href="#Start" class="headerlink" title="Start"></a>Start</h2><h3 id="Prerequisites"><a href="#Prerequisites" class="headerlink" title="Prerequisites"></a>Prerequisites</h3><ol>
-<li>npm &amp; node.js</li>
-<li>git</li>
-</ol>
-<h3 id="Installing"><a href="#Installing" class="headerlink" title="Installing"></a>Installing</h3><p>Install Hexo</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install -g hexo-cli</span><br></pre></td></tr></table></figure>
-
-<p>Add hexo folder, cd into it and install packages through npm</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">hexo init &lt;folder&gt;</span><br><span class="line">cd &lt;folder&gt;</span><br><span class="line">npm install</span><br></pre></td></tr></table></figure>
-
-<blockquote>
-<p>Notes: the default theme ‘Landscape’ has an unknown variable at README.md line 77. It would lead to build failed. So need to delete the README.md file of the ‘Landscape’ theme. Or comment out that line. (2019.10.04)</p>
-</blockquote>
-<h3 id="Setting"><a href="#Setting" class="headerlink" title="Setting"></a>Setting</h3><p>Edit the <code>_config.yml</code> file </p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">...</span><br><span class="line"># Site</span><br><span class="line">title: &lt;YOUR BLOG NAME&gt;</span><br><span class="line">subtitle: &lt;BLOG SUBTITLE&gt;</span><br><span class="line">description:</span><br><span class="line">keywords:</span><br><span class="line">author: &lt;YOUR NAME&gt;</span><br><span class="line">language: zh-tw  //正體中文</span><br><span class="line">timezone:</span><br><span class="line"></span><br><span class="line"># URL</span><br><span class="line">url: https://&lt;username&gt;.github.io/&lt;repo-name&gt;/</span><br><span class="line">root: /&lt;repo-name&gt;/</span><br><span class="line">...</span><br></pre></td></tr></table></figure>
-
-<blockquote>
-<p>Notes: It is essensial to set <strong><code>root</code></strong> to <strong><code>/&lt;repo-name&gt;/</code></strong> otherwise it could led to CSS file generating failed.</p>
-</blockquote>
-<p>More details: Hexo document <a href="https://hexo.io/docs/configuration.html" target="_blank" rel="noopener">Configuration</a></p>
-<h3 id="Deployment"><a href="#Deployment" class="headerlink" title="Deployment"></a>Deployment</h3><p>In official document tutorial, it recommends to use <code>Travis CI</code> to deploy <code>Github Pages</code>. It is free for open source repository, meaning your repository’s master branch has to be public.</p>
-<h4 id="Two-options-of-GitHub-Pages-Url-Choosing"><a href="#Two-options-of-GitHub-Pages-Url-Choosing" class="headerlink" title="Two options of GitHub Pages Url Choosing"></a>Two options of GitHub Pages Url Choosing</h4><ol>
-<li><p>Create a repo named <code>username.github.io</code>, where username is your username on GitHub. </p>
-</li>
-<li><p>Create a repo named anything. for example: <code>myblog</code>.</p>
-</li>
-</ol>
-<p>The difference between these two options is that a user has only one site of url <code>https://&lt;username&gt;.github.io</code>, while you can have mutiple sites with the url <code>https://&lt;username&gt;.github.io/&lt;repo-name&gt;/</code>.</p>
-<h4 id="Push-hexo-files-to-Github"><a href="#Push-hexo-files-to-Github" class="headerlink" title="Push hexo files to Github"></a>Push hexo files to Github</h4><ol>
-<li>Push the files of your Hexo folder to the repository. </li>
-</ol>
-<blockquote>
-<p>Notes: The public/ folder is not (and should not be) uploaded by default, make sure the <code>.gitignore</code> file contains <code>public/</code> line.</p>
-</blockquote>
-<h4 id="Add-Travis-CI-to-GitHub-account"><a href="#Add-Travis-CI-to-GitHub-account" class="headerlink" title="Add Travis CI to GitHub account"></a>Add Travis CI to GitHub account</h4><ol>
-<li><p>Go to Applications settings, configure Travis CI to have access to the repo. You’ll be redirected to Travis page.</p>
-</li>
-<li><p>On a new tab, generate a new token with repo scopes. Note down the token value.</p>
-</li>
-<li><p>On the Travis page, go to your repo’s setting. Under Environment Variables, put GH_TOKEN as name and paste the token onto value. Click Add to save it.</p>
-</li>
-<li><p>Add <code>.travis.yml</code> file to your repo (alongside <code>_config.yml</code> &amp; <code>package.json</code>) with the following content:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">sudo: false</span><br><span class="line">language: node_js</span><br><span class="line">node_js:</span><br><span class="line">  - 10 # use nodejs v10 LTS</span><br><span class="line">cache: npm</span><br><span class="line">branches:</span><br><span class="line">  only:</span><br><span class="line">    - master # build master branch only</span><br><span class="line">script:</span><br><span class="line">  - hexo generate # generate static files</span><br><span class="line">deploy:</span><br><span class="line">  provider: pages</span><br><span class="line">  skip-cleanup: true</span><br><span class="line">  github-token: $GH_TOKEN</span><br><span class="line">  keep-history: true</span><br><span class="line">  on:</span><br><span class="line">    branch: master</span><br><span class="line">  local-dir: public</span><br></pre></td></tr></table></figure>
-
-</li>
-</ol>
-<h4 id="Deploy"><a href="#Deploy" class="headerlink" title="Deploy"></a>Deploy</h4><ol>
-<li><p>To create a new post, youn can add <code>&lt;title&gt;.md</code> file in the <code>source/_posts</code> folder by running following command:</p>
-<pre><code>hexo new [layout] &lt;title&gt;</code></pre><blockquote>
-<p>Notes: <code>post</code> is the default layout. To change the default layout by editing the default_layout setting in <code>_config.yml</code>.</p>
-</blockquote>
-</li>
-<li><p>You can monitor the building process at Travis CI dashboard. And add the image of build/passing by click it to copy the markdown script and paste into your <code>README.md</code> file in hexo folder.</p>
-</li>
-<li><p>Once Travis CI finish the deployment, the generated pages can be found in the <code>gh-pages</code> branch of your repository</p>
-</li>
-<li><p>In your GitHub repo’s setting, navigate to “GitHub Pages” section and make sure that the Source is pointed to <code>gh-pages</code> branch.</p>
-</li>
-<li><p>Now you can check the webpage at the url you set.</p>
-</li>
-</ol>
-<h2 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h2><p><a href="https://hexo.io/docs/configuration.html" target="_blank" rel="noopener">Hexo Docs</a><br><a href="https://help.github.com/en/articles/getting-started-with-github-pages" target="_blank" rel="noopener">GitHub Pages</a><br><a href="https://docs.travis-ci.com/user/tutorial/" target="_blank" rel="noopener">Travis CI Docs</a></p>
-
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-          <div class="post-eof"></div>
-        
-      </footer>
-  </div>
-  
-  
-  
-  </article>
-
-    
   </div>
 
   
+  <nav class="pagination">
+    <span class="page-number current">1</span><a class="page-number" href="/myblog/page/2/">2</a><a class="extend next" rel="next" href="/myblog/page/2/"><i class="fa fa-angle-right" aria-label="Next page"></i></a>
+  </nav>
 
 
           </div>
@@ -1409,7 +1352,7 @@ C --> D(Make changes);</pre>
         
           <a href="/myblog/archives/">
         
-          <span class="site-state-item-count">10</span>
+          <span class="site-state-item-count">11</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
