@@ -15,6 +15,28 @@ D3 特色包括：
 2. Elegance：流暢的動態轉場效果，簡潔的程式碼
 3. Community：有龐大使用者社群支援，有許多開放資源
 
+# D3.js vs Chart.js：
+
+D3 enables developers to create bespoke, interactive data visualisations. It consists of a number of modules to help with tasks such as:
+
+- adding, removing and updating HTML/SVG elements
+- animation
+- interaction (e.g. zooming, panning, dragging)
+- arranging elements based on tree and network data structures
+- working with geographic data
+
+Chart.js provides ready made bar, line, pie and scatter charts. A minimal amount of coding and time is required to get a chart up and running. Charts also include a legend, hover pop-up and series toggling. They are also responsive to device size.
+
+Charts can be configured. For example the legend can be displayed above, below or to the side of the chart. The look and feel of the chart can also be modified by changing background colour, line colours, line widths and more.
+
+Chart.js renders its charts using the Canvas element which results in good performance compared with SVG, espcially when rendering a large amount of data. The other advantage of Canvas rendering is that it’s relatively easy to download the chart as an image file.
+
+Conclusion:
+Both D3.js and Chart.js are excellent libraries for visualising data. Chart.js requires far less effort to create charts and should suffice in most cases, especially when standard charts are required. There’s little limit to what D3.js can achieve but it’ll likely require significantly more development effort than Chart.js.
+
+If you’re still not sure which to use my rule of thumb is: if you’re wanting to make a standard chart (such as line, bar, pie, radar, scatter or bubble) try starting with Chart.js. If you’re after something more bespoke then D3 might be a better choice.
+
+
 # How do D3 work
 
 - Use D3 Select to grab hold of elements on the screen.
@@ -110,3 +132,5 @@ componentDidUpdate = () => {
 [D3.js Quick Start Guide](https://reurl.cc/k5EY23)
 [Codepen](https://codepen.io/thecraftycoderpdx/pen/jZyzKo)
 [Shubo's Notes](http://shubo.io/react-d3/)
+[D3 or Chart.js for Data Visualisation?](https://www.createwithdata.com/d3js-or-chartjs/)
+[Canvas vs. SVG](https://dcdrkim.pixnet.net/blog/post/313576476-html-5-canvas-vs.-svg)
