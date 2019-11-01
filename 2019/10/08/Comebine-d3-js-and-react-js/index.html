@@ -63,7 +63,7 @@
 <meta property="og:site_name" content="Jinny&#39;s blog">
 <meta property="og:description" content="Why use D3D3 is a JavaScript library for visualizing data with HTML, SVG, and CSS.D3 是一個利用資料集來操作文件的 JavaScript 函式庫，可以讓你繪製出用 HTML、SVG 及 CSS 做出來的多元化動態資料圖形，D3 遵照著網頁標準，因此現今的瀏覽器皆可直接支援瀏覽，不需要另外安裝任何框架或是套件，D3">
 <meta property="og:locale" content="zh-tw">
-<meta property="og:updated_time" content="2019-10-31T11:37:13.512Z">
+<meta property="og:updated_time" content="2019-11-01T14:00:22.008Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Comebine d3.js and react.js">
 <meta name="twitter:description" content="Why use D3D3 is a JavaScript library for visualizing data with HTML, SVG, and CSS.D3 是一個利用資料集來操作文件的 JavaScript 函式庫，可以讓你繪製出用 HTML、SVG 及 CSS 做出來的多元化動態資料圖形，D3 遵照著網頁標準，因此現今的瀏覽器皆可直接支援瀏覽，不需要另外安裝任何框架或是套件，D3">
@@ -237,7 +237,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2019-10-31 11:37:13" itemprop="dateModified" datetime="2019-10-31T11:37:13+00:00">2019-10-31</time>
+                <time title="Modified: 2019-11-01 14:00:22" itemprop="dateModified" datetime="2019-11-01T14:00:22+00:00">2019-11-01</time>
               </span>
             
           
@@ -260,6 +260,19 @@
 <li>Elegance：流暢的動態轉場效果，簡潔的程式碼</li>
 <li>Community：有龐大使用者社群支援，有許多開放資源</li>
 </ol>
+<h1 id="D3-js-vs-Chart-js："><a href="#D3-js-vs-Chart-js：" class="headerlink" title="D3.js vs Chart.js："></a>D3.js vs Chart.js：</h1><p>D3 enables developers to create bespoke, interactive data visualisations. It consists of a number of modules to help with tasks such as:</p>
+<ul>
+<li>adding, removing and updating HTML/SVG elements</li>
+<li>animation</li>
+<li>interaction (e.g. zooming, panning, dragging)</li>
+<li>arranging elements based on tree and network data structures</li>
+<li>working with geographic data</li>
+</ul>
+<p>Chart.js provides ready made bar, line, pie and scatter charts. A minimal amount of coding and time is required to get a chart up and running. Charts also include a legend, hover pop-up and series toggling. They are also responsive to device size.</p>
+<p>Charts can be configured. For example the legend can be displayed above, below or to the side of the chart. The look and feel of the chart can also be modified by changing background colour, line colours, line widths and more.</p>
+<p>Chart.js renders its charts using the Canvas element which results in good performance compared with SVG, espcially when rendering a large amount of data. The other advantage of Canvas rendering is that it’s relatively easy to download the chart as an image file.</p>
+<p>Conclusion:<br>Both D3.js and Chart.js are excellent libraries for visualising data. Chart.js requires far less effort to create charts and should suffice in most cases, especially when standard charts are required. There’s little limit to what D3.js can achieve but it’ll likely require significantly more development effort than Chart.js.</p>
+<p>If you’re still not sure which to use my rule of thumb is: if you’re wanting to make a standard chart (such as line, bar, pie, radar, scatter or bubble) try starting with Chart.js. If you’re after something more bespoke then D3 might be a better choice.</p>
 <h1 id="How-do-D3-work"><a href="#How-do-D3-work" class="headerlink" title="How do D3 work"></a>How do D3 work</h1><ul>
 <li>Use D3 Select to grab hold of elements on the screen.</li>
 <li>Use D3 Append to add SVGs onto the selections.</li>
@@ -303,7 +316,7 @@
 <p>在元件生成完成後和元件更新（State 變更）完成時觸發 D3 Update Function</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">componentDidMount = () =&gt; &#123;</span><br><span class="line">  this.updateStyleAndAttrs();</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">componentDidUpdate = () =&gt; &#123;</span><br><span class="line">  this.updateStyleAndAttrs();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-<h1 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h1><p><a href="https://github.com/d3/d3/wiki/TW-Home" target="_blank" rel="noopener">D3 Docs</a><br><a href="https://github.com/d3/d3/wiki/Gallery" target="_blank" rel="noopener">D3 Gallery</a><br><a href="https://reurl.cc/k5EY23" target="_blank" rel="noopener">D3.js Quick Start Guide</a><br><a href="https://codepen.io/thecraftycoderpdx/pen/jZyzKo" target="_blank" rel="noopener">Codepen</a><br><a href="http://shubo.io/react-d3/" target="_blank" rel="noopener">Shubo’s Notes</a></p>
+<h1 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h1><p><a href="https://github.com/d3/d3/wiki/TW-Home" target="_blank" rel="noopener">D3 Docs</a><br><a href="https://github.com/d3/d3/wiki/Gallery" target="_blank" rel="noopener">D3 Gallery</a><br><a href="https://reurl.cc/k5EY23" target="_blank" rel="noopener">D3.js Quick Start Guide</a><br><a href="https://codepen.io/thecraftycoderpdx/pen/jZyzKo" target="_blank" rel="noopener">Codepen</a><br><a href="http://shubo.io/react-d3/" target="_blank" rel="noopener">Shubo’s Notes</a><br><a href="https://www.createwithdata.com/d3js-or-chartjs/" target="_blank" rel="noopener">D3 or Chart.js for Data Visualisation?</a><br><a href="https://dcdrkim.pixnet.net/blog/post/313576476-html-5-canvas-vs.-svg" target="_blank" rel="noopener">Canvas vs. SVG</a></p>
 
     </div>
 
@@ -379,7 +392,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Why-use-D3"><span class="nav-number">1.</span> <span class="nav-text">Why use D3</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#How-do-D3-work"><span class="nav-number">2.</span> <span class="nav-text">How do D3 work</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Data-Binding"><span class="nav-number">2.1.</span> <span class="nav-text">Data Binding</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#General-Update-Pattern"><span class="nav-number">2.2.</span> <span class="nav-text">General Update Pattern</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#How-to-combine-D3-and-React"><span class="nav-number">3.</span> <span class="nav-text">How to combine D3 and React</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#呈現-UI-的邏輯不同"><span class="nav-number">3.0.1.</span> <span class="nav-text">呈現 UI 的邏輯不同</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#分工合作，做各自擅長的"><span class="nav-number">3.0.2.</span> <span class="nav-text">分工合作，做各自擅長的</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Reference"><span class="nav-number">4.</span> <span class="nav-text">Reference</span></a></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Why-use-D3"><span class="nav-number">1.</span> <span class="nav-text">Why use D3</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#D3-js-vs-Chart-js："><span class="nav-number">2.</span> <span class="nav-text">D3.js vs Chart.js：</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#How-do-D3-work"><span class="nav-number">3.</span> <span class="nav-text">How do D3 work</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Data-Binding"><span class="nav-number">3.1.</span> <span class="nav-text">Data Binding</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#General-Update-Pattern"><span class="nav-number">3.2.</span> <span class="nav-text">General Update Pattern</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#How-to-combine-D3-and-React"><span class="nav-number">4.</span> <span class="nav-text">How to combine D3 and React</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#呈現-UI-的邏輯不同"><span class="nav-number">4.0.1.</span> <span class="nav-text">呈現 UI 的邏輯不同</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#分工合作，做各自擅長的"><span class="nav-number">4.0.2.</span> <span class="nav-text">分工合作，做各自擅長的</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Reference"><span class="nav-number">5.</span> <span class="nav-text">Reference</span></a></li></ol></div>
         
       </div>
       <!--/noindex-->
