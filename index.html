@@ -193,6 +193,131 @@
   
   
   <div class="post-block home">
+    <link itemprop="mainEntityOfPage" href="https://chinyun.github.io/myblog/myblog/2019/11/02/CSRF-XSS-SQL-injection/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="chinyun">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/myblog/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Jinny's blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+            
+            <a href="/myblog/2019/11/02/CSRF-XSS-SQL-injection/" class="post-title-link" itemprop="url">CSRF, XSS, SQL injection</a>
+          
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              
+                
+              
+
+              <time title="Created: 2019-11-02 20:32:24 / Modified: 16:00:46" itemprop="dateCreated datePublished" datetime="2019-11-02T20:32:24+00:00">2019-11-02</time>
+            </span>
+          
+            
+
+            
+          
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>Web Security 網頁安全泛指針對網頁、網站上的資訊安全，涵蓋程式漏洞、邏輯漏洞、資訊洩漏等。</p>
+<p>#Cross Site Request Forgery(XSRF or CSRF)</p>
+<p>指在受害者不知情狀況下，被其他網域借用身份來完成未經同意的 HTTP Request。<br>當網站使用 cookie-based authentication，會把 session id 和 session data 存在 cookie 中，剛使用者曾在其他網站登入而未登出，並且進入惡意網站操作時，攻擊者利用可以進行跨域 http 請求的 http tag(ex: img、iframe等)埋入惡意的 request 程式碼，觸發後因為使用者未登出，因此攻擊者獲得 cookie 資料，攻擊者得以冒用使用者身份通過驗證。得以任意改變使者者在資料庫的資料。</p>
+<p>同源政策對於連結(links)、重新導向(redirect)、表單(form)等的跨來源存取都是寬鬆的，因此駭客利用此特性做 CSRF 攻擊。</p>
+<p>如何防範：</p>
+<ol>
+<li>使用 token-based authentication</li>
+<li>使用 HttpOnly 來防止 Cookie 被 JavaScript 讀取</li>
+<li>目前各大成熟的框架，都有針對傳遞資料做 CSRF 驗證，網站會產生的一組密碼，並在表單輸出時，檢查那組密碼是否正確。</li>
+</ol>
+<p>Cross Site Request Forgery attacks are not an issue if you are using JWT with local storage. On the other hand, if your use case requires you to store the JWT in a cookie, you will need to protect against XSRF. XSRF are not as easily understood as XSS attacks. Explaining how XSRF attacks work can be time-consuming, so instead, check out this really good guide that explains in-depth how XSRF attacks work. Luckily, preventing XSRF attacks is a fairly simple matter. To over-simplify, protecting against an XSRF attack, your server, upon establishing a session with a client will generate a unique token (note this is not a JWT). Then, anytime data is submitted to your server, a hidden input field will contain this token and the server will check to make sure the tokens match. Again, as our recommendation is to store the JWT in <strong>local storage</strong>, you probably will not have to worry about XSRF attacks.</p>
+<p>One of the best ways to protect your users and servers is to have a <strong>short expiration time</strong> for tokens. That way, even if a token is compromised, it will quickly become useless. Additionally, you may maintain a blacklist of compromised tokens and not allow those tokens access to the system. Finally, the nuclear approach would be to change the signing algorithm, which would invalidate all active tokens and require all of your users to log in again. This approach is not easily recommended, but is available in the event of a severe breach.</p>
+<h1 id="Cross-Site-Scripting-XSS"><a href="#Cross-Site-Scripting-XSS" class="headerlink" title="Cross Site Scripting(XSS)"></a>Cross Site Scripting(XSS)</h1><p>「XSS攻擊通常指的是通過利用網頁開發時留下的漏洞，通過巧妙的方法注入惡意指令程式碼到網頁，使用戶載入並執行攻擊者惡意製造的網頁程式。 這些惡意網頁程式通常是JavaScript，但實際上也可以包括Java，VBScript，ActiveX，Flash或者甚至是普通的HTML。」–wikipedia</p>
+<p>使用者以為安全進入網站後反而被導向到釣魚網站、甚至被竊取帳號密碼、個人資料。<br>目前 XSS 攻擊的種類大致可以分成以下幾種類型：</p>
+<ul>
+<li><p>Stored XSS (儲存型)：<br>會被保存在伺服器資料庫中的 JavaScript 代碼引起的攻擊即為 Stored XSS，最常見的就是論壇文章、留言板等等，因為使用者可以輸入任意內容，若沒有確實檢查，那使用者輸入如 ｀<code>&lt;script&gt;</code> 等關鍵字就會被當成正常的 HTML 執行，標籤的內容也會被正常的作為 JavaScript 代碼執行。</p>
+</li>
+<li><p>Reflected XSS (反射型)：<br>由網頁後端直接嵌入由前端使用者所傳送過來的內容造成的，最常見的就是以 GET 方法傳送資料給伺服器時，伺服器未檢查就將內容回應到網頁上所產生的漏洞。</p>
+</li>
+<li><p>DOM-Based XSS (基於 DOM 的類型):<br>網頁上的 JavaScript 在執行過程中，沒有詳細檢查，輸入任意的內容都會被建立成有效的 DOM 物件，包含嵌入的代碼也會被執行，使得操作 DOM 的過程代入了惡意指令。但這樣的攻擊除非攻擊者親自到受害者電腦前輸入，否則不可能讓受害者輸入這種惡意代碼，通常需要搭配前兩個手法；讓內容保存在伺服器資料庫中、或是以反射型的方式製造出內容，再藉由JavaScript 動態產生有效的 DOM 物件來運行惡意代碼。</p>
+</li>
+</ul>
+<p>如何防範：</p>
+<ol>
+<li><p>前兩種 Stored、Reflected 的類型都必須由後端進行防範，除了必要的 HTML 代碼，任何允許使用者輸入的內容都需要檢查，刪除所有「<code>&lt;script&gt;</code>」、「 <code>onerror=</code>」及其他任何可能執行代碼的字串。</p>
+</li>
+<li><p>DOM-Based 則必須由前端來防範，但基本上還是跟前面的原則相同。<br>另外不同的一點就是應該選擇正確的方法、屬性來操作 DOM，譬如<code>document.getElementById(&#39;show_name&#39;).innerHTML = name;</code> 中的<code>innerHTML</code>屬性代表插入的內容是合法的 HTML 字串，所以字串會解析成 DOM 物件，此處使用<code>innerText</code>會被保證作為純粹的文字，也就不可能被插入惡意代碼執行了。</p>
+</li>
+</ol>
+<p>Cross Site Scripting attacks occur when an outside entity is able to execute code within your website or app. The most common attack vector here is if your website allows <strong>inputs</strong> that are not properly sanitized. <strong>If an attacker can execute code on your domain, your JWT tokens are vulnerable.</strong> Our CTO has argued in the past that XSS attacks are much easier to deal with compared to XSRF attacks because they are generally better understood. <strong>Many frameworks, including Angular, automatically sanitize inputs and prevent arbitrary code execution.</strong> If you are not using a framework that sanitizes input/output out-of-the-box, you can look at plugins like caja developed by Google to assist. Sanitizing inputs is a solved issue in many frameworks and languages and I would recommend using a framework or plugin vs building your own.</p>
+<h1 id="SQL-injection"><a href="#SQL-injection" class="headerlink" title="SQL injection"></a>SQL injection</h1><p>「Injection 是一種駭客常用的攻擊概念，透過注入惡意的程式碼的方式，破壞原本程式碼的語意，來達到攻擊的效果。SQL 是網站常用來取得資料的程式語法，SQL Injection 便是駭客透過修改 SQL 語句，改變他的語意，達成竊取資料/破壞資料的行為。」<br>–<a href="https://medium.com/@jaydenlin/淺談駭客攻擊-網站安全-一次看懂-sql-injection-的攻擊原理-b1994fd2392a" target="_blank" rel="noopener">一次看懂 SQL Injection 的攻擊原理</a></p>
+<p>「在輸入的字串之中夾帶SQL指令，在設計不良的程式當中忽略了字元檢查，那麼這些夾帶進去的惡意指令就會被資料庫伺服器誤認為是正常的SQL指令而執行，因此遭到破壞或是入侵。」<br>–wikipedia</p>
+<p>「在 SQL 語法中常會出現攻擊者可以透過更改語法邏輯或加入特殊指令的方式，在未設定過濾惡意程式碼的情況下，資料庫伺服器（DataBase）會直接接收使用者所輸入的 SQL 指令並執行攻擊代碼，使攻擊者能夠取得最高權限，得以擅自竊取、修改、挪動或刪除資料的可能。此類漏洞無疑的會對公司或商號造成相當大的損傷。」<br>–<a href="https://ithelp.ithome.com.tw/articles/10189201" target="_blank" rel="noopener">攻擊行為－SQL 資料隱碼攻擊 SQL injection</a></p>
+<p>常見攻擊手法：</p>
+<ul>
+<li>Authorization Bypass（略過權限檢查）</li>
+<li>Injecting SQL Sub-Statements into SQL Queries（注入 SQL 子語法）</li>
+<li>Exploiting Stored Procedures（利用預存程序）</li>
+</ul>
+<p>防範手法：</p>
+<ul>
+<li><p>使用 ORM(object relational mapping)：<br>在資料庫和 model資料容器之間的框架，他可以幫助開發者更簡便安全的去資料庫讀取資料，透過 ruby, java 等程式語言，去操作資料庫語言。同時因為是操作程式語言，若 query 中的值不符合預期格式，框架會自動擋掉而不會讓 SQL injection 成功。目前大部分的網站都是使用框架來開發，而這些框架都是使用 ORM 來處理他們的資料庫，因此在 ORM 的保護下，不是我們預期的資料格式，而是 SQL 語法的話，具有基本的保護能力。</p>
+</li>
+<li><p>參數化查詢（parameterized query 或 parameterized statement）：<br>是指在設計與資料庫連結並存取資料時，在需要填入數值或資料的地方，使用參數（parameter）來給值，這個方法目前已被視為最有效可預防SQL注入攻擊的攻擊手法的防禦方式。 – <a href="https://www.wikiwand.com/zh-tw/%E5%8F%83%E6%95%B8%E5%8C%96%E6%9F%A5%E8%A9%A2" target="_blank" rel="noopener">參數化查詢</a></p>
+</li>
+<li><p>使用 Regular expression 驗證過濾輸入值與參數中惡意代碼，將輸入值中的單引號置換為雙引號。</p>
+</li>
+<li><p>限制輸入字元格式並檢查輸入長度。</p>
+</li>
+<li><p>資料庫設定使用者帳號權限，限制某些管道使用者無法作資料庫存取。</p>
+</li>
+</ul>
+<h1 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h1><p><a href="https://www.gnucitizen.org/blog/csrf-demystified/" target="_blank" rel="noopener">CSRF</a><br><a href="https://forum.gamer.com.tw/Co.php?bsn=60292&sn=11267" target="_blank" rel="noopener">網頁安全】給網頁開發新人的 XSS 攻擊 介紹與防範</a><br><a href="https://ithelp.ithome.com.tw/articles/10209227" target="_blank" rel="noopener">資安常見攻擊( Web ) 與學習方法</a></p>
+
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+          <div class="post-eof"></div>
+        
+      </footer>
+  </div>
+  
+  
+  
+  </article>
+
+    
+        <article itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block home">
     <link itemprop="mainEntityOfPage" href="https://chinyun.github.io/myblog/myblog/2019/11/02/hello-world/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -222,7 +347,7 @@
                 
               
 
-              <time title="Created: 2019-11-02 14:13:01" itemprop="dateCreated datePublished" datetime="2019-11-02T14:13:01+00:00">2019-11-02</time>
+              <time title="Created: 2019-11-02 16:00:46" itemprop="dateCreated datePublished" datetime="2019-11-02T16:00:46+00:00">2019-11-02</time>
             </span>
           
 
@@ -314,7 +439,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2019-11-02 14:13:01" itemprop="dateModified" datetime="2019-11-02T14:13:01+00:00">2019-11-02</time>
+                <time title="Modified: 2019-11-02 16:00:46" itemprop="dateModified" datetime="2019-11-02T16:00:46+00:00">2019-11-02</time>
               </span>
             
           
@@ -471,7 +596,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2019-11-02 14:13:01" itemprop="dateModified" datetime="2019-11-02T14:13:01+00:00">2019-11-02</time>
+                <time title="Modified: 2019-11-02 16:00:46" itemprop="dateModified" datetime="2019-11-02T16:00:46+00:00">2019-11-02</time>
               </span>
             
           
@@ -570,7 +695,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2019-11-02 14:13:01" itemprop="dateModified" datetime="2019-11-02T14:13:01+00:00">2019-11-02</time>
+                <time title="Modified: 2019-11-02 16:00:46" itemprop="dateModified" datetime="2019-11-02T16:00:46+00:00">2019-11-02</time>
               </span>
             
           
@@ -695,7 +820,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2019-11-02 14:13:01" itemprop="dateModified" datetime="2019-11-02T14:13:01+00:00">2019-11-02</time>
+                <time title="Modified: 2019-11-02 16:00:46" itemprop="dateModified" datetime="2019-11-02T16:00:46+00:00">2019-11-02</time>
               </span>
             
           
@@ -816,7 +941,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2019-11-02 14:13:01" itemprop="dateModified" datetime="2019-11-02T14:13:01+00:00">2019-11-02</time>
+                <time title="Modified: 2019-11-02 16:00:46" itemprop="dateModified" datetime="2019-11-02T16:00:46+00:00">2019-11-02</time>
               </span>
             
           
@@ -909,7 +1034,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2019-11-02 14:13:01" itemprop="dateModified" datetime="2019-11-02T14:13:01+00:00">2019-11-02</time>
+                <time title="Modified: 2019-11-02 16:00:46" itemprop="dateModified" datetime="2019-11-02T16:00:46+00:00">2019-11-02</time>
               </span>
             
           
@@ -1028,7 +1153,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2019-11-02 14:13:01" itemprop="dateModified" datetime="2019-11-02T14:13:01+00:00">2019-11-02</time>
+                <time title="Modified: 2019-11-02 16:00:46" itemprop="dateModified" datetime="2019-11-02T16:00:46+00:00">2019-11-02</time>
               </span>
             
           
@@ -1137,7 +1262,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2019-11-02 14:13:01" itemprop="dateModified" datetime="2019-11-02T14:13:01+00:00">2019-11-02</time>
+                <time title="Modified: 2019-11-02 16:00:46" itemprop="dateModified" datetime="2019-11-02T16:00:46+00:00">2019-11-02</time>
               </span>
             
           
@@ -1185,148 +1310,6 @@
 <p>若使用其他 theme 設置方法不太相同需要查看官方文件</p>
 </blockquote>
 <h1 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h1><p><a href="https://mermaidjs.github.io/#/" target="_blank" rel="noopener">mermaid</a><br><a href="https://github.com/webappdevelp/hexo-filter-mermaid-diagrams" target="_blank" rel="noopener">hexo-filter-mermaid-diagrams</a></p>
-
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-          <div class="post-eof"></div>
-        
-      </footer>
-  </div>
-  
-  
-  
-  </article>
-
-    
-        <article itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block home">
-    <link itemprop="mainEntityOfPage" href="https://chinyun.github.io/myblog/myblog/2019/10/09/React-State-Management-Redux/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="chinyun">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/myblog/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Jinny's blog">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-            
-            <a href="/myblog/2019/10/09/React-State-Management-Redux/" class="post-title-link" itemprop="url">React State Management & Redux</a>
-          
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              
-                
-              
-
-              <time title="Created: 2019-10-09 15:42:37" itemprop="dateCreated datePublished" datetime="2019-10-09T15:42:37+00:00">2019-10-09</time>
-            </span>
-          
-            
-
-            
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2019-11-02 14:13:01" itemprop="dateModified" datetime="2019-11-02T14:13:01+00:00">2019-11-02</time>
-              </span>
-            
-          
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="How-React-manage-State"><a href="#How-React-manage-State" class="headerlink" title="How React manage State"></a>How React manage State</h1><p>React 使用單向數據流，父元件會把自身的 state 作為 props 傳遞給子元件，以此來共享資料。</p>
-<p>根據官方文件描述：「 React Componenet 除了接收資料外（ 透過 <code>this.props</code> 存取 ），也可以保存自身的 state （透過 <code>this.state</code> 存取）。當一個 component 的 state 改變的時候，產生的標記語法將會透過自動重新呼叫 <code>render()</code> 更新。」</p>
-<p>React Componenet 變更 state 的唯一方法是用 <code>this.setState()</code>，而且 state 只能在自身的 Componenet 內變更，所以當應用程式的規模越來越大、元件越來越多，需要共通使用的 state 也會越來越多。 </p>
-<h1 id="Lifting-State-Up"><a href="#Lifting-State-Up" class="headerlink" title="Lifting State Up"></a>Lifting State Up</h1><p>隨著應用程式增加更多功能，同一個 state 可能需要被多個同層級或非父子關係的元件使用，以反應相同的資料變化。此時這個 state 必須被<strong>提升</strong>到最靠近他們的共同上層元件(ancestor)，再以 props 的形式傳遞給其他元件使用，這個過程稱為<strong>狀態提升</strong>(Lifting State Up)。</p>
-<p>根據官方文件：「 在 React 應用程式中，對於資料的變化只能有一個唯一的「真相來源」。通常來說，state 會優先被加入到需要 render 的 component。接著，如果其他的 component 也需要的話，你可以提升 state 到共同最靠近的 ancestor。你應該依賴<strong>上至下的資料流</strong>，而不是嘗試在不同 component 之間同步 state。」</p>
-<p>但不斷提升 state 的結果可能是許多 state 被以 props 形式不斷傳遞到子元件，而需要改變 state 時也必須將 function 以 props 傳遞到子元件，在子元件被觸發後，在上層元件內呼叫 <code>this.setState()</code>。如此一來，使用者操作應用程式改變資料等不同的 functions 被分散在各個元件，不僅不好維護，也容易因為 state 更新先後的問題引起錯誤。</p>
-<h1 id="Why-Redux"><a href="#Why-Redux" class="headerlink" title="Why Redux"></a>Why Redux</h1><p>Redux 由 Dan Abramov 開發：「 Redux provides a solid, stable and mature solution to managing state in your React application. Through a handful of small, useful patterns, Redux can transform your application from a total mess of confusing and scattered state, into a delightfully organized, easy to understand modern JavaScript powerhouse.」</p>
-<p>Redux 受到幾個 Flux Pattern 重要特質的影響，過去的 MVC(Model-View-Controller) Pattern 是這樣的：</p>
-<pre class="mermaid">graph LR;
-A(Action) --> B(Controller);
-B --> C(Model);
-C --> D(View);
-C --> G(View);
-B --> E(Model);
-E --> G(View);
-B --> F(Model);
-F --> G(View);
-E --> H(View);</pre>
-
-<p>而 Flux Pattern 是這樣的：</p>
-<pre class="mermaid">graph LR;
-A(Action) --> B(Dispatcher);
-B --> C(Store);
-C --> D(View);</pre>
-
-<p>隨著 App 成長， state management 越來越複雜，所以我們會發現使用 Flux Pattern 這樣的邏輯是有效率的。</p>
-<h3 id="Redux-Pattern"><a href="#Redux-Pattern" class="headerlink" title="Redux Pattern"></a>Redux Pattern</h3><pre class="mermaid">graph LR;
-A(Action) -- Middleware --> B(Reducer);
-B --> C(Store);
-C --> D(Make changes);</pre>
-
-<h3 id="Redux-的優點"><a href="#Redux-的優點" class="headerlink" title="Redux 的優點"></a>Redux 的優點</h3><ul>
-<li>Good for managing large state.</li>
-<li>Useful for sharing data between containers.</li>
-<li>Predictable state management using the 3 principles:<ol>
-<li>Single source of truth - have one big object that describes the entire state</li>
-<li>State is read only - can only be modified by dispatching actions.</li>
-<li>Changes using pure function - receives an input and always return s an output that is predictable.</li>
-</ol>
-</li>
-</ul>
-<blockquote>
-<p>To dispatch state mutations you have to write a function that takes the previous state of the app and the action being dispatched, then return the next state of the app. This function is called the <strong>Reducer</strong>.</p>
-</blockquote>
-<p>Redux help developer thinking in a way of “how can we build an app that is able to scale with thousands of user interactions” and “how can we make it that the information flows from one to another into a predictable view, a system that is predictable.”</p>
-<h3 id="Conclusion"><a href="#Conclusion" class="headerlink" title="Conclusion"></a>Conclusion</h3><p>整理為什麼使用 Redux + React 的方式管理 state 的理由：</p>
-<ol>
-<li><p>更有效率的管理 state：<br>Redux 採集中管理 state，再分配給需要該 state 的元件，因此不需要一直傳遞 props。</p>
-</li>
-<li><p>更有邏輯的管理 state：<br>在 Redux 管理下，一律透過 action 描述更新動作，經過 Reducer 來變更 state。</p>
-</li>
-<li><p>更好維護：<br>使用上結合兩者，將 UI 的 state 交給 React，將 Data 的 state 交給 Redux，當需要修改時，可以更快找到需要修改的地方。</p>
-</li>
-</ol>
-<p>但並不是所有 React 應用程式都需要 Redux，需要判斷 state tree 是否很複雜：</p>
-<ol>
-<li>應用程式需要經常變化 UI</li>
-<li>許多非父子關係的元件共用相同資料或以相同方式更新 state</li>
-<li>同一個 state 受到多種不同方式更新</li>
-</ol>
-<p>如果有這些狀況可以使用 Redux 來管理 state。</p>
-<h1 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h1><p><a href="https://zh-hant.reactjs.org/docs/lifting-state-up.html" target="_blank" rel="noopener">React Docs</a><br><a href="https://egghead.io/courses/getting-started-with-redux" target="_blank" rel="noopener">Redux Docs</a></p>
 
         
       
@@ -1394,7 +1377,7 @@ C --> D(Make changes);</pre>
         
           <a href="/myblog/archives/">
         
-          <span class="site-state-item-count">12</span>
+          <span class="site-state-item-count">13</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
