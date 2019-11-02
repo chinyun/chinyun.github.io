@@ -1,0 +1,532 @@
+<!DOCTYPE html>
+
+
+
+
+
+<html lang="zh-tw">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 3.9.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/myblog/images/apple-touch-icon-next.png?v=7.4.1">
+  <link rel="icon" type="image/png" sizes="32x32" href="/myblog/images/favicon-32x32-next.png?v=7.4.1">
+  <link rel="icon" type="image/png" sizes="16x16" href="/myblog/images/favicon-16x16-next.png?v=7.4.1">
+  <link rel="mask-icon" href="/myblog/images/logo.svg?v=7.4.1" color="#222">
+
+<link rel="stylesheet" href="/myblog/css/main.css?v=7.4.1">
+
+
+<link rel="stylesheet" href="/myblog/lib/font-awesome/css/font-awesome.min.css?v=4.7.0">
+
+
+<script id="hexo-configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/myblog/',
+    scheme: 'Pisces',
+    version: '7.4.1',
+    exturl: false,
+    sidebar: {"position":"left","display":"post","offset":12,"onmobile":false},
+    copycode: {"enable":false,"show_result":false,"style":null},
+    back2top: {"enable":true,"sidebar":false,"scrollpercent":false},
+    bookmark: {"enable":false,"color":"#222","save":"auto"},
+    fancybox: false,
+    mediumzoom: false,
+    lazyload: false,
+    pangu: false,
+    algolia: {
+      appID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    },
+    localsearch: {"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},
+    path: '',
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    translation: {
+      copy_button: 'Copy',
+      copy_success: 'Copied',
+      copy_failure: 'Copy failed'
+    },
+    sidebarPadding: 40
+  };
+</script>
+
+  <meta name="description" content="根據 google 開發者指南，選擇正確的網頁存儲機制對本地設備和基於雲端的服務器存儲都很重要，良好的存儲引擎可以確保以可靠的方式保存信息，同時減少佔用的網路頻寬並提升響應能力，正確的存儲緩存策略是實現離線移動網頁體驗的核心構建基礎。–Never Load the Same Resource Twice - 網頁存儲概覽 Session 是什麼？session 可以被翻譯作「一系列動作、具有上下文">
+<meta name="keywords" content="JavaScript, React, d3, NodeJS, Web">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Cookie, Session, Web Storage, Token">
+<meta property="og:url" content="https://chinyun.github.io/myblog/2019/11/01/Cookie-Session-Web-Storage-Token/index.html">
+<meta property="og:site_name" content="Jinny&#39;s blog">
+<meta property="og:description" content="根據 google 開發者指南，選擇正確的網頁存儲機制對本地設備和基於雲端的服務器存儲都很重要，良好的存儲引擎可以確保以可靠的方式保存信息，同時減少佔用的網路頻寬並提升響應能力，正確的存儲緩存策略是實現離線移動網頁體驗的核心構建基礎。–Never Load the Same Resource Twice - 網頁存儲概覽 Session 是什麼？session 可以被翻譯作「一系列動作、具有上下文">
+<meta property="og:locale" content="zh-tw">
+<meta property="og:updated_time" content="2019-11-02T14:13:01.642Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Cookie, Session, Web Storage, Token">
+<meta name="twitter:description" content="根據 google 開發者指南，選擇正確的網頁存儲機制對本地設備和基於雲端的服務器存儲都很重要，良好的存儲引擎可以確保以可靠的方式保存信息，同時減少佔用的網路頻寬並提升響應能力，正確的存儲緩存策略是實現離線移動網頁體驗的核心構建基礎。–Never Load the Same Resource Twice - 網頁存儲概覽 Session 是什麼？session 可以被翻譯作「一系列動作、具有上下文">
+  <link rel="canonical" href="https://chinyun.github.io/myblog/2019/11/01/Cookie-Session-Web-Storage-Token/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome: false,
+    isPost: true,
+    isPage: false,
+    isArchive: false
+  };
+</script>
+
+  <title>Cookie, Session, Web Storage, Token | Jinny's blog</title>
+  
+
+
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .logo,
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-tw">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-meta">
+
+    <div>
+      <a href="/myblog/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Jinny's blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+        <p class="site-subtitle">Writing For Sharing</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+      
+      
+      
+        
+        <li class="menu-item menu-item-home">
+      
+    
+
+    <a href="/myblog/" rel="section"><i class="fa fa-fw fa-home"></i>Home</a>
+
+  </li>
+      
+      
+      
+        
+        <li class="menu-item menu-item-archives">
+      
+    
+
+    <a href="/myblog/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>Archives</a>
+
+  </li>
+  </ul>
+
+</nav>
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+            
+
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+      <article itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block post">
+    <link itemprop="mainEntityOfPage" href="https://chinyun.github.io/myblog/myblog/2019/11/01/Cookie-Session-Web-Storage-Token/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="chinyun">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/myblog/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Jinny's blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">Cookie, Session, Web Storage, Token
+
+          
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              
+                
+              
+
+              <time title="Created: 2019-11-01 22:24:34" itemprop="dateCreated datePublished" datetime="2019-11-01T22:24:34+00:00">2019-11-01</time>
+            </span>
+          
+            
+
+            
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2019-11-02 14:13:01" itemprop="dateModified" datetime="2019-11-02T14:13:01+00:00">2019-11-02</time>
+              </span>
+            
+          
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p>根據 google 開發者指南，選擇正確的網頁存儲機制對本地設備和基於雲端的服務器存儲都很重要，良好的存儲引擎可以確保以可靠的方式保存信息，同時減少佔用的網路頻寬並提升響應能力，正確的存儲緩存策略是實現離線移動網頁體驗的核心構建基礎。<br>–<a href="https://developers.google.com/web/fundamentals/instant-and-offline/web-storage" target="_blank" rel="noopener">Never Load the Same Resource Twice - 網頁存儲概覽</a></p>
+<h1 id="Session-是什麼？"><a href="#Session-是什麼？" class="headerlink" title="Session 是什麼？"></a>Session 是什麼？</h1><p>session 可以被翻譯作「一系列動作、具有上下文意義的狀態」或被簡單的翻作「會話」、「工作階段」。<br>由於 http 協定是無狀態(stateless)的設計，server 和 client 不會一直保持連線狀態，也不會有雙方狀態的即時更新，每一次的請求和回應的都是獨立的，沒辦法記憶內容，而 session 就是讓 client 和 server 之間保持狀態的解決方案。<br>session 可以說是一種機制，可以讓伺服器記住訪問者的身份，避免短時間內重複載入，不同程式語言對於 session 機制有不同的實現方法。</p>
+<h1 id="Session-機制的實作"><a href="#Session-機制的實作" class="headerlink" title="Session 機制的實作"></a>Session 機制的實作</h1><h3 id="網址"><a href="#網址" class="headerlink" title="網址"></a>網址</h3><p>將 request 內容附加在網址上，server 透過網址資訊判斷 client 狀態。 </p>
+<h3 id="Cookies"><a href="#Cookies" class="headerlink" title="Cookies"></a>Cookies</h3><p>cookie 是最常見的方式，可以把資訊記錄在本機端的文檔中，網站只能儲存使用者確實輸入過的內容而無法存取電腦內的資料。<br>cookie 的機制就是當 clinet 發送 request 時，server 收到 request 後透過 Set-Cookie 語法讓瀏覽器儲存一些內容(設置 cookie)，而這些內容會在瀏覽器發送 request 時一併送達 server，server 透過 cookie 內容決定狀態。</p>
+<ul>
+<li>cookie-based session: 把所有 session 狀態存在 cookie 裡面並且加密</li>
+<li>在 cookie 只儲存 session id，其餘狀態(session data)都存在 server，透過 session id 來向 server 請求訪問資料。<blockquote>
+<p>但 cookie 的問題是認證不認人，一旦 cookie、session id 被偷走，別人就可以偽造身份來登入，這也就是為什麼有時候如果駭客取得一大串 session id 的時候，有用戶會發現帳戶被系統自動登出，讓該 session id 失效。<br>由於 session 代表意義廣泛、多處有使用到此詞，因此有時候口語中講到 session 也會直接指存在 cookie 中的 session id 和 session data。</p>
+</blockquote>
+</li>
+<li>要注意 HttpOnly 與 Secure 的設定值</li>
+</ul>
+<p>cookie-based authentication 流程：</p>
+<ol>
+<li>User enters their login credentials.</li>
+<li>Server verifies the credentials are correct and creates a session which is then stored in a database.</li>
+<li>A cookie with the session ID is placed in the users browser.</li>
+<li>On subsequent requests, the session ID is verified against the database and if valid the request processed.</li>
+<li>Once a user logs out of the app, the session is destroyed both client-side and server-side.</li>
+</ol>
+<h3 id="Token"><a href="#Token" class="headerlink" title="Token"></a>Token</h3><p>Token-based authentication 是無狀態的，server 不會保留有關哪些用戶已登入或已發出哪些 token 的紀錄，取而代之的是，對 server 的每個請求都帶有一個 token，server 使用該 token 來驗證請求的真實性。<br>The token is generally sent as an addition Authorization header in the form of Bearer {JWT}, but can additionally be sent in the body of a POST request or even as a query parameter. </p>
+<p>一般 token 的流程如下：</p>
+<ol>
+<li>User enters their login credentials.</li>
+<li>Server verifies the credentials are correct and returns a signed token.</li>
+<li>This token is stored client-side, most commonly in local storage - but can be stored in session storage or a cookie as well.</li>
+<li>Subsequent requests to the server include this token as an additional Authorization header or through one of the other methods mentioned above.</li>
+<li>The server decodes the JWT and if the token is valid processes the request.</li>
+<li>Once a user logs out, the token is destroyed client-side, no interaction with the server is necessary.</li>
+</ol>
+<p>Token 優於傳統 cookie-based 方法的原因為：</p>
+<ul>
+<li>Stateless, Scalable, and Decoupled，<br>使用 token-based appoarch，後端不需要保存 token 的紀錄，每個 token 包含驗證所需的資訊，server的工作只要給予成功登入的請求 signed token，並且驗證後續的 token 是否一致。 Third party services such as <strong>Auth0</strong> can handle the issuing of tokens and then the server only needs to verify the validity of the token.</li>
+<li>Cross Domain and CORS，不同於 cookies 只能在單網域或子網域中運作，token-based approach with CORS enabled 所以可以被不同 services 和 domains 訪問。</li>
+</ul>
+<h3 id="JWT-JSON-Web-Token"><a href="#JWT-JSON-Web-Token" class="headerlink" title="JWT (JSON Web Token)"></a>JWT (JSON Web Token)</h3><p>A JSON Web Token is comprised of three parts: the header, payload, and signature.<br>Header:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  &apos;typ&apos;: &apos;JWT&apos;, # 聲明類型</span><br><span class="line">  &apos;alg&apos;: &apos;HS256&apos; # 加密的方法: HMAC、SHA256、RSA 進行 Base64 編碼</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>Payload: 用來放用來放必要的資料(通常是用來認證使用者的資料)或額外的資料(metadata)，存放溝通訊息。<br>Signature: 由三個部分組成，加密後的 header、加密後的 payload以及 secret，secret 要保存在 server 端，JWT 的簽發驗證都必須使用這個 secret，當其他人得知這個 secret 就表示 client-side 可以自己簽發 JWT，因此任何場景都不應該外流。</p>
+<p>Tokens Are Signed, Not Encrypted. Token could be signed by the HMACSHA256 algorithm, and the header and payload are Base64URL encoded, it is not encrypted. Base64URL can be decoded.<br>It should go without saying that sensitive data, such as passwords, should never be stored in the payload. If you must store sensitive data in the payload or your use case calls for the JWT to be obscured, you can use JSON Web Encryption (JWE). JWE allows you to encrypt the contents of a JWT so that it is not readable by anyone but the server.</p>
+<p>Commonly, the JWT is placed in the browser’s local storage and this works well for most use cases.There are some issues with storing JWTs in local storage to be aware of. Unlike cookies, local storage is sandboxed to a specific domain and its data cannot be accessed by any other domain including sub-domains.</p>
+<p>You can store the token in a cookie instead, but the max size of a cookie is only 4kb so that may be problematic if you have many claims attached to the token. Additionally, you can store the token in <strong>session storage</strong> which is similar to local storage but is cleared as soon as the user closes the browser.</p>
+<h3 id="Web-Storage"><a href="#Web-Storage" class="headerlink" title="Web Storage"></a>Web Storage</h3><p>HTML5 提供的 web storage 方法分成兩種： session storage 和 local storage。<br>這是一種可以讓網頁儲存資料於本地端的技術，作用與 cookie 相同，但與只有 4k 容量的 cookie 不同，基本上一般瀏覽器支援 5M 的儲存空間。而且 cookie 會在伺服器和用戶端之間旅行，而 web storage 則是儲存於用戶端，不會佔用網路頻寬、不影響網站效能，因此可以把安全性低而量較大的資料以 web storage 形式儲存。</p>
+<p>web storage 儲存形式為 string，存取的程式指令寫在用戶端的 JavaScript 中，資料結構為 key/value pair。</p>
+<ul>
+<li>local storage: 永久性儲存在瀏覽器中，關閉瀏覽器也不會消失，除非手動刪除。</li>
+<li>session storage: 只存在單一分頁，開新分頁即是新的 session，資料無法跨分頁分享。</li>
+</ul>
+<p>隔離：瀏覽器會把不同網站的 local storage 隔離開來，基於「同源政策」避免不同網域的訪問者進行惡意攻擊，某個網站的網頁所儲存於 local storage 的資料，其他網站是看不到的，只有來自相同網站的網頁才能共享資料。</p>
+<ul>
+<li>不同協定視為不同源： HTTP 和 HTTPS 不同源</li>
+<li>主機名稱： 相同 host name 底下的虛擬路徑屬於相同來源，不同主機名稱視為不同源</li>
+</ul>
+<h1 id="Session-安全設計原則"><a href="#Session-安全設計原則" class="headerlink" title="Session 安全設計原則"></a>Session 安全設計原則</h1><ul>
+<li>需有一定期限的生命週期（expire機制）</li>
+<li>盡量利用原有架構 session 管理的機制</li>
+<li>登入成功後的 sessoin id 必須強制更換</li>
+</ul>
+<h1 id="Notes"><a href="#Notes" class="headerlink" title="Notes"></a>Notes</h1><ul>
+<li><p><a href="https://github.com/aszx87410/blog/issues/46" target="_blank" rel="noopener">深入 Session 與 Cookie：Express、PHP 與 Rails 的實作</a><br>sessionID 如何產生、sessionID 儲存方式、session 資訊儲存方式</p>
+</li>
+<li><p><a href="https://ithelp.ithome.com.tw/articles/10187343" target="_blank" rel="noopener">Day24 - Cookie在express上的應用—登入實作為例。</a></p>
+</li>
+</ul>
+<h1 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h1><ul>
+<li><a href="https://github.com/aszx87410/blog/issues/45" target="_blank" rel="noopener">淺談 Session 與 Cookie：一起來讀 RFC</a></li>
+<li><a href="https://cythilya.github.io/2015/08/18/node-cookie-and-session/" target="_blank" rel="noopener">Node.js: Cookie and Session</a></li>
+<li><a href="https://github.com/aszx87410/blog/issues/17" target="_blank" rel="noopener">我遇過最難的 cookie 問題</a></li>
+<li><a href="https://dzone.com/articles/cookies-vs-tokens-the-definitive-guide" target="_blank" rel="noopener">Cookies vs. Tokens: The Definitive Guide</a></li>
+</ul>
+<h1 id="延伸閱讀"><a href="#延伸閱讀" class="headerlink" title="延伸閱讀"></a>延伸閱讀</h1><ul>
+<li><a href>CSRF, XSS, SQL injection</a></li>
+<li><a href>HTTPS/HTTP/JSON/AJAX</a></li>
+<li><a href>CORS 同源政策</a></li>
+<li><a href>Hash function &amp; Encryption</a></li>
+<li><a href>Cache &amp; HTTP Cache</a></li>
+</ul>
+
+    </div>
+
+    
+    
+    
+        
+      
+
+      <footer class="post-footer">
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-next post-nav-item">
+              
+                <a href="/myblog/2019/10/31/CSS-position-box-sizing/" rel="next" title="CSS position & box-sizing">
+                  <i class="fa fa-chevron-left"></i> CSS position & box-sizing
+                </a>
+              
+            </div>
+
+            <span class="post-nav-divider"></span>
+
+            <div class="post-nav-prev post-nav-item">
+              
+                <a href="/myblog/2019/11/02/hello-world/" rel="prev" title="Hello World">
+                  Hello World <i class="fa fa-chevron-right"></i>
+                </a>
+              
+            </div>
+          </div>
+        
+      </footer>
+    
+  </div>
+  
+  
+  
+  </article>
+
+  </div>
+
+
+          </div>
+          
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+        
+        
+        
+        
+      
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Session-是什麼？"><span class="nav-number">1.</span> <span class="nav-text">Session 是什麼？</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Session-機制的實作"><span class="nav-number">2.</span> <span class="nav-text">Session 機制的實作</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#網址"><span class="nav-number">2.0.1.</span> <span class="nav-text">網址</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Cookies"><span class="nav-number">2.0.2.</span> <span class="nav-text">Cookies</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Token"><span class="nav-number">2.0.3.</span> <span class="nav-text">Token</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#JWT-JSON-Web-Token"><span class="nav-number">2.0.4.</span> <span class="nav-text">JWT (JSON Web Token)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Web-Storage"><span class="nav-number">2.0.5.</span> <span class="nav-text">Web Storage</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Session-安全設計原則"><span class="nav-number">3.</span> <span class="nav-text">Session 安全設計原則</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Notes"><span class="nav-number">4.</span> <span class="nav-text">Notes</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Reference"><span class="nav-number">5.</span> <span class="nav-text">Reference</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#延伸閱讀"><span class="nav-number">6.</span> <span class="nav-text">延伸閱讀</span></a></li></ol></div>
+        
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">chinyun</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        
+          <a href="/myblog/archives/">
+        
+          <span class="site-state-item-count">12</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+    
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">chinyun</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> v3.9.0</div>
+  <span class="post-meta-divider">|</span>
+  <div class="theme-info">Theme – <a href="https://theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Pisces</a> v7.4.1</div>
+  <script src='https://unpkg.com/mermaid@7.1.2/dist/mermaid.min.js'></script>
+  <script>
+    if (window.mermaid) {
+      mermaid.initialize("");
+    }
+  </script>
+
+        
+
+
+
+
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/myblog/lib/anime.min.js?v=3.1.0"></script>
+  <script src="/myblog/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  <script src="/myblog/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+<script src="/myblog/js/utils.js?v=7.4.1"></script><script src="/myblog/js/motion.js?v=7.4.1"></script>
+<script src="/myblog/js/schemes/pisces.js?v=7.4.1"></script>
+<script src="/myblog/js/next-boot.js?v=7.4.1"></script>
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<script>
+if (document.querySelectorAll('pre.mermaid').length) {
+  NexT.utils.getScript('//cdn.jsdelivr.net/npm/mermaid@8/dist/mermaid.min.js', () => {
+    mermaid.initialize({
+      theme: 'forest',
+      logLevel: 3,
+      flowchart: { curve: 'linear' },
+      gantt: { axisFormat: '%m/%d/%Y' },
+      sequence: { actorMargin: 50 }
+    });
+  }, window.mermaid);
+}
+</script>
+
+
+
+
+  
+
+  
+
+  
+
+</body>
+</html>
