@@ -38,6 +38,7 @@ cookie-based authentication 流程：
 5. Once a user logs out of the app, the session is destroyed both client-side and server-side.
 
 ### Token
+
 Token-based authentication 是無狀態的，server 不會保留有關哪些用戶已登入或已發出哪些 token 的紀錄，取而代之的是，對 server 的每個請求都帶有一個 token，server 使用該 token 來驗證請求的真實性。
 The token is generally sent as an addition Authorization header in the form of Bearer {JWT}, but can additionally be sent in the body of a POST request or even as a query parameter. 
 
