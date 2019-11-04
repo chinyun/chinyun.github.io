@@ -16,7 +16,7 @@ Web Security 網頁安全泛指針對網頁、網站上的資訊安全，涵蓋�
 如何防範：
 1. 使用 token-based authentication
 2. 使用 HttpOnly 來防止 Cookie 被 JavaScript 讀取
-3. 目前各大成熟的框架，都有針對傳遞資料做 CSRF 驗證，網站會產生的一組密碼，並在表單輸出時，檢查那組密碼是否正確。
+3. 目前各大成熟的框架，都有針對傳遞資料做 CSRF 驗證，網站會產生的一組密碼，並在請求送出時，檢查那組密碼是否正確。
 
 Cross Site Request Forgery attacks are not an issue if you are using JWT with local storage. On the other hand, if your use case requires you to store the JWT in a cookie, you will need to protect against XSRF. XSRF are not as easily understood as XSS attacks. Explaining how XSRF attacks work can be time-consuming, so instead, check out this really good guide that explains in-depth how XSRF attacks work. Luckily, preventing XSRF attacks is a fairly simple matter. To over-simplify, protecting against an XSRF attack, your server, upon establishing a session with a client will generate a unique token (note this is not a JWT). Then, anytime data is submitted to your server, a hidden input field will contain this token and the server will check to make sure the tokens match. Again, as our recommendation is to store the JWT in **local storage**, you probably will not have to worry about XSRF attacks.
 
@@ -62,6 +62,26 @@ Cross Site Scripting attacks occur when an outside entity is able to execute cod
 - Exploiting Stored Procedures（利用預存程序）
 
 防範手法：
+- 使用 SQL query builder for JavaScript - knex.js：
+
+Read carefully from knex documentation how to pass values to knex raw (http://knexjs.org/#Raw).
+
+If you are passing values as parameter binding to raw like:
+```
+knex.raw('select * from foo where id = ?', [1])
+```
+In that case parameters and query string are passed separately to database driver protecting query from SQL injection.
+
+Other query builder methods always uses binding format internally so they are safe too.
+
+Biggest mistake that one can do with knex raw queries is to use javascript template string and interpolate variables directly to SQL string format like:
+```
+knex.raw(`select * from foo where id = ${id}`) // NEVER DO THIS 
+```
+One thing to note is that knex table/identifier names cannot be passed as bindings to driver, so with those one should be extra careful to not read table / column names from user and use them without properly validating them first.
+
+Refer from:[Does Knex.js prevent sql injection?](https://stackoverflow.com/questions/49665023/does-knex-js-prevent-sql-injection/49665379)
+
 - 使用 ORM(object relational mapping)：
 在資料庫和 model資料容器之間的框架，他可以幫助開發者更簡便安全的去資料庫讀取資料，透過 ruby, java 等程式語言，去操作資料庫語言。同時因為是操作程式語言，若 query 中的值不符合預期格式，框架會自動擋掉而不會讓 SQL injection 成功。目前大部分的網站都是使用框架來開發，而這些框架都是使用 ORM 來處理他們的資料庫，因此在 ORM 的保護下，不是我們預期的資料格式，而是 SQL 語法的話，具有基本的保護能力。
 
