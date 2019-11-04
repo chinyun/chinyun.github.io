@@ -222,7 +222,7 @@
                 
               
 
-              <time title="Created: 2019-11-04 07:24:45" itemprop="dateCreated datePublished" datetime="2019-11-04T07:24:45+00:00">2019-11-04</time>
+              <time title="Created: 2019-11-04 10:18:00" itemprop="dateCreated datePublished" datetime="2019-11-04T10:18:00+00:00">2019-11-04</time>
             </span>
           
 
@@ -314,7 +314,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2019-11-04 07:24:45" itemprop="dateModified" datetime="2019-11-04T07:24:45+00:00">2019-11-04</time>
+                <time title="Modified: 2019-11-04 10:18:00" itemprop="dateModified" datetime="2019-11-04T10:18:00+00:00">2019-11-04</time>
               </span>
             
           
@@ -338,7 +338,7 @@
 <ol>
 <li>使用 token-based authentication</li>
 <li>使用 HttpOnly 來防止 Cookie 被 JavaScript 讀取</li>
-<li>目前各大成熟的框架，都有針對傳遞資料做 CSRF 驗證，網站會產生的一組密碼，並在表單輸出時，檢查那組密碼是否正確。</li>
+<li>目前各大成熟的框架，都有針對傳遞資料做 CSRF 驗證，網站會產生的一組密碼，並在請求送出時，檢查那組密碼是否正確。</li>
 </ol>
 <p>Cross Site Request Forgery attacks are not an issue if you are using JWT with local storage. On the other hand, if your use case requires you to store the JWT in a cookie, you will need to protect against XSRF. XSRF are not as easily understood as XSS attacks. Explaining how XSRF attacks work can be time-consuming, so instead, check out this really good guide that explains in-depth how XSRF attacks work. Luckily, preventing XSRF attacks is a fairly simple matter. To over-simplify, protecting against an XSRF attack, your server, upon establishing a session with a client will generate a unique token (note this is not a JWT). Then, anytime data is submitted to your server, a hidden input field will contain this token and the server will check to make sure the tokens match. Again, as our recommendation is to store the JWT in <strong>local storage</strong>, you probably will not have to worry about XSRF attacks.</p>
 <p>One of the best ways to protect your users and servers is to have a <strong>short expiration time</strong> for tokens. That way, even if a token is compromised, it will quickly become useless. Additionally, you may maintain a blacklist of compromised tokens and not allow those tokens access to the system. Finally, the nuclear approach would be to change the signing algorithm, which would invalidate all active tokens and require all of your users to log in again. This approach is not easily recommended, but is available in the event of a severe breach.</p>
@@ -370,6 +370,20 @@
 <li>Exploiting Stored Procedures（利用預存程序）</li>
 </ul>
 <p>防範手法：</p>
+<ul>
+<li>使用 SQL query builder for JavaScript - knex.js：</li>
+</ul>
+<p>Read carefully from knex documentation how to pass values to knex raw (<a href="http://knexjs.org/#Raw" target="_blank" rel="noopener">http://knexjs.org/#Raw</a>).</p>
+<p>If you are passing values as parameter binding to raw like:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">knex.raw(&apos;select * from foo where id = ?&apos;, [1])</span><br></pre></td></tr></table></figure>
+
+<p>In that case parameters and query string are passed separately to database driver protecting query from SQL injection.</p>
+<p>Other query builder methods always uses binding format internally so they are safe too.</p>
+<p>Biggest mistake that one can do with knex raw queries is to use javascript template string and interpolate variables directly to SQL string format like:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">knex.raw(`select * from foo where id = $&#123;id&#125;`) // NEVER DO THIS</span><br></pre></td></tr></table></figure>
+
+<p>One thing to note is that knex table/identifier names cannot be passed as bindings to driver, so with those one should be extra careful to not read table / column names from user and use them without properly validating them first.</p>
+<p>Refer from:<a href="https://stackoverflow.com/questions/49665023/does-knex-js-prevent-sql-injection/49665379" target="_blank" rel="noopener">Does Knex.js prevent sql injection?</a></p>
 <ul>
 <li><p>使用 ORM(object relational mapping)：<br>在資料庫和 model資料容器之間的框架，他可以幫助開發者更簡便安全的去資料庫讀取資料，透過 ruby, java 等程式語言，去操作資料庫語言。同時因為是操作程式語言，若 query 中的值不符合預期格式，框架會自動擋掉而不會讓 SQL injection 成功。目前大部分的網站都是使用框架來開發，而這些框架都是使用 ORM 來處理他們的資料庫，因此在 ORM 的保護下，不是我們預期的資料格式，而是 SQL 語法的話，具有基本的保護能力。</p>
 </li>
@@ -447,7 +461,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2019-11-04 07:24:45" itemprop="dateModified" datetime="2019-11-04T07:24:45+00:00">2019-11-04</time>
+                <time title="Modified: 2019-11-04 10:18:00" itemprop="dateModified" datetime="2019-11-04T10:18:00+00:00">2019-11-04</time>
               </span>
             
           
@@ -534,8 +548,8 @@
 <li><a href="https://dzone.com/articles/cookies-vs-tokens-the-definitive-guide" target="_blank" rel="noopener">Cookies vs. Tokens: The Definitive Guide</a></li>
 </ul>
 <h1 id="延伸閱讀"><a href="#延伸閱讀" class="headerlink" title="延伸閱讀"></a>延伸閱讀</h1><ul>
-<li><a href>CSRF, XSS, SQL injection</a></li>
 <li><a href>HTTPS/HTTP/JSON/AJAX</a></li>
+<li><a href>CSRF, XSS, SQL injection</a></li>
 <li><a href>CORS 同源政策</a></li>
 <li><a href>Hash function &amp; Encryption</a></li>
 <li><a href>Cache &amp; HTTP Cache</a></li>
@@ -604,7 +618,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2019-11-04 07:24:45" itemprop="dateModified" datetime="2019-11-04T07:24:45+00:00">2019-11-04</time>
+                <time title="Modified: 2019-11-04 10:18:00" itemprop="dateModified" datetime="2019-11-04T10:18:00+00:00">2019-11-04</time>
               </span>
             
           
@@ -703,7 +717,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2019-11-04 07:24:45" itemprop="dateModified" datetime="2019-11-04T07:24:45+00:00">2019-11-04</time>
+                <time title="Modified: 2019-11-04 10:18:00" itemprop="dateModified" datetime="2019-11-04T10:18:00+00:00">2019-11-04</time>
               </span>
             
           
@@ -828,7 +842,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2019-11-04 07:24:45" itemprop="dateModified" datetime="2019-11-04T07:24:45+00:00">2019-11-04</time>
+                <time title="Modified: 2019-11-04 10:18:00" itemprop="dateModified" datetime="2019-11-04T10:18:00+00:00">2019-11-04</time>
               </span>
             
           
@@ -949,7 +963,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2019-11-04 07:24:45" itemprop="dateModified" datetime="2019-11-04T07:24:45+00:00">2019-11-04</time>
+                <time title="Modified: 2019-11-04 10:18:00" itemprop="dateModified" datetime="2019-11-04T10:18:00+00:00">2019-11-04</time>
               </span>
             
           
@@ -1042,7 +1056,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2019-11-04 07:24:45" itemprop="dateModified" datetime="2019-11-04T07:24:45+00:00">2019-11-04</time>
+                <time title="Modified: 2019-11-04 10:18:00" itemprop="dateModified" datetime="2019-11-04T10:18:00+00:00">2019-11-04</time>
               </span>
             
           
@@ -1161,7 +1175,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2019-11-04 07:24:45" itemprop="dateModified" datetime="2019-11-04T07:24:45+00:00">2019-11-04</time>
+                <time title="Modified: 2019-11-04 10:18:00" itemprop="dateModified" datetime="2019-11-04T10:18:00+00:00">2019-11-04</time>
               </span>
             
           
@@ -1270,7 +1284,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2019-11-04 07:24:45" itemprop="dateModified" datetime="2019-11-04T07:24:45+00:00">2019-11-04</time>
+                <time title="Modified: 2019-11-04 10:18:00" itemprop="dateModified" datetime="2019-11-04T10:18:00+00:00">2019-11-04</time>
               </span>
             
           
