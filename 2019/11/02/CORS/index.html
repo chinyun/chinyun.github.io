@@ -1,0 +1,492 @@
+<!DOCTYPE html>
+
+
+
+
+
+<html lang="zh-tw">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 3.9.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/myblog/images/apple-touch-icon-next.png?v=7.4.1">
+  <link rel="icon" type="image/png" sizes="32x32" href="/myblog/images/favicon-32x32-next.png?v=7.4.1">
+  <link rel="icon" type="image/png" sizes="16x16" href="/myblog/images/favicon-16x16-next.png?v=7.4.1">
+  <link rel="mask-icon" href="/myblog/images/logo.svg?v=7.4.1" color="#222">
+
+<link rel="stylesheet" href="/myblog/css/main.css?v=7.4.1">
+
+
+<link rel="stylesheet" href="/myblog/lib/font-awesome/css/font-awesome.min.css?v=4.7.0">
+
+
+<script id="hexo-configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/myblog/',
+    scheme: 'Pisces',
+    version: '7.4.1',
+    exturl: false,
+    sidebar: {"position":"left","display":"post","offset":12,"onmobile":false},
+    copycode: {"enable":false,"show_result":false,"style":null},
+    back2top: {"enable":true,"sidebar":false,"scrollpercent":false},
+    bookmark: {"enable":false,"color":"#222","save":"auto"},
+    fancybox: false,
+    mediumzoom: false,
+    lazyload: false,
+    pangu: false,
+    algolia: {
+      appID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    },
+    localsearch: {"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},
+    path: '',
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    translation: {
+      copy_button: 'Copy',
+      copy_success: 'Copied',
+      copy_failure: 'Copy failed'
+    },
+    sidebarPadding: 40
+  };
+</script>
+
+  <meta name="description" content="什麼是 CORS?Cross-Origin Resource Sharing 跨來源資源共享，這是由 W3C 頒布的一種瀏覽器技術規範，透過傳輸 HTTP Header 判斷阻擋或允許不同來源網域的資源存取。 當使用者請求一個不是目前文件來源，例如不同網域(domain/host)、通訊協定(protocol)或通訊埠(port)的資源時，會建立一個跨來源 HTTP 請求(cross-origin">
+<meta name="keywords" content="JavaScript, React, d3, NodeJS, Web">
+<meta property="og:type" content="article">
+<meta property="og:title" content="CORS">
+<meta property="og:url" content="https://chinyun.github.io/myblog/2019/11/02/CORS/index.html">
+<meta property="og:site_name" content="Jinny&#39;s blog">
+<meta property="og:description" content="什麼是 CORS?Cross-Origin Resource Sharing 跨來源資源共享，這是由 W3C 頒布的一種瀏覽器技術規範，透過傳輸 HTTP Header 判斷阻擋或允許不同來源網域的資源存取。 當使用者請求一個不是目前文件來源，例如不同網域(domain/host)、通訊協定(protocol)或通訊埠(port)的資源時，會建立一個跨來源 HTTP 請求(cross-origin">
+<meta property="og:locale" content="zh-tw">
+<meta property="og:updated_time" content="2019-11-05T14:13:35.818Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="CORS">
+<meta name="twitter:description" content="什麼是 CORS?Cross-Origin Resource Sharing 跨來源資源共享，這是由 W3C 頒布的一種瀏覽器技術規範，透過傳輸 HTTP Header 判斷阻擋或允許不同來源網域的資源存取。 當使用者請求一個不是目前文件來源，例如不同網域(domain/host)、通訊協定(protocol)或通訊埠(port)的資源時，會建立一個跨來源 HTTP 請求(cross-origin">
+  <link rel="canonical" href="https://chinyun.github.io/myblog/2019/11/02/CORS/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome: false,
+    isPost: true,
+    isPage: false,
+    isArchive: false
+  };
+</script>
+
+  <title>CORS | Jinny's blog</title>
+  
+
+
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .logo,
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-tw">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-meta">
+
+    <div>
+      <a href="/myblog/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Jinny's blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+        <p class="site-subtitle">Writing For Sharing</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+      
+      
+      
+        
+        <li class="menu-item menu-item-home">
+      
+    
+
+    <a href="/myblog/" rel="section"><i class="fa fa-fw fa-home"></i>Home</a>
+
+  </li>
+      
+      
+      
+        
+        <li class="menu-item menu-item-archives">
+      
+    
+
+    <a href="/myblog/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>Archives</a>
+
+  </li>
+  </ul>
+
+</nav>
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+            
+
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+      <article itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block post">
+    <link itemprop="mainEntityOfPage" href="https://chinyun.github.io/myblog/myblog/2019/11/02/CORS/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="chinyun">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/myblog/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Jinny's blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">CORS
+
+          
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              
+                
+              
+
+              <time title="Created: 2019-11-02 21:00:05" itemprop="dateCreated datePublished" datetime="2019-11-02T21:00:05+00:00">2019-11-02</time>
+            </span>
+          
+            
+
+            
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2019-11-05 14:13:35" itemprop="dateModified" datetime="2019-11-05T14:13:35+00:00">2019-11-05</time>
+              </span>
+            
+          
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h1 id="什麼是-CORS"><a href="#什麼是-CORS" class="headerlink" title="什麼是 CORS?"></a>什麼是 CORS?</h1><p>Cross-Origin Resource Sharing 跨來源資源共享，這是由 W3C 頒布的一種瀏覽器技術規範，透過傳輸 HTTP Header 判斷阻擋或允許不同來源網域的資源存取。</p>
+<p>當使用者請求一個不是目前文件來源，例如不同網域(domain/host)、通訊協定(protocol)或通訊埠(port)的資源時，會建立一個<strong>跨來源 HTTP 請求</strong>(cross-origin http request)。</p>
+<p>而瀏覽器基於安全性考量，程式碼所發出的跨來源 HTTP 請求會受到限制，若不受限制的話，駭客可以透過撰寫程式碼跨域撈資料來進行跨站腳本攻擊(XSS)，而這個限制只有在瀏覽器上，若在本機使用 node.js 則沒有限制。</p>
+<h2 id="同源政策（same-origin-policy）"><a href="#同源政策（same-origin-policy）" class="headerlink" title="同源政策（same-origin policy）"></a>同源政策（same-origin policy）</h2><p>在同源政策（same-origin policy）中規範了那寫資源可以跨源存取，哪些會受到限制。<br>同源的定義簡單如下：</p>
+<ul>
+<li>不同網域（Domain）</li>
+<li>不同通訊協定：HTTP, HTTPS, FTP</li>
+<li>不同連接埠號（Port）</li>
+</ul>
+<p>只要瀏覽器發的 request 與 server 所屬不同源，request 就會被瀏覽器阻擋。不過即便擋下來，其實 request 已經發出去，server 也確實給予瀏覽器 response，只是瀏覽器基於同源政策，因此不把拿到的回應給你的 JavaScript 去做進一步的處理。</p>
+<p>一般來說跨來源寫（Cross-origin writes）、跨來源嵌入（Cross-origin embedding）是被允許的，而跨來源讀取（Cross-origin reads）是受限制的。</p>
+<ol>
+<li>受同源政策管理的跨來源請求：<br>XMLHttpRequest 及 Fetch 都遵守同源政策(same-origin policy)，<strong>這代表網路應用程式所使用的 API 除非使用 CORS 標頭否則只能請求與應用程式相同網域的 HTTP 資源</strong>。<br>如果想開啟跨來源 HTTP 請求的話， server 必須在 response 的 header 加上 <code>Access-Control-Allow-Origin: *</code>表示接受所有不同來源的跨域請求，或者可以指定接受特定網址的跨域請求：<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Access-Control-Allow-Origin: http://foo.example</span><br></pre></td></tr></table></figure>
+
+</li>
+</ol>
+<p>其他方法還有：</p>
+<ul>
+<li>Access-Control-Allow-Headers：指定哪些 HTTP 標頭可以於實際請求中使用。</li>
+<li>Access-Control-Allow-Methods：GET, POST, PUT，存取資源所允許的方法，用來回應預檢請求。</li>
+<li>Access-Control-Expose-Headers：瀏覽器能夠存取伺服器回應當中哪些標頭。</li>
+<li>Access-Control-Max-Age：預檢請求之結果可以被快取的秒數。</li>
+<li>Access-Control-Allow-Credentials：用於驗證請求中，用來告知瀏覽器是否允許 client-side 向 server-side 傳送 cookie，默認為 false：CORS 規範會阻止跨域 AJAX 向 server-side 發送 cookie。</li>
+</ul>
+<ol start="2">
+<li>不受同源政策管理的 html tags 包括：<code>&lt;script src=&#39;&#39; /&gt;</code>、<code>&lt;img/&gt;</code>、<code>&lt;video/&gt;</code>、<code>&lt;audio/&gt;</code>、<code>&lt;iframe/&gt;</code>、<code>&lt;link rel=&#39;stylesheet&#39; href /&gt;</code> 這些資源本來就能夠跨域存取。</li>
+</ol>
+<h2 id="JSON-with-Padding-JSONP"><a href="#JSON-with-Padding-JSONP" class="headerlink" title="JSON with Padding(JSONP)"></a>JSON with Padding(JSONP)</h2><p>JSONP 是一個利用 script tag 不受同源政策限制的特性，直接載入帶參數的 js 程式碼的跨來源請求實作方法，實務上在操作 JSONP 的時候，Server 通常會提供一個callback的參數讓 client 端帶過去。</p>
+<p>Twitch API 有提供 JSONP 的版本，我們可以直接來看範例：</p>
+<p>URL: <a href="https://api.twitch.tv/kraken/games/top?client_id=xxx&amp;callback=receiveData&amp;limit=1" target="_blank" rel="noopener">https://api.twitch.tv/kraken/games/top?client_id=xxx&amp;callback=receiveData&amp;limit=1</a></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">receiveData(&#123;&quot;_total&quot;:1067,&quot;_links&quot;:&#123;&quot;self&quot;:&quot;https://api.twitch.tv/kraken/games/top?limit=1&quot;,&quot;next&quot;:&quot;https://api.twitch.tv/kraken/games/top?limit=1\u0026offset=1&quot;&#125;,&quot;top&quot;:[&#123;&quot;game&quot;:&#123;&quot;name&quot;:&quot;Dota 2&quot;,&quot;popularity&quot;:63361,&quot;_id&quot;:29595,&quot;giantbomb_id&quot;:32887,&quot;box&quot;:&#123;&quot;large&quot;:&quot;https://static-cdn.jtvnw.net/ttv-boxart/Dota%202-272x380.jpg&quot;,&quot;medium&quot;:&quot;https://static-cdn.jtvnw.net/ttv-boxart/Dota%202-136x190.jpg&quot;,&quot;small&quot;:&quot;https://static-cdn.jtvnw.net/ttv-boxart/Dota%202-52x72.jpg&quot;,&quot;template&quot;:&quot;https://static-cdn.jtvnw.net/ttv-boxart/Dota%202-&#123;width&#125;x&#123;height&#125;.jpg&quot;&#125;,&quot;logo&quot;:&#123;&quot;large&quot;:&quot;https://static-cdn.jtvnw.net/ttv-logoart/Dota%202-240x144.jpg&quot;,&quot;medium&quot;:&quot;https://static-cdn.jtvnw.net/ttv-logoart/Dota%202-120x72.jpg&quot;,&quot;small&quot;:&quot;https://static-cdn.jtvnw.net/ttv-logoart/Dota%202-60x36.jpg&quot;,&quot;template&quot;:&quot;https://static-cdn.jtvnw.net/ttv-logoart/Dota%202-&#123;width&#125;x&#123;height&#125;.jpg&quot;&#125;,&quot;_links&quot;:&#123;&#125;,&quot;localized_name&quot;:&quot;Dota 2&quot;,&quot;locale&quot;:&quot;zh-tw&quot;&#125;,&quot;viewers&quot;:65622,&quot;channels&quot;:376&#125;]&#125;)</span><br></pre></td></tr></table></figure>
+
+<p>結合起來就是：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&lt;script src=&quot;https://api.twitch.tv/kraken/games/top?client_id=xxx&amp;callback=receiveData&amp;limit=1&quot;&gt;&lt;/script&gt;</span><br><span class="line">&lt;script&gt;</span><br><span class="line">  function receiveData (response) &#123;</span><br><span class="line">    console.log(response);</span><br><span class="line">  &#125;</span><br><span class="line">&lt;/script&gt;</span><br></pre></td></tr></table></figure>
+
+<p>利用 JSONP 也可以存取跨來源的資料。但 JSONP 的缺點就是你要帶的那些參數永遠都只能用附加在網址上的方式（GET）帶過去，沒辦法用 POST。</p>
+<h1 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h1><p><a href="https://blog.techbridge.cc/2017/05/20/api-ajax-cors-and-jsonp/" target="_blank" rel="noopener">輕鬆理解 Ajax 與跨來源請求</a><br><a href="https://pjchender.github.io/2018/08/20/%E5%90%8C%E6%BA%90%E6%94%BF%E7%AD%96%E8%88%87%E8%B7%A8%E4%BE%86%E6%BA%90%E8%B3%87%E6%BA%90%E5%85%B1%E7%94%A8%EF%BC%88cors%EF%BC%89/" target="_blank" rel="noopener">[JS] 同源政策與跨來源資源共用（CORS）</a></p>
+
+    </div>
+
+    
+    
+    
+        
+      
+
+      <footer class="post-footer">
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-next post-nav-item">
+              
+                <a href="/myblog/2019/11/02/CSRF-XSS-SQL-injection/" rel="next" title="CSRF, XSS, SQL injection">
+                  <i class="fa fa-chevron-left"></i> CSRF, XSS, SQL injection
+                </a>
+              
+            </div>
+
+            <span class="post-nav-divider"></span>
+
+            <div class="post-nav-prev post-nav-item">
+              
+                <a href="/myblog/2019/11/05/hello-world/" rel="prev" title="Hello World">
+                  Hello World <i class="fa fa-chevron-right"></i>
+                </a>
+              
+            </div>
+          </div>
+        
+      </footer>
+    
+  </div>
+  
+  
+  
+  </article>
+
+  </div>
+
+
+          </div>
+          
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+        
+        
+        
+        
+      
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#什麼是-CORS"><span class="nav-number">1.</span> <span class="nav-text">什麼是 CORS?</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#同源政策（same-origin-policy）"><span class="nav-number">1.1.</span> <span class="nav-text">同源政策（same-origin policy）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#JSON-with-Padding-JSONP"><span class="nav-number">1.2.</span> <span class="nav-text">JSON with Padding(JSONP)</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Reference"><span class="nav-number">2.</span> <span class="nav-text">Reference</span></a></li></ol></div>
+        
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">chinyun</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        
+          <a href="/myblog/archives/">
+        
+          <span class="site-state-item-count">15</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+    
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">chinyun</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> v3.9.0</div>
+  <span class="post-meta-divider">|</span>
+  <div class="theme-info">Theme – <a href="https://theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Pisces</a> v7.4.1</div>
+  <script src='https://unpkg.com/mermaid@7.1.2/dist/mermaid.min.js'></script>
+  <script>
+    if (window.mermaid) {
+      mermaid.initialize("");
+    }
+  </script>
+
+        
+
+
+
+
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/myblog/lib/anime.min.js?v=3.1.0"></script>
+  <script src="/myblog/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  <script src="/myblog/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+<script src="/myblog/js/utils.js?v=7.4.1"></script><script src="/myblog/js/motion.js?v=7.4.1"></script>
+<script src="/myblog/js/schemes/pisces.js?v=7.4.1"></script>
+<script src="/myblog/js/next-boot.js?v=7.4.1"></script>
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<script>
+if (document.querySelectorAll('pre.mermaid').length) {
+  NexT.utils.getScript('//cdn.jsdelivr.net/npm/mermaid@8/dist/mermaid.min.js', () => {
+    mermaid.initialize({
+      theme: 'forest',
+      logLevel: 3,
+      flowchart: { curve: 'linear' },
+      gantt: { axisFormat: '%m/%d/%Y' },
+      sequence: { actorMargin: 50 }
+    });
+  }, window.mermaid);
+}
+</script>
+
+
+
+
+  
+
+  
+
+  
+
+</body>
+</html>
