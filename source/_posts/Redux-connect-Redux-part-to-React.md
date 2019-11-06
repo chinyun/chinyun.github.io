@@ -109,9 +109,12 @@ const store = createStore(rootReducer, applyMiddleware(thunkMiddleware, logger))
 ```
 這段程式碼表示透過 applyMiddleware() 放入多個 middleware，讓 action dispatch時貫穿每個 middleware，最後再到 reducer。
 
+# Asynchronous Redux
+
 The 'redux-thunk' package that provides a getstate and dispatch functions that are passed on.
 It can handle asynchronous actions like AJAX calls. How does thunk middleware work? Thunk middleware is waiting for a function. It waits and sees if any actions return a function instead of an object. 
-因為 thunk 監聽 action 是否為 function 並返回一個 function，因此 action 可以寫作這樣：
+
+asynchronous actions 可以寫作這樣：
 
 ```
 export const editBudgets = (data, id, index) => (dispatch) => {
@@ -138,8 +141,7 @@ export const editBudgets = (data, id, index) => (dispatch) => {
   .catch(err => dispatch({ type: REQUEST_DATA_FAILED, payload: err }));
 }
 ```
-
-`const editBudgets = (data, id, index) => (dispatch) => {}`這是一個 higher order function，表示一個 function return 另一個 function。
+其中這段 `const editBudgets = (data, id, index) => (dispatch) => {...}` 表示 A function that return another function, redux wouldn't understand it. Because it's not an object, as it expects for an action. With the redux-thunk middleware, now we're listening to actions. Anytime the actions get triggered it's going to return a function and trigger redux-thunk. And redux-thunk is going to know whether it is a function or not. And if it is a function, give a dispatch so we can call the actions to run the function as we thought.
 
 # Reference
 
