@@ -58,14 +58,14 @@
   <meta name="description" content="以下筆記如何在 react app 中引入 redux：示範 code 專案：Tripper-app-redux 程式碼in Tripper-app-redux’s index.js: 123456789101112131415161718import React from &amp;apos;react&amp;apos;;import ReactDOM from &amp;apos;react-dom&amp;apos;;i">
 <meta name="keywords" content="JavaScript, React, d3, NodeJS, Web">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Redux:connect Redux part to React">
+<meta property="og:title" content="Connect Redux part to React">
 <meta property="og:url" content="https://chinyun.github.io/myblog/2019/11/05/Redux-connect-Redux-part-to-React/index.html">
 <meta property="og:site_name" content="Jinny&#39;s blog">
 <meta property="og:description" content="以下筆記如何在 react app 中引入 redux：示範 code 專案：Tripper-app-redux 程式碼in Tripper-app-redux’s index.js: 123456789101112131415161718import React from &amp;apos;react&amp;apos;;import ReactDOM from &amp;apos;react-dom&amp;apos;;i">
 <meta property="og:locale" content="zh-tw">
-<meta property="og:updated_time" content="2019-11-06T07:20:18.065Z">
+<meta property="og:updated_time" content="2019-11-06T07:44:02.696Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Redux:connect Redux part to React">
+<meta name="twitter:title" content="Connect Redux part to React">
 <meta name="twitter:description" content="以下筆記如何在 react app 中引入 redux：示範 code 專案：Tripper-app-redux 程式碼in Tripper-app-redux’s index.js: 123456789101112131415161718import React from &amp;apos;react&amp;apos;;import ReactDOM from &amp;apos;react-dom&amp;apos;;i">
   <link rel="canonical" href="https://chinyun.github.io/myblog/2019/11/05/Redux-connect-Redux-part-to-React/">
 
@@ -81,7 +81,7 @@
   };
 </script>
 
-  <title>Redux:connect Redux part to React | Jinny's blog</title>
+  <title>Connect Redux part to React | Jinny's blog</title>
   
 
 
@@ -210,7 +210,7 @@
       <meta itemprop="name" content="Jinny's blog">
     </span>
       <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">Redux:connect Redux part to React
+        <h1 class="post-title" itemprop="name headline">Connect Redux part to React
 
           
         </h1>
@@ -237,7 +237,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2019-11-06 07:20:18" itemprop="dateModified" datetime="2019-11-06T07:20:18+00:00">2019-11-06</time>
+                <time title="Modified: 2019-11-06 07:44:02" itemprop="dateModified" datetime="2019-11-06T07:44:02+00:00">2019-11-06</time>
               </span>
             
           
@@ -273,28 +273,29 @@
 <li><strong>dispatch(): dispatch actions to change the state of the application.</strong></li>
 <li>subscribe(): register a callback that the redux store will call any time an action has been dispatched. So you can update the UI of application to reflect the current application’s state.</li>
 </ol>
-<p>運用 <code>combineReducers()</code> method 將多個 reducer 綁在一起變成一個 rootReducer，<code>createStore()</code>則負責建立 store，接受兩個參數：要監聽的 reducer、用 applyMiddleware(middleware1, middleware2..) 加入要使用的 middleware。</p>
-<h1 id="Connect"><a href="#Connect" class="headerlink" title="Connect"></a>Connect</h1><p><code>connect()</code> are those which one of these components we want to be smart or be aware that the redux library exists and they subscribe to the changes.<br>The connect function is optimized in order for us to avoid using somthing called <code>store.subscribe()</code>. It is a higher order function, means that a function that return another function.<br>Through connect function，App component now could listen to the states that <code>mapStateToProps</code> gives and interested in actions that <code>mapDispatchToProps</code> gives to the component.</p>
-<h1 id="Redux-Middleware"><a href="#Redux-Middleware" class="headerlink" title="Redux Middleware"></a>Redux Middleware</h1><p>Middleware is the suggested way to extend Redux with custom functionality. Middleware lets you wrap the store’s dispatch method for fun and profit. The key feature of middleware is that it is composable. Multiple middleware can be combined together, where each middleware requires no knowledge of what comes before or after it in the chain.<br>Middleware 就像一個 tunnel，在 action 到 reducer 的階段之間建立通道，在 dispatch actions 時適時採取相應的行為。<br>Middleware helps us to handle side effects, monitor each one of our actions. We can listen to what logging output each one of these actions happen. It provides a third-party extension point between dispatching an<br>action, and the moment it reaches the reducer.</p>
+<p>運用 <code>combineReducers()</code> method 將多個 reducer 綁在一起變成一個，<code>createStore()</code>則負責建立 store，接受兩個參數：要監聽的 reducer、用 applyMiddleware() 加入要使用的 middleware。</p>
+<h1 id="Connect"><a href="#Connect" class="headerlink" title="Connect"></a>Connect</h1><p><code>connect()</code> are those which one of these components we want to be smart or be aware that the redux library exists and they subscribe to the changes. The connect function is optimized in order for us to avoid using somthing called <code>store.subscribe()</code>. It is a higher order function, means that a function that return another function. Through connect function, App component now could listen to the states that <code>mapStateToProps</code> gives and interested in actions that <code>mapDispatchToProps</code> gives to the component.</p>
+<h1 id="Redux-Middleware"><a href="#Redux-Middleware" class="headerlink" title="Redux Middleware"></a>Redux Middleware</h1><p>Middleware is the suggested way to extend Redux with custom functionality. Middleware lets you wrap the store’s dispatch method for fun and profit. The key feature of middleware is that it is composable. Multiple middleware can be combined together, where each middleware requires no knowledge of what comes before or after it in the chain.<br>Middleware 就像一個 tunnel，在 action 到 reducer 的階段之間建立通道，在 dispatch actions 時適時採取相應的行為。 Middleware helps us to handle side effects, monitor each one of our actions. We can listen to what logging output each one of these actions happen. It provides a third-party extension point between dispatching an action, and the moment it reaches the reducer.</p>
 <p>Redux Pattern:</p>
 <pre class="mermaid">graph LR;
 A(Action) -- Middleware --> B(Reducer);
 B --> C(Store);
 C --> D(Make changes);</pre>
-<p>在 Action 和 Reducer 之間的 Middleware 作用是輔助處理Redux，當 dispatch(action)的時候，從 dispatch 到 reducer 之間，透過 middleware 進行額外動作。<br>例如：</p>
+<p>在 Action 和 Reducer 之間的 Middleware 作用是輔助處理，當 dispatch action 的時候透過 middleware 進行額外動作。<br>常用的 Middleware 例如：</p>
 <ul>
-<li>redux-logger: 監聽 actions，在 console 印出 action type、以及更新前、後的狀態</li>
-<li>redux-thunk: 額外或是非同步的 dispatch</li>
-<li>redux-observable、redux-saga: 複雜邏輯 dispatch</li>
+<li>redux-logger：監聽 actions，在 console 印出 action type、以及更新前、後的狀態</li>
+<li>redux-thunk：額外或是非同步的 dispatch</li>
+<li>redux-observable、redux-saga：複雜邏輯 dispatch</li>
 </ul>
+<p>使用的方法：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">const store = createStore(rootReducer, applyMiddleware(thunkMiddleware, logger));</span><br></pre></td></tr></table></figure>
 
-<p>這段程式碼表示透過 applyMiddleware() 放入多個 middleware，讓 action dispatch時貫穿每個 middleware，最後再到 reducer。</p>
-<h1 id="Asynchronous-Redux"><a href="#Asynchronous-Redux" class="headerlink" title="Asynchronous Redux"></a>Asynchronous Redux</h1><p>The ‘redux-thunk’ package that provides a getstate and dispatch functions that are passed on.<br>It can handle asynchronous actions like AJAX calls. How does thunk middleware work? Thunk middleware is waiting for a function. It waits and sees if any actions return a function instead of an object. </p>
-<p>asynchronous actions 可以寫作這樣：</p>
+<p>在建立 store 的時候一併設定，透過 applyMiddleware() 放入多個 middleware，表示當 action dispatch時會依序經過 thunkMiddleware、logger 這些 middleware，然後再到 reducer。</p>
+<h1 id="Asynchronous-Redux"><a href="#Asynchronous-Redux" class="headerlink" title="Asynchronous Redux"></a>Asynchronous Redux</h1><p>The redux-thunk package that provides a getState and dispatch functions that are passed on. <strong>Redux-thunk can handle asynchronous actions like AJAX calls.</strong> How does this middleware work? Thunk middleware is waiting for a function, it waits and sees if any actions return a function instead of an object. And if it is a function, <strong>give a dispatch so we can call the actions to run</strong> the function as we thought.  </p>
+<p>Asynchronous Action 可以寫作這樣：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">export const editBudgets = (data, id, index) =&gt; (dispatch) =&gt; &#123;</span><br><span class="line">  dispatch(&#123; type: REQUEST_DATA_FAILED &#125;);</span><br><span class="line">  fetch(`$&#123;Url&#125;/journeys_budgets/$&#123;id&#125;`, &#123;</span><br><span class="line">    method: &apos;PATCH&apos;,</span><br><span class="line">    headers: &#123;&apos;Content-Type&apos;: &apos;application/json&apos;&#125;,</span><br><span class="line">    body: JSON.stringify(data)</span><br><span class="line">  &#125;)</span><br><span class="line">  .then(response =&gt; response.json())</span><br><span class="line">  .then(journey =&gt; &#123;</span><br><span class="line">    if (journey) &#123;</span><br><span class="line">      dispatch(&#123;</span><br><span class="line">        type: REQUEST_UPDATE_BUDGETS_SUCCESS,</span><br><span class="line">        payload: &#123;</span><br><span class="line">          data: journey,</span><br><span class="line">          index: index</span><br><span class="line">        &#125;</span><br><span class="line">      &#125;)</span><br><span class="line">    &#125; else &#123;</span><br><span class="line">      alert(&apos;unable to edit budget&apos;)</span><br><span class="line">    &#125;    </span><br><span class="line">  &#125;)</span><br><span class="line">  .catch(err =&gt; dispatch(&#123; type: REQUEST_DATA_FAILED, payload: err &#125;));</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-<p>其中這段 <code>const editBudgets = (data, id, index) =&gt; (dispatch) =&gt; {...}</code> 表示 A function that return another function, redux wouldn’t understand it. Because it’s not an object, as it expects for an action. With the redux-thunk middleware, now we’re listening to actions. Anytime the actions get triggered it’s going to return a function and trigger redux-thunk. And redux-thunk is going to know whether it is a function or not. And if it is a function, give a dispatch so we can call the actions to run the function as we thought.</p>
+<p>其中 <code>const editBudgets = (data, id, index) =&gt; (dispatch) =&gt; {...}</code> 表示 A function that return another function, redux wouldn’t understand it. Because it’s not an object, as it expects for an action. With the redux-thunk middleware, now we’re listening to actions. Anytime the actions get triggered it’s going to return a function and trigger redux-thunk and redux-thunk is going to know whether it is a function or not then give it a dispatch to call action to run.</p>
 <h1 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h1><p><a href="https://redux.js.org/introduction/getting-started" target="_blank" rel="noopener">redux 官方</a></p>
 
     </div>
@@ -321,10 +322,6 @@ C --> D(Make changes);</pre>
             <span class="post-nav-divider"></span>
 
             <div class="post-nav-prev post-nav-item">
-              
-                <a href="/myblog/2019/11/06/hello-world/" rel="prev" title="Hello World">
-                  Hello World <i class="fa fa-chevron-right"></i>
-                </a>
               
             </div>
           </div>
