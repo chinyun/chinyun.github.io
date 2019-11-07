@@ -62,7 +62,7 @@ AJAX (**Asynchronous JavaScript And XML/JSON**) 非同步的 JavaScript 與 XML 
 
 兩者都是以讓人閱讀的文字為基礎，可以被轉譯成程式語言使用，讓文件能夠很容易地讓人去閱讀，同時又很容易讓電腦程式去辨識的語言格式和語法，不過 XML 相較之下更難被解析(parse)，須使用專屬的解析器，而 JSON 不須使用 end tag，JSON is parse into a ready-to-use JS Object，讀寫更簡潔、快速，可以使用 arrays(objects)格式來儲存資料，雖然 JSON 是以 JavaScript 語法為基礎，但可獨立使用，且許多程式設計環境亦可讀取 (剖析) 並產生 JSON。所以現在多使用 JSON 格式來傳輸資料。
 
-- XHR(XMLHttpRequest)：是一個 JavaScript 物件，他的功能是用來項 server 發縙非同步請求，在 XHR 技術剛被開發出來時，
+- XHR(XMLHttpRequest)：是一個 JavaScript 物件，他的功能是用來向 server 發送非同步請求，在 XHR 技術剛被開發出來時，
 使用 XML 作為請求、回應的資料格式，因此被稱為 XMLHttpRequest。現今提到 XMLHttpRequest 時已經不限於使用 XML 資料格式，也可以傳遞 XML、JSON、String 等多種資料格式。
 
 - AJAX 進化史：
