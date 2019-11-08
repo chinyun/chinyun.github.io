@@ -55,19 +55,19 @@
   };
 </script>
 
-  <meta name="description" content="How React manage StateReact 使用單向數據流，父元件會把自身的 state 作為 props 傳遞給子元件，以此來共享資料。 根據官方文件描述：「 React Componenet 除了接收資料外（ 透過 this.props 存取 ），也可以保存自身的 state （透過 this.state 存取）。當一個 component 的 state 改變的時候，產生的標記語">
+  <meta name="description" content="position static 預設，只有套用此預設的元素屬於「不會被特別定位」  relative 表現與 static 一樣，除非有設定 top, right, bottom, left 等其他屬性，會使元素相對的調整其原本該出現的所在位置，不管「相對定位」過的元素如何在頁面上移動位置或增加多少空間，都不會影響到原本其他元素所在的位置。  fixed 相對於瀏覽器視窗來定位，表示即便頁面捲動他">
 <meta name="keywords" content="JavaScript, React, d3, NodeJS, Web">
 <meta property="og:type" content="article">
-<meta property="og:title" content="React State Management &amp; Redux">
-<meta property="og:url" content="https://chinyun.github.io/myblog/2019/10/09/React-State-Management-Redux/index.html">
+<meta property="og:title" content="CSS position &amp; box-sizing &amp; display">
+<meta property="og:url" content="https://chinyun.github.io/myblog/2019/10/31/CSS-position-box-sizing-display/index.html">
 <meta property="og:site_name" content="Jinny&#39;s blog">
-<meta property="og:description" content="How React manage StateReact 使用單向數據流，父元件會把自身的 state 作為 props 傳遞給子元件，以此來共享資料。 根據官方文件描述：「 React Componenet 除了接收資料外（ 透過 this.props 存取 ），也可以保存自身的 state （透過 this.state 存取）。當一個 component 的 state 改變的時候，產生的標記語">
+<meta property="og:description" content="position static 預設，只有套用此預設的元素屬於「不會被特別定位」  relative 表現與 static 一樣，除非有設定 top, right, bottom, left 等其他屬性，會使元素相對的調整其原本該出現的所在位置，不管「相對定位」過的元素如何在頁面上移動位置或增加多少空間，都不會影響到原本其他元素所在的位置。  fixed 相對於瀏覽器視窗來定位，表示即便頁面捲動他">
 <meta property="og:locale" content="zh-tw">
 <meta property="og:updated_time" content="2019-11-08T11:36:36.731Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="React State Management &amp; Redux">
-<meta name="twitter:description" content="How React manage StateReact 使用單向數據流，父元件會把自身的 state 作為 props 傳遞給子元件，以此來共享資料。 根據官方文件描述：「 React Componenet 除了接收資料外（ 透過 this.props 存取 ），也可以保存自身的 state （透過 this.state 存取）。當一個 component 的 state 改變的時候，產生的標記語">
-  <link rel="canonical" href="https://chinyun.github.io/myblog/2019/10/09/React-State-Management-Redux/">
+<meta name="twitter:title" content="CSS position &amp; box-sizing &amp; display">
+<meta name="twitter:description" content="position static 預設，只有套用此預設的元素屬於「不會被特別定位」  relative 表現與 static 一樣，除非有設定 top, right, bottom, left 等其他屬性，會使元素相對的調整其原本該出現的所在位置，不管「相對定位」過的元素如何在頁面上移動位置或增加多少空間，都不會影響到原本其他元素所在的位置。  fixed 相對於瀏覽器視窗來定位，表示即便頁面捲動他">
+  <link rel="canonical" href="https://chinyun.github.io/myblog/2019/10/31/CSS-position-box-sizing-display/">
 
 
 <script id="page-configurations">
@@ -81,7 +81,7 @@
   };
 </script>
 
-  <title>React State Management & Redux | Jinny's blog</title>
+  <title>CSS position & box-sizing & display | Jinny's blog</title>
   
 
 
@@ -198,7 +198,7 @@
   
   
   <div class="post-block post">
-    <link itemprop="mainEntityOfPage" href="https://chinyun.github.io/myblog/myblog/2019/10/09/React-State-Management-Redux/">
+    <link itemprop="mainEntityOfPage" href="https://chinyun.github.io/myblog/myblog/2019/10/31/CSS-position-box-sizing-display/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="chinyun">
@@ -210,7 +210,7 @@
       <meta itemprop="name" content="Jinny's blog">
     </span>
       <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">React State Management & Redux
+        <h1 class="post-title" itemprop="name headline">CSS position & box-sizing & display
 
           
         </h1>
@@ -226,7 +226,7 @@
                 
               
 
-              <time title="Created: 2019-10-09 15:42:37" itemprop="dateCreated datePublished" datetime="2019-10-09T15:42:37+00:00">2019-10-09</time>
+              <time title="Created: 2019-10-31 18:48:51" itemprop="dateCreated datePublished" datetime="2019-10-31T18:48:51+00:00">2019-10-31</time>
             </span>
           
             
@@ -253,68 +253,37 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <h1 id="How-React-manage-State"><a href="#How-React-manage-State" class="headerlink" title="How React manage State"></a>How React manage State</h1><p>React 使用單向數據流，父元件會把自身的 state 作為 props 傳遞給子元件，以此來共享資料。</p>
-<p>根據官方文件描述：「 React Componenet 除了接收資料外（ 透過 <code>this.props</code> 存取 ），也可以保存自身的 state （透過 <code>this.state</code> 存取）。當一個 component 的 state 改變的時候，產生的標記語法將會透過自動重新呼叫 <code>render()</code> 更新。」</p>
-<p>React Componenet 變更 state 的唯一方法是用 <code>this.setState()</code>，而且 state 只能在自身的 Componenet 內變更，所以當應用程式的規模越來越大、元件越來越多，需要共通使用的 state 也會越來越多。 </p>
-<h1 id="Lifting-State-Up"><a href="#Lifting-State-Up" class="headerlink" title="Lifting State Up"></a>Lifting State Up</h1><p>隨著應用程式增加更多功能，同一個 state 可能需要被多個同層級或非父子關係的元件使用，以反應相同的資料變化。此時這個 state 必須被<strong>提升</strong>到最靠近他們的共同上層元件(ancestor)，再以 props 的形式傳遞給其他元件使用，這個過程稱為<strong>狀態提升</strong>(Lifting State Up)。</p>
-<p>根據官方文件：「 在 React 應用程式中，對於資料的變化只能有一個唯一的「真相來源」。通常來說，state 會優先被加入到需要 render 的 component。接著，如果其他的 component 也需要的話，你可以提升 state 到共同最靠近的 ancestor。你應該依賴<strong>上至下的資料流</strong>，而不是嘗試在不同 component 之間同步 state。」</p>
-<p>但不斷提升 state 的結果可能是許多 state 被以 props 形式不斷傳遞到子元件，而需要改變 state 時也必須將 function 以 props 傳遞到子元件，在子元件被觸發後，在上層元件內呼叫 <code>this.setState()</code>。如此一來，使用者操作應用程式改變資料等不同的 functions 被分散在各個元件，不僅不好維護，也容易因為 state 更新先後的問題引起錯誤。</p>
-<h1 id="Why-Redux"><a href="#Why-Redux" class="headerlink" title="Why Redux"></a>Why Redux</h1><p>Redux 由 Dan Abramov 開發：「 Redux provides a solid, stable and mature solution to managing state in your React application. Through a handful of small, useful patterns, Redux can transform your application from a total mess of confusing and scattered state, into a delightfully organized, easy to understand modern JavaScript powerhouse.」</p>
-<p>Redux 受到幾個 Flux Pattern 重要特質的影響，過去的 MVC(Model-View-Controller) Pattern 是這樣的：</p>
-<pre class="mermaid">graph LR;
-A(Action) --> B(Controller);
-B --> C(Model);
-C --> D(View);
-C --> G(View);
-B --> E(Model);
-E --> G(View);
-B --> F(Model);
-F --> G(View);
-E --> H(View);</pre>
-
-<p>而 Flux Pattern 是這樣的：</p>
-<pre class="mermaid">graph LR;
-A(Action) --> B(Dispatcher);
-B --> C(Store);
-C --> D(View);</pre>
-
-<p>隨著 App 成長， state management 越來越複雜，所以我們會發現使用 Flux Pattern 這樣的邏輯是有效率的。</p>
-<h3 id="Redux-Pattern"><a href="#Redux-Pattern" class="headerlink" title="Redux Pattern"></a>Redux Pattern</h3><pre class="mermaid">graph LR;
-A(Action) -- Middleware --> B(Reducer);
-B --> C(Store);
-C --> D(Make changes);</pre>
-
-<h3 id="Redux-的優點"><a href="#Redux-的優點" class="headerlink" title="Redux 的優點"></a>Redux 的優點</h3><ul>
-<li>Good for managing large state.</li>
-<li>Useful for sharing data between containers.</li>
-<li>Predictable state management using the 3 principles:<ol>
-<li>Single source of truth - have one big object that describes the entire state</li>
-<li>State is read only - can only be modified by dispatching actions.</li>
-<li>Changes using pure function - receives an input and always return s an output that is predictable.</li>
-</ol>
+        <h1 id="position"><a href="#position" class="headerlink" title="position"></a>position</h1><ul>
+<li><p><strong>static</strong> 預設，只有套用此預設的元素屬於「不會被特別定位」</p>
+</li>
+<li><p><strong>relative</strong> 表現與 static 一樣，除非有設定 top, right, bottom, left 等其他屬性，會使元素相對的調整其原本該出現的所在位置，不管「相對定位」過的元素如何在頁面上移動位置或增加多少空間，都不會影響到原本其他元素所在的位置。</p>
+</li>
+<li><p><strong>fixed</strong> 相對於瀏覽器視窗來定位，表示即便頁面捲動他還是會固定在相同位置，使用 top, right, bottom, left 來定位，固定元素不會保留它原本在頁面上應有的空間，不會跟其他元素的配置相干擾。</p>
+</li>
+<li><p><strong>absolute</strong> 元素的定位是他所屬的上層容器的相對位置，若元素的上層沒有可以被定位的元素，那就會以相對於整個網頁，也就是 <code>&lt;body&gt;</code> 的相對位置。當畫面捲動時元素會隨頁面捲動。</p>
 </li>
 </ul>
-<blockquote>
-<p>To dispatch state mutations you have to write a function that takes the previous state of the app and the action being dispatched, then return the next state of the app. This function is called the <strong>Reducer</strong>.</p>
-</blockquote>
-<p>Redux help developer thinking in a way of “how can we build an app that is able to scale with thousands of user interactions” and “how can we make it that the information flows from one to another into a predictable view, a system that is predictable.”</p>
-<h3 id="Conclusion"><a href="#Conclusion" class="headerlink" title="Conclusion"></a>Conclusion</h3><p>整理為什麼使用 Redux + React 的方式管理 state 的理由：</p>
-<ol>
-<li><p>更有效率的管理 state：<br>Redux 採集中管理 state，再分配給需要該 state 的元件，因此不需要一直傳遞 props。</p>
+<h1 id="box-sizing"><a href="#box-sizing" class="headerlink" title="box-sizing"></a>box-sizing</h1><ul>
+<li><strong>border-box</strong> 元素的內距和邊框不會增加元素本身的寬度。<br>因為部分瀏覽器版本還未支援，需要做瀏覽器兼容設定：<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">-webkit-box-sizing: border-box;</span><br><span class="line">-moz-box-sizing: border-box;</span><br><span class="line">box-sizing: border-box;</span><br></pre></td></tr></table></figure>
+
 </li>
-<li><p>更有邏輯的管理 state：<br>在 Redux 管理下，一律透過 action 描述更新動作，經過 Reducer 來變更 state。</p>
-</li>
-<li><p>更好維護：<br>使用上結合兩者，將 UI 的 state 交給 React，將 Data 的 state 交給 Redux，當需要修改時，可以更快找到需要修改的地方。</p>
-</li>
-</ol>
-<p>但並不是所有 React 應用程式都需要 Redux，需要判斷 state tree 是否很複雜：</p>
-<ol>
-<li>應用程式需要經常變化 UI</li>
-<li>許多非父子關係的元件共用相同資料或以相同方式更新 state</li>
-<li>同一個 state 受到多種不同方式更新</li>
-</ol>
-<p>如果有這些狀況可以使用 Redux 來管理 state。</p>
-<h1 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h1><p><a href="https://zh-hant.reactjs.org/docs/lifting-state-up.html" target="_blank" rel="noopener">React Docs</a><br><a href="https://egghead.io/courses/getting-started-with-redux" target="_blank" rel="noopener">Redux Docs</a></p>
+</ul>
+<p>其他屬性值：</p>
+<ul>
+<li><strong>content-box</strong> 預設，長寬值只包含 content，不包括 border 和 padding。</li>
+<li><strong>inherit</strong> 從上層元素繼承</li>
+</ul>
+<h1 id="display"><a href="#display" class="headerlink" title="display"></a>display</h1><ul>
+<li><strong>none</strong> The element is completely removed.</li>
+<li><strong>inline</strong> Displays an element as an inline element (like <code>&lt;span&gt;</code>). Any height and width properties will have <strong>no effect</strong>.</li>
+<li><strong>block</strong> Displays an element as a block element (like <code>&lt;p&gt;</code>). It starts on a new line, and takes up the whole width.</li>
+<li><strong>inline-block</strong> Displays an element as an inline-level block container. The element itself is formatted as an inline element, but you can apply height and width values.</li>
+<li><strong>flex</strong> Displays an element as a block-level flex container.</li>
+<li><strong>table</strong> Let the element behave like a <table> element</table></li>
+<li><strong>table-cell</strong> Let the element behave like a <td> element</td></li>
+<li><strong>table-row</strong> Let the element behave like a <tr> element</tr></li>
+</ul>
+<h1 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h1><p><a href="https://zh-tw.learnlayout.com/toc.html" target="_blank" rel="noopener">https://zh-tw.learnlayout.com/toc.html</a><br><a href="https://www.w3schools.com/cssref/pr_class_display.asp" target="_blank" rel="noopener">https://www.w3schools.com/cssref/pr_class_display.asp</a><br><a href="https://www.oxxostudio.tw/articles/201501/css-flexbox.html" target="_blank" rel="noopener">https://www.oxxostudio.tw/articles/201501/css-flexbox.html</a></p>
 
     </div>
 
@@ -331,8 +300,8 @@ C --> D(Make changes);</pre>
           <div class="post-nav">
             <div class="post-nav-next post-nav-item">
               
-                <a href="/myblog/2019/10/08/Comebine-d3-js-and-react-js/" rel="next" title="Comebine d3.js and react.js">
-                  <i class="fa fa-chevron-left"></i> Comebine d3.js and react.js
+                <a href="/myblog/2019/10/31/git-push-fatal-please-verify-email-address/" rel="next" title="git push fatal-please verify email address">
+                  <i class="fa fa-chevron-left"></i> git push fatal-please verify email address
                 </a>
               
             </div>
@@ -341,8 +310,8 @@ C --> D(Make changes);</pre>
 
             <div class="post-nav-prev post-nav-item">
               
-                <a href="/myblog/2019/10/09/Hexo-mermaid/" rel="prev" title="Hexo+mermaid">
-                  Hexo+mermaid <i class="fa fa-chevron-right"></i>
+                <a href="/myblog/2019/11/01/Cookie-Session-Web-Storage-Token/" rel="prev" title="Cookie, Session, Web Storage, Token">
+                  Cookie, Session, Web Storage, Token <i class="fa fa-chevron-right"></i>
                 </a>
               
             </div>
@@ -390,7 +359,7 @@ C --> D(Make changes);</pre>
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#How-React-manage-State"><span class="nav-number">1.</span> <span class="nav-text">How React manage State</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Lifting-State-Up"><span class="nav-number">2.</span> <span class="nav-text">Lifting State Up</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Why-Redux"><span class="nav-number">3.</span> <span class="nav-text">Why Redux</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Redux-Pattern"><span class="nav-number">3.0.1.</span> <span class="nav-text">Redux Pattern</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Redux-的優點"><span class="nav-number">3.0.2.</span> <span class="nav-text">Redux 的優點</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Conclusion"><span class="nav-number">3.0.3.</span> <span class="nav-text">Conclusion</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Reference"><span class="nav-number">4.</span> <span class="nav-text">Reference</span></a></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#position"><span class="nav-number">1.</span> <span class="nav-text">position</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#box-sizing"><span class="nav-number">2.</span> <span class="nav-text">box-sizing</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#display"><span class="nav-number">3.</span> <span class="nav-text">display</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Reference"><span class="nav-number">4.</span> <span class="nav-text">Reference</span></a></li></ol></div>
         
       </div>
       <!--/noindex-->

@@ -193,6 +193,108 @@
   
   
   <div class="post-block home">
+    <link itemprop="mainEntityOfPage" href="https://chinyun.github.io/myblog/myblog/2019/11/08/css-pseudo-class-pseudo-element/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="chinyun">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/myblog/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Jinny's blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+            
+            <a href="/myblog/2019/11/08/css-pseudo-class-pseudo-element/" class="post-title-link" itemprop="url">css pseudo class & pseudo element</a>
+          
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              
+                
+              
+
+              <time title="Created: 2019-11-08 18:39:38 / Modified: 11:36:36" itemprop="dateCreated datePublished" datetime="2019-11-08T18:39:38+00:00">2019-11-08</time>
+            </span>
+          
+            
+
+            
+          
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>單冒號 (:) 是用在偽類<br>雙冒號 (::) 則是用在偽元素<br>偽類 (pseudo class) 就是在選已經存在的東西，比方說 <code>a:hover</code> 就是選了已經存在的 <code>&lt;a&gt;</code> 的某一個狀態<br>偽元素 (pseudo element) 就是在創造一個新的假元素，因為他不在 DOM 裡面，而是創造的了一個我們看不見的元素。比如說 <code>::first-line</code>，第一行並沒有被任何的 tag 包住，所以在選取的過程就像是用了一個看不到的 tag 把第一行包起來，所以才選得到這行。</p>
+<p>使用偽類元素，一方面可以減少頁面中的節點元素，加速頁面渲染速度，另一方面可以為設計動畫提供很多新思維。</p>
+<h1 id="pseudo-class"><a href="#pseudo-class" class="headerlink" title="pseudo class"></a>pseudo class</h1><p>Pseudo-classes are used to provide styles not for elements, but for various states of elements. The pseudo-class concept is introduced to permit selection based on information that lies outside of the document tree or that cannot be expressed using the other <em>simple selectors</em>.<br>用於定義元素的特殊狀態，為了選擇 DOM tree 之外的信息，或者使用其他簡單選擇器不能表達的信息，不會出現在 DOM tree。</p>
+<p>Simple selectors includes:</p>
+<ul>
+<li>type selector (<code>h1, p, div</code>)</li>
+<li>universal selector (<code>*</code>)</li>
+<li>attribute selector (<code>img[alt]</code>)</li>
+<li>class selector (<code>.class</code>)</li>
+<li>ID selector (<code>#id</code>)</li>
+<li>pseudo-class (<code>:</code>) <ul>
+<li><strong>:active</strong> </li>
+<li><strong>:hover</strong> 設定滑鼠滑過的樣式</li>
+<li><strong>:visited</strong> 被訪問過的連結的樣式</li>
+<li><strong>:link</strong></li>
+<li><strong>:nth-child()</strong></li>
+<li><strong>:checked</strong></li>
+</ul>
+</li>
+</ul>
+<p>狀態不存在 DOM 裡面，或是這幾種 simple selectors 選不到的東西，就是 pseudo-class 要去解決的問題。</p>
+<h1 id="pseudo-element"><a href="#pseudo-element" class="headerlink" title="pseudo element"></a>pseudo element</h1><p>Pseudo elements differ from pseudo-classes in that they don’t select states of elements; they select parts of an element. 用於選擇元素的指定部分，創造一個關於 DOM tree 的抽象內容，提供一種方法來引用源文檔中不存在的內容，創造之後會出現在 DOM tree，偽元素也會「繼承」原本元素的屬性。</p>
+<ul>
+<li><strong>::first-line</strong>：選取第一行</li>
+<li><strong>::first-letter</strong>：選取第一個字</li>
+<li><strong>::before</strong>：在原本的元素「之前」加入內容</li>
+<li><strong>::after</strong>：在原本的元素「之後」加入內容</li>
+<li><strong>::selection</strong>：選取文字反白後</li>
+</ul>
+<h1 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h1><p><a href="https://stringpiggy.hpd.io/pseudo-element-pseudo-class-difference/" target="_blank" rel="noopener">偽元素 (pseudo element) 和偽類 (pseudo class) 差在哪？</a><br><a href="https://www.itread01.com/content/1549211047.html" target="_blank" rel="noopener">css偽類元素的運用以及相應的hover的使用</a><br><a href="https://ithelp.ithome.com.tw/articles/10196924" target="_blank" rel="noopener">CSS 偽類 與 偽元素</a><br><a href="http://csscoke.com/2013/09/21/%E4%BD%BF%E7%94%A8css3-nth-childn-%E9%81%B8%E5%8F%96%E5%99%A8%E8%A9%B3%E8%A7%A3/" target="_blank" rel="noopener">使用CSS3 :nth-child(n) 選取器教學</a><br><a href="https://www.oxxostudio.tw/articles/201405/css-selector.html" target="_blank" rel="noopener">CSS 偽類 child 和 of-type</a><br><a href="https://www.oxxostudio.tw/articles/201706/pseudo-element-1.html" target="_blank" rel="noopener">CSS 偽元素 ( before 與 after )</a></p>
+
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+          <div class="post-eof"></div>
+        
+      </footer>
+  </div>
+  
+  
+  
+  </article>
+
+    
+        <article itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block home">
     <link itemprop="mainEntityOfPage" href="https://chinyun.github.io/myblog/myblog/2019/11/05/Redux-connect-Redux-part-to-React/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -233,7 +335,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2019-11-07 14:21:10" itemprop="dateModified" datetime="2019-11-07T14:21:10+00:00">2019-11-07</time>
+                <time title="Modified: 2019-11-08 11:36:36" itemprop="dateModified" datetime="2019-11-08T11:36:36+00:00">2019-11-08</time>
               </span>
             
           
@@ -317,6 +419,305 @@ C --> D(Make changes);</pre>
   
   
   <div class="post-block home">
+    <link itemprop="mainEntityOfPage" href="https://chinyun.github.io/myblog/myblog/2019/11/04/MVC-framework-SSR-CSR-SPA/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="chinyun">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/myblog/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Jinny's blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+            
+            <a href="/myblog/2019/11/04/MVC-framework-SSR-CSR-SPA/" class="post-title-link" itemprop="url">MVC framework, SSR, CSR, SPA</a>
+          
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              
+                
+              
+
+              <time title="Created: 2019-11-04 21:18:49" itemprop="dateCreated datePublished" datetime="2019-11-04T21:18:49+00:00">2019-11-04</time>
+            </span>
+          
+            
+
+            
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2019-11-08 11:36:36" itemprop="dateModified" datetime="2019-11-08T11:36:36+00:00">2019-11-08</time>
+              </span>
+            
+          
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="What-is-MVC-framework-Why-we-need"><a href="#What-is-MVC-framework-Why-we-need" class="headerlink" title="What is MVC framework? Why we need?"></a>What is MVC framework? Why we need?</h1><p>MVC 架構是為了讓複雜程式碼能夠根據各自負責的功能目的做區分而出現的開發設計模式，分別是 modle、view、controller 三個部分，在權責區分清楚的情況下，可以有更好的擴充性和維護性。</p>
+<p>modle 代表邏輯處理，view 負責 UI 的呈現，controller 則串連 modle 和 view，作為程式的流程控制。</p>
+<p>舉例：</p>
+<p>使用者造訪一個部落格網站，點擊文章列表頁面，瀏覽器發出 request 給伺服器，server side 處理 request；將請求丟給對應的 controller，controller 向 model 存取資料，model 回應傳回資料並 render html 交給 controller，controller 再回傳一整份 html 檔給瀏覽器，瀏覽器顯示包含資料內容的 html 畫面。</p>
+<h1 id="前後端分離"><a href="#前後端分離" class="headerlink" title="前後端分離"></a>前後端分離</h1><p>後端專注在提供資料，前端專注在顯示資料，把 data 跟 view 完全切開來，這樣要替換語言或框架時也比較方便，後端只要確保 API 接口一致，就不會影響前端，反之也是一樣。</p>
+<p>假如 server 有一天掛了，API 也跟著掛了，使用者依然可以造訪網頁，只是看不到資料而已，或者是你可以顯示出一個錯誤的圖案。但如果是舊的那種綁在一起的架構，server 一旦掛掉，你連畫面都渲染不出來。</p>
+<p>而這樣的做法會讓前端自己管理 URL 的狀態，去決定現在要顯示哪一個頁面。</p>
+<h1 id="SSR-Sever-side-Rendering"><a href="#SSR-Sever-side-Rendering" class="headerlink" title="SSR(Sever-side Rendering)"></a>SSR(Sever-side Rendering)</h1><p>view 的畫面是在後端動態產生 html，render 完成再 response 給前端（瀏覽器），本質上是「每一個不同頁面就回傳一份不同的 html 檔案」，每一個頁面之間的狀態不會互相干擾。</p>
+<h1 id="CSR-Client-side-Rendering"><a href="#CSR-Client-side-Rendering" class="headerlink" title="CSR(Client-side Rendering)"></a>CSR(Client-side Rendering)</h1><p>view 的畫面當前端拿到資料以後，才用 JavaScript 動態的產生，把內容填到網頁上面，並且需要管理不同頁面，根據路徑或用 hashtag 管理畫面切換。<br>前端 render 的難題在：「要怎麼只更新部分畫面，而不是暴力的每次都砍掉重練」。</p>
+<h1 id="SPA-Single-Page-Application"><a href="#SPA-Single-Page-Application" class="headerlink" title="SPA(Single-Page-Application)"></a>SPA(Single-Page-Application)</h1><p>所有個內容都由前端用 JavaScript 動態產生，用 AJAX 拿資料並搭配 JavaScript 來做畫面上的處理。<br>與之對應的概念是 MPA，Multiple Page Application。</p>
+<ul>
+<li><p>前端、後端各自有 MVC 框架<br>前端如果利用 SPA 來實作的話，會把原本應該是後端處理的一部份職責給搬到前端去，例如說狀態的管理跟路由；以往 Server 根據不同的路徑對應到不同的 Controller，進而渲染出不同的 View，可是現在 Server 無論什麼路徑都會輸出同一個檔案（index.html），所以你在前端也要判斷現在的網址是哪個，才能決定在前端應該渲染出哪個畫面，因此前端也開始需要 MVC 架構了，也就是由 router 去分類路徑並交給 controller 去分別連接 model 和 view。<br>藉由前後端各自的架構，後端只負責輸出資料，前端來負責抓資料跟渲染畫面。把前後端完完全全的切開了，就算後端壞掉，前端還是看得到畫面（只是可能會顯示個錯誤畫面之類的）；前端壞掉，後端還是能安穩的輸出資料供其他服務使用。</p>
+</li>
+<li><p>SEO 問題<br>由於 SPA 是由前端的 JavaScript 動態產生內容，因此如果你對 SPA 的網站按下右鍵 -&gt; 檢視原始碼，只會看到空蕩蕩的一片，只看得到一個 JavaScript 檔案跟一些最基本的 tag，這對於 SEO 的影響而言是不好的。<br>強大的 Google 的爬蟲其實支援執行 JavaScript，所以他依然會 index 你在前端渲染之後的頁面，但還有其他很多搜尋引擎，有些可能沒有像 Google 這麼強大，碰到 SPA 就只能索引空蕩蕩的 HTML，內容幾乎空白。<br>既然問題出在「第一次渲染」，在第一次渲染的時候把該輸出的資料都輸出(運用 server-side rendering)，對使用者來說還是一個 SPA，差別在於使用者接收到 HTML 的時候，就已經有完整的資料了，第一個頁面由 Server side render，之後的操作還是由 Client side render。</p>
+</li>
+</ul>
+<h1 id="Flux"><a href="#Flux" class="headerlink" title="Flux"></a>Flux</h1><p>Flux 是一種架構設計模式，幫助你撰寫有條理的前端架構，用於管理控制應用程式中資料的流向，確保資料是 one-way data flow，資料的定義不限於指來自 server 的邏輯資料，也包括 view 的變化等。 在 flux 的架構中，Store基本上是你唯一可以操作資料與儲存資料的地方。</p>
+<p>Flux Pattern 是這樣的：</p>
+<pre class="mermaid">graph LR;
+A(Action) --> B(Dispatcher);
+B --> C(Store);
+C --> D(View);</pre>
+
+<ul>
+<li>Flux 中有四位主要角色：</li>
+</ul>
+<ol>
+<li>Action：規範所有改變資料的動作，讓你可以快速掌握整個 App 的行為。</li>
+<li>Dispatcher：將目前發生的行為，告知給所有已註冊的 Store。</li>
+<li>Store：存放資料和業務邏輯，並且只提供 getter API 讓人取得資料。</li>
+<li>View：根據資料渲染 UI 和傾聽使用者的操作事件。</li>
+</ol>
+<p>當 action 被觸發後，View 就會透過 Dispatcher dispatch 出一個 Action，該 Action 可以包含一個 payload，說明你想做什麼事情以及你需要操作什麼資料，在 Store 資料做完更新後，要告訴前端頁面去刷新視圖(view)。</p>
+<ul>
+<li>Flux 的特性：</li>
+</ul>
+<ol>
+<li>單向資料流：改變資料的行為都必須經過 Action、Dispatcher，再到 Store。</li>
+<li>Single Source of Truth：資料統一存放於 Store，View 要資料都需跟 Store 拿。</li>
+</ol>
+<ul>
+<li>Flux 的優點：<br>用更清晰的模式，規範資料和頁面複雜互動情境下的資料流。</li>
+</ul>
+<p>事實上，MVC 跟 Flux 都只是一個概念，因此有各種不同的實作，加上MVC在資料流的處理上，並不像Flux一般有較為明確的定義，多數時候Model的更動與View的刷新可能會透過Controller來管理，讓Model單純存放data。</p>
+<p>如此一來，假若今天 View 的操作更動了 Model，而 Model 的變化又刷新了 View，在系統龐大的時候，一來一往，就會讓資料與頁面狀態變得非常複雜，要追蹤某個頁面的變動到底是誰觸發的，或是哪個資料改變了，必須從 Controller 去慢慢 trace。而若是遵照 Flux 的流程，任何 View 的 update 都只要去追蹤其 State 的來源 Store 即可，有一個明確的 flow 可以遵循，並且每個 View 所需要監聽的資料來源，可以依照 Store 來區分，資料流不會互相干擾，而且 Flux 能夠更輕鬆的做出更小單元的 Unit test，這是複雜的 Controller 難以達成的。</p>
+<h1 id="React-Redux-gt-解決-MVC-架構問題"><a href="#React-Redux-gt-解決-MVC-架構問題" class="headerlink" title="React + Redux =&gt; 解決 MVC 架構問題"></a>React + Redux =&gt; 解決 MVC 架構問題</h1><ul>
+<li>React 解決什麼問題？<br>React 是專注在 MVC 架構中的 view，以 state 來管理介面變化的開發框架，透過 virtualDOM 在 state 改變時只重新 render 改變的地方，不需要在頁面切換或資料狀態更新、介面變化時重新 render 整個畫面，有效增進了應用程式的效能和使用者體驗。</li>
+</ul>
+<p>React 把更改 state 的邏輯寫在各自的 component，然而當項目的邏輯變得越來越複雜的時候，將難以釐清 state 和 view 之間的對應關係：一個 state 的變化可能引起多個 view 的變化，一個 view 上面觸發的事件可能引起多個 state 的改變，需要對所有引起 state 變化的情況進行統一管理，於是就需要 Redux。</p>
+<ul>
+<li>Redux 解決什麼問題？<br>Redux 受到幾個 Flux Pattern 重要特質的影響，Redux 透過單一的狀態樹將所有 state 存於一個物件中，並由 Store 去管理；一律透過 action 描述更新動作，經過 Reducer 來變更 state。<br>Reducer 根據 action 物件和舊資料回傳新資料，因此你可以紀錄 action，並重新調用 reducer 函數來得到一樣的狀態，幫助我們做可預測的狀態管理，能夠追蹤 state 和資料變化，更好維護而且資料之間不會互相干擾。</li>
+</ul>
+<p>Redux Pattern:</p>
+<pre class="mermaid">graph LR;
+A(Action) -- Middleware --> B(Reducer);
+B --> C(Store);
+C --> D(Make changes);</pre>
+
+<p><strong>所以使用 Redux + React，可以促進維護性和可擴展性。</strong></p>
+<p>Redux 和 Flux pattern 不同的地方在於： </p>
+<ol>
+<li><p>Redux 只有一個 store，業務資料都存於一個狀態物件中，並由 Store 去管理；Flux 裡面會有多個 store，分別管理不同資料。</p>
+</li>
+<li><p>Redux 中更新的邏輯不在 store 中執行而是由 reducer 負責執行；Flux 在 store 裡面執行更新邏輯，當 store 變化的時候再通知 controller-view 更新自己的數據。</p>
+</li>
+</ol>
+<p>reducer 是一個純函數，這個函數被表述為(previousState, action) =&gt; newState，它根據應用的狀態和當前的 action 推導出新的 state 。 Redux 中有多個 reducer，每個 reducer 負責維護應用整體 state 樹中的某一部分，多個 reducer 可以通過 combineReducers 方法合成一個根 reducer，這個根 reducer 負責維護完整的 state，當一個 action 被觸發，store 會調用 dispatch 方法向某個特定的 reducer 傳遞該 action，reducer 收到 action 之後執行對應的更新邏輯然後返回一個新的 state，state 的更新最終會傳遞到根 reducer 處，返回一個全新的完整的 state，然後傳遞給 view。</p>
+<ol start="2">
+<li>Redux 沒有 Dispatcher 的概念，它使用 reducer 來進行事件的處理，Store 提供 dispatch API 來傳遞 action 物件；<br>Flux 的 Dispatcher 負責將 action 物件傳遞給每個 Store</li>
+</ol>
+<p>Redux 和 Flux 之間最大的區別就是對 store/reducer 的抽象，Flux 中 store 是各自為陣的，每個 store 只對對應的 controller-view 負責，每次更新都只通知對應的 controller-view；而 Redux 中各子 reducer 都是由根 reducer 統一管理的，每個子 reducer 的變化都要經過根 reducer 的整合。</p>
+<h1 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h1><p><a href="https://medium.com/@hulitw/introduction-mvc-spa-and-ssr-545c941669e9" target="_blank" rel="noopener">跟著小明一起搞懂技術名詞：MVC、SPA 與 SSR 2018</a><br><a href="https://ithelp.ithome.com.tw/articles/10194968" target="_blank" rel="noopener">Node.js-Backend見聞錄(10)：關於後端觀念(六)-關於MVC 2017</a><br><a href="https://blog.techbridge.cc/2017/09/16/frontend-backend-mvc/" target="_blank" rel="noopener">前後端分離與 SPA 2017</a><br><a href="https://blog.techbridge.cc/2016/04/29/introduce-flux-from-flux-and-mvc/" target="_blank" rel="noopener">從 Flux 與 MVC 的差異來簡介 Flux 2016</a><br><a href="http://blog.turn.tw/?p=1539" target="_blank" rel="noopener">MVC是一個巨大誤會 2015</a><br><a href="https://imweb.io/topic/57711e37f0a5487b05f325b5" target="_blank" rel="noopener">浅谈 React、Flux 与 Redux 2016</a><br><a href="https://medium.com/4cats-io/%E6%B7%B1%E5%85%A5%E6%B7%BA%E5%87%BA-redux-7b08403c4957" target="_blank" rel="noopener">深入淺出 Redux 2016</a></p>
+
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+          <div class="post-eof"></div>
+        
+      </footer>
+  </div>
+  
+  
+  
+  </article>
+
+    
+        <article itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block home">
+    <link itemprop="mainEntityOfPage" href="https://chinyun.github.io/myblog/myblog/2019/11/04/Knex-js-PostgreSQL/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="chinyun">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/myblog/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Jinny's blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+            
+            <a href="/myblog/2019/11/04/Knex-js-PostgreSQL/" class="post-title-link" itemprop="url">Knex.js+PostgreSQL</a>
+          
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              
+                
+              
+
+              <time title="Created: 2019-11-04 16:18:24" itemprop="dateCreated datePublished" datetime="2019-11-04T16:18:24+00:00">2019-11-04</time>
+            </span>
+          
+            
+
+            
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2019-11-08 11:36:36" itemprop="dateModified" datetime="2019-11-08T11:36:36+00:00">2019-11-08</time>
+              </span>
+            
+          
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="What-is-Knex-js"><a href="#What-is-Knex-js" class="headerlink" title="What is Knex.js?"></a>What is Knex.js?</h1><p>Knex.js is a tool in the Database Tools category of a tech stack.<br>Knex.js is an open source tool with 10.8K GitHub stars and 1.3K GitHub forks. </p>
+<p>Knex.js is a JavaScript query builder for relational databases including PostgreSQL, MySQL, SQLite3, Oracle, MSSQL, MariaDB and Amazon Redshift. It can be used with callbacks and promises. It supports transactions and connection pooling.</p>
+<p>可以將操作資料庫的方式分成三種層次： low-level Database Drivers、middle-level Query Builders、high-level ORMs。</p>
+<ol>
+<li>Database Drivers<br>This is basically as low-level as you can get — short of manually generating TCP packets and delivering them to the database. A database driver is going to handle connecting to a database (and sometimes connection pooling). At this level you’re going to be writing raw SQL strings and delivering them to a database, and receiving a response from the database. In the Node.js ecosystem there are many libraries operating at this layer. Here are three popular libraries:</li>
+</ol>
+<ul>
+<li>mysql: MySQL (13k stars / 330k weekly downloads)</li>
+<li>pg: PostgreSQL (6k stars / 520k weekly downloads)</li>
+<li>sqlite3: SQLite (3k stars / 120k weekly downloads)</li>
+</ul>
+<p>Each of these libraries essentially works the same way: take the database credentials, instantiate a new database instance, connect to the database, and send it queries in the form of a string and asynchronously handle the result.</p>
+<ol start="2">
+<li>Query Builders<br>This is the intermediary level between using the simpler Database Driver module vs a full-fledged ORM. The most notable module which operates at this layer is Knex. This module is able to generate queries for a few different SQL dialects. This module depends on one of the aforementioned libraries — you’ll need to install the particular ones you plan on using with Knex.</li>
+</ol>
+<ul>
+<li>knex: Query Builder (8k stars / 170k weekly downloads)</li>
+</ul>
+<ol start="3">
+<li>ORMs<br>ORMs are powerful tools. The ORMs we’ll be examining in this post are able to communicate with SQL backends such as SQLite, PostgreSQL, MySQL, and MSSQL.<br>This is the highest level of abstraction we’re going to consider. When working with ORMs we typically need to do a lot more configuration ahead of time. The point of an ORM, as the name implies, is to map a record in a relational database to an object (typically, but not always, a class instance) in our application. What this means is that we’re defining the structure of these objects, as well as their relationships, in our application code.<br>Bust there are some reasons that you should be wary of using an ORM:</li>
+</ol>
+<p>(1) <strong>Take time to learn but it is not SQL.</strong> An ORM is going to be written in the same language as the rest of the application, while SQL is a completely different syntax. A lot of people pick up an ORM because they don’t want to take the time to learn the underlying SQL (Structured Query Language).The syntax for a simple read operation varies greatly between these examples. As the operation you’re trying to perform increases in complexity, such as operations involving multiple tables, the ORM syntax will vary from between implementations even more.</p>
+<p>(2) <strong>Complex ORM calls can be Inefficient</strong>: Recall that the purpose of an ORM is to take the underlying data stored in a database and map it into an object that we can interact within our application. This often comes with some inefficiencies when we use an ORM to fetch certain data.</p>
+<p>(3) <strong>Not all queries can be represented as an ORM operation</strong>. When we need to generate these queries we have to fall back to generating the SQL query by hand. This often means a codebase with heavy ORM usage will still have a few handwritten queries strewn about it. A common situation which doesn’t work too well with ORMs is when a query contains a subquery. </p>
+<h1 id="Why-use-Knex-js"><a href="#Why-use-Knex-js" class="headerlink" title="Why use Knex.js?"></a>Why use Knex.js?</h1><p>與 SQL 原生語法相近，卻更簡潔、容易使用。語法設計讓參數和查詢字串分別傳遞給 database driver，保護查詢不會受到 SQL injection。</p>
+<p>One nicety is that you’re able to programmatically generate dynamic queries in a much more convenient way than if you were to concatenate strings together to form SQL (which often introduces security vulnerabilities).</p>
+<p>Parameters and query string are passed separately to database driver protecting query from SQL injection. Other query builder methods always uses binding format internally so they are safe too.</p>
+<h1 id="How-to-use"><a href="#How-to-use" class="headerlink" title="How to use?"></a>How to use?</h1><p>When creating a Knex instance you provide the connection details, along with the dialect you plan on using and are then able to start making queries. The queries you write will <strong>closely resemble the underlying SQL queries</strong>.<br>詳細的使用說明可以查詢<a href="http://knexjs.org/" target="_blank" rel="noopener">官方文件</a></p>
+<p>Here is the example of using knex.js to connect postgreSQL:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">// $ npm install pg knex</span><br><span class="line"></span><br><span class="line">const knex = require(&apos;knex&apos;);</span><br><span class="line">const connection = require(&apos;./connection.json&apos;);</span><br><span class="line">const client = knex(&#123;</span><br><span class="line">  client: &apos;pg&apos;,</span><br><span class="line">  connection</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+<p>要小心使用 <code>knex.raw()</code>，避免允許植入 SQL 語句。</p>
+<h1 id="What-is-PostgreSQL-compare-with-MySQL"><a href="#What-is-PostgreSQL-compare-with-MySQL" class="headerlink" title="What is PostgreSQL? compare with MySQL?"></a>What is PostgreSQL? compare with MySQL?</h1><p>PostgreSQL 和 MySQL 兩個資料庫之間有許多相似之處和重疊，但也有非常明顯的差異，使用 PostgreSQL 的優點：</p>
+<p>-Open Source:<br>PostgreSQL 由 PostgreSQL 全球開發小組（PostgreSQL Global Development Group）開發，PostgreSQL 全球開發組由多個公司和個人貢獻者所組成。它是免費的開源軟體。PostgreSQL 是在 PostgreSQL 使用許可發布的，這是一個自由的開源許可，類似於 BSD 或 MIT 使用許可。</p>
+<p>MySQL 開發專案根據 GNU GPL 的條款提供了它的原始碼以及各種各樣的專有協議。它現在由 Oracle 公司擁有，並且提供了幾個商業使用的付費版本。</p>
+<ul>
+<li>ACID Compliance:<br>ACID（Atomicity，Consistency，Isolation，Durability）是一組資料庫交易安全的特性，ACID 要求確保在單一的資料交易中發生多個更新時也不會在整個系統中遺失數據或發生錯誤。<br>PostgreSQL 完全符合 ACID 特性，並確保滿足所有要求。</li>
+</ul>
+<p>MySQL 只有在使用 InnoDB 和 NDB 叢集儲存引擎時，才符合ACID 標準。</p>
+<ul>
+<li>Performance:<br>PostgreSQL 被廣泛應用於讀寫速度至關重要且資料需要驗證的大型系統中。 此外，它在商業解決方案中，還支持各種效能優化，（如地理空間資料支持，不需要讀取鎖定的資料一致性支援，如 Oracle、SQL Server）。 整體來看，PostgreSQL 的效能在需要執行複雜查詢的系統中會得到了最好的展現。 PostgreSQL 在 OLTP / OLAP 系統中運行良好，尤其在需要讀/寫速度和需要大量的資料分析時。 PostgreSQL 也適用於商業智慧應用服務，但更適合需要快速讀/寫速度的資料倉庫和資料分析應用服務。</li>
+</ul>
+<p>MySQL 被廣泛採用，是由於 Web 應用，只需要一個簡單的資料交易資料庫。然而，在一般的情況下，如果 MySQL 的表現不佳，都是當負載過重或試圖進行複雜查詢的時候。MySQL 在 OLAP / OLTP 系統只需要讀取速度時表現良好。MySQL + InnoDB為 OLTP 場景提供了非常好的讀/寫速度。 整體來說，MySQL在高度資料一致性需求的情況下表現良好。MySQL 是可靠的，並且適用於商業智慧應用服務，因為商業智慧應用服務通常是更重視讀取效能的。</p>
+<ul>
+<li>Security:<br>PostgreSQL 具有角色並可繼承角色來設定和維護權限。 PostgreSQL 內建支援 SSL連線來加密客戶端/伺服器通訊。 它具有資料列級的安全性。除此之外，PostgreSQL 還附帶了一個名為 SE-PostgreSQL 的增強功能，可以根據 SELinux 安全策略提供額外的存取控制。</li>
+</ul>
+<p>MySQL 為所有連線、查詢和用戶可能嘗試執行的其他操作實作了存取控制列表（ACL）的安全性。 對 MySQL 客戶端和伺服器之間的 SSL 加密連接也有支援。</p>
+<ul>
+<li>NoSQL Features/JSON Support:<br>NoSQL 和 JSON 都非常流行，NoSQL資料庫變得越來越普及。JSON 是一種簡單的資料格式，它允許程式設計師儲存和傳遞跨系統的資料內容、資料列表和 key-value 對應。<br>PostgreSQL 支援 JSON 和其他 NoSQL 的功能，如內建 XML 支援和 HSTORE 的 key-value 對應。 它還支援將 JSON 資料索引以加快存取速度。</li>
+</ul>
+<p>MySQL 具有 JSON 資料類型支援，但沒有其他 NoSQL功能，也不支援 JSON 索引。</p>
+<ul>
+<li>Programming Languages Support:<br>PostgreSQL 支援各種程式語言，包括：C / C ++，Java，JavaScript，.Net，R，Perl，Python，Ruby，Tcl 等等。 甚至可以在單獨的程序中執行用戶提供的程式（即作為背景執行程式）。</li>
+</ul>
+<p>MySQL 一些支援伺服器端不可擴展的程式語言。</p>
+<ul>
+<li>Extensible Type System:<br>PostgreSQL有幾個專用於延伸套件的功能，可以增加新的資料型別、新的函數功能、新的索引類型。</li>
+</ul>
+<p>MySQL 不支援增加延伸功能。</p>
+<p>更多比較可以查看 PostgreSQL官方文件：<a href="https://faq.postgresql.tw/postgresql-vs-mysql" target="_blank" rel="noopener">PostgreSQL vs MySQL</a></p>
+<p>PostgreSQL 相對於 MySQL 的優勢：</p>
+<p>　　1、在 SQL 的標準實現上要比 MySQL 完善，而且功能實現比較嚴謹；<br>　　2、存儲過程的功能支持要比 MySQL 好，具備本地緩存執行計劃的能力；<br>　　3、對表連接支持較完整，優化器的功能較完整，支持的索引類型很多，復雜查詢能力較強；<br>　　4、PG 主表采用堆表存放，MySQL 采用索引組織表，能夠支持比MySQL更大的數據量。<br>　　5、PG 的主備復制屬於物理復制，相對於 MySQL 基於 binlog 的邏輯復制，數據的一致性更加可靠，復制性能更高，對主機性能的影響也更小。<br>　　6、MySQL 的存儲引擎插件化機制，存在鎖機制復雜影響並發的問題，而 PG 不存在。</p>
+<p>　　MySQL 相對於 PG 的優勢：</p>
+<p>　　1、innodb 的基於回滾段實現的 MVCC 機制，相對 PG 新老數據一起存放的基於 XID 的 MVCC 機制，是占優的。新老數據一起存放，需要定時觸發 VACUUM，會帶來多余的 IO和數據庫對象加鎖開銷，引起數據庫整體的並發能力下降。而且 VACUUM清理不及時，還可能會引發數據膨脹；<br>　　2、MySQL采用索引組織表，這種存儲方式非常適合基於主鍵匹配的查詢、刪改操作，但是對表結構設計存在約束；<br>　　3、MySQL的優化器較簡單，系統表、運算符、數據類型的實現都很精簡，非常適合簡單的查詢操作；<br>　　4、MySQL分區表的實現要優於PG的基於繼承表的分區實現，主要體現在分區個數達到上千上萬後的處理性能差異較大。<br>　　5、MySQL的存儲引擎插件化機制，使得它的應用場景更加廣泛，比如除了innodb適合事務處理場景外，myisam適合靜態數據的查詢場景。</p>
+<p>總體上來說，開源數據庫都不是很完善，商業數據庫oracle在架構和功能方面都還是完善很多的。從應用場景來說，PG更加適合嚴格的企業應用場景（比如金融、電信、ERP、CRM），而MySQL更加適合業務邏輯相對簡單、數據可靠性要求較低的互聯網場景（比如Google、facebook、alibaba）。</p>
+<p>雖然有不同的歷史、引擎與工具，不過並沒有明確的參考能夠表明這兩個數據庫哪一個能夠適用於所有情況。很多組織喜歡使用PostgreSQL，因為它的可靠性好，在保護數據方面很擅長，而且是個社區項目，不會陷入廠商的牢籠之中。MySQL更加靈活，提供了更多選項來針對不同的任務進行裁剪。很多時候，對於一個組織來說，對某個軟件使用的熟練程度要比特性上的原因更重要。</p>
+<h1 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h1><p><a href="https://blog.logrocket.com/why-you-should-avoid-orms-with-examples-in-node-js-e0baab73fa5/" target="_blank" rel="noopener">Why you should avoid ORMs (with examples in Node.js)</a><br><a href="http://knexjs.org/" target="_blank" rel="noopener">Knex.js</a><br><a href="https://faq.postgresql.tw/postgresql-vs-mysql" target="_blank" rel="noopener">PostgreSQL vs MySQL</a><br><a href="https://www.itread01.com/articles/1502570301.html" target="_blank" rel="noopener">PostgreSQL 與 MySQL的比較</a></p>
+
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+          <div class="post-eof"></div>
+        
+      </footer>
+  </div>
+  
+  
+  
+  </article>
+
+    
+        <article itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block home">
     <link itemprop="mainEntityOfPage" href="https://chinyun.github.io/myblog/myblog/2019/11/02/HTTPS-HTTP-JSON-AJAX/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -357,7 +758,7 @@ C --> D(Make changes);</pre>
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2019-11-07 14:21:10" itemprop="dateModified" datetime="2019-11-07T14:21:10+00:00">2019-11-07</time>
+                <time title="Modified: 2019-11-08 11:36:36" itemprop="dateModified" datetime="2019-11-08T11:36:36+00:00">2019-11-08</time>
               </span>
             
           
@@ -373,17 +774,84 @@ C --> D(Make changes);</pre>
     <div class="post-body" itemprop="articleBody">
 
       
-          <h1 id="How-is-the-Internet-work"><a href="#How-is-the-Internet-work" class="headerlink" title="How is the Internet work?"></a>How is the Internet work?</h1><p>現代網路運作的基礎主要由瀏覽器、伺服器以及網路資料的傳遞組成，當使用者在自己電腦透過瀏覽器瀏覽網頁時，會從瀏覽器發出造訪某網頁網址的請求，而該網址所屬的網站伺服器接收到請求內容後，返回包含了 HTML、CSS、JavaScript 等的檔案，瀏覽器接到回應之後將網站呈現在畫面上，上述這個瀏覽器發出請求(request)、伺服器給予回應(response)的過程就是一般我們在瀏覽器輸入網址後，到瀏覽器渲染出頁面之間發生的事情。</p>
-<p>網路資料傳遞的原則：</p>
+          <h1 id="How-is-the-Internet-work"><a href="#How-is-the-Internet-work" class="headerlink" title="How is the Internet work?"></a>How is the Internet work?</h1><p>現代網路運作的基礎主要由瀏覽器、伺服器以及網路資料的傳遞組成，在網路世界中，最小的資訊單位是 bit，遍佈世界的光纖纜線以光速傳輸資訊，所以當我們用 wifi 上網時，就像用電台傳送廣播一樣，將資訊波段以無線的方式傳送 wifi路由器，再透過電纜運送連結到世界上的任何一處。<br>當使用者在自己電腦透過瀏覽器瀏覽網頁時，會從瀏覽器發出造訪某網頁網址的請求，而該網址所屬的網站伺服器接收到請求內容後，返回包含了 HTML、CSS、JavaScript 等的檔案，瀏覽器接到回應之後將網站呈現在畫面上，上述這個瀏覽器發出請求(request)、伺服器給予回應(response)的過程就是一般我們在瀏覽器輸入網址後，到瀏覽器渲染出頁面之間發生的事情，而這個過程其實仰賴許多機制共同建立，包括：</p>
+<ul>
+<li><p><strong>域名系統 - DNS (Domain Name System)</strong>：由於我們平常用的網址是 Domain，而電腦都是用 IP 在溝通的，DNS 會負責將網址分析為 IP 位址，回報給本地電腦，本地電腦獲得 IP 位址，就能成功連上對方主機並請求主機回傳網頁資料。</p>
+</li>
+<li><p><strong>資料傳輸的單位 - 封包 (packet)</strong>：封包帶有起始和終點的 IP 位址資訊，網路傳輸時會將資料拆分成多個封包傳遞；若某網路定義的封包大小為 1500 bytes，一部影音為 500MB 的資料就會被拆為 35萬個左右的封包發送至目的地 IP 位址。（1MB = 1,048,576 bytes）</p>
+</li>
+<li><p><strong>指引封包走對的路線 - 路由器 (router)</strong>：一種專門電腦，根據纜線的「交通狀況」幫封包選擇最易通行、最省時且風險最低的路徑，確保網路傳輸可靠度。</p>
+</li>
+<li><p><strong>確保資料完整抵達 - 傳輸控制協定 (TCP-Transmission Control Protocol)</strong>：在資料送達時，根據 IP 封包裡的資訊檢查是否有全部送達，只有全數送達時才會簽收，若發現資料短少就會通知伺服器主機要求重新發送資料。</p>
+</li>
+<li><p><strong>通訊協定：伺服器和瀏覽器的對話 - HTTP</strong>：通訊協定事電腦之間互相索取資料的溝通語言，設計 HTTP 的最初目的是發布和接收 HTML 頁面。</p>
+</li>
+</ul>
+<p>透過以上的機制維持網路的運作，我們可以在自家電腦使用瀏覽器發送請求以連上世界各地的網站，獲得世界各地主機的資料。</p>
+<p>事實上，網路除了瀏覽器和伺服器，根據網路的架構還可以將網路運作分為四個層級：應用層、傳送層、網路層、鏈結層，可以對應到 OSI 七層級，如下表：</p>
+<table>
+<thead>
+<tr>
+<th>OSI 七層級</th>
+<th>TCP/IP 模型</th>
+<th>相關通訊協定和標準</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>應用層、表現層、會談層</td>
+<td>應用層</td>
+<td>HTTP/FTP/SMTP/DNS/SSH</td>
+</tr>
+<tr>
+<td>傳送層</td>
+<td>傳送層</td>
+<td>TCP</td>
+</tr>
+<tr>
+<td>網路層</td>
+<td>網路層</td>
+<td>IP</td>
+</tr>
+<tr>
+<td>資訊鏈結層、實體層</td>
+<td>鏈結層</td>
+<td>LAN/WAN</td>
+</tr>
+</tbody></table>
+<p>TCP/IP 模型由 OSI(open system interconnecttion)模型簡化而來，OSI是由 ISO組織制定，作為制定網路標準的參考，依網路運作方式將網路架構分為七個層次。<br><strong>鏈結層</strong>將數位訊號組成符合邏輯的傳輸資料(資訊框 data frame)，定義網路裝置之間的位元資料傳輸，主要跟硬體有關。<br><strong>網路層</strong>定義網路路由、定址功能，IP(Internet Protocol)會將 IP 位址加入傳輸資料內，並將資料組成封包。<br><strong>傳送層</strong>負責資料傳輸和控制，將大型資料切割成適合傳輸的大小型式，替應用層提供流量管制及錯誤控制。<br><strong>應用層</strong>建立網路連線、將ASCII編碼轉成應用層可用資料，負責加密、解密資料等，連結瀏覽器和伺服器之間的溝通。</p>
+<h1 id="HTTP-vs-HTTPS"><a href="#HTTP-vs-HTTPS" class="headerlink" title="HTTP vs. HTTPS"></a>HTTP vs. HTTPS</h1><p>現代網路資料傳遞的原則有：</p>
 <ol>
-<li>有標準化的內容格式</li>
+<li>標準化的內容格式</li>
 <li>資料結構分為 header 和 body</li>
-<li>用狀態碼 http status 標準化傳輸結果</li>
-<li>用動詞 http method 標準化動作： GET、POST、DELETE、PUT、PATCH</li>
-<li>protocol 協定：定義資料交換的格式，標準化促成規模化 ex: http、https</li>
+<li>使用狀態碼 HTTP Status Code 標準化傳輸結果<ul>
+<li>HTTP Status Code<ul>
+<li>2XX 成功：<ul>
+<li>200 ok</li>
+<li>204 no content</li>
+</ul>
+</li>
+<li>3xx 重新導向:<ul>
+<li>301 永久搬遷</li>
+<li>302 暫時搬遷</li>
+</ul>
+</li>
+<li>4xx 用戶端錯誤:<ul>
+<li>404 Not Found</li>
+<li>401 Unauthorized：未認證，表示 client-side 沒有必要的憑證或伺服器拒絕了 client-side 提供的憑證。</li>
+<li>403 Forbidden：伺服器理解請求，但是拒絕執行，表示 client-side 沒有權限。</li>
+</ul>
+</li>
+<li>5xx 伺服器端錯誤<br>502 Bad Gateway：表示伺服器的某個服務沒有正確執行，可能是處理請求的時間太長或伺服器主機問題。</li>
+</ul>
+</li>
+</ul>
+</li>
 </ol>
-<h1 id="HTTP-vs-HTTPS"><a href="#HTTP-vs-HTTPS" class="headerlink" title="HTTP vs. HTTPS"></a>HTTP vs. HTTPS</h1><ul>
-<li><p>HTTP(Hyper Text Transfer Protocol) 超文本傳輸協定<br>In 1989 Tim Berners-Lee invented the World Wide Web and built the HTTP for transferring HTML document around the world. HTTP is a protocol or the rules that we use over the wires. It is a foundation of any data exchange on the web.</p>
+<blockquote>
+<p><a href="https://noob.tw/http-status-code/" target="_blank" rel="noopener">常見與不常見的 HTTP Status Code</a></p>
+</blockquote>
+<ol start="4">
+<li><p>用動詞 HTTP Method 標準化動作： GET、POST、DELETE、PUT、PATCH</p>
 <ul>
 <li>HTTP Method<ul>
 <li>GET：透過 API 把資料內容撈出來，這些內容通常是可以對外公布，不需要密碼帳號就可以取得的資料。</li>
@@ -395,21 +863,25 @@ C --> D(Make changes);</pre>
 </li>
 </ul>
 </li>
+<li><p>protocol 通訊協定：定義資料交換的格式，標準化促成規模化 ex: HTTP、HTTPS</p>
+<ul>
+<li><p>HTTP(Hyper Text Transfer Protocol) 超文本傳輸協定<br>In 1989 Tim Berners-Lee invented the World Wide Web and built the HTTP for transferring HTML document around the world. HTTP is a protocol or the rules that we use over the wires. It is a foundation of any data exchange on the web.</p>
+</li>
 <li><p>HTTPS(Hyper Text Transfer Protocol Secure) 超文本安全傳輸協定<br>HTTPS(Hyper Text Transfer Protocol Secure) use TLS and SSL technology to encrypt the information that transported. Only the server or client web could have the secret key to read the message.</p>
 </li>
 </ul>
-<p>主要是由網景公司(Netscape)開發並內建於其瀏覽器中，之後廣泛發展於網際網路上，用於對資料進行壓縮傳輸及傳輸後解壓縮回正確資訊的操作。隨著網路的發達，資訊技術越來越透明，HTTP 的開放明文顯得在網際網路中，不再是這麼安全的傳送協定，知名企業網站及全球級大型網站 Google、Facebook 等皆採用 HTTPS 加密，作為預設連線方式，因此有使用者登入系統或或存取到機密敏感資料頁面等有建立會員、購物車、金流、刷卡機制服務的網站選擇使用HTTPS的傳送協定。</p>
-<p>HTTPS 其實就是在原本的 HTTP 協定中延伸加入 SSL(Secure Sockets Layer,傳輸層安全協議) 或 TLS(Transport Layer Security，傳輸層安全) 憑證的安全連線技術。SSL/TLS 憑證是網頁伺服器和瀏覽器之間以加解密方式溝通的安全技術標準，透過憑證內的公開金鑰加密資料傳輸至伺服器端，伺服器端用私密金鑰解密來證明自己的身份，取得有效憑證後在網際網路上傳輸加密過的資料以達到資安的目的。</p>
-<p>當您在伺服器與連線至伺服器的瀏覽器上安裝 SSL 憑證時，SSL 憑證的存在會觸發 SLL (或 TLS) 協議，這將加密伺服器與瀏覽器之間 (或伺服器之間) 發送的資訊；詳細資料顯然更加複雜一些。</p>
+<p>主要是由網景公司(Netscape)開發並內建於其瀏覽器中，之後廣泛發展於網際網路上，用於對資料進行壓縮傳輸及傳輸後解壓縮回正確資訊的操作。隨著網路的發達，資訊技術越來越透明，HTTP 的開放明文顯得在網際網路中，不再是這麼安全的傳送協定，知名企業網站及全球級大型網站 Google、Facebook 等皆採用 HTTPS 加密，作為預設連線方式，因此有使用者登入系統或或存取到機密敏感資料頁面等有建立會員、購物車、金流、刷卡機制服務的網站選擇使用HTTPS的傳送協定。HTTPS 其實就是在原本的 HTTP 協定中延伸加入 SSL(Secure Sockets Layer,傳輸層安全協議) 或 TLS(Transport Layer Security，傳輸層安全) 憑證的安全連線技術。</p>
+<p>SSL/TLS 憑證是網頁伺服器和瀏覽器之間以加解密方式溝通的安全技術標準，透過憑證內的公開金鑰加密資料傳輸至伺服器端，伺服器端用私密金鑰解密來證明自己的身份，取得有效憑證後在網際網路上傳輸加密過的資料以達到資安的目的。當您在伺服器與連線至伺服器的瀏覽器上安裝 SSL 憑證時，SSL 憑證的存在會觸發 SLL (或 TLS) 協議，這將加密伺服器與瀏覽器之間 (或伺服器之間) 發送的資訊；詳細資料顯然更加複雜一些。</p>
 <p>運作流程：</p>
 <ol>
 <li>SSL 在 TCP 連線建立後開始運作，啟動 SSL信號交換。</li>
 <li>伺服器發送憑證至使用者，同時附上大量規格 (包括哪個版本的 SSL/TLS 以及使用哪個加密方法等。)</li>
-<li>然後使用者檢查憑證的有效性，並選擇雙方都支援的最高等級的加密，並使用這些方法啟動安全的工作階段。有很多組方法可用優勢各異，被稱為密碼組。</li>
-<li>為了確保所有傳輸訊息的完整性與真實性，SSL 與 TLS 協議也包括使用訊息驗證程式碼的驗證程序。這些方法聽上去冗長又複雜，但在現實生活中是瞬間實現的。</li>
+<li>使用者檢查憑證的有效性，選擇雙方都支援的最高等級的加密，並使用這些方法啟動安全的工作階段。有很多組方法可用優勢各異，被稱為密碼組。</li>
+<li>為了確保所有傳輸訊息的完整性與真實性，SSL 與 TLS 協議也包括使用訊息驗證程式碼的驗證程序。<br>這些方法聽上去冗長又複雜，但在現實生活中是瞬間實現的。<br>SSL 直接在傳輸控制協議之上 (TCP) 運作，像安全感毛毯一樣有效。其允許最高的協議層不變，同時仍然提供安全連線。所以在 SSL 層下，其他協議層可以照常運作。若 SSL 憑證使用正確，所有攻擊者將看到哪個 IP 與通訊埠已連線以及大概在發送多少資料。他們或許可以終止連線，但是伺服器與使用者可以知道這是由第三方造成的。但是，他們無法攔截任何資料，所以使攻擊從根本上變得無效。</li>
 </ol>
-<p>SSL 直接在傳輸控制協議之上 (TCP) 運作，像安全感毛毯一樣有效。其允許最高的協議層不變，同時仍然提供安全連線。所以在 SSL 層下，其他協議層可以照常運作。若 SSL 憑證使用正確，所有攻擊者將看到哪個 IP 與通訊埠已連線以及大概在發送多少資料。他們或許可以終止連線，但是伺服器與使用者可以知道這是由第三方造成的。但是，他們無法攔截任何資料，所以使攻擊從根本上變得無效。</p>
-<p>取得SSL憑證的方法就是向憑證廠商購買，<br>SSL憑證費用依照加密的等級、販售廠商而有所不同，可以依照網站性質與企業規模選擇SSL的加密程度以及衡量費用支出。一般來說，SSL憑證的發行廠商是不會影響搜尋排名，但是Google Chrome於2017年公布賽門鐵克(Symantec)發行的SSL視為無效化，並於2018/3/7公布Chrome 66連上賽門鐵克的SSL時呈現的警告畫面，被Chrome 視為無效的SSL憑證發行商名單:Thawte、VeriSign、Equifax、GeoTrust、RapidSSL、Symantec。</p>
+<p>取得SSL憑證的方法就是向憑證廠商購買，SSL憑證費用依照加密的等級、販售廠商而有所不同，可以依照網站性質與企業規模選擇SSL的加密程度以及衡量費用支出。一般來說，SSL憑證的發行廠商是不會影響搜尋排名，但是Google Chrome於2017年公布賽門鐵克(Symantec)發行的SSL視為無效化，並於2018/3/7公布Chrome 66連上賽門鐵克的SSL時呈現的警告畫面，被Chrome 視為無效的SSL憑證發行商名單:Thawte、VeriSign、Equifax、GeoTrust、RapidSSL、Symantec。</p>
+</li>
+</ol>
 <h1 id="AJAX-and-JSON"><a href="#AJAX-and-JSON" class="headerlink" title="AJAX and JSON"></a>AJAX and JSON</h1><p>AJAX (<strong>Asynchronous JavaScript And XML/JSON</strong>) 非同步的 JavaScript 與 XML 技術，這是在2005年由Jesse James Garrett所發明的術語，描述一個使用多種既有技術的新方法。這些技術包括 HTTPS/HTTP 通訊協定、發 HTTP Request 方法(例如 fetch api)、XHR(XMLHttpRequest)或 JSON。使用 AJAX 能使網頁應用程式更快速、即時的更動介面內容，而不需要刷新整個頁面，讓程式更快回應使用者的操作，可以在網頁操作過程當中，不用刷新網頁就可以得到新的資訊。</p>
 <ul>
 <li><p>JavaScript：在 AJAX 技術裡，使用 JavaScript 將所有技術串連，當 server 回傳對應的資料給 client 時，我們可以透過 JavaScript 去解析和拆解這些資料，並使用 DOM 提供的方法把資料放進網頁。</p>
@@ -458,10 +930,11 @@ C --> D(Make changes);</pre>
 </ul>
 <p>Making HTTP calls from the client-side wasn’t this easy a decade ago. A front-end developer would have to rely on XMLHttpRequest which was hard to use and implement. The modern libraries and HTTP clients make the front-end features like user interactions, animations, asynchronous file uploads, etc., easier. </p>
 <h1 id="RESTful-API"><a href="#RESTful-API" class="headerlink" title="RESTful API"></a>RESTful API</h1><ul>
-<li><p>API (Application Programming Interface) 應用程式介面<br>串接 API 指的就是在開發時透過程式介面操作資料；一個應用程式通常會開發其程式介面提供串接、讀取資料或應用服務，提供一套標準讓任何想接入應用程式服務的開發者，可以遵循規範、根據介面的設計撰寫程式碼，來得到想要的服務或資料。串接 API 的本質就是交換資料，通常我們會根據文件說明來使用他人寫好的 API，若要主動提供 API 時則需定義要給什麼資料。</p>
-</li>
-<li><p>Web API 或 HTTP API<br>透過 HTTP 協定的 API，也就是用 HTTP 格式來提供資料的 API 可以稱為 Web API/HTTP API。根據 HTTP 規範，伺服器端和客戶端進行請求和回應時，會使用定義明確的請求格式(request format)和回應格式(response format)，request format 指的是 client-side 需使用特定的 HTTP verb 對 url 發出請求，response format 則是指 server-side 回應時採用的資料格式，有可能是 XML、JSON等。</p>
-</li>
+<li>API (Application Programming Interface) 應用程式介面<br>是一種廣義的稱呼，主要是指 Application 與資料庫的互動介面。透過這個介面，開發者可以了解如何和提供這個介面的 Application 互動。<br>其中一種 API 又可以稱作 Web API，也是現在最廣泛出現的，他是指程式開發者提供一個網址 url 來讓其他開發者訪問，並提供使用這個 API 的文件（說明書），這樣其他開發者就可以閱讀文件了解如何使用這個 API 來存取所需的資料。</li>
+</ul>
+<p>串接 API 指的就是在開發時透過程式介面操作資料；一個應用程式通常會開發其程式介面提供串接、讀取資料或應用服務，提供一套標準讓任何想接入應用程式服務的開發者，可以遵循規範、根據介面的設計撰寫程式碼，來得到想要的服務或資料。串接 API 的本質就是交換資料，通常我們會根據文件說明來使用他人寫好的 API，若要主動提供 API 時則需定義要給什麼資料。</p>
+<ul>
+<li>Web API 或 HTTP API<br>透過 HTTP 協定的 API，也就是用 HTTP 格式來提供資料的 API 可以稱為 Web API/HTTP API。根據 HTTP 規範，伺服器端和客戶端進行請求和回應時，會使用定義明確的請求格式(request format)和回應格式(response format)，request format 指的是 client-side 需使用特定的 HTTP verb 對 url 發出請求，response format 則是指 server-side 回應時採用的資料格式，有可能是 XML、JSON等。</li>
 </ul>
 <p>HTTP 的組成元素：</p>
 <table>
@@ -564,7 +1037,7 @@ C --> D(Make changes);</pre>
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2019-11-07 14:21:10" itemprop="dateModified" datetime="2019-11-07T14:21:10+00:00">2019-11-07</time>
+                <time title="Modified: 2019-11-08 11:36:36" itemprop="dateModified" datetime="2019-11-08T11:36:36+00:00">2019-11-08</time>
               </span>
             
           
@@ -681,7 +1154,7 @@ C --> D(Make changes);</pre>
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2019-11-07 14:21:10" itemprop="dateModified" datetime="2019-11-07T14:21:10+00:00">2019-11-07</time>
+                <time title="Modified: 2019-11-08 11:36:36" itemprop="dateModified" datetime="2019-11-08T11:36:36+00:00">2019-11-08</time>
               </span>
             
           
@@ -828,7 +1301,7 @@ C --> D(Make changes);</pre>
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2019-11-07 14:21:10" itemprop="dateModified" datetime="2019-11-07T14:21:10+00:00">2019-11-07</time>
+                <time title="Modified: 2019-11-08 11:36:36" itemprop="dateModified" datetime="2019-11-08T11:36:36+00:00">2019-11-08</time>
               </span>
             
           
@@ -945,6 +1418,117 @@ C --> D(Make changes);</pre>
   
   
   <div class="post-block home">
+    <link itemprop="mainEntityOfPage" href="https://chinyun.github.io/myblog/myblog/2019/10/31/CSS-position-box-sizing-display/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="chinyun">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/myblog/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Jinny's blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+            
+            <a href="/myblog/2019/10/31/CSS-position-box-sizing-display/" class="post-title-link" itemprop="url">CSS position & box-sizing & display</a>
+          
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              
+                
+              
+
+              <time title="Created: 2019-10-31 18:48:51" itemprop="dateCreated datePublished" datetime="2019-10-31T18:48:51+00:00">2019-10-31</time>
+            </span>
+          
+            
+
+            
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2019-11-08 11:36:36" itemprop="dateModified" datetime="2019-11-08T11:36:36+00:00">2019-11-08</time>
+              </span>
+            
+          
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="position"><a href="#position" class="headerlink" title="position"></a>position</h1><ul>
+<li><p><strong>static</strong> 預設，只有套用此預設的元素屬於「不會被特別定位」</p>
+</li>
+<li><p><strong>relative</strong> 表現與 static 一樣，除非有設定 top, right, bottom, left 等其他屬性，會使元素相對的調整其原本該出現的所在位置，不管「相對定位」過的元素如何在頁面上移動位置或增加多少空間，都不會影響到原本其他元素所在的位置。</p>
+</li>
+<li><p><strong>fixed</strong> 相對於瀏覽器視窗來定位，表示即便頁面捲動他還是會固定在相同位置，使用 top, right, bottom, left 來定位，固定元素不會保留它原本在頁面上應有的空間，不會跟其他元素的配置相干擾。</p>
+</li>
+<li><p><strong>absolute</strong> 元素的定位是他所屬的上層容器的相對位置，若元素的上層沒有可以被定位的元素，那就會以相對於整個網頁，也就是 <code>&lt;body&gt;</code> 的相對位置。當畫面捲動時元素會隨頁面捲動。</p>
+</li>
+</ul>
+<h1 id="box-sizing"><a href="#box-sizing" class="headerlink" title="box-sizing"></a>box-sizing</h1><ul>
+<li><strong>border-box</strong> 元素的內距和邊框不會增加元素本身的寬度。<br>因為部分瀏覽器版本還未支援，需要做瀏覽器兼容設定：<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">-webkit-box-sizing: border-box;</span><br><span class="line">-moz-box-sizing: border-box;</span><br><span class="line">box-sizing: border-box;</span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+<p>其他屬性值：</p>
+<ul>
+<li><strong>content-box</strong> 預設，長寬值只包含 content，不包括 border 和 padding。</li>
+<li><strong>inherit</strong> 從上層元素繼承</li>
+</ul>
+<h1 id="display"><a href="#display" class="headerlink" title="display"></a>display</h1><ul>
+<li><strong>none</strong> The element is completely removed.</li>
+<li><strong>inline</strong> Displays an element as an inline element (like <code>&lt;span&gt;</code>). Any height and width properties will have <strong>no effect</strong>.</li>
+<li><strong>block</strong> Displays an element as a block element (like <code>&lt;p&gt;</code>). It starts on a new line, and takes up the whole width.</li>
+<li><strong>inline-block</strong> Displays an element as an inline-level block container. The element itself is formatted as an inline element, but you can apply height and width values.</li>
+<li><strong>flex</strong> Displays an element as a block-level flex container.</li>
+<li><strong>table</strong> Let the element behave like a <table> element</table></li>
+<li><strong>table-cell</strong> Let the element behave like a <td> element</td></li>
+<li><strong>table-row</strong> Let the element behave like a <tr> element</tr></li>
+</ul>
+<h1 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h1><p><a href="https://zh-tw.learnlayout.com/toc.html" target="_blank" rel="noopener">https://zh-tw.learnlayout.com/toc.html</a><br><a href="https://www.w3schools.com/cssref/pr_class_display.asp" target="_blank" rel="noopener">https://www.w3schools.com/cssref/pr_class_display.asp</a><br><a href="https://www.oxxostudio.tw/articles/201501/css-flexbox.html" target="_blank" rel="noopener">https://www.oxxostudio.tw/articles/201501/css-flexbox.html</a></p>
+
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+          <div class="post-eof"></div>
+        
+      </footer>
+  </div>
+  
+  
+  
+  </article>
+
+    
+        <article itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block home">
     <link itemprop="mainEntityOfPage" href="https://chinyun.github.io/myblog/myblog/2019/10/31/git-push-fatal-please-verify-email-address/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -985,7 +1569,7 @@ C --> D(Make changes);</pre>
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2019-11-07 14:21:10" itemprop="dateModified" datetime="2019-11-07T14:21:10+00:00">2019-11-07</time>
+                <time title="Modified: 2019-11-08 11:36:36" itemprop="dateModified" datetime="2019-11-08T11:36:36+00:00">2019-11-08</time>
               </span>
             
           
@@ -1065,448 +1649,6 @@ C --> D(Make changes);</pre>
   </article>
 
     
-        <article itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block home">
-    <link itemprop="mainEntityOfPage" href="https://chinyun.github.io/myblog/myblog/2019/10/29/Scrum-敏捷開發/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="chinyun">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/myblog/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Jinny's blog">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-            
-            <a href="/myblog/2019/10/29/Scrum-敏捷開發/" class="post-title-link" itemprop="url">Scrum 敏捷開發</a>
-          
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              
-                
-              
-
-              <time title="Created: 2019-10-29 18:05:47" itemprop="dateCreated datePublished" datetime="2019-10-29T18:05:47+00:00">2019-10-29</time>
-            </span>
-          
-            
-
-            
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2019-11-07 14:21:10" itemprop="dateModified" datetime="2019-11-07T14:21:10+00:00">2019-11-07</time>
-              </span>
-            
-          
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="Scrum-是什麼？"><a href="#Scrum-是什麼？" class="headerlink" title="Scrum 是什麼？"></a>Scrum 是什麼？</h1><p>Scrum 是一個流程框架，從 1990 年代初期由 Ken Schwaber 和 Jeff Sutherland 共同發展出來的，他被用在研究和辨識市場、技術、產品性能的可能性，以及開發產品和加強功能，人們透過運用這個框架來處理錯綜複雜的調適性問題，並且講求團隊運用其生產力和創意來盡可能的交付高價值的產品。</p>
-<p>“A framework within which people can address complex adaptive problems, while productively and creatively delivering products of the highest possible value.”<br>– <a href="https://scrumguides.org/index.html" target="_blank" rel="noopener">The Scrum Guide</a></p>
-<h1 id="Scrum-如何運作？"><a href="#Scrum-如何運作？" class="headerlink" title="Scrum 如何運作？"></a>Scrum 如何運作？</h1><p>將所有工作事項切分成多個可量化執行時間、工作量的小任務，並依照優先順序分配小任務於每個開發週期中，這個週期稱為 sprint，也就是快速衝刺的意思，通常以 2-4 週為一個 sprint，團隊成員必須於時限內完成計畫目標，當一個 sprint 結束時，會將完成的任務整理成一個可檢視的成果，再繼續進行下一個週期，反覆循環直到專案完成。</p>
-<p>在管理進程上，會此用 Scrum board 來視覺化表示進度，例如將 board 分為 story（使用情境）、todo（細節功能）、WIP(work-in-process)、to verify（QA、test） 和 done 這幾個欄位，並用一張便利貼表示一個任務，當任務有進度時，便將便利貼移動到所屬進度，依照狀態及時挪動，直到完成，這樣的作法可以讓團隊成員共享資訊並清楚所有工作流程和進度。</p>
-<p>scrum 的運作依靠以下重要物件、活動、特質：</p>
-<ol>
-<li>使用者故事</li>
-<li>task: 根據 user story 列出所有需要被完成的任務</li>
-<li>product backlog: 產品代辦清單</li>
-<li>sprint backlog: 衝刺代辦清單</li>
-<li>product increment: 可隨時發佈的可運作產品</li>
-<li>sprint meeting</li>
-<li>daily srcum</li>
-<li>sprint review meeting</li>
-<li>sprint retrospective meeting</li>
-<li>團隊專注、勇氣、開放、承諾和尊重</li>
-</ol>
-<h1 id="專案角色"><a href="#專案角色" class="headerlink" title="專案角色"></a>專案角色</h1><p>在 scrum 中需要有明確的角色分配，主要角色為：</p>
-<ol>
-<li><p>product owner 代表客戶立場，整合客戶意見、使用者回饋，確保開發中產品符合需求，負責規劃使用者故事，並與團隊討論<br>決定開發優先順序，在開發過程協助團隊釐清產品需求。在每個 sprint 週期結束時，決定使否將此週期的成果發佈。</p>
-</li>
-<li><p>scrum master<br>確保專案按照 scrum 方式開發，並排除任何會影響 scrum 流程的障礙，是規則的執行者。</p>
-</li>
-<li><p>develop team<br>負責開發和交付產品，包括設計、工程等個領域的專業人士。</p>
-</li>
-</ol>
-<p>其他角色可能為：<br>stackholder 利益關係者，可能是客戶</p>
-<h1 id="kanban-v-s-scrum"><a href="#kanban-v-s-scrum" class="headerlink" title="kanban v.s. scrum"></a>kanban v.s. scrum</h1><p>kanban 也是一種敏捷開發框架，由豐田汽車的創辦人 豐田喜一郎開發出來的一套管理方法，以「減少浪費」、「持續改進」為生產管理目標，也使用 kanban board 來視覺化作業流程，限制半成品（work-in-progress）的數量，監控與管理作業流程，建立明確的規劃，建立良好的訊息回饋路徑，團隊間互相合作，帶著實驗精神展開持續的改善。屬於長期的工作計畫，可以在任何時間點，透過團隊討論達成共識，改變專案執行方式和流程，沒有明確的專案角色，視專案和團隊需求而定，同時持續發布產品更新，由團隊成員共同決定是否發佈。</p>
-<p>兩者的主要不同之處為：</p>
-<ul>
-<li>scrum 限制每個任務執行時間，kanban 主要限制同時執行的任務數目</li>
-<li>scrum 有明確的專案角色，kanban 沒有</li>
-<li>scrum 有明確的週期時間，kanban 是長期持續進行</li>
-<li>scrum 在一個 sprint 結束後發佈產品，kanban 因為沒有明確週期，所以可以隨時發佈產品</li>
-</ul>
-<p>兩者的相同之處是：</p>
-<ul>
-<li>採用視覺化的流程管理，公開透明化讓團隊成員可以共同討論、檢視。</li>
-<li>有週期性檢閱成果，持續改善優化工作內容與流程</li>
-<li>將複雜龐大的工作項目切分成多項可執行小任務，提升工作效率。</li>
-</ul>
-
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-          <div class="post-eof"></div>
-        
-      </footer>
-  </div>
-  
-  
-  
-  </article>
-
-    
-        <article itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block home">
-    <link itemprop="mainEntityOfPage" href="https://chinyun.github.io/myblog/myblog/2019/10/12/React-lifecycle-and-state/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="chinyun">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/myblog/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Jinny's blog">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-            
-            <a href="/myblog/2019/10/12/React-lifecycle-and-state/" class="post-title-link" itemprop="url">React lifecycle and state</a>
-          
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              
-                
-              
-
-              <time title="Created: 2019-10-12 20:15:41" itemprop="dateCreated datePublished" datetime="2019-10-12T20:15:41+00:00">2019-10-12</time>
-            </span>
-          
-            
-
-            
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2019-11-07 14:21:10" itemprop="dateModified" datetime="2019-11-07T14:21:10+00:00">2019-11-07</time>
-              </span>
-            
-          
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="React-lifecycle-method-amp-state-updating"><a href="#React-lifecycle-method-amp-state-updating" class="headerlink" title="React lifecycle method &amp; state updating"></a>React lifecycle method &amp; state updating</h1><h1 id="提升-React-效能：保持-virtual-DOM-的一致"><a href="#提升-React-效能：保持-virtual-DOM-的一致" class="headerlink" title="提升 React 效能：保持 virtual DOM 的一致"></a>提升 React 效能：保持 virtual DOM 的一致</h1><ul>
-<li>DOM (Document Object Model)是什麼？</li>
-</ul>
-<p>DOM 文件物件模型，是 Html, XML, SVG 等文件的程式介面，提供一種文件樹的結構化表示方法，可以讓程式存取並改變文件架構、風格（style）和內容，透過 DOM 結構，文件擁有屬性、函式節點，物件可以和事件處理程序連結，當事件被觸發，執行處理程序來存取或改變文件。</p>
-<ul>
-<li>React 如何改變 DOM 以及如何提升效能？</li>
-</ul>
-<p>由於讀取更新 DOM 損耗 browser 的執行率，每一次改變便 render 整個頁面在 JavaScript 是很慢的，React 使用 Virtual DOM 虛擬 DOM 的一個強大的 Render 系統，只需更新 DOM 而不需要從 DOM 讀取，以減少運算。<br>同時， React 的 diff 演算法，當 render function running 得時候，讓 virtual dom 和 real dom 比對只重繪有更新的部分，做出最低必要的更新。</p>
-<p>官方文件：<br>When you use React, at a single point in time you can think of the render() function as creating a tree of React elements. On the next state or props update, that render() function will return a different tree of React elements. React then needs to figure out how to efficiently update the UI to match the most recent tree.</p>
-<ul>
-<li>開發者提升 React 應用程式的方法</li>
-</ul>
-<p>盡可能的減少讀取和更新 DOM<br>We must minimize the amount of work that we do to the DOM.</p>
-
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-          <div class="post-eof"></div>
-        
-      </footer>
-  </div>
-  
-  
-  
-  </article>
-
-    
-        <article itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block home">
-    <link itemprop="mainEntityOfPage" href="https://chinyun.github.io/myblog/myblog/2019/10/12/React-Updating-state-when-state-is-an-array-of-objects/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="chinyun">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/myblog/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Jinny's blog">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-            
-            <a href="/myblog/2019/10/12/React-Updating-state-when-state-is-an-array-of-objects/" class="post-title-link" itemprop="url">React: Updating state when state is an array of objects</a>
-          
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              
-                
-              
-
-              <time title="Created: 2019-10-12 19:06:41" itemprop="dateCreated datePublished" datetime="2019-10-12T19:06:41+00:00">2019-10-12</time>
-            </span>
-          
-            
-
-            
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2019-11-07 14:21:10" itemprop="dateModified" datetime="2019-11-07T14:21:10+00:00">2019-11-07</time>
-              </span>
-            
-          
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>當 state 的結構是 array of objects 的時候，更新 state 的方法需要考慮到 data structure 和 react update 機制。</p>
-<h1 id="Immutable-Data-Structures"><a href="#Immutable-Data-Structures" class="headerlink" title="Immutable Data Structures"></a>Immutable Data Structures</h1><p>由於 react 的 state update 機制是觸發 render function 後會讓 virtual dom 和 real dom 比對只重繪有更新的部分，做出最低必要的更新。<br>因此每次變動 state 的時候需要這樣寫：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">this.setState(&#123;</span><br><span class="line">  obj: &#123;</span><br><span class="line">    ...this.state.obj,</span><br><span class="line">    id: 2</span><br><span class="line">  &#125;</span><br><span class="line">&#125;)</span><br><span class="line">  </span><br><span class="line">this.setState(&#123;</span><br><span class="line">  list: [...this.state.arr, 123]</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
-
-<p>而不能這樣寫：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">#wrong</span><br><span class="line">const newObject = this.state.obj</span><br><span class="line">newObject.id = 2;</span><br><span class="line">this.setState(&#123;</span><br><span class="line">  obj: newObject</span><br><span class="line">&#125;)</span><br><span class="line">  </span><br><span class="line">#wrong</span><br><span class="line">const arr = this.state.arr;</span><br><span class="line">arr.push(123);</span><br><span class="line">this.setState(&#123;</span><br><span class="line">  list: arr</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
-
-<p>也就是說每次改動 state 的時候，都是產生一個新的物件，而不是直接對現有的 object 進行變更，這就是 Immutable data 的概念。</p>
-<h1 id="如何正確的更新-state？"><a href="#如何正確的更新-state？" class="headerlink" title="如何正確的更新 state？"></a>如何正確的更新 state？</h1><p>由於 JavaScript 的資料結構特性，我們需要用 <code>Object Spread Operator</code> 和 <code>Object.assign({}, defaults, options)</code> 等方法在 React 中更新 state。</p>
-<ul>
-<li>Objects, Array 深、淺拷貝</li>
-</ul>
-<p>由於在 JavaScript 中 Objects, Array 的資料型別在賦值的時候，是用 pass by reference 的方法，與原始型別（primitive type）的直接傳值（pass by value）是不一樣的。</p>
-<p>所以我們在複製 Objects, Array 的時候會利用函式處理，而不會直接用等號賦值。<br>但賦值的時候因為傳值的差異，有 淺拷貝（Shallow copies）和深拷貝（Deep copies）的差異。</p>
-<p>淺拷貝:<br>Shallow copies duplicate as little as possible. A shallow copy of a collection is a copy of the collection structure, not the elements. With a shallow copy, two collections now share the individual elements.</p>
-<p>深拷貝:<br>Deep copies duplicate everything. A deep copy of a collection is two collections with all of the elements in the original collection duplicated.</p>
-<p>對 Shallow copy 來說，只是複製 collection structure，而不是 element。<strong>所以在指派第二層物件時會出現問題。</strong></p>
-<p>而 Deep Copy 是整個複製，包含 element。<strong>所以當我們在使用多層物件時，要用 deep copy。</strong></p>
-<ul>
-<li>正確的更新 state</li>
-</ul>
-<p>當我的 state 如下：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">this.state = &#123;</span><br><span class="line">  journeyList: [</span><br><span class="line">    &#123;id: 1, name: &quot;Japan, Tokyo&quot;&#125;,</span><br><span class="line">    &#123;id: 2, name: &quot;Japan, Kyoto&quot;&#125;,</span><br><span class="line">    &#123;id: 3, name: &quot;Europe 12 DAYS Travel&quot;&#125;</span><br><span class="line">  ]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>Update function would look like this:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">updateJourney = (journey) =&gt; &#123;</span><br><span class="line">    const index = this.state.journeyList.findIndex((item)=&gt; item.id === journey[0].id);</span><br><span class="line">    if (index !== -1) &#123;</span><br><span class="line">      this.setState(&#123;</span><br><span class="line">        journeyList: [</span><br><span class="line">          ...this.state.journeyList.slice(0, index),</span><br><span class="line">           Object.assign(&#123;&#125;, this.state.journeyList[index], journey[0]),</span><br><span class="line">           ...this.state.journeyList.slice(index + 1)</span><br><span class="line">        ]</span><br><span class="line">      &#125;);</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;;</span><br></pre></td></tr></table></figure>
-
-<p>若 journey 為：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[&#123;id: 4, name: &apos;Singapore 7 days trip&apos;&#125;]</span><br></pre></td></tr></table></figure>
-
-<p>則我的 state 就會變成：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">this.state = &#123;</span><br><span class="line">  journeyList: [</span><br><span class="line">    &#123;id: 1, name: &quot;Japan, Tokyo&quot;&#125;,</span><br><span class="line">    &#123;id: 2, name: &quot;Japan, Kyoto&quot;&#125;,</span><br><span class="line">    &#123;id: 3, name: &quot;Europe 12 DAYS Travel&quot;&#125;,</span><br><span class="line">    &#123;id: 4, name: &apos;Singapore 7 days trip&apos;&#125;</span><br><span class="line">  ]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h1 id="Use-Redux-to-update-state"><a href="#Use-Redux-to-update-state" class="headerlink" title="Use Redux to update state"></a>Use Redux to update state</h1><p>上述寫法當開發規模拓展的時候，每一次操作都需要深拷貝一次 state 並 assign 內容， code 維護上會較困難，因此可以考慮使用 Redux 的 state update pattern。</p>
-<p>Redux uses a concept of state reducers which each work on a specific slice of the state of your application. That way you don’t have to manually dig through your entire state each time you want to affect a deep change.</p>
-<p>相關文章可以參考：<a href="https://chinyun.github.io/myblog/2019/10/09/React-State-Management-Redux/">React State Management &amp; Redux</a></p>
-<h1 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h1><p><a href="https://stackoverflow.com/questions/37662708/react-updating-state-when-state-is-an-array-of-objects" target="_blank" rel="noopener">StackOverflow</a></p>
-<p><a href="https://blog.techbridge.cc/2018/01/05/react-render-optimization/" target="_blank" rel="noopener">React 性能優化大挑戰</a></p>
-<p><a href="https://dustinhsiao21.com/2018/01/07/javascript-shallow-copy-and-deep-copy/" target="_blank" rel="noopener">關於JAVASCRIPT中的SHALLOW COPY(淺拷貝)及DEEP COPY(深拷貝)</a></p>
-
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-          <div class="post-eof"></div>
-        
-      </footer>
-  </div>
-  
-  
-  
-  </article>
-
-    
-        <article itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block home">
-    <link itemprop="mainEntityOfPage" href="https://chinyun.github.io/myblog/myblog/2019/10/12/UI-variation-and-dynamic-feedback/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="chinyun">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/myblog/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Jinny's blog">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-            
-            <a href="/myblog/2019/10/12/UI-variation-and-dynamic-feedback/" class="post-title-link" itemprop="url">UI variation and dynamic feedback</a>
-          
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              
-                
-              
-
-              <time title="Created: 2019-10-12 14:47:37" itemprop="dateCreated datePublished" datetime="2019-10-12T14:47:37+00:00">2019-10-12</time>
-            </span>
-          
-            
-
-            
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2019-11-07 14:21:10" itemprop="dateModified" datetime="2019-11-07T14:21:10+00:00">2019-11-07</time>
-              </span>
-            
-          
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="UI-UX-與互動設計"><a href="#UI-UX-與互動設計" class="headerlink" title="UI/UX 與互動設計"></a>UI/UX 與互動設計</h1><ul>
-<li><p>靜態的網頁介面與具有互動性的網站不同之處在於，互動能夠有效地引導使用者進行期待的操作。</p>
-</li>
-<li><p>互動設計與 UX 設計關係緊密，UX 關注網頁所規劃的操作流程是否足夠引導使用者表現出預期行為？使用者完成任務的效率是否良好？操作過程是否有挫折感？設計的操作提示，是否足夠引導使用者良好的方式吸收訊息？</p>
-</li>
-<li><p>為網頁設計具有互動性 UI 的可以幫助打造更友善的使用者介面，營造良好的使用者體驗。</p>
-</li>
-</ul>
-<p>在為應用程式做介面設計和互動設計的時候，將為使用者考慮的細節包含進去思考，會發現每一個操作的動作，有它可以設計得更貼心的細微處。<br>觀察日常生活中經常使用的應用程式，也可以發現在細節處講究的互動設計，這些微互動設計可以稱為 微互動。</p>
-<p>根據 微互動 一書的作者 Dan Saffer，他說：<br>「Microinteractions are contained product moments that revolve around a single use case — they have one main task. Every time you change a setting, sync your data or devices, set an alarm, pick a password, log in, set a status message, or favorite or “like” something, you are engaging with a microinteraction.」</p>
-<ul>
-<li>微互動是應用程式、設備等與使用者之間互動過程中，所有細節上的互動。</li>
-<li>微互動可以幫助使用者更流暢的完成主要功能操作，也能讓使用者感到愉悅，影響使用者會不會繼續使用產品。</li>
-</ul>
-<p>UI 基本上由 輸入 -&gt; 內容改變 -&gt; 輸出 這個架構構成，而微互動則是<br>觸發 Trigger -&gt; 規則 Ruls -&gt; 回饋 Feedback -&gt; 迴圈和模式 Loops &amp; Modes。</p>
-<p>「 A Trigger initiates a microinteraction. The Rules determine what happens, while <strong>Feedback lets people know what’s happening.</strong> Loops and Modes determine the meta-rules of the microinteraction. 」– Reference: MICROINTERACTIONS</p>
-<h1 id="為什麼需要回饋（feedbacks）"><a href="#為什麼需要回饋（feedbacks）" class="headerlink" title="為什麼需要回饋（feedbacks）"></a>為什麼需要回饋（feedbacks）</h1><p>使用者操作時有預期心理，即使底層資料已改變，如果視覺上沒有給予足夠的回饋，會覺得操作行為尚未完成，適當的回饋可以傳遞更完整的訊息給使用者。</p>
-<p>「 回饋：呼應微互動的規則。<br>使用數位裝置時，我們看到或聽到的一切都是一種抽象概念。只有少數使用者清楚軟體或裝置運作背後的原理。比如，我們不是真的把檔案放進資料夾內，電子郵件也不是真的送進收件夾裡，這些都是方便使用者理解互動如何進行的隱喻。任何可視、可聽、可感覺，可以幫助使用者了解系統運作規則，就是回饋。」 – Reference:[筆記] 微互動 microinteractions</p>
-<h1 id="如何產生適當的回饋（feedbacks）"><a href="#如何產生適當的回饋（feedbacks）" class="headerlink" title="如何產生適當的回饋（feedbacks）"></a>如何產生適當的回饋（feedbacks）</h1><p>「 回饋可以採用多種形式：視覺、聽覺、觸覺（震動），甚至是<strong>動畫</strong>（有許多維度可以變化：時間點、速度、方向等）。重點是讓回饋契合執行中的動作，儘可能以最適當的方式傳達明確的訊息。<br>回饋可以展現產品的個性。<br>回饋也可以具備自己的運作規則，比方出現的時機？如何改變顏色？當使用者旋轉平板，畫面如何旋轉？這些規則可以變成回饋本身的微互動，開放使用者手動設定。」 – Reference:[筆記] 微互動 microinteractions</p>
-<h1 id="CSS-Animation-amp-React-Render-機制"><a href="#CSS-Animation-amp-React-Render-機制" class="headerlink" title="CSS Animation &amp; React Render 機制"></a>CSS Animation &amp; React Render 機制</h1><ul>
-<li><p>問題<br>React 在 Render 時會比較 Virtual DOM 與真實 DOM 的差異，沒有改變的地方便不會重新 Render，但是 CSS Animation 的機制是每次節點生成時產生動畫效果，而如果 React Component 以 props 的方式傳遞資料，父元件的 state 更新使子元件的 props 改變，由 props 傳遞的內容也隨之改變，然而節點本身沒有消失再生成，所以並不會產生動畫效果。</p>
-</li>
-<li><p>解決方式<br>給予 Html element 特定的 Key -&gt; 每次 props 更新時，連動 Key 更新，使 react render 機制判斷為新節點，因而重新生成觸動 animation的 element。</p>
-</li>
-</ul>
-<p>for example:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">render() &#123;</span><br><span class="line">  return (</span><br><span class="line">    &lt;div&gt;</span><br><span class="line">      &lt;p key=&#123;this.props.name&#125; className=&apos;title&apos;&gt;&#123;this.props.name&#125;&lt;/p&gt;</span><br><span class="line">    &lt;/div&gt;</span><br></pre></td></tr></table></figure>
-
-<h1 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h1><p><a href="http://uirate.net/?p=1667" target="_blank" rel="noopener">[筆記] 微互動 microinteractions</a><br><a href="http://microinteractions.com/what-is-a-microinteraction/" target="_blank" rel="noopener">MICROINTERACTIONS</a></p>
-
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-          <div class="post-eof"></div>
-        
-      </footer>
-  </div>
-  
-  
-  
-  </article>
-
-    
   </div>
 
   
@@ -1555,7 +1697,7 @@ C --> D(Make changes);</pre>
         
           <a href="/myblog/archives/">
         
-          <span class="site-state-item-count">15</span>
+          <span class="site-state-item-count">19</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>

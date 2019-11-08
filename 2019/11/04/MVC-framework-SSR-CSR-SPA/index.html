@@ -1,0 +1,527 @@
+<!DOCTYPE html>
+
+
+
+
+
+<html lang="zh-tw">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 3.9.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/myblog/images/apple-touch-icon-next.png?v=7.4.1">
+  <link rel="icon" type="image/png" sizes="32x32" href="/myblog/images/favicon-32x32-next.png?v=7.4.1">
+  <link rel="icon" type="image/png" sizes="16x16" href="/myblog/images/favicon-16x16-next.png?v=7.4.1">
+  <link rel="mask-icon" href="/myblog/images/logo.svg?v=7.4.1" color="#222">
+
+<link rel="stylesheet" href="/myblog/css/main.css?v=7.4.1">
+
+
+<link rel="stylesheet" href="/myblog/lib/font-awesome/css/font-awesome.min.css?v=4.7.0">
+
+
+<script id="hexo-configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/myblog/',
+    scheme: 'Pisces',
+    version: '7.4.1',
+    exturl: false,
+    sidebar: {"position":"left","display":"post","offset":12,"onmobile":false},
+    copycode: {"enable":false,"show_result":false,"style":null},
+    back2top: {"enable":true,"sidebar":false,"scrollpercent":false},
+    bookmark: {"enable":false,"color":"#222","save":"auto"},
+    fancybox: false,
+    mediumzoom: false,
+    lazyload: false,
+    pangu: false,
+    algolia: {
+      appID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    },
+    localsearch: {"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},
+    path: '',
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    translation: {
+      copy_button: 'Copy',
+      copy_success: 'Copied',
+      copy_failure: 'Copy failed'
+    },
+    sidebarPadding: 40
+  };
+</script>
+
+  <meta name="description" content="What is MVC framework? Why we need?MVC 架構是為了讓複雜程式碼能夠根據各自負責的功能目的做區分而出現的開發設計模式，分別是 modle、view、controller 三個部分，在權責區分清楚的情況下，可以有更好的擴充性和維護性。 modle 代表邏輯處理，view 負責 UI 的呈現，controller 則串連 modle 和 view，作為程式的流程控制">
+<meta name="keywords" content="JavaScript, React, d3, NodeJS, Web">
+<meta property="og:type" content="article">
+<meta property="og:title" content="MVC framework, SSR, CSR, SPA">
+<meta property="og:url" content="https://chinyun.github.io/myblog/2019/11/04/MVC-framework-SSR-CSR-SPA/index.html">
+<meta property="og:site_name" content="Jinny&#39;s blog">
+<meta property="og:description" content="What is MVC framework? Why we need?MVC 架構是為了讓複雜程式碼能夠根據各自負責的功能目的做區分而出現的開發設計模式，分別是 modle、view、controller 三個部分，在權責區分清楚的情況下，可以有更好的擴充性和維護性。 modle 代表邏輯處理，view 負責 UI 的呈現，controller 則串連 modle 和 view，作為程式的流程控制">
+<meta property="og:locale" content="zh-tw">
+<meta property="og:updated_time" content="2019-11-08T11:36:36.731Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="MVC framework, SSR, CSR, SPA">
+<meta name="twitter:description" content="What is MVC framework? Why we need?MVC 架構是為了讓複雜程式碼能夠根據各自負責的功能目的做區分而出現的開發設計模式，分別是 modle、view、controller 三個部分，在權責區分清楚的情況下，可以有更好的擴充性和維護性。 modle 代表邏輯處理，view 負責 UI 的呈現，controller 則串連 modle 和 view，作為程式的流程控制">
+  <link rel="canonical" href="https://chinyun.github.io/myblog/2019/11/04/MVC-framework-SSR-CSR-SPA/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome: false,
+    isPost: true,
+    isPage: false,
+    isArchive: false
+  };
+</script>
+
+  <title>MVC framework, SSR, CSR, SPA | Jinny's blog</title>
+  
+
+
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .logo,
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-tw">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-meta">
+
+    <div>
+      <a href="/myblog/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Jinny's blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+        <p class="site-subtitle">Writing For Sharing</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+      
+      
+      
+        
+        <li class="menu-item menu-item-home">
+      
+    
+
+    <a href="/myblog/" rel="section"><i class="fa fa-fw fa-home"></i>Home</a>
+
+  </li>
+      
+      
+      
+        
+        <li class="menu-item menu-item-archives">
+      
+    
+
+    <a href="/myblog/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>Archives</a>
+
+  </li>
+  </ul>
+
+</nav>
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+            
+
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+      <article itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block post">
+    <link itemprop="mainEntityOfPage" href="https://chinyun.github.io/myblog/myblog/2019/11/04/MVC-framework-SSR-CSR-SPA/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="chinyun">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/myblog/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Jinny's blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">MVC framework, SSR, CSR, SPA
+
+          
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              
+                
+              
+
+              <time title="Created: 2019-11-04 21:18:49" itemprop="dateCreated datePublished" datetime="2019-11-04T21:18:49+00:00">2019-11-04</time>
+            </span>
+          
+            
+
+            
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2019-11-08 11:36:36" itemprop="dateModified" datetime="2019-11-08T11:36:36+00:00">2019-11-08</time>
+              </span>
+            
+          
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h1 id="What-is-MVC-framework-Why-we-need"><a href="#What-is-MVC-framework-Why-we-need" class="headerlink" title="What is MVC framework? Why we need?"></a>What is MVC framework? Why we need?</h1><p>MVC 架構是為了讓複雜程式碼能夠根據各自負責的功能目的做區分而出現的開發設計模式，分別是 modle、view、controller 三個部分，在權責區分清楚的情況下，可以有更好的擴充性和維護性。</p>
+<p>modle 代表邏輯處理，view 負責 UI 的呈現，controller 則串連 modle 和 view，作為程式的流程控制。</p>
+<p>舉例：</p>
+<p>使用者造訪一個部落格網站，點擊文章列表頁面，瀏覽器發出 request 給伺服器，server side 處理 request；將請求丟給對應的 controller，controller 向 model 存取資料，model 回應傳回資料並 render html 交給 controller，controller 再回傳一整份 html 檔給瀏覽器，瀏覽器顯示包含資料內容的 html 畫面。</p>
+<h1 id="前後端分離"><a href="#前後端分離" class="headerlink" title="前後端分離"></a>前後端分離</h1><p>後端專注在提供資料，前端專注在顯示資料，把 data 跟 view 完全切開來，這樣要替換語言或框架時也比較方便，後端只要確保 API 接口一致，就不會影響前端，反之也是一樣。</p>
+<p>假如 server 有一天掛了，API 也跟著掛了，使用者依然可以造訪網頁，只是看不到資料而已，或者是你可以顯示出一個錯誤的圖案。但如果是舊的那種綁在一起的架構，server 一旦掛掉，你連畫面都渲染不出來。</p>
+<p>而這樣的做法會讓前端自己管理 URL 的狀態，去決定現在要顯示哪一個頁面。</p>
+<h1 id="SSR-Sever-side-Rendering"><a href="#SSR-Sever-side-Rendering" class="headerlink" title="SSR(Sever-side Rendering)"></a>SSR(Sever-side Rendering)</h1><p>view 的畫面是在後端動態產生 html，render 完成再 response 給前端（瀏覽器），本質上是「每一個不同頁面就回傳一份不同的 html 檔案」，每一個頁面之間的狀態不會互相干擾。</p>
+<h1 id="CSR-Client-side-Rendering"><a href="#CSR-Client-side-Rendering" class="headerlink" title="CSR(Client-side Rendering)"></a>CSR(Client-side Rendering)</h1><p>view 的畫面當前端拿到資料以後，才用 JavaScript 動態的產生，把內容填到網頁上面，並且需要管理不同頁面，根據路徑或用 hashtag 管理畫面切換。<br>前端 render 的難題在：「要怎麼只更新部分畫面，而不是暴力的每次都砍掉重練」。</p>
+<h1 id="SPA-Single-Page-Application"><a href="#SPA-Single-Page-Application" class="headerlink" title="SPA(Single-Page-Application)"></a>SPA(Single-Page-Application)</h1><p>所有個內容都由前端用 JavaScript 動態產生，用 AJAX 拿資料並搭配 JavaScript 來做畫面上的處理。<br>與之對應的概念是 MPA，Multiple Page Application。</p>
+<ul>
+<li><p>前端、後端各自有 MVC 框架<br>前端如果利用 SPA 來實作的話，會把原本應該是後端處理的一部份職責給搬到前端去，例如說狀態的管理跟路由；以往 Server 根據不同的路徑對應到不同的 Controller，進而渲染出不同的 View，可是現在 Server 無論什麼路徑都會輸出同一個檔案（index.html），所以你在前端也要判斷現在的網址是哪個，才能決定在前端應該渲染出哪個畫面，因此前端也開始需要 MVC 架構了，也就是由 router 去分類路徑並交給 controller 去分別連接 model 和 view。<br>藉由前後端各自的架構，後端只負責輸出資料，前端來負責抓資料跟渲染畫面。把前後端完完全全的切開了，就算後端壞掉，前端還是看得到畫面（只是可能會顯示個錯誤畫面之類的）；前端壞掉，後端還是能安穩的輸出資料供其他服務使用。</p>
+</li>
+<li><p>SEO 問題<br>由於 SPA 是由前端的 JavaScript 動態產生內容，因此如果你對 SPA 的網站按下右鍵 -&gt; 檢視原始碼，只會看到空蕩蕩的一片，只看得到一個 JavaScript 檔案跟一些最基本的 tag，這對於 SEO 的影響而言是不好的。<br>強大的 Google 的爬蟲其實支援執行 JavaScript，所以他依然會 index 你在前端渲染之後的頁面，但還有其他很多搜尋引擎，有些可能沒有像 Google 這麼強大，碰到 SPA 就只能索引空蕩蕩的 HTML，內容幾乎空白。<br>既然問題出在「第一次渲染」，在第一次渲染的時候把該輸出的資料都輸出(運用 server-side rendering)，對使用者來說還是一個 SPA，差別在於使用者接收到 HTML 的時候，就已經有完整的資料了，第一個頁面由 Server side render，之後的操作還是由 Client side render。</p>
+</li>
+</ul>
+<h1 id="Flux"><a href="#Flux" class="headerlink" title="Flux"></a>Flux</h1><p>Flux 是一種架構設計模式，幫助你撰寫有條理的前端架構，用於管理控制應用程式中資料的流向，確保資料是 one-way data flow，資料的定義不限於指來自 server 的邏輯資料，也包括 view 的變化等。 在 flux 的架構中，Store基本上是你唯一可以操作資料與儲存資料的地方。</p>
+<p>Flux Pattern 是這樣的：</p>
+<pre class="mermaid">graph LR;
+A(Action) --> B(Dispatcher);
+B --> C(Store);
+C --> D(View);</pre>
+
+<ul>
+<li>Flux 中有四位主要角色：</li>
+</ul>
+<ol>
+<li>Action：規範所有改變資料的動作，讓你可以快速掌握整個 App 的行為。</li>
+<li>Dispatcher：將目前發生的行為，告知給所有已註冊的 Store。</li>
+<li>Store：存放資料和業務邏輯，並且只提供 getter API 讓人取得資料。</li>
+<li>View：根據資料渲染 UI 和傾聽使用者的操作事件。</li>
+</ol>
+<p>當 action 被觸發後，View 就會透過 Dispatcher dispatch 出一個 Action，該 Action 可以包含一個 payload，說明你想做什麼事情以及你需要操作什麼資料，在 Store 資料做完更新後，要告訴前端頁面去刷新視圖(view)。</p>
+<ul>
+<li>Flux 的特性：</li>
+</ul>
+<ol>
+<li>單向資料流：改變資料的行為都必須經過 Action、Dispatcher，再到 Store。</li>
+<li>Single Source of Truth：資料統一存放於 Store，View 要資料都需跟 Store 拿。</li>
+</ol>
+<ul>
+<li>Flux 的優點：<br>用更清晰的模式，規範資料和頁面複雜互動情境下的資料流。</li>
+</ul>
+<p>事實上，MVC 跟 Flux 都只是一個概念，因此有各種不同的實作，加上MVC在資料流的處理上，並不像Flux一般有較為明確的定義，多數時候Model的更動與View的刷新可能會透過Controller來管理，讓Model單純存放data。</p>
+<p>如此一來，假若今天 View 的操作更動了 Model，而 Model 的變化又刷新了 View，在系統龐大的時候，一來一往，就會讓資料與頁面狀態變得非常複雜，要追蹤某個頁面的變動到底是誰觸發的，或是哪個資料改變了，必須從 Controller 去慢慢 trace。而若是遵照 Flux 的流程，任何 View 的 update 都只要去追蹤其 State 的來源 Store 即可，有一個明確的 flow 可以遵循，並且每個 View 所需要監聽的資料來源，可以依照 Store 來區分，資料流不會互相干擾，而且 Flux 能夠更輕鬆的做出更小單元的 Unit test，這是複雜的 Controller 難以達成的。</p>
+<h1 id="React-Redux-gt-解決-MVC-架構問題"><a href="#React-Redux-gt-解決-MVC-架構問題" class="headerlink" title="React + Redux =&gt; 解決 MVC 架構問題"></a>React + Redux =&gt; 解決 MVC 架構問題</h1><ul>
+<li>React 解決什麼問題？<br>React 是專注在 MVC 架構中的 view，以 state 來管理介面變化的開發框架，透過 virtualDOM 在 state 改變時只重新 render 改變的地方，不需要在頁面切換或資料狀態更新、介面變化時重新 render 整個畫面，有效增進了應用程式的效能和使用者體驗。</li>
+</ul>
+<p>React 把更改 state 的邏輯寫在各自的 component，然而當項目的邏輯變得越來越複雜的時候，將難以釐清 state 和 view 之間的對應關係：一個 state 的變化可能引起多個 view 的變化，一個 view 上面觸發的事件可能引起多個 state 的改變，需要對所有引起 state 變化的情況進行統一管理，於是就需要 Redux。</p>
+<ul>
+<li>Redux 解決什麼問題？<br>Redux 受到幾個 Flux Pattern 重要特質的影響，Redux 透過單一的狀態樹將所有 state 存於一個物件中，並由 Store 去管理；一律透過 action 描述更新動作，經過 Reducer 來變更 state。<br>Reducer 根據 action 物件和舊資料回傳新資料，因此你可以紀錄 action，並重新調用 reducer 函數來得到一樣的狀態，幫助我們做可預測的狀態管理，能夠追蹤 state 和資料變化，更好維護而且資料之間不會互相干擾。</li>
+</ul>
+<p>Redux Pattern:</p>
+<pre class="mermaid">graph LR;
+A(Action) -- Middleware --> B(Reducer);
+B --> C(Store);
+C --> D(Make changes);</pre>
+
+<p><strong>所以使用 Redux + React，可以促進維護性和可擴展性。</strong></p>
+<p>Redux 和 Flux pattern 不同的地方在於： </p>
+<ol>
+<li><p>Redux 只有一個 store，業務資料都存於一個狀態物件中，並由 Store 去管理；Flux 裡面會有多個 store，分別管理不同資料。</p>
+</li>
+<li><p>Redux 中更新的邏輯不在 store 中執行而是由 reducer 負責執行；Flux 在 store 裡面執行更新邏輯，當 store 變化的時候再通知 controller-view 更新自己的數據。</p>
+</li>
+</ol>
+<p>reducer 是一個純函數，這個函數被表述為(previousState, action) =&gt; newState，它根據應用的狀態和當前的 action 推導出新的 state 。 Redux 中有多個 reducer，每個 reducer 負責維護應用整體 state 樹中的某一部分，多個 reducer 可以通過 combineReducers 方法合成一個根 reducer，這個根 reducer 負責維護完整的 state，當一個 action 被觸發，store 會調用 dispatch 方法向某個特定的 reducer 傳遞該 action，reducer 收到 action 之後執行對應的更新邏輯然後返回一個新的 state，state 的更新最終會傳遞到根 reducer 處，返回一個全新的完整的 state，然後傳遞給 view。</p>
+<ol start="2">
+<li>Redux 沒有 Dispatcher 的概念，它使用 reducer 來進行事件的處理，Store 提供 dispatch API 來傳遞 action 物件；<br>Flux 的 Dispatcher 負責將 action 物件傳遞給每個 Store</li>
+</ol>
+<p>Redux 和 Flux 之間最大的區別就是對 store/reducer 的抽象，Flux 中 store 是各自為陣的，每個 store 只對對應的 controller-view 負責，每次更新都只通知對應的 controller-view；而 Redux 中各子 reducer 都是由根 reducer 統一管理的，每個子 reducer 的變化都要經過根 reducer 的整合。</p>
+<h1 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h1><p><a href="https://medium.com/@hulitw/introduction-mvc-spa-and-ssr-545c941669e9" target="_blank" rel="noopener">跟著小明一起搞懂技術名詞：MVC、SPA 與 SSR 2018</a><br><a href="https://ithelp.ithome.com.tw/articles/10194968" target="_blank" rel="noopener">Node.js-Backend見聞錄(10)：關於後端觀念(六)-關於MVC 2017</a><br><a href="https://blog.techbridge.cc/2017/09/16/frontend-backend-mvc/" target="_blank" rel="noopener">前後端分離與 SPA 2017</a><br><a href="https://blog.techbridge.cc/2016/04/29/introduce-flux-from-flux-and-mvc/" target="_blank" rel="noopener">從 Flux 與 MVC 的差異來簡介 Flux 2016</a><br><a href="http://blog.turn.tw/?p=1539" target="_blank" rel="noopener">MVC是一個巨大誤會 2015</a><br><a href="https://imweb.io/topic/57711e37f0a5487b05f325b5" target="_blank" rel="noopener">浅谈 React、Flux 与 Redux 2016</a><br><a href="https://medium.com/4cats-io/%E6%B7%B1%E5%85%A5%E6%B7%BA%E5%87%BA-redux-7b08403c4957" target="_blank" rel="noopener">深入淺出 Redux 2016</a></p>
+
+    </div>
+
+    
+    
+    
+        
+      
+
+      <footer class="post-footer">
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-next post-nav-item">
+              
+                <a href="/myblog/2019/11/04/Knex-js-PostgreSQL/" rel="next" title="Knex.js+PostgreSQL">
+                  <i class="fa fa-chevron-left"></i> Knex.js+PostgreSQL
+                </a>
+              
+            </div>
+
+            <span class="post-nav-divider"></span>
+
+            <div class="post-nav-prev post-nav-item">
+              
+                <a href="/myblog/2019/11/05/Redux-connect-Redux-part-to-React/" rel="prev" title="Connect Redux part to React">
+                  Connect Redux part to React <i class="fa fa-chevron-right"></i>
+                </a>
+              
+            </div>
+          </div>
+        
+      </footer>
+    
+  </div>
+  
+  
+  
+  </article>
+
+  </div>
+
+
+          </div>
+          
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+        
+        
+        
+        
+      
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#What-is-MVC-framework-Why-we-need"><span class="nav-number">1.</span> <span class="nav-text">What is MVC framework? Why we need?</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#前後端分離"><span class="nav-number">2.</span> <span class="nav-text">前後端分離</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#SSR-Sever-side-Rendering"><span class="nav-number">3.</span> <span class="nav-text">SSR(Sever-side Rendering)</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#CSR-Client-side-Rendering"><span class="nav-number">4.</span> <span class="nav-text">CSR(Client-side Rendering)</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#SPA-Single-Page-Application"><span class="nav-number">5.</span> <span class="nav-text">SPA(Single-Page-Application)</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Flux"><span class="nav-number">6.</span> <span class="nav-text">Flux</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#React-Redux-gt-解決-MVC-架構問題"><span class="nav-number">7.</span> <span class="nav-text">React + Redux =&gt; 解決 MVC 架構問題</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Reference"><span class="nav-number">8.</span> <span class="nav-text">Reference</span></a></li></ol></div>
+        
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">chinyun</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        
+          <a href="/myblog/archives/">
+        
+          <span class="site-state-item-count">19</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+    
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">chinyun</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> v3.9.0</div>
+  <span class="post-meta-divider">|</span>
+  <div class="theme-info">Theme – <a href="https://theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Pisces</a> v7.4.1</div>
+  <script src='https://unpkg.com/mermaid@7.1.2/dist/mermaid.min.js'></script>
+  <script>
+    if (window.mermaid) {
+      mermaid.initialize("");
+    }
+  </script>
+
+        
+
+
+
+
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/myblog/lib/anime.min.js?v=3.1.0"></script>
+  <script src="/myblog/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  <script src="/myblog/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+<script src="/myblog/js/utils.js?v=7.4.1"></script><script src="/myblog/js/motion.js?v=7.4.1"></script>
+<script src="/myblog/js/schemes/pisces.js?v=7.4.1"></script>
+<script src="/myblog/js/next-boot.js?v=7.4.1"></script>
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<script>
+if (document.querySelectorAll('pre.mermaid').length) {
+  NexT.utils.getScript('//cdn.jsdelivr.net/npm/mermaid@8/dist/mermaid.min.js', () => {
+    mermaid.initialize({
+      theme: 'forest',
+      logLevel: 3,
+      flowchart: { curve: 'linear' },
+      gantt: { axisFormat: '%m/%d/%Y' },
+      sequence: { actorMargin: 50 }
+    });
+  }, window.mermaid);
+}
+</script>
+
+
+
+
+  
+
+  
+
+  
+
+</body>
+</html>
