@@ -6,19 +6,59 @@ tags:
 
 # How is the Internet work?
 
-現代網路運作的基礎主要由瀏覽器、伺服器以及網路資料的傳遞組成，當使用者在自己電腦透過瀏覽器瀏覽網頁時，會從瀏覽器發出造訪某網頁網址的請求，而該網址所屬的網站伺服器接收到請求內容後，返回包含了 HTML、CSS、JavaScript 等的檔案，瀏覽器接到回應之後將網站呈現在畫面上，上述這個瀏覽器發出請求(request)、伺服器給予回應(response)的過程就是一般我們在瀏覽器輸入網址後，到瀏覽器渲染出頁面之間發生的事情。
+現代網路運作的基礎主要由瀏覽器、伺服器以及網路資料的傳遞組成，在網路世界中，最小的資訊單位是 bit，遍佈世界的光纖纜線以光速傳輸資訊，所以當我們用 wifi 上網時，就像用電台傳送廣播一樣，將資訊波段以無線的方式傳送 wifi路由器，再透過電纜運送連結到世界上的任何一處。
+當使用者在自己電腦透過瀏覽器瀏覽網頁時，會從瀏覽器發出造訪某網頁網址的請求，而該網址所屬的網站伺服器接收到請求內容後，返回包含了 HTML、CSS、JavaScript 等的檔案，瀏覽器接到回應之後將網站呈現在畫面上，上述這個瀏覽器發出請求(request)、伺服器給予回應(response)的過程就是一般我們在瀏覽器輸入網址後，到瀏覽器渲染出頁面之間發生的事情，而這個過程其實仰賴許多機制共同建立，包括：
 
-網路資料傳遞的原則：
-1. 有標準化的內容格式
-2. 資料結構分為 header 和 body
-3. 用狀態碼 http status 標準化傳輸結果
-4. 用動詞 http method 標準化動作： GET、POST、DELETE、PUT、PATCH
-5. protocol 協定：定義資料交換的格式，標準化促成規模化 ex: http、https
+- **域名系統 - DNS (Domain Name System)**：由於我們平常用的網址是 Domain，而電腦都是用 IP 在溝通的，DNS 會負責將網址分析為 IP 位址，回報給本地電腦，本地電腦獲得 IP 位址，就能成功連上對方主機並請求主機回傳網頁資料。
+
+- **資料傳輸的單位 - 封包 (packet)**：封包帶有起始和終點的 IP 位址資訊，網路傳輸時會將資料拆分成多個封包傳遞；若某網路定義的封包大小為 1500 bytes，一部影音為 500MB 的資料就會被拆為 35萬個左右的封包發送至目的地 IP 位址。（1MB = 1,048,576 bytes）
+
+- **指引封包走對的路線 - 路由器 (router)**：一種專門電腦，根據纜線的「交通狀況」幫封包選擇最易通行、最省時且風險最低的路徑，確保網路傳輸可靠度。
+
+- **確保資料完整抵達 - 傳輸控制協定 (TCP-Transmission Control Protocol)**：在資料送達時，根據 IP 封包裡的資訊檢查是否有全部送達，只有全數送達時才會簽收，若發現資料短少就會通知伺服器主機要求重新發送資料。
+
+- **通訊協定：伺服器和瀏覽器的對話 - HTTP**：通訊協定事電腦之間互相索取資料的溝通語言，設計 HTTP 的最初目的是發布和接收 HTML 頁面。
+
+透過以上的機制維持網路的運作，我們可以在自家電腦使用瀏覽器發送請求以連上世界各地的網站，獲得世界各地主機的資料。
+
+事實上，網路除了瀏覽器和伺服器，根據網路的架構還可以將網路運作分為四個層級：應用層、傳送層、網路層、鏈結層，可以對應到 OSI 七層級，如下表：
+
+| OSI 七層級 | TCP/IP 模型 | 相關通訊協定和標準 |
+| -------- | -------- | -------- | 
+| 應用層、表現層、會談層 | 應用層 | HTTP/FTP/SMTP/DNS/SSH |
+| 傳送層 | 傳送層 | TCP |
+| 網路層 | 網路層 | IP |
+| 資訊鏈結層、實體層 | 鏈結層 | LAN/WAN | 
+
+TCP/IP 模型由 OSI(open system interconnecttion)模型簡化而來，OSI是由 ISO組織制定，作為制定網路標準的參考，依網路運作方式將網路架構分為七個層次。
+**鏈結層**將數位訊號組成符合邏輯的傳輸資料(資訊框 data frame)，定義網路裝置之間的位元資料傳輸，主要跟硬體有關。
+**網路層**定義網路路由、定址功能，IP(Internet Protocol)會將 IP 位址加入傳輸資料內，並將資料組成封包。
+**傳送層**負責資料傳輸和控制，將大型資料切割成適合傳輸的大小型式，替應用層提供流量管制及錯誤控制。
+**應用層**建立網路連線、將ASCII編碼轉成應用層可用資料，負責加密、解密資料等，連結瀏覽器和伺服器之間的溝通。
 
 # HTTP vs. HTTPS
 
-- HTTP(Hyper Text Transfer Protocol) 超文本傳輸協定
-In 1989 Tim Berners-Lee invented the World Wide Web and built the HTTP for transferring HTML document around the world. HTTP is a protocol or the rules that we use over the wires. It is a foundation of any data exchange on the web.
+現代網路資料傳遞的原則有：
+1. 標準化的內容格式
+2. 資料結構分為 header 和 body
+3. 使用狀態碼 HTTP Status Code 標準化傳輸結果
+  - HTTP Status Code
+    - 2XX 成功：
+      - 200 ok
+      - 204 no content
+    - 3xx 重新導向:
+      - 301 永久搬遷
+      - 302 暫時搬遷
+    - 4xx 用戶端錯誤:
+      - 404 Not Found
+      - 401 Unauthorized：未認證，表示 client-side 沒有必要的憑證或伺服器拒絕了 client-side 提供的憑證。
+      - 403 Forbidden：伺服器理解請求，但是拒絕執行，表示 client-side 沒有權限。
+    - 5xx 伺服器端錯誤
+      502 Bad Gateway：表示伺服器的某個服務沒有正確執行，可能是處理請求的時間太長或伺服器主機問題。
+
+> [常見與不常見的 HTTP Status Code](https://noob.tw/http-status-code/)
+
+4. 用動詞 HTTP Method 標準化動作： GET、POST、DELETE、PUT、PATCH
   - HTTP Method
     - GET：透過 API 把資料內容撈出來，這些內容通常是可以對外公布，不需要密碼帳號就可以取得的資料。
     - POST：新增一筆資料
@@ -26,25 +66,26 @@ In 1989 Tim Berners-Lee invented the World Wide Web and built the HTTP for trans
     - PUT：更新一筆資料，如果存在這筆資料就會覆蓋過去
     - PATCH：部分更新資料
 
-- HTTPS(Hyper Text Transfer Protocol Secure) 超文本安全傳輸協定
-HTTPS(Hyper Text Transfer Protocol Secure) use TLS and SSL technology to encrypt the information that transported. Only the server or client web could have the secret key to read the message.
+5. protocol 通訊協定：定義資料交換的格式，標準化促成規模化 ex: HTTP、HTTPS
+  - HTTP(Hyper Text Transfer Protocol) 超文本傳輸協定
+  In 1989 Tim Berners-Lee invented the World Wide Web and built the HTTP for transferring HTML document around the world. HTTP is a protocol or the rules that we use over the wires. It is a foundation of any data exchange on the web.
 
-主要是由網景公司(Netscape)開發並內建於其瀏覽器中，之後廣泛發展於網際網路上，用於對資料進行壓縮傳輸及傳輸後解壓縮回正確資訊的操作。隨著網路的發達，資訊技術越來越透明，HTTP 的開放明文顯得在網際網路中，不再是這麼安全的傳送協定，知名企業網站及全球級大型網站 Google、Facebook 等皆採用 HTTPS 加密，作為預設連線方式，因此有使用者登入系統或或存取到機密敏感資料頁面等有建立會員、購物車、金流、刷卡機制服務的網站選擇使用HTTPS的傳送協定。
+  - HTTPS(Hyper Text Transfer Protocol Secure) 超文本安全傳輸協定
+  HTTPS(Hyper Text Transfer Protocol Secure) use TLS and SSL technology to encrypt the information that transported. Only the server or client web could have the secret key to read the message.
 
-HTTPS 其實就是在原本的 HTTP 協定中延伸加入 SSL(Secure Sockets Layer,傳輸層安全協議) 或 TLS(Transport Layer Security，傳輸層安全) 憑證的安全連線技術。SSL/TLS 憑證是網頁伺服器和瀏覽器之間以加解密方式溝通的安全技術標準，透過憑證內的公開金鑰加密資料傳輸至伺服器端，伺服器端用私密金鑰解密來證明自己的身份，取得有效憑證後在網際網路上傳輸加密過的資料以達到資安的目的。
+  主要是由網景公司(Netscape)開發並內建於其瀏覽器中，之後廣泛發展於網際網路上，用於對資料進行壓縮傳輸及傳輸後解壓縮回正確資訊的操作。隨著網路的發達，資訊技術越來越透明，HTTP 的開放明文顯得在網際網路中，不再是這麼安全的傳送協定，知名企業網站及全球級大型網站 Google、Facebook 等皆採用 HTTPS 加密，作為預設連線方式，因此有使用者登入系統或或存取到機密敏感資料頁面等有建立會員、購物車、金流、刷卡機制服務的網站選擇使用HTTPS的傳送協定。HTTPS 其實就是在原本的 HTTP 協定中延伸加入 SSL(Secure Sockets Layer,傳輸層安全協議) 或 TLS(Transport Layer Security，傳輸層安全) 憑證的安全連線技術。
 
-當您在伺服器與連線至伺服器的瀏覽器上安裝 SSL 憑證時，SSL 憑證的存在會觸發 SLL (或 TLS) 協議，這將加密伺服器與瀏覽器之間 (或伺服器之間) 發送的資訊；詳細資料顯然更加複雜一些。
+  SSL/TLS 憑證是網頁伺服器和瀏覽器之間以加解密方式溝通的安全技術標準，透過憑證內的公開金鑰加密資料傳輸至伺服器端，伺服器端用私密金鑰解密來證明自己的身份，取得有效憑證後在網際網路上傳輸加密過的資料以達到資安的目的。當您在伺服器與連線至伺服器的瀏覽器上安裝 SSL 憑證時，SSL 憑證的存在會觸發 SLL (或 TLS) 協議，這將加密伺服器與瀏覽器之間 (或伺服器之間) 發送的資訊；詳細資料顯然更加複雜一些。
 
-運作流程：
-1. SSL 在 TCP 連線建立後開始運作，啟動 SSL信號交換。
-2. 伺服器發送憑證至使用者，同時附上大量規格 (包括哪個版本的 SSL/TLS 以及使用哪個加密方法等。)
-3. 然後使用者檢查憑證的有效性，並選擇雙方都支援的最高等級的加密，並使用這些方法啟動安全的工作階段。有很多組方法可用優勢各異，被稱為密碼組。
-4. 為了確保所有傳輸訊息的完整性與真實性，SSL 與 TLS 協議也包括使用訊息驗證程式碼的驗證程序。這些方法聽上去冗長又複雜，但在現實生活中是瞬間實現的。
+  運作流程：
+  1. SSL 在 TCP 連線建立後開始運作，啟動 SSL信號交換。
+  2. 伺服器發送憑證至使用者，同時附上大量規格 (包括哪個版本的 SSL/TLS 以及使用哪個加密方法等。)
+  3. 使用者檢查憑證的有效性，選擇雙方都支援的最高等級的加密，並使用這些方法啟動安全的工作階段。有很多組方法可用優勢各異，被稱為密碼組。
+  4. 為了確保所有傳輸訊息的完整性與真實性，SSL 與 TLS 協議也包括使用訊息驗證程式碼的驗證程序。
+  這些方法聽上去冗長又複雜，但在現實生活中是瞬間實現的。
+  SSL 直接在傳輸控制協議之上 (TCP) 運作，像安全感毛毯一樣有效。其允許最高的協議層不變，同時仍然提供安全連線。所以在 SSL 層下，其他協議層可以照常運作。若 SSL 憑證使用正確，所有攻擊者將看到哪個 IP 與通訊埠已連線以及大概在發送多少資料。他們或許可以終止連線，但是伺服器與使用者可以知道這是由第三方造成的。但是，他們無法攔截任何資料，所以使攻擊從根本上變得無效。
 
-SSL 直接在傳輸控制協議之上 (TCP) 運作，像安全感毛毯一樣有效。其允許最高的協議層不變，同時仍然提供安全連線。所以在 SSL 層下，其他協議層可以照常運作。若 SSL 憑證使用正確，所有攻擊者將看到哪個 IP 與通訊埠已連線以及大概在發送多少資料。他們或許可以終止連線，但是伺服器與使用者可以知道這是由第三方造成的。但是，他們無法攔截任何資料，所以使攻擊從根本上變得無效。
-
-取得SSL憑證的方法就是向憑證廠商購買，
-SSL憑證費用依照加密的等級、販售廠商而有所不同，可以依照網站性質與企業規模選擇SSL的加密程度以及衡量費用支出。一般來說，SSL憑證的發行廠商是不會影響搜尋排名，但是Google Chrome於2017年公布賽門鐵克(Symantec)發行的SSL視為無效化，並於2018/3/7公布Chrome 66連上賽門鐵克的SSL時呈現的警告畫面，被Chrome 視為無效的SSL憑證發行商名單:Thawte、VeriSign、Equifax、GeoTrust、RapidSSL、Symantec。
+  取得SSL憑證的方法就是向憑證廠商購買，SSL憑證費用依照加密的等級、販售廠商而有所不同，可以依照網站性質與企業規模選擇SSL的加密程度以及衡量費用支出。一般來說，SSL憑證的發行廠商是不會影響搜尋排名，但是Google Chrome於2017年公布賽門鐵克(Symantec)發行的SSL視為無效化，並於2018/3/7公布Chrome 66連上賽門鐵克的SSL時呈現的警告畫面，被Chrome 視為無效的SSL憑證發行商名單:Thawte、VeriSign、Equifax、GeoTrust、RapidSSL、Symantec。
 
 # AJAX and JSON
 
@@ -94,6 +135,9 @@ Making HTTP calls from the client-side wasn’t this easy a decade ago. A front-
 # RESTful API
 
 - API (Application Programming Interface) 應用程式介面
+是一種廣義的稱呼，主要是指 Application 與資料庫的互動介面。透過這個介面，開發者可以了解如何和提供這個介面的 Application 互動。
+其中一種 API 又可以稱作 Web API，也是現在最廣泛出現的，他是指程式開發者提供一個網址 url 來讓其他開發者訪問，並提供使用這個 API 的文件（說明書），這樣其他開發者就可以閱讀文件了解如何使用這個 API 來存取所需的資料。
+
 串接 API 指的就是在開發時透過程式介面操作資料；一個應用程式通常會開發其程式介面提供串接、讀取資料或應用服務，提供一套標準讓任何想接入應用程式服務的開發者，可以遵循規範、根據介面的設計撰寫程式碼，來得到想要的服務或資料。串接 API 的本質就是交換資料，通常我們會根據文件說明來使用他人寫好的 API，若要主動提供 API 時則需定義要給什麼資料。
 
 - Web API 或 HTTP API
