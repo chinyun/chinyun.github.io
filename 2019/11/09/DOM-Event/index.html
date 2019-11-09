@@ -55,19 +55,19 @@
   };
 </script>
 
-  <meta name="description" content="單冒號 (:) 是用在偽類雙冒號 (::) 則是用在偽元素偽類 (pseudo class) 就是在選已經存在的東西，比方說 a:hover 就是選了已經存在的 &amp;lt;a&amp;gt; 的某一個狀態偽元素 (pseudo element) 就是在創造一個新的假元素，因為他不在 DOM 裡面，而是創造的了一個我們看不見的元素。比如說 ::first-line，第一行並沒有被任何的 tag 包住，所以在選">
+  <meta name="description" content="DOM (Document Object Model)W3C(World Wide Web Consortium) 全球資訊網協會訂定了 DOM 的標準，將 DOM 區分為三部分：core DOM、XML DOM、HTML DOM。HTML DOM 是用來取得、修改、新增、刪除 HTML 元素，有了明確的標準不同瀏覽器才能提供一套相同的操作方式給開發者使用。DOM 的樹狀結構是一種有階層(父子關係">
 <meta name="keywords" content="JavaScript, React, d3, NodeJS, Web">
 <meta property="og:type" content="article">
-<meta property="og:title" content="css pseudo class &amp; pseudo element">
-<meta property="og:url" content="https://chinyun.github.io/myblog/2019/11/08/css-pseudo-class-pseudo-element/index.html">
+<meta property="og:title" content="DOM Event">
+<meta property="og:url" content="https://chinyun.github.io/myblog/2019/11/09/DOM-Event/index.html">
 <meta property="og:site_name" content="Jinny&#39;s blog">
-<meta property="og:description" content="單冒號 (:) 是用在偽類雙冒號 (::) 則是用在偽元素偽類 (pseudo class) 就是在選已經存在的東西，比方說 a:hover 就是選了已經存在的 &amp;lt;a&amp;gt; 的某一個狀態偽元素 (pseudo element) 就是在創造一個新的假元素，因為他不在 DOM 裡面，而是創造的了一個我們看不見的元素。比如說 ::first-line，第一行並沒有被任何的 tag 包住，所以在選">
+<meta property="og:description" content="DOM (Document Object Model)W3C(World Wide Web Consortium) 全球資訊網協會訂定了 DOM 的標準，將 DOM 區分為三部分：core DOM、XML DOM、HTML DOM。HTML DOM 是用來取得、修改、新增、刪除 HTML 元素，有了明確的標準不同瀏覽器才能提供一套相同的操作方式給開發者使用。DOM 的樹狀結構是一種有階層(父子關係">
 <meta property="og:locale" content="zh-tw">
 <meta property="og:updated_time" content="2019-11-09T16:15:50.769Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="css pseudo class &amp; pseudo element">
-<meta name="twitter:description" content="單冒號 (:) 是用在偽類雙冒號 (::) 則是用在偽元素偽類 (pseudo class) 就是在選已經存在的東西，比方說 a:hover 就是選了已經存在的 &amp;lt;a&amp;gt; 的某一個狀態偽元素 (pseudo element) 就是在創造一個新的假元素，因為他不在 DOM 裡面，而是創造的了一個我們看不見的元素。比如說 ::first-line，第一行並沒有被任何的 tag 包住，所以在選">
-  <link rel="canonical" href="https://chinyun.github.io/myblog/2019/11/08/css-pseudo-class-pseudo-element/">
+<meta name="twitter:title" content="DOM Event">
+<meta name="twitter:description" content="DOM (Document Object Model)W3C(World Wide Web Consortium) 全球資訊網協會訂定了 DOM 的標準，將 DOM 區分為三部分：core DOM、XML DOM、HTML DOM。HTML DOM 是用來取得、修改、新增、刪除 HTML 元素，有了明確的標準不同瀏覽器才能提供一套相同的操作方式給開發者使用。DOM 的樹狀結構是一種有階層(父子關係">
+  <link rel="canonical" href="https://chinyun.github.io/myblog/2019/11/09/DOM-Event/">
 
 
 <script id="page-configurations">
@@ -81,7 +81,7 @@
   };
 </script>
 
-  <title>css pseudo class & pseudo element | Jinny's blog</title>
+  <title>DOM Event | Jinny's blog</title>
   
 
 
@@ -198,7 +198,7 @@
   
   
   <div class="post-block post">
-    <link itemprop="mainEntityOfPage" href="https://chinyun.github.io/myblog/myblog/2019/11/08/css-pseudo-class-pseudo-element/">
+    <link itemprop="mainEntityOfPage" href="https://chinyun.github.io/myblog/myblog/2019/11/09/DOM-Event/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="chinyun">
@@ -210,7 +210,7 @@
       <meta itemprop="name" content="Jinny's blog">
     </span>
       <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">css pseudo class & pseudo element
+        <h1 class="post-title" itemprop="name headline">DOM Event
 
           
         </h1>
@@ -226,19 +226,11 @@
                 
               
 
-              <time title="Created: 2019-11-08 18:39:38" itemprop="dateCreated datePublished" datetime="2019-11-08T18:39:38+00:00">2019-11-08</time>
+              <time title="Created: 2019-11-09 16:48:30 / Modified: 16:15:50" itemprop="dateCreated datePublished" datetime="2019-11-09T16:48:30+00:00">2019-11-09</time>
             </span>
           
             
 
-            
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2019-11-09 16:15:50" itemprop="dateModified" datetime="2019-11-09T16:15:50+00:00">2019-11-09</time>
-              </span>
             
           
 
@@ -253,36 +245,28 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <p>單冒號 (:) 是用在偽類<br>雙冒號 (::) 則是用在偽元素<br>偽類 (pseudo class) 就是在選已經存在的東西，比方說 <code>a:hover</code> 就是選了已經存在的 <code>&lt;a&gt;</code> 的某一個狀態<br>偽元素 (pseudo element) 就是在創造一個新的假元素，因為他不在 DOM 裡面，而是創造的了一個我們看不見的元素。比如說 <code>::first-line</code>，第一行並沒有被任何的 tag 包住，所以在選取的過程就像是用了一個看不到的 tag 把第一行包起來，所以才選得到這行。</p>
-<p>使用偽類元素，一方面可以減少頁面中的節點元素，加速頁面渲染速度，另一方面可以為設計動畫提供很多新思維。</p>
-<h1 id="pseudo-class"><a href="#pseudo-class" class="headerlink" title="pseudo class"></a>pseudo class</h1><p>Pseudo-classes are used to provide styles not for elements, but for various states of elements. The pseudo-class concept is introduced to permit selection based on information that lies outside of the document tree or that cannot be expressed using the other <em>simple selectors</em>.<br>用於定義元素的特殊狀態，為了選擇 DOM tree 之外的信息，或者使用其他簡單選擇器不能表達的信息，不會出現在 DOM tree。</p>
-<p>Simple selectors includes:</p>
+        <h1 id="DOM-Document-Object-Model"><a href="#DOM-Document-Object-Model" class="headerlink" title="DOM (Document Object Model)"></a>DOM (Document Object Model)</h1><p>W3C(World Wide Web Consortium) 全球資訊網協會訂定了 DOM 的標準，將 DOM 區分為三部分：core DOM、XML DOM、HTML DOM。HTML DOM 是用來取得、修改、新增、刪除 HTML 元素，有了明確的標準不同瀏覽器才能提供一套相同的操作方式給開發者使用。<br>DOM 的樹狀結構是一種有階層(父子關係)的資料結構，以節點(node)代表一個物件，物件本身具有屬性和方法，上層的節點為父節點(parent)下層節點為子節點(child)，一個父節點可能有很多個子節點，但子節點只會有一個父節點。<br>在 document 之上其實還有一個 window 物件，它不屬於 DOM 但實作時經常會使用到 window 提供的屬性及方法，例如： setInterval, clearIntervel, confirm, alert, location</p>
+<h1 id="DOM-事件傳遞機制"><a href="#DOM-事件傳遞機制" class="headerlink" title="DOM 事件傳遞機制"></a>DOM 事件傳遞機制</h1><p>事件在 DOM 裡面有既定的傳遞順序，假設你有一個 ul 元素，底下有很多 li ，代表不同的 item，當你點擊任何一個 li 的時候，其實也點擊了 ul，因為 ul 把所有的 li 都包住了。假如我在兩個元素上面都加了eventListener，哪一個會先執行？這時候知道事件的執行順序就很重要。</p>
+<p>DOM 事件觸發有三個階段，例如：當點擊事件發生時，會先從 window 開始往下傳遞，一直傳到被點擊的該物件為止，到這邊就叫做 CAPTURING_PHASE 捕獲階段，接著事件傳遞到物件本身，這時候叫做 AT_TARGET，最後事件會從物件一路傳回去 window，這時候叫做 BUBBLING_PHASE 冒泡階段。</p>
 <ul>
-<li>type selector (<code>h1, p, div</code>)</li>
-<li>universal selector (<code>*</code>)</li>
-<li>attribute selector (<code>img[alt]</code>)</li>
-<li>class selector (<code>.class</code>)</li>
-<li>ID selector (<code>#id</code>)</li>
-<li>pseudo-class (<code>:</code>) <ul>
-<li><strong>:active</strong> </li>
-<li><strong>:hover</strong> 設定滑鼠滑過的樣式</li>
-<li><strong>:visited</strong> 被訪問過的連結的樣式</li>
-<li><strong>:link</strong></li>
-<li><strong>:nth-child()</strong></li>
-<li><strong>:checked</strong></li>
-</ul>
+<li><p>先捕獲(capturing)再冒泡(bubbling)，當事件傳到 target 本身，沒有分捕獲跟冒泡:<br>一般而言是先捕獲再冒泡，但是當事件傳遞到點擊的真正對象，也就是 event.target 的時候，無論你使用 addEventListener 的第三個參數是 true 還是 false，這邊的 event.eventPhase 都會變成 AT_TARGET，既然這邊已經變成 AT_TARGET ，自然就沒有什麼捕獲跟冒泡之分，所以執行順序就會根據 addEventListener 的順序而定，先添加的先執行，後添加的後執行。</p>
+</li>
+<li><p>事件註冊，加上監聽機制的方法：<code>target.addEventListener(type, listener[, useCapture]);</code><br>addEventListener 函數的第三個參數是 boolean 值，可以決定事先採取被觸發事件的動作反應，還是其外部元素的觸發動作。設定為 true 代表把這個 listener 添加到捕獲階段，false 代表把這個 listener 添加到冒泡階段，預設為false、在冒泡階段 listen 事件觸發。一個 element可以有多個 eventlistener，監聽不同事件(event)，設置指定動作(function)。</p>
 </li>
 </ul>
-<p>狀態不存在 DOM 裡面，或是這幾種 simple selectors 選不到的東西，就是 pseudo-class 要去解決的問題。</p>
-<h1 id="pseudo-element"><a href="#pseudo-element" class="headerlink" title="pseudo element"></a>pseudo element</h1><p>Pseudo elements differ from pseudo-classes in that they don’t select states of elements; they select parts of an element. 用於選擇元素的指定部分，創造一個關於 DOM tree 的抽象內容，提供一種方法來引用源文檔中不存在的內容，創造之後會出現在 DOM tree，偽元素也會「繼承」原本元素的屬性。</p>
-<ul>
-<li><strong>::first-line</strong>：選取第一行</li>
-<li><strong>::first-letter</strong>：選取第一個字</li>
-<li><strong>::before</strong>：在原本的元素「之前」加入內容</li>
-<li><strong>::after</strong>：在原本的元素「之後」加入內容</li>
-<li><strong>::selection</strong>：選取文字反白後</li>
+<h1 id="stopPropagation-amp-preventDefault"><a href="#stopPropagation-amp-preventDefault" class="headerlink" title="stopPropagation &amp; preventDefault"></a>stopPropagation &amp; preventDefault</h1><ul>
+<li><p>stopPropagation：取消事件繼續往下傳遞。加在哪邊，事件的傳遞就斷在哪裡，不會繼續往下傳遞給下一個節點。<br>用法如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">$list.addEventListener(&apos;click&apos;, (e) =&gt; &#123;</span><br><span class="line">  console.log(&apos;list capturing&apos;);</span><br><span class="line">  e.stopPropagation();</span><br><span class="line">&#125;, true)</span><br></pre></td></tr></table></figure>
+
+<p>儘管已經用e.stopPropagation，但對於同一個層級，剩下的 listener 還是會被執行到，若是你想要讓其他同一層級的 listener 也不要被執行，可以改用 e.stopImmediatePropagation();</p>
+</li>
+<li><p>preventDefault：取消瀏覽器的預設行為。最常見的例子是阻止點擊<code>&lt;a&gt;</code>時新開分頁、跳轉或<code>&lt;form&gt;</code> submit action。<br>preventDefault 跟事件傳遞「一點關係都沒有」，事件還是會繼續往下傳遞。有一個特別值得注意的地方是 W3C 的文件裡面有寫到：Once preventDefault has been called it will remain in effect throughout the remainder of the event’s propagation. 意思就是說一旦 call 了 preventDefault，在之後傳遞下去的事件裡面也會有效果。<br>用法舉例：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">form.addEventListener(&apos;submit&apos;,e=&gt;&#123;</span><br><span class="line">  e.preventDefault(); // 把原生的 Form submit 跳轉行為停掉</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+</li>
 </ul>
-<h1 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h1><p><a href="https://stringpiggy.hpd.io/pseudo-element-pseudo-class-difference/" target="_blank" rel="noopener">偽元素 (pseudo element) 和偽類 (pseudo class) 差在哪？</a><br><a href="https://www.itread01.com/content/1549211047.html" target="_blank" rel="noopener">css偽類元素的運用以及相應的hover的使用</a><br><a href="https://ithelp.ithome.com.tw/articles/10196924" target="_blank" rel="noopener">CSS 偽類 與 偽元素</a><br><a href="http://csscoke.com/2013/09/21/%E4%BD%BF%E7%94%A8css3-nth-childn-%E9%81%B8%E5%8F%96%E5%99%A8%E8%A9%B3%E8%A7%A3/" target="_blank" rel="noopener">使用CSS3 :nth-child(n) 選取器教學</a><br><a href="https://www.oxxostudio.tw/articles/201405/css-selector.html" target="_blank" rel="noopener">CSS 偽類 child 和 of-type</a><br><a href="https://www.oxxostudio.tw/articles/201706/pseudo-element-1.html" target="_blank" rel="noopener">CSS 偽元素 ( before 與 after )</a></p>
+<h1 id="Event-Delegation"><a href="#Event-Delegation" class="headerlink" title="Event Delegation"></a>Event Delegation</h1><p>事件代理機制是將許多事件綁定在同一節點，透過該節點使下層的子節點都可以觸發事件，因為只要綁定一個地方不需要每個子節點或後來新增的節點都綁定所以叫做事件代理。</p>
+<h1 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h1><p><a href="https://medium.com/@realdennis/javascript-%E4%BA%8B%E4%BB%B6-event-da8104c5c98c" target="_blank" rel="noopener">事件 (Event) 的註冊、觸發與傳遞</a><br><a href="https://blog.techbridge.cc/2017/07/15/javascript-event-propagation/" target="_blank" rel="noopener">DOM 的事件傳遞機制：捕獲與冒泡</a></p>
 
     </div>
 
@@ -299,8 +283,8 @@
           <div class="post-nav">
             <div class="post-nav-next post-nav-item">
               
-                <a href="/myblog/2019/11/05/Redux-connect-Redux-part-to-React/" rel="next" title="Connect Redux part to React">
-                  <i class="fa fa-chevron-left"></i> Connect Redux part to React
+                <a href="/myblog/2019/11/08/css-pseudo-class-pseudo-element/" rel="next" title="css pseudo class & pseudo element">
+                  <i class="fa fa-chevron-left"></i> css pseudo class & pseudo element
                 </a>
               
             </div>
@@ -308,10 +292,6 @@
             <span class="post-nav-divider"></span>
 
             <div class="post-nav-prev post-nav-item">
-              
-                <a href="/myblog/2019/11/09/DOM-Event/" rel="prev" title="DOM Event">
-                  DOM Event <i class="fa fa-chevron-right"></i>
-                </a>
               
             </div>
           </div>
@@ -358,7 +338,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#pseudo-class"><span class="nav-number">1.</span> <span class="nav-text">pseudo class</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#pseudo-element"><span class="nav-number">2.</span> <span class="nav-text">pseudo element</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Reference"><span class="nav-number">3.</span> <span class="nav-text">Reference</span></a></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#DOM-Document-Object-Model"><span class="nav-number">1.</span> <span class="nav-text">DOM (Document Object Model)</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#DOM-事件傳遞機制"><span class="nav-number">2.</span> <span class="nav-text">DOM 事件傳遞機制</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#stopPropagation-amp-preventDefault"><span class="nav-number">3.</span> <span class="nav-text">stopPropagation &amp; preventDefault</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Event-Delegation"><span class="nav-number">4.</span> <span class="nav-text">Event Delegation</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Reference"><span class="nav-number">5.</span> <span class="nav-text">Reference</span></a></li></ol></div>
         
       </div>
       <!--/noindex-->
