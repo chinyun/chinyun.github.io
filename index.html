@@ -193,6 +193,140 @@
   
   
   <div class="post-block home">
+    <link itemprop="mainEntityOfPage" href="https://chinyun.github.io/myblog/myblog/2019/11/11/JS-Data-Type/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="chinyun">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/myblog/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Jinny's blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+            
+            <a href="/myblog/2019/11/11/JS-Data-Type/" class="post-title-link" itemprop="url">JS Data Type</a>
+          
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              
+                
+              
+
+              <time title="Created: 2019-11-11 17:50:01 / Modified: 10:31:53" itemprop="dateCreated datePublished" datetime="2019-11-11T17:50:01+00:00">2019-11-11</time>
+            </span>
+          
+            
+
+            
+          
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="JavaScript-Data-Type"><a href="#JavaScript-Data-Type" class="headerlink" title="JavaScript Data Type"></a>JavaScript Data Type</h1><p>JavaScript 的資料類型總共有七種，其中 6 種被稱為 <strong>原始型別 primitive data types</strong>: string, number, boolean, null, undefined, symbol (new in ECMAScript 2015)，以及最後一種 Object 對象資料型別。</p>
+<ul>
+<li><strong>number</strong>：number for numbers of any kind: integer or floating-point.</li>
+<li><strong>string</strong>：string for strings. A string may have one or more characters, there’s no separate single-character type.</li>
+<li><strong>boolean</strong>：boolean for true/false.</li>
+<li><strong>null</strong>：null for unknown values – a stand alone type that has a single value null.</li>
+<li><strong>indefined</strong>：undefined for unassigned values – a standalone type that has a single value undefined.</li>
+<li><strong>object</strong>：object for more complex data structures. 包括 function<code>function(){}</code>, array<code>[]</code>, object<code>{key:value}</code>等不同對象物件資料類型。</li>
+<li><strong>symbol</strong>：symbol for unique identifiers.</li>
+</ul>
+<p>JavaScript 是弱型別，也能說是動態的程式語言，這代表不必特別宣告變數的型別，程式在運作時，型別會自動轉換，這也代表可以用不同的型別使用同一個變數。<br>A variable in JavaScript can contain any data. A variable can at one moment be a string and at another be a number:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">let message = &quot;hello&quot;;</span><br><span class="line">message = 123456;</span><br><span class="line">&lt;!-- no error --&gt;</span><br></pre></td></tr></table></figure>
+
+<p>Programming languages that allow such things are called “dynamically typed”, meaning that there are data types, but variables are not bound to any of them.</p>
+<h1 id="JavaScript-Equals"><a href="#JavaScript-Equals" class="headerlink" title="JavaScript Equals"></a>JavaScript Equals</h1><p>在 JavaScript 語法中，比較值是否相等有分為一般相等比較和嚴格相等比較兩種：</p>
+<ul>
+<li>Double Equals == 一般相等比較，若等號兩邊的資料類型不同，會轉換為相同類型再比較</li>
+<li>Triple Equals === 嚴格相等比較，若類型不同即為不相等</li>
+</ul>
+<p>字串的比較：依字典順序，按字母逐個進行比較</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">alert(&apos;Z&apos;&gt;&apos;A&apos;) -&gt; true</span><br><span class="line">alert(&apos;Bee&apos;&gt;&apos;Be&apos;) -&gt; true</span><br><span class="line">alert(&apos;Glow&apos;&gt;&apos;Glee&apos;) -&gt; true</span><br><span class="line">alert(&apos;a&apos;&lt;&apos;A&apos;) -&gt; false；在 unicode 中 小寫 a 大於 大寫 A</span><br></pre></td></tr></table></figure>
+
+<p>若為不同類型比較會先轉換為數字(number)在判定大小：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">alert(&apos;2&apos;&gt;1) -&gt; ture</span><br><span class="line">alert(&apos;01&apos;== 1) -&gt; true</span><br><span class="line">alert(&apos;2&apos;&gt;&apos;12&apos;) -&gt; true</span><br><span class="line">alert(0 == &apos;&apos;) -&gt; true</span><br><span class="line">alert(true == 1) -&gt; true</span><br><span class="line">alert(false == 0) -&gt; true</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">let a = 0;</span><br><span class="line">alert(Boolean(a)) -&gt; false</span><br><span class="line">let b = &apos;0&apos;;</span><br><span class="line">alert(Boolean(b)) -&gt; true</span><br><span class="line">alert(a == b) -&gt; true</span><br></pre></td></tr></table></figure>
+
+<h1 id="Type-Conversions-類型轉換"><a href="#Type-Conversions-類型轉換" class="headerlink" title="Type Conversions 類型轉換"></a>Type Conversions 類型轉換</h1><ul>
+<li><p>String()</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">let value = true;</span><br><span class="line">alert(typeof value);  -&gt; boolean</span><br><span class="line">value = String(value); -&gt; &quot;true&quot;</span><br><span class="line">alert(typeof value); -&gt; string</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>Number()</p>
+<ul>
+<li>undefined -&gt; NaN</li>
+<li>null -&gt; 0</li>
+<li>true 和 false -&gt; 1 and 0</li>
+<li>string  <ul>
+<li>“按原樣讀取”字符串，兩端的空白會被忽略。空字符串變成 0。轉換出錯則輸出 NaN。</li>
+<li>幾乎所有的算術運算符都將值轉換為數字進行運算，加號 + 是個例外：如果其中一個運算元是字符串，則另一個也會被轉換為字符串。<br><code>alert( 1 + &#39;2&#39; ); -&gt; &#39;12&#39;</code></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>Boolean()</p>
+<ul>
+<li>0, null, undefined, NaN, “”  -&gt; false</li>
+<li>1, 其他值  -&gt; true</li>
+</ul>
+</li>
+<li><p>總結注意點：</p>
+<ul>
+<li>當用 Number() 轉換型別成 number 時，須注意 “” 空字符會轉為 0，undefined 會變成 NaN。</li>
+<li>用 Boolean() 轉換型別成 boolean 時， 0 為 false；1 為 true，而 null, undefined, NaN 及 “” 都會是 false。</li>
+</ul>
+</li>
+</ul>
+<h1 id="null-NaN-undefined"><a href="#null-NaN-undefined" class="headerlink" title="null, NaN, undefined"></a>null, NaN, undefined</h1><ul>
+<li>null 表示無、空值，未知的特殊值，typeof(null) -&gt; object，這是一個誤解，因為 typeof 用型別標籤來辨別，null的型別標籤為 000，符合 object 的 type 所以會產生這個結果，這可以說是一種 bug，詳見:<a href="https://developer.mozilla.org/zh-TW/docs/Web/JavaScript/Reference/Operators/typeof" target="_blank" rel="noopener">typeof</a></li>
+<li>NaN 表示不是一個數字(not a number)，typeof(NaN) -&gt; number</li>
+<li>undefined 表示未被賦值，有宣告但未給予數值、字串等值，typeof(undefined) -&gt; undefined，不等於 not defined，not defined 是沒有宣告系統不認得的意思</li>
+</ul>
+<h1 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h1><p><a href="https://zh.javascript.info/type-conversions" target="_blank" rel="noopener">javascript.info:type-conversions</a><br><a href="https://developer.mozilla.org/zh-TW/docs/Web/JavaScript/Data_structures" target="_blank" rel="noopener">JavaScript 的資料型別與資料結構</a><br><a href="https://cythilya.github.io/2018/10/24/object/" target="_blank" rel="noopener">型別（Type）</a></p>
+
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+          <div class="post-eof"></div>
+        
+      </footer>
+  </div>
+  
+  
+  
+  </article>
+
+    
+        <article itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block home">
     <link itemprop="mainEntityOfPage" href="https://chinyun.github.io/myblog/myblog/2019/11/09/DOM-Event/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -222,11 +356,19 @@
                 
               
 
-              <time title="Created: 2019-11-09 16:48:30 / Modified: 16:15:50" itemprop="dateCreated datePublished" datetime="2019-11-09T16:48:30+00:00">2019-11-09</time>
+              <time title="Created: 2019-11-09 16:48:30" itemprop="dateCreated datePublished" datetime="2019-11-09T16:48:30+00:00">2019-11-09</time>
             </span>
           
             
 
+            
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2019-11-11 10:31:53" itemprop="dateModified" datetime="2019-11-11T10:31:53+00:00">2019-11-11</time>
+              </span>
             
           
 
@@ -327,7 +469,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2019-11-09 16:15:50" itemprop="dateModified" datetime="2019-11-09T16:15:50+00:00">2019-11-09</time>
+                <time title="Modified: 2019-11-11 10:31:53" itemprop="dateModified" datetime="2019-11-11T10:31:53+00:00">2019-11-11</time>
               </span>
             
           
@@ -437,7 +579,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2019-11-09 16:15:50" itemprop="dateModified" datetime="2019-11-09T16:15:50+00:00">2019-11-09</time>
+                <time title="Modified: 2019-11-11 10:31:53" itemprop="dateModified" datetime="2019-11-11T10:31:53+00:00">2019-11-11</time>
               </span>
             
           
@@ -561,7 +703,7 @@ C --> D(Make changes);</pre>
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2019-11-09 16:15:50" itemprop="dateModified" datetime="2019-11-09T16:15:50+00:00">2019-11-09</time>
+                <time title="Modified: 2019-11-11 10:31:53" itemprop="dateModified" datetime="2019-11-11T10:31:53+00:00">2019-11-11</time>
               </span>
             
           
@@ -713,7 +855,7 @@ C --> D(Make changes);</pre>
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2019-11-09 16:15:50" itemprop="dateModified" datetime="2019-11-09T16:15:50+00:00">2019-11-09</time>
+                <time title="Modified: 2019-11-11 10:31:53" itemprop="dateModified" datetime="2019-11-11T10:31:53+00:00">2019-11-11</time>
               </span>
             
           
@@ -860,7 +1002,7 @@ C --> D(Make changes);</pre>
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2019-11-09 16:15:50" itemprop="dateModified" datetime="2019-11-09T16:15:50+00:00">2019-11-09</time>
+                <time title="Modified: 2019-11-11 10:31:53" itemprop="dateModified" datetime="2019-11-11T10:31:53+00:00">2019-11-11</time>
               </span>
             
           
@@ -1139,7 +1281,7 @@ C --> D(Make changes);</pre>
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2019-11-09 16:15:50" itemprop="dateModified" datetime="2019-11-09T16:15:50+00:00">2019-11-09</time>
+                <time title="Modified: 2019-11-11 10:31:53" itemprop="dateModified" datetime="2019-11-11T10:31:53+00:00">2019-11-11</time>
               </span>
             
           
@@ -1256,7 +1398,7 @@ C --> D(Make changes);</pre>
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2019-11-09 16:15:50" itemprop="dateModified" datetime="2019-11-09T16:15:50+00:00">2019-11-09</time>
+                <time title="Modified: 2019-11-11 10:31:53" itemprop="dateModified" datetime="2019-11-11T10:31:53+00:00">2019-11-11</time>
               </span>
             
           
@@ -1403,7 +1545,7 @@ C --> D(Make changes);</pre>
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2019-11-09 16:15:50" itemprop="dateModified" datetime="2019-11-09T16:15:50+00:00">2019-11-09</time>
+                <time title="Modified: 2019-11-11 10:31:53" itemprop="dateModified" datetime="2019-11-11T10:31:53+00:00">2019-11-11</time>
               </span>
             
           
@@ -1515,122 +1657,11 @@ C --> D(Make changes);</pre>
   </article>
 
     
-        <article itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block home">
-    <link itemprop="mainEntityOfPage" href="https://chinyun.github.io/myblog/myblog/2019/10/31/CSS-position-box-sizing-display/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="chinyun">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/myblog/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Jinny's blog">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-            
-            <a href="/myblog/2019/10/31/CSS-position-box-sizing-display/" class="post-title-link" itemprop="url">CSS position & box-sizing & display</a>
-          
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              
-                
-              
-
-              <time title="Created: 2019-10-31 18:48:51" itemprop="dateCreated datePublished" datetime="2019-10-31T18:48:51+00:00">2019-10-31</time>
-            </span>
-          
-            
-
-            
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2019-11-09 16:15:50" itemprop="dateModified" datetime="2019-11-09T16:15:50+00:00">2019-11-09</time>
-              </span>
-            
-          
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="position"><a href="#position" class="headerlink" title="position"></a>position</h1><ul>
-<li><p><strong>static</strong> 預設，只有套用此預設的元素屬於「不會被特別定位」</p>
-</li>
-<li><p><strong>relative</strong> 表現與 static 一樣，除非有設定 top, right, bottom, left 等其他屬性，會使元素相對的調整其原本該出現的所在位置，不管「相對定位」過的元素如何在頁面上移動位置或增加多少空間，都不會影響到原本其他元素所在的位置。</p>
-</li>
-<li><p><strong>fixed</strong> 相對於瀏覽器視窗來定位，表示即便頁面捲動他還是會固定在相同位置，使用 top, right, bottom, left 來定位，固定元素不會保留它原本在頁面上應有的空間，不會跟其他元素的配置相干擾。</p>
-</li>
-<li><p><strong>absolute</strong> 元素的定位是他所屬的上層容器的相對位置，若元素的上層沒有可以被定位的元素，那就會以相對於整個網頁，也就是 <code>&lt;body&gt;</code> 的相對位置。當畫面捲動時元素會隨頁面捲動。</p>
-</li>
-</ul>
-<h1 id="box-sizing"><a href="#box-sizing" class="headerlink" title="box-sizing"></a>box-sizing</h1><ul>
-<li><strong>border-box</strong> 元素的內距和邊框不會增加元素本身的寬度。<br>因為部分瀏覽器版本還未支援，需要做瀏覽器兼容設定：<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">-webkit-box-sizing: border-box;</span><br><span class="line">-moz-box-sizing: border-box;</span><br><span class="line">box-sizing: border-box;</span><br></pre></td></tr></table></figure>
-
-</li>
-</ul>
-<p>其他屬性值：</p>
-<ul>
-<li><strong>content-box</strong> 預設，長寬值只包含 content，不包括 border 和 padding。</li>
-<li><strong>inherit</strong> 從上層元素繼承</li>
-</ul>
-<h1 id="display"><a href="#display" class="headerlink" title="display"></a>display</h1><ul>
-<li><strong>none</strong> The element is completely removed.</li>
-<li><strong>inline</strong> Displays an element as an inline element (like <code>&lt;span&gt;</code>). Any height and width properties will have <strong>no effect</strong>.</li>
-<li><strong>block</strong> Displays an element as a block element (like <code>&lt;p&gt;</code>). It starts on a new line, and takes up the whole width.</li>
-<li><strong>inline-block</strong> Displays an element as an inline-level block container. The element itself is formatted as an inline element, but you can apply height and width values.</li>
-<li><strong>flex</strong> Displays an element as a block-level flex container.</li>
-<li><strong>table</strong> Let the element behave like a <table> element</table></li>
-<li><strong>table-cell</strong> Let the element behave like a <td> element</td></li>
-<li><strong>table-row</strong> Let the element behave like a <tr> element</tr></li>
-</ul>
-<h1 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h1><p><a href="https://zh-tw.learnlayout.com/toc.html" target="_blank" rel="noopener">https://zh-tw.learnlayout.com/toc.html</a><br><a href="https://www.w3schools.com/cssref/pr_class_display.asp" target="_blank" rel="noopener">https://www.w3schools.com/cssref/pr_class_display.asp</a><br><a href="https://www.oxxostudio.tw/articles/201501/css-flexbox.html" target="_blank" rel="noopener">https://www.oxxostudio.tw/articles/201501/css-flexbox.html</a></p>
-
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-          <div class="post-eof"></div>
-        
-      </footer>
-  </div>
-  
-  
-  
-  </article>
-
-    
   </div>
 
   
   <nav class="pagination">
-    <span class="page-number current">1</span><a class="page-number" href="/myblog/page/2/">2</a><a class="extend next" rel="next" href="/myblog/page/2/"><i class="fa fa-angle-right" aria-label="Next page"></i></a>
+    <span class="page-number current">1</span><a class="page-number" href="/myblog/page/2/">2</a><a class="page-number" href="/myblog/page/3/">3</a><a class="extend next" rel="next" href="/myblog/page/2/"><i class="fa fa-angle-right" aria-label="Next page"></i></a>
   </nav>
 
 
@@ -1674,7 +1705,7 @@ C --> D(Make changes);</pre>
         
           <a href="/myblog/archives/">
         
-          <span class="site-state-item-count">20</span>
+          <span class="site-state-item-count">21</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
