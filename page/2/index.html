@@ -193,6 +193,153 @@
   
   
   <div class="post-block home">
+    <link itemprop="mainEntityOfPage" href="https://chinyun.github.io/myblog/myblog/2019/11/02/CSRF-XSS-SQL-injection/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="chinyun">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/myblog/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Jinny's blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+            
+            <a href="/myblog/2019/11/02/CSRF-XSS-SQL-injection/" class="post-title-link" itemprop="url">CSRF, XSS, SQL injection</a>
+          
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              
+                
+              
+
+              <time title="Created: 2019-11-02 20:32:24" itemprop="dateCreated datePublished" datetime="2019-11-02T20:32:24+00:00">2019-11-02</time>
+            </span>
+          
+            
+
+            
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2019-11-11 15:21:42" itemprop="dateModified" datetime="2019-11-11T15:21:42+00:00">2019-11-11</time>
+              </span>
+            
+          
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>Web Security 網頁安全泛指針對網頁、網站上的資訊安全，涵蓋程式漏洞、邏輯漏洞、資訊洩漏等。</p>
+<p>#Cross Site Request Forgery(XSRF or CSRF)</p>
+<p>指在受害者不知情狀況下，被其他網域借用身份來完成未經同意的 HTTP Request。<br>當網站使用 cookie-based authentication，會把 session id 和 session data 存在 cookie 中，剛使用者曾在其他網站登入而未登出，並且進入惡意網站操作時，攻擊者利用可以進行跨域 http 請求的 http tag(ex: img、iframe等)埋入惡意的 request 程式碼，觸發後因為使用者未登出，因此攻擊者獲得 cookie 資料，攻擊者得以冒用使用者身份通過驗證。得以任意改變使者者在資料庫的資料。</p>
+<p>同源政策對於連結(links)、重新導向(redirect)、表單(form)等的跨來源存取都是寬鬆的，因此駭客利用此特性做 CSRF 攻擊。</p>
+<p>如何防範：</p>
+<ol>
+<li>使用 token-based authentication</li>
+<li>使用 HttpOnly 來防止 Cookie 被 JavaScript 讀取</li>
+<li>目前各大成熟的框架，都有針對傳遞資料做 CSRF 驗證，網站會產生的一組密碼，並在請求送出時，檢查那組密碼是否正確。</li>
+</ol>
+<p>Cross Site Request Forgery attacks are not an issue if you are using JWT with local storage. On the other hand, if your use case requires you to store the JWT in a cookie, you will need to protect against XSRF. XSRF are not as easily understood as XSS attacks. Explaining how XSRF attacks work can be time-consuming, so instead, check out this really good guide that explains in-depth how XSRF attacks work. Luckily, preventing XSRF attacks is a fairly simple matter. To over-simplify, protecting against an XSRF attack, your server, upon establishing a session with a client will generate a unique token (note this is not a JWT). Then, anytime data is submitted to your server, a hidden input field will contain this token and the server will check to make sure the tokens match. Again, as our recommendation is to store the JWT in <strong>local storage</strong>, you probably will not have to worry about XSRF attacks.</p>
+<p>One of the best ways to protect your users and servers is to have a <strong>short expiration time</strong> for tokens. That way, even if a token is compromised, it will quickly become useless. Additionally, you may maintain a blacklist of compromised tokens and not allow those tokens access to the system. Finally, the nuclear approach would be to change the signing algorithm, which would invalidate all active tokens and require all of your users to log in again. This approach is not easily recommended, but is available in the event of a severe breach.</p>
+<h1 id="Cross-Site-Scripting-XSS"><a href="#Cross-Site-Scripting-XSS" class="headerlink" title="Cross Site Scripting(XSS)"></a>Cross Site Scripting(XSS)</h1><p>「XSS攻擊通常指的是通過利用網頁開發時留下的漏洞，通過巧妙的方法注入惡意指令程式碼到網頁，使用戶載入並執行攻擊者惡意製造的網頁程式。 這些惡意網頁程式通常是JavaScript，但實際上也可以包括Java，VBScript，ActiveX，Flash或者甚至是普通的HTML。」–wikipedia</p>
+<p>使用者以為安全進入網站後反而被導向到釣魚網站、甚至被竊取帳號密碼、個人資料。<br>目前 XSS 攻擊的種類大致可以分成以下幾種類型：</p>
+<ul>
+<li><p>Stored XSS (儲存型)：<br>會被保存在伺服器資料庫中的 JavaScript 代碼引起的攻擊即為 Stored XSS，最常見的就是論壇文章、留言板等等，因為使用者可以輸入任意內容，若沒有確實檢查，那使用者輸入如 ｀<code>&lt;script&gt;</code> 等關鍵字就會被當成正常的 HTML 執行，標籤的內容也會被正常的作為 JavaScript 代碼執行。</p>
+</li>
+<li><p>Reflected XSS (反射型)：<br>由網頁後端直接嵌入由前端使用者所傳送過來的內容造成的，最常見的就是以 GET 方法傳送資料給伺服器時，伺服器未檢查就將內容回應到網頁上所產生的漏洞。</p>
+</li>
+<li><p>DOM-Based XSS (基於 DOM 的類型):<br>網頁上的 JavaScript 在執行過程中，沒有詳細檢查，輸入任意的內容都會被建立成有效的 DOM 物件，包含嵌入的代碼也會被執行，使得操作 DOM 的過程代入了惡意指令。但這樣的攻擊除非攻擊者親自到受害者電腦前輸入，否則不可能讓受害者輸入這種惡意代碼，通常需要搭配前兩個手法；讓內容保存在伺服器資料庫中、或是以反射型的方式製造出內容，再藉由JavaScript 動態產生有效的 DOM 物件來運行惡意代碼。</p>
+</li>
+</ul>
+<p>如何防範：</p>
+<ol>
+<li><p>前兩種 Stored、Reflected 的類型都必須由後端進行防範，除了必要的 HTML 代碼，任何允許使用者輸入的內容都需要檢查，刪除所有「<code>&lt;script&gt;</code>」、「 <code>onerror=</code>」及其他任何可能執行代碼的字串。</p>
+</li>
+<li><p>DOM-Based 則必須由前端來防範，但基本上還是跟前面的原則相同。<br>另外不同的一點就是應該選擇正確的方法、屬性來操作 DOM，譬如<code>document.getElementById(&#39;show_name&#39;).innerHTML = name;</code> 中的<code>innerHTML</code>屬性代表插入的內容是合法的 HTML 字串，所以字串會解析成 DOM 物件，此處使用<code>innerText</code>會被保證作為純粹的文字，也就不可能被插入惡意代碼執行了。</p>
+</li>
+</ol>
+<p>Cross Site Scripting attacks occur when an outside entity is able to execute code within your website or app. The most common attack vector here is if your website allows <strong>inputs</strong> that are not properly sanitized. <strong>If an attacker can execute code on your domain, your JWT tokens are vulnerable.</strong> Our CTO has argued in the past that XSS attacks are much easier to deal with compared to XSRF attacks because they are generally better understood. <strong>Many frameworks, including Angular, automatically sanitize inputs and prevent arbitrary code execution.</strong> If you are not using a framework that sanitizes input/output out-of-the-box, you can look at plugins like caja developed by Google to assist. Sanitizing inputs is a solved issue in many frameworks and languages and I would recommend using a framework or plugin vs building your own.</p>
+<h1 id="SQL-injection"><a href="#SQL-injection" class="headerlink" title="SQL injection"></a>SQL injection</h1><p>「Injection 是一種駭客常用的攻擊概念，透過注入惡意的程式碼的方式，破壞原本程式碼的語意，來達到攻擊的效果。SQL 是網站常用來取得資料的程式語法，SQL Injection 便是駭客透過修改 SQL 語句，改變他的語意，達成竊取資料/破壞資料的行為。」<br>–<a href="https://medium.com/@jaydenlin/淺談駭客攻擊-網站安全-一次看懂-sql-injection-的攻擊原理-b1994fd2392a" target="_blank" rel="noopener">一次看懂 SQL Injection 的攻擊原理</a></p>
+<p>「在輸入的字串之中夾帶SQL指令，在設計不良的程式當中忽略了字元檢查，那麼這些夾帶進去的惡意指令就會被資料庫伺服器誤認為是正常的SQL指令而執行，因此遭到破壞或是入侵。」<br>–wikipedia</p>
+<p>「在 SQL 語法中常會出現攻擊者可以透過更改語法邏輯或加入特殊指令的方式，在未設定過濾惡意程式碼的情況下，資料庫伺服器（DataBase）會直接接收使用者所輸入的 SQL 指令並執行攻擊代碼，使攻擊者能夠取得最高權限，得以擅自竊取、修改、挪動或刪除資料的可能。此類漏洞無疑的會對公司或商號造成相當大的損傷。」<br>–<a href="https://ithelp.ithome.com.tw/articles/10189201" target="_blank" rel="noopener">攻擊行為－SQL 資料隱碼攻擊 SQL injection</a></p>
+<p>常見攻擊手法：</p>
+<ul>
+<li>Authorization Bypass（略過權限檢查）</li>
+<li>Injecting SQL Sub-Statements into SQL Queries（注入 SQL 子語法）</li>
+<li>Exploiting Stored Procedures（利用預存程序）</li>
+</ul>
+<p>防範手法：</p>
+<ul>
+<li>使用 SQL query builder for JavaScript - knex.js：</li>
+</ul>
+<p>Read carefully from knex documentation how to pass values to knex raw (<a href="http://knexjs.org/#Raw" target="_blank" rel="noopener">http://knexjs.org/#Raw</a>).</p>
+<p>If you are passing values as parameter binding to raw like:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">knex.raw(&apos;select * from foo where id = ?&apos;, [1])</span><br></pre></td></tr></table></figure>
+
+<p>In that case parameters and query string are passed separately to database driver protecting query from SQL injection.</p>
+<p>Other query builder methods always uses binding format internally so they are safe too.</p>
+<p>Biggest mistake that one can do with knex raw queries is to use javascript template string and interpolate variables directly to SQL string format like:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">knex.raw(`select * from foo where id = $&#123;id&#125;`) // NEVER DO THIS</span><br></pre></td></tr></table></figure>
+
+<p>One thing to note is that knex table/identifier names cannot be passed as bindings to driver, so with those one should be extra careful to not read table / column names from user and use them without properly validating them first.</p>
+<p>Refer from:<a href="https://stackoverflow.com/questions/49665023/does-knex-js-prevent-sql-injection/49665379" target="_blank" rel="noopener">Does Knex.js prevent sql injection?</a></p>
+<ul>
+<li><p>使用 ORM(object relational mapping)：<br>在資料庫和 model資料容器之間的框架，他可以幫助開發者更簡便安全的去資料庫讀取資料，透過 ruby, java 等程式語言，去操作資料庫語言。同時因為是操作程式語言，若 query 中的值不符合預期格式，框架會自動擋掉而不會讓 SQL injection 成功。目前大部分的網站都是使用框架來開發，而這些框架都是使用 ORM 來處理他們的資料庫，因此在 ORM 的保護下，不是我們預期的資料格式，而是 SQL 語法的話，具有基本的保護能力。</p>
+</li>
+<li><p>參數化查詢（parameterized query 或 parameterized statement）：<br>是指在設計與資料庫連結並存取資料時，在需要填入數值或資料的地方，使用參數（parameter）來給值，這個方法目前已被視為最有效可預防SQL注入攻擊的攻擊手法的防禦方式。 – <a href="https://www.wikiwand.com/zh-tw/%E5%8F%83%E6%95%B8%E5%8C%96%E6%9F%A5%E8%A9%A2" target="_blank" rel="noopener">參數化查詢</a></p>
+</li>
+<li><p>使用 Regular expression 驗證過濾輸入值與參數中惡意代碼，將輸入值中的單引號置換為雙引號。</p>
+</li>
+<li><p>限制輸入字元格式並檢查輸入長度。</p>
+</li>
+<li><p>資料庫設定使用者帳號權限，限制某些管道使用者無法作資料庫存取。</p>
+</li>
+</ul>
+<h1 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h1><p><a href="https://www.gnucitizen.org/blog/csrf-demystified/" target="_blank" rel="noopener">CSRF</a><br><a href="https://forum.gamer.com.tw/Co.php?bsn=60292&sn=11267" target="_blank" rel="noopener">網頁安全】給網頁開發新人的 XSS 攻擊 介紹與防範</a><br><a href="https://ithelp.ithome.com.tw/articles/10209227" target="_blank" rel="noopener">資安常見攻擊( Web ) 與學習方法</a></p>
+
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+          <div class="post-eof"></div>
+        
+      </footer>
+  </div>
+  
+  
+  
+  </article>
+
+    
+        <article itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block home">
     <link itemprop="mainEntityOfPage" href="https://chinyun.github.io/myblog/myblog/2019/11/01/Cookie-Session-Web-Storage-Token/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -233,7 +380,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2019-11-11 13:18:15" itemprop="dateModified" datetime="2019-11-11T13:18:15+00:00">2019-11-11</time>
+                <time title="Modified: 2019-11-11 15:21:42" itemprop="dateModified" datetime="2019-11-11T15:21:42+00:00">2019-11-11</time>
               </span>
             
           
@@ -390,7 +537,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2019-11-11 13:18:15" itemprop="dateModified" datetime="2019-11-11T13:18:15+00:00">2019-11-11</time>
+                <time title="Modified: 2019-11-11 15:21:42" itemprop="dateModified" datetime="2019-11-11T15:21:42+00:00">2019-11-11</time>
               </span>
             
           
@@ -501,7 +648,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2019-11-11 13:18:15" itemprop="dateModified" datetime="2019-11-11T13:18:15+00:00">2019-11-11</time>
+                <time title="Modified: 2019-11-11 15:21:42" itemprop="dateModified" datetime="2019-11-11T15:21:42+00:00">2019-11-11</time>
               </span>
             
           
@@ -626,7 +773,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2019-11-11 13:18:15" itemprop="dateModified" datetime="2019-11-11T13:18:15+00:00">2019-11-11</time>
+                <time title="Modified: 2019-11-11 15:21:42" itemprop="dateModified" datetime="2019-11-11T15:21:42+00:00">2019-11-11</time>
               </span>
             
           
@@ -747,7 +894,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2019-11-11 13:18:15" itemprop="dateModified" datetime="2019-11-11T13:18:15+00:00">2019-11-11</time>
+                <time title="Modified: 2019-11-11 15:21:42" itemprop="dateModified" datetime="2019-11-11T15:21:42+00:00">2019-11-11</time>
               </span>
             
           
@@ -840,7 +987,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2019-11-11 13:18:15" itemprop="dateModified" datetime="2019-11-11T13:18:15+00:00">2019-11-11</time>
+                <time title="Modified: 2019-11-11 15:21:42" itemprop="dateModified" datetime="2019-11-11T15:21:42+00:00">2019-11-11</time>
               </span>
             
           
@@ -959,7 +1106,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2019-11-11 13:18:15" itemprop="dateModified" datetime="2019-11-11T13:18:15+00:00">2019-11-11</time>
+                <time title="Modified: 2019-11-11 15:21:42" itemprop="dateModified" datetime="2019-11-11T15:21:42+00:00">2019-11-11</time>
               </span>
             
           
@@ -1068,7 +1215,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2019-11-11 13:18:15" itemprop="dateModified" datetime="2019-11-11T13:18:15+00:00">2019-11-11</time>
+                <time title="Modified: 2019-11-11 15:21:42" itemprop="dateModified" datetime="2019-11-11T15:21:42+00:00">2019-11-11</time>
               </span>
             
           
@@ -1180,7 +1327,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2019-11-11 13:18:15" itemprop="dateModified" datetime="2019-11-11T13:18:15+00:00">2019-11-11</time>
+                <time title="Modified: 2019-11-11 15:21:42" itemprop="dateModified" datetime="2019-11-11T15:21:42+00:00">2019-11-11</time>
               </span>
             
           
@@ -1277,150 +1424,6 @@ C --> D(Make changes);</pre>
   </article>
 
     
-        <article itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block home">
-    <link itemprop="mainEntityOfPage" href="https://chinyun.github.io/myblog/myblog/2019/10/08/Comebine-d3-js-and-react-js/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="chinyun">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/myblog/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Jinny's blog">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-            
-            <a href="/myblog/2019/10/08/Comebine-d3-js-and-react-js/" class="post-title-link" itemprop="url">Comebine d3.js and react.js</a>
-          
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              
-                
-              
-
-              <time title="Created: 2019-10-08 16:09:54" itemprop="dateCreated datePublished" datetime="2019-10-08T16:09:54+00:00">2019-10-08</time>
-            </span>
-          
-            
-
-            
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2019-11-11 13:18:15" itemprop="dateModified" datetime="2019-11-11T13:18:15+00:00">2019-11-11</time>
-              </span>
-            
-          
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="Why-use-D3"><a href="#Why-use-D3" class="headerlink" title="Why use D3"></a>Why use D3</h1><p>D3 is a JavaScript library for visualizing data with HTML, SVG, and CSS.<br>D3 是一個利用資料集來操作文件的 JavaScript 函式庫，可以讓你繪製出用 HTML、SVG 及 CSS 做出來的多元化動態資料圖形，D3 遵照著網頁標準，因此現今的瀏覽器皆可直接支援瀏覽，不需要另外安裝任何框架或是套件，D3 很強大的一個功能就是資料視覺化和資料驅動(Data-Driven) 的 DOM 操作。<br>以資料驅動（ Data-Driven ）的方式在網頁上動態地操作 DOM，可以更有效率的處理巨量資料。</p>
-<p>D3 特色包括：</p>
-<ol>
-<li>Flexibility：可以創造特殊圖形，語法彈性大</li>
-<li>Elegance：流暢的動態轉場效果，簡潔的程式碼</li>
-<li>Community：有龐大使用者社群支援，有許多開放資源</li>
-</ol>
-<h1 id="D3-js-vs-Chart-js："><a href="#D3-js-vs-Chart-js：" class="headerlink" title="D3.js vs Chart.js："></a>D3.js vs Chart.js：</h1><p>D3 enables developers to create bespoke, interactive data visualisations. It consists of a number of modules to help with tasks such as:</p>
-<ul>
-<li>adding, removing and updating HTML/SVG elements</li>
-<li>animation</li>
-<li>interaction (e.g. zooming, panning, dragging)</li>
-<li>arranging elements based on tree and network data structures</li>
-<li>working with geographic data</li>
-</ul>
-<p>Chart.js provides ready made bar, line, pie and scatter charts. A minimal amount of coding and time is required to get a chart up and running. Charts also include a legend, hover pop-up and series toggling. They are also responsive to device size.</p>
-<p>Charts can be configured. For example the legend can be displayed above, below or to the side of the chart. The look and feel of the chart can also be modified by changing background colour, line colours, line widths and more.</p>
-<p>Chart.js renders its charts using the Canvas element which results in good performance compared with SVG, espcially when rendering a large amount of data. The other advantage of Canvas rendering is that it’s relatively easy to download the chart as an image file.</p>
-<p>Conclusion:<br>Both D3.js and Chart.js are excellent libraries for visualising data. Chart.js requires far less effort to create charts and should suffice in most cases, especially when standard charts are required. There’s little limit to what D3.js can achieve but it’ll likely require significantly more development effort than Chart.js.</p>
-<p>If you’re still not sure which to use my rule of thumb is: if you’re wanting to make a standard chart (such as line, bar, pie, radar, scatter or bubble) try starting with Chart.js. If you’re after something more bespoke then D3 might be a better choice.</p>
-<h1 id="How-do-D3-work"><a href="#How-do-D3-work" class="headerlink" title="How do D3 work"></a>How do D3 work</h1><ul>
-<li>Use D3 Select to grab hold of elements on the screen.</li>
-<li>Use D3 Append to add SVGs onto the selections.</li>
-<li>Use D3 Attr to set attributes of SVGs to make them appear on the screen.</li>
-<li>Use method chaining to write cleaner code.</li>
-<li>D3 is read in the data as an array of JSON objects. No matter the data comes from .TSV, .CSV or .JSON file.</li>
-<li>The attributes of SVGs are actually coming from some data.</li>
-<li>D3 gives us the power to selectively edit the SVGs onthe screen depending on what each data point is saying.</li>
-</ul>
-<h2 id="Data-Binding"><a href="#Data-Binding" class="headerlink" title="Data Binding"></a>Data Binding</h2><p>D3 的 Data Binding 機制，讓資料和 DOM 節點形成一對一的對應關係；當資料改變時， D3 會去更新相對應的 DOM 節點。</p>
-<p><code>d3.select()</code>&amp;<code>d3.selectAll()</code>：選取 DOM 節點。<br><code>d3.data()</code>：傳遞資料，將每一筆資料綁定一個 DOM 節點，當資料更新時， D3 會知道這筆資料對應的 DOM 節點。</p>
-<h2 id="General-Update-Pattern"><a href="#General-Update-Pattern" class="headerlink" title="General Update Pattern"></a>General Update Pattern</h2><p>D3 透過 enter() 和 exit() 來動態控制網頁上元素：</p>
-<ul>
-<li><code>d3.enter()</code>：比對網頁上元素，篩選出尚未綁定資料的節點，再用 <code>.append()</code> 新增。</li>
-<li><code>d3.exit()</code>：比對網頁上元素，篩選出不存在相對應資料的節點，再用<code>.remove()</code> 移除。</li>
-</ul>
-<p>更新資料的的情形包括：</p>
-<ol>
-<li>JOIN new data with old elements</li>
-<li>EXIT old elements not present in new data</li>
-<li>UPDATE old elements present in new data.</li>
-<li>ENTER new elements present in new data.</li>
-</ol>
-<h1 id="How-to-combine-D3-and-React"><a href="#How-to-combine-D3-and-React" class="headerlink" title="How to combine D3 and React"></a>How to combine D3 and React</h1><h3 id="呈現-UI-的邏輯不同"><a href="#呈現-UI-的邏輯不同" class="headerlink" title="呈現 UI 的邏輯不同"></a>呈現 UI 的邏輯不同</h3><ul>
-<li>React：透過 State 改變觸發 Render()，根據最新的 State 重繪 UI</li>
-<li>D3：透過觸發 Update Function 來載入新 Data ，根據 Data 產生 UI </li>
-</ul>
-<p>如果想要在 React 元件中寫 D3 視覺圖表，就需要思考如何將兩者結合，使資料更新時，<br>能夠同時在畫面上動態呈現視覺圖表變化。</p>
-<h3 id="分工合作，做各自擅長的"><a href="#分工合作，做各自擅長的" class="headerlink" title="分工合作，做各自擅長的"></a>分工合作，做各自擅長的</h3><p>React 負責 DOM Render，D3 負責 SVG 繪圖：</p>
-<ul>
-<li>運用 React Refs 屬性操作 DOM 節點</li>
-<li>當資料更新時由 React 重繪 UI：Lifecycle Method（componentDidMount、 componentDidUpdate）</li>
-<li>將 SVG 繪圖交給 D3，負責 attribute &amp; style </li>
-</ul>
-<p>Assign the reference of the DOM element to a component property.</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"># in the react component</span><br><span class="line">...</span><br><span class="line">render() &#123;</span><br><span class="line">  const paths = this.props.data.map(d =&gt; &lt;path key=&#123;d.name&#125;/&gt;);</span><br><span class="line">  return (</span><br><span class="line">    ...</span><br><span class="line">    &lt;div&gt;</span><br><span class="line">      &lt;svg ref=&#123;el =&gt; this.svgEl = el&#125;&gt;</span><br><span class="line">        &#123;paths&#125;</span><br><span class="line">      &lt;/svg&gt;</span><br><span class="line">    &lt;/div&gt;</span><br><span class="line">    ...</span><br><span class="line">  )</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>將 D3 Update Function 寫成 React Component 的元件 method</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">updateStyleAndAttrs = () =&gt; &#123;</span><br><span class="line">  ...</span><br><span class="line">  d3.select(this.svgEl)</span><br><span class="line">    .selectAll(&apos;path&apos;)</span><br><span class="line">    ...</span><br><span class="line">  ...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>在元件生成完成後和元件更新（State 變更）完成時觸發 D3 Update Function</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">componentDidMount = () =&gt; &#123;</span><br><span class="line">  this.updateStyleAndAttrs();</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">componentDidUpdate = () =&gt; &#123;</span><br><span class="line">  this.updateStyleAndAttrs();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h1 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h1><p><a href="https://github.com/d3/d3/wiki/TW-Home" target="_blank" rel="noopener">D3 Docs</a><br><a href="https://github.com/d3/d3/wiki/Gallery" target="_blank" rel="noopener">D3 Gallery</a><br><a href="https://reurl.cc/k5EY23" target="_blank" rel="noopener">D3.js Quick Start Guide</a><br><a href="https://codepen.io/thecraftycoderpdx/pen/jZyzKo" target="_blank" rel="noopener">Codepen</a><br><a href="http://shubo.io/react-d3/" target="_blank" rel="noopener">Shubo’s Notes</a><br><a href="https://www.createwithdata.com/d3js-or-chartjs/" target="_blank" rel="noopener">D3 or Chart.js for Data Visualisation?</a><br><a href="https://dcdrkim.pixnet.net/blog/post/313576476-html-5-canvas-vs.-svg" target="_blank" rel="noopener">Canvas vs. SVG</a></p>
-
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-          <div class="post-eof"></div>
-        
-      </footer>
-  </div>
-  
-  
-  
-  </article>
-
-    
   </div>
 
   
@@ -1469,7 +1472,7 @@ C --> D(Make changes);</pre>
         
           <a href="/myblog/archives/">
         
-          <span class="site-state-item-count">22</span>
+          <span class="site-state-item-count">23</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
