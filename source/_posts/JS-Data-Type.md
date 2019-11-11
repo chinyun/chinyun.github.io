@@ -81,6 +81,13 @@ alert(typeof value); -> string
   - 當用 Number() 轉換型別成 number 時，須注意 "" 空字符會轉為 0，undefined 會變成 NaN。
   - 用 Boolean() 轉換型別成 boolean 時， 0 為 false；1 為 true，而 null, undefined, NaN 及 "" 都會是 false。
 
+- 補充：
+  - 強制轉型 Coercion：
+  強制轉型（coercion）分為兩種，分別是「明確的」強制轉型（explicit coercion）和「隱含的」強制轉型（implicit coercion），「明確的」強制轉型是程式碼中刻意寫出來的型別轉換的動作，例如`String(), Number()`。反之，在程式碼中沒有明確指出要轉換型別卻轉型的，就是隱含的強制轉型，例如 ＋運算子串接 數字和文字時
+  - 舉例： `[]+{}`和`{}+[]`的結果？
+    - `[] + {}` 中，[] 會轉為空字串`""`，而 {} 會轉為字串 `"[object Object]"`。
+    - `{} + []` 中，{} 被當成空區塊而無作用，+[] 被當成強制轉型為數字 Number([]) （由於陣列是物件，中間會先使用 toString 轉成字空串，導致變成 Number('')）而得到 `0`。
+
 # null, NaN, undefined
 
 - null 表示無、空值，未知的特殊值，typeof(null) -> object，這是一個誤解，因為 typeof 用型別標籤來辨別，null的型別標籤為 000，符合 object 的 type 所以會產生這個結果，這可以說是一種 bug，詳見:[typeof](https://developer.mozilla.org/zh-TW/docs/Web/JavaScript/Reference/Operators/typeof)
@@ -92,3 +99,4 @@ alert(typeof value); -> string
 [javascript.info:type-conversions](https://zh.javascript.info/type-conversions)
 [JavaScript 的資料型別與資料結構](https://developer.mozilla.org/zh-TW/docs/Web/JavaScript/Data_structures)
 [型別（Type）](https://cythilya.github.io/2018/10/24/object/)
+[強制轉型（Coercion）](https://cythilya.github.io/2018/10/15/coercion/)

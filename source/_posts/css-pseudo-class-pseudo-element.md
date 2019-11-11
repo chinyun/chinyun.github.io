@@ -36,11 +36,11 @@ Simple selectors includes:
 
 Pseudo elements differ from pseudo-classes in that they don’t select states of elements; they select parts of an element. 用於選擇元素的指定部分，創造一個關於 DOM tree 的抽象內容，提供一種方法來引用源文檔中不存在的內容，創造之後會出現在 DOM tree，偽元素也會「繼承」原本元素的屬性。
 
-- **::first-line**：選取第一行
-- **::first-letter**：選取第一個字
-- **::before**：在原本的元素「之前」加入內容
-- **::after**：在原本的元素「之後」加入內容
-- **::selection**：選取文字反白後
+- **::first-line** 選取第一行
+- **::first-letter** 選取第一個字
+- **::before** 在原本的元素「之前」加入內容
+- **::after** 在原本的元素「之後」加入內容
+- **::selection** 選取文字反白後
 
 # Reference
 
