@@ -1,0 +1,493 @@
+<!DOCTYPE html>
+
+
+
+
+
+<html lang="zh-tw">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 3.9.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/myblog/images/apple-touch-icon-next.png?v=7.4.1">
+  <link rel="icon" type="image/png" sizes="32x32" href="/myblog/images/favicon-32x32-next.png?v=7.4.1">
+  <link rel="icon" type="image/png" sizes="16x16" href="/myblog/images/favicon-16x16-next.png?v=7.4.1">
+  <link rel="mask-icon" href="/myblog/images/logo.svg?v=7.4.1" color="#222">
+
+<link rel="stylesheet" href="/myblog/css/main.css?v=7.4.1">
+
+
+<link rel="stylesheet" href="/myblog/lib/font-awesome/css/font-awesome.min.css?v=4.7.0">
+
+
+<script id="hexo-configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/myblog/',
+    scheme: 'Pisces',
+    version: '7.4.1',
+    exturl: false,
+    sidebar: {"position":"left","display":"post","offset":12,"onmobile":false},
+    copycode: {"enable":false,"show_result":false,"style":null},
+    back2top: {"enable":true,"sidebar":false,"scrollpercent":false},
+    bookmark: {"enable":false,"color":"#222","save":"auto"},
+    fancybox: false,
+    mediumzoom: false,
+    lazyload: false,
+    pangu: false,
+    algolia: {
+      appID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    },
+    localsearch: {"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},
+    path: '',
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    translation: {
+      copy_button: 'Copy',
+      copy_success: 'Copied',
+      copy_failure: 'Copy failed'
+    },
+    sidebarPadding: 40
+  };
+</script>
+
+  <meta name="description" content="JavaScript ClassIn Object-oriented programming, a class is an extensible program-code-template for creating objects, providing initial values for state(member variables) and implementations of behavio">
+<meta name="keywords" content="JavaScript, React, d3, NodeJS, Web">
+<meta property="og:type" content="article">
+<meta property="og:title" content="JS Class">
+<meta property="og:url" content="https://chinyun.github.io/myblog/2019/11/11/JS-Class/index.html">
+<meta property="og:site_name" content="Jinny&#39;s blog">
+<meta property="og:description" content="JavaScript ClassIn Object-oriented programming, a class is an extensible program-code-template for creating objects, providing initial values for state(member variables) and implementations of behavio">
+<meta property="og:locale" content="zh-tw">
+<meta property="og:updated_time" content="2019-11-11T12:44:14.441Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="JS Class">
+<meta name="twitter:description" content="JavaScript ClassIn Object-oriented programming, a class is an extensible program-code-template for creating objects, providing initial values for state(member variables) and implementations of behavio">
+  <link rel="canonical" href="https://chinyun.github.io/myblog/2019/11/11/JS-Class/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome: false,
+    isPost: true,
+    isPage: false,
+    isArchive: false
+  };
+</script>
+
+  <title>JS Class | Jinny's blog</title>
+  
+
+
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .logo,
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-tw">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-meta">
+
+    <div>
+      <a href="/myblog/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Jinny's blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+        <p class="site-subtitle">Writing For Sharing</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+      
+      
+      
+        
+        <li class="menu-item menu-item-home">
+      
+    
+
+    <a href="/myblog/" rel="section"><i class="fa fa-fw fa-home"></i>Home</a>
+
+  </li>
+      
+      
+      
+        
+        <li class="menu-item menu-item-archives">
+      
+    
+
+    <a href="/myblog/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>Archives</a>
+
+  </li>
+  </ul>
+
+</nav>
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+            
+
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+      <article itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block post">
+    <link itemprop="mainEntityOfPage" href="https://chinyun.github.io/myblog/myblog/2019/11/11/JS-Class/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="chinyun">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/myblog/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Jinny's blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">JS Class
+
+          
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              
+                
+              
+
+              <time title="Created: 2019-11-11 18:30:54 / Modified: 12:44:14" itemprop="dateCreated datePublished" datetime="2019-11-11T18:30:54+00:00">2019-11-11</time>
+            </span>
+          
+            
+
+            
+          
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h1 id="JavaScript-Class"><a href="#JavaScript-Class" class="headerlink" title="JavaScript Class"></a>JavaScript Class</h1><p>In Object-oriented programming, a class is an extensible program-code-template for creating objects, providing initial values for state(member variables) and implementations of behavior(member functions or methods).class 是一種可以拓展的編程模板，用來創建對象(object)，提供狀態初始值(變量)和行為實現(函數或方法)。</p>
+<p>JavaScript 雖然具有物件導向程式語言的特性，但與 Java、C++ 等以類別為基礎的程式設計規範不同，JavaScript 是一種以原型(prototype-based)為基礎的語言。</p>
+<p>由於開發上經常需要創建許多相似類型的對象(object)，例如針對 users、goods等。在 JavaScript 中，可以用構造函數(Constructor)和 operator “new” 來達成這個使用目的，但在 ES6 中有一個更進階的用法叫做 “Class”。</p>
+<p>ECMAScript 6 中引入了類別 (class) 作為 JavaScript 現有原型程式(prototype-based)繼承的語法糖。語法糖可以讓現有語法操作變得更容易。類別 (class)語法並不是要引入新的物件導向繼承模型到 JavaScript 中，而是提供一個更簡潔的語法來建立物件和處理繼承。</p>
+<p>Class 允許使用更簡潔的結構語法來定義 prototype-based 的類別。在 prototype-based 類別中，所有 methods 都存在 prototype 屬性中，藉以與其他延伸出去的類別共用，如此可以節省 memory 空間。<br>比較傳統原型繼承的寫法和使用 class 的寫法會發現，class 省略了 prototype chaining 並且整個 class 的宣告定義集中描述在 class 區塊內，幫助讀者了解這段程式的作用範圍，使 class 的目的更為清楚。</p>
+<ul>
+<li><p>Constructor 構造函數</p>
+<ul>
+<li>是一種常規函數，函數名稱首字必須大寫</li>
+<li>創建時必須使用 new 來操作</li>
+<li>需在 prototype 物件上定義方法</li>
+<li>示範：<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">function User(name) &#123;</span><br><span class="line">  this.name = name;</span><br><span class="line">  this.isAdmin = false;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">User.prototype.sayHi = function() &#123;</span><br><span class="line">  console.log(this.name);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">let user = new User(&quot;Jack&quot;); // 創建一個 User Constructor</span><br><span class="line"></span><br><span class="line">alert(user.name); -&gt; Jack</span><br><span class="line">alert(user.isAdmin); -&gt; false</span><br><span class="line">user.sayHi() -&gt; Jack</span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+<p>當一個函數作為 new User(…)執行時，它執行以下步驟：</p>
+<ol>
+<li>一個新的空對像被創建並分配給 this。</li>
+<li>函數體執行。通常它會修改 this，為其添加新的屬性。</li>
+<li>返回 this 的值。<br>所以 new User(“Jack”) 的结果是相同的對象。</li>
+</ol>
+</li>
+</ul>
+<ul>
+<li><p>Class</p>
+<ul>
+<li>使用 constructor() 建構子來定義初始狀態，而且創建時也必須使用 new 來操作。<br>建構子(constructor)方法是一個特別的方法，用來建立和初始化一個類別的物件，一個類別只能有一個建構子(constructor)。<br>Class 的 constructor()函數是默認的 method，即使沒有寫出來也會自動生成一個默認的空構造函數，並加入到 class.prototype上。<br>class syntax：<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">class User &#123;</span><br><span class="line">  constructor(name) &#123;</span><br><span class="line">    this.name = name;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  sayHi() &#123;</span><br><span class="line">    alert(this.name);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line">let user = new User(&quot;John&quot;);</span><br><span class="line">user.sayHi();</span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+<p>此時 User.prototype 包括 constructor 和 sayHi 兩個 methods。</p>
+<ul>
+<li><p>class expression 像一般 function 一樣，也可以寫作沒有名稱的表達式</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">let User = class &#123;</span><br><span class="line">  sayHi() &#123;</span><br><span class="line">    alert(&quot;Hello&quot;);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">function makeClass(phrase) &#123;</span><br><span class="line">  // 返回並宣告一個 class</span><br><span class="line">  return class &#123;  </span><br><span class="line">    sayHi() &#123;</span><br><span class="line">      alert(phrase);</span><br><span class="line">    &#125;;</span><br><span class="line">  &#125;;</span><br><span class="line">&#125;</span><br><span class="line">let User = makeClass(&quot;Hello&quot;);</span><br><span class="line"></span><br><span class="line">new User().sayHi(); // Hello</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>使用 extend() 以及 super()來繼承父類的參數給子類。<br>關鍵字 extends 是在類別宣告或是類別敘述中建立子類別的方法。若在子類別中有建構子(constructor)，要使用this前則必須先呼叫super()函式：在子類別建構子中用關鍵字 super 來呼叫父類別的建構子。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">const createPersonClass = name =&gt; class extends User &#123;</span><br><span class="line">  constructor() &#123;</span><br><span class="line">    super(name)</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>內部 method 之間不用逗號區分，與一般物件不同，可以避免我們描述二者時產生混淆</p>
+</li>
+<li><p>class 結構中的 code 都自動開啟了嚴格模式(use strict)</p>
+</li>
+<li><p>class 的宣告不會被 hoisting 提升到最高作用區，與函式宣告式不同，編譯器尚未抵達和執行 class 宣告之前無法建立或存取class</p>
+</li>
+<li><p>Just like literal objects, classes may include getters/setters, computed properties etc.</p>
+</li>
+</ul>
+</li>
+</ul>
+<h1 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h1><p><a href="https://javascript.info/class" target="_blank" rel="noopener">javascript.info</a><br><a href="https://developer.mozilla.org/zh-TW/docs/Web/JavaScript/Reference/Classes" target="_blank" rel="noopener">mozilla.org - MDN Web Docs</a></p>
+
+    </div>
+
+    
+    
+    
+        
+      
+
+      <footer class="post-footer">
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-next post-nav-item">
+              
+                <a href="/myblog/2019/11/11/JS-Data-Type/" rel="next" title="JS Data Type">
+                  <i class="fa fa-chevron-left"></i> JS Data Type
+                </a>
+              
+            </div>
+
+            <span class="post-nav-divider"></span>
+
+            <div class="post-nav-prev post-nav-item">
+              
+            </div>
+          </div>
+        
+      </footer>
+    
+  </div>
+  
+  
+  
+  </article>
+
+  </div>
+
+
+          </div>
+          
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+        
+        
+        
+        
+      
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#JavaScript-Class"><span class="nav-number">1.</span> <span class="nav-text">JavaScript Class</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Reference"><span class="nav-number">2.</span> <span class="nav-text">Reference</span></a></li></ol></div>
+        
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">chinyun</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        
+          <a href="/myblog/archives/">
+        
+          <span class="site-state-item-count">22</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+    
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">chinyun</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> v3.9.0</div>
+  <span class="post-meta-divider">|</span>
+  <div class="theme-info">Theme – <a href="https://theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Pisces</a> v7.4.1</div>
+  <script src='https://unpkg.com/mermaid@7.1.2/dist/mermaid.min.js'></script>
+  <script>
+    if (window.mermaid) {
+      mermaid.initialize("");
+    }
+  </script>
+
+        
+
+
+
+
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/myblog/lib/anime.min.js?v=3.1.0"></script>
+  <script src="/myblog/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  <script src="/myblog/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+<script src="/myblog/js/utils.js?v=7.4.1"></script><script src="/myblog/js/motion.js?v=7.4.1"></script>
+<script src="/myblog/js/schemes/pisces.js?v=7.4.1"></script>
+<script src="/myblog/js/next-boot.js?v=7.4.1"></script>
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<script>
+if (document.querySelectorAll('pre.mermaid').length) {
+  NexT.utils.getScript('//cdn.jsdelivr.net/npm/mermaid@8/dist/mermaid.min.js', () => {
+    mermaid.initialize({
+      theme: 'forest',
+      logLevel: 3,
+      flowchart: { curve: 'linear' },
+      gantt: { axisFormat: '%m/%d/%Y' },
+      sequence: { actorMargin: 50 }
+    });
+  }, window.mermaid);
+}
+</script>
+
+
+
+
+  
+
+  
+
+  
+
+</body>
+</html>
