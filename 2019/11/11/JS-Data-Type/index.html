@@ -63,7 +63,7 @@
 <meta property="og:site_name" content="Jinny&#39;s blog">
 <meta property="og:description" content="JavaScript Data TypeJavaScript 的資料類型總共有七種，其中 6 種被稱為 原始型別 primitive data types: string, number, boolean, null, undefined, symbol (new in ECMAScript 2015)，以及最後一種 Object 對象資料型別。  number：number for number">
 <meta property="og:locale" content="zh-tw">
-<meta property="og:updated_time" content="2019-11-11T12:44:14.441Z">
+<meta property="og:updated_time" content="2019-11-11T13:18:15.932Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="JS Data Type">
 <meta name="twitter:description" content="JavaScript Data TypeJavaScript 的資料類型總共有七種，其中 6 種被稱為 原始型別 primitive data types: string, number, boolean, null, undefined, symbol (new in ECMAScript 2015)，以及最後一種 Object 對象資料型別。  number：number for number">
@@ -226,7 +226,7 @@
                 
               
 
-              <time title="Created: 2019-11-11 17:50:01 / Modified: 12:44:14" itemprop="dateCreated datePublished" datetime="2019-11-11T17:50:01+00:00">2019-11-11</time>
+              <time title="Created: 2019-11-11 17:50:01 / Modified: 13:18:15" itemprop="dateCreated datePublished" datetime="2019-11-11T17:50:01+00:00">2019-11-11</time>
             </span>
           
             
@@ -300,13 +300,23 @@
 <li>用 Boolean() 轉換型別成 boolean 時， 0 為 false；1 為 true，而 null, undefined, NaN 及 “” 都會是 false。</li>
 </ul>
 </li>
+<li><p>補充：</p>
+<ul>
+<li>強制轉型 Coercion：<br>強制轉型（coercion）分為兩種，分別是「明確的」強制轉型（explicit coercion）和「隱含的」強制轉型（implicit coercion），「明確的」強制轉型是程式碼中刻意寫出來的型別轉換的動作，例如<code>String(), Number()</code>。反之，在程式碼中沒有明確指出要轉換型別卻轉型的，就是隱含的強制轉型，例如 ＋運算子串接 數字和文字時</li>
+<li>舉例： <code>[]+{}</code>和<code>{}+[]</code>的結果？<ul>
+<li><code>[] + {}</code> 中，[] 會轉為空字串<code>&quot;&quot;</code>，而 {} 會轉為字串 <code>&quot;[object Object]&quot;</code>。</li>
+<li><code>{} + []</code> 中，{} 被當成空區塊而無作用，+[] 被當成強制轉型為數字 Number([]) （由於陣列是物件，中間會先使用 toString 轉成字空串，導致變成 Number(‘’)）而得到 <code>0</code>。</li>
+</ul>
+</li>
+</ul>
+</li>
 </ul>
 <h1 id="null-NaN-undefined"><a href="#null-NaN-undefined" class="headerlink" title="null, NaN, undefined"></a>null, NaN, undefined</h1><ul>
 <li>null 表示無、空值，未知的特殊值，typeof(null) -&gt; object，這是一個誤解，因為 typeof 用型別標籤來辨別，null的型別標籤為 000，符合 object 的 type 所以會產生這個結果，這可以說是一種 bug，詳見:<a href="https://developer.mozilla.org/zh-TW/docs/Web/JavaScript/Reference/Operators/typeof" target="_blank" rel="noopener">typeof</a></li>
 <li>NaN 表示不是一個數字(not a number)，typeof(NaN) -&gt; number</li>
 <li>undefined 表示未被賦值，有宣告但未給予數值、字串等值，typeof(undefined) -&gt; undefined，不等於 not defined，not defined 是沒有宣告系統不認得的意思</li>
 </ul>
-<h1 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h1><p><a href="https://zh.javascript.info/type-conversions" target="_blank" rel="noopener">javascript.info:type-conversions</a><br><a href="https://developer.mozilla.org/zh-TW/docs/Web/JavaScript/Data_structures" target="_blank" rel="noopener">JavaScript 的資料型別與資料結構</a><br><a href="https://cythilya.github.io/2018/10/24/object/" target="_blank" rel="noopener">型別（Type）</a></p>
+<h1 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h1><p><a href="https://zh.javascript.info/type-conversions" target="_blank" rel="noopener">javascript.info:type-conversions</a><br><a href="https://developer.mozilla.org/zh-TW/docs/Web/JavaScript/Data_structures" target="_blank" rel="noopener">JavaScript 的資料型別與資料結構</a><br><a href="https://cythilya.github.io/2018/10/24/object/" target="_blank" rel="noopener">型別（Type）</a><br><a href="https://cythilya.github.io/2018/10/15/coercion/" target="_blank" rel="noopener">強制轉型（Coercion）</a></p>
 
     </div>
 
