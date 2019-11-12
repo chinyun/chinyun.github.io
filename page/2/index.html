@@ -193,6 +193,123 @@
   
   
   <div class="post-block home">
+    <link itemprop="mainEntityOfPage" href="https://chinyun.github.io/myblog/myblog/2019/11/02/CORS/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="chinyun">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/myblog/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Jinny's blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+            
+            <a href="/myblog/2019/11/02/CORS/" class="post-title-link" itemprop="url">CORS</a>
+          
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              
+                
+              
+
+              <time title="Created: 2019-11-02 21:00:05" itemprop="dateCreated datePublished" datetime="2019-11-02T21:00:05+00:00">2019-11-02</time>
+            </span>
+          
+            
+
+            
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2019-11-12 11:57:44" itemprop="dateModified" datetime="2019-11-12T11:57:44+00:00">2019-11-12</time>
+              </span>
+            
+          
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="什麼是-CORS"><a href="#什麼是-CORS" class="headerlink" title="什麼是 CORS?"></a>什麼是 CORS?</h1><p>Cross-Origin Resource Sharing 跨來源資源共享，這是由 W3C 頒布的一種瀏覽器技術規範，透過傳輸 HTTP Header 判斷阻擋或允許不同來源網域的資源存取。</p>
+<p>當使用者請求一個不是目前文件來源，例如不同網域(domain/host)、通訊協定(protocol)或通訊埠(port)的資源時，會建立一個<strong>跨來源 HTTP 請求</strong>(cross-origin http request)。</p>
+<p>而瀏覽器基於安全性考量，程式碼所發出的跨來源 HTTP 請求會受到限制，若不受限制的話，駭客可以透過撰寫程式碼跨域撈資料來進行跨站腳本攻擊(XSS)，而這個限制只有在瀏覽器上，若在本機使用 node.js 則沒有限制。</p>
+<h2 id="同源政策（same-origin-policy）"><a href="#同源政策（same-origin-policy）" class="headerlink" title="同源政策（same-origin policy）"></a>同源政策（same-origin policy）</h2><p>在同源政策（same-origin policy）中規範了那寫資源可以跨源存取，哪些會受到限制。<br>同源的定義簡單如下：</p>
+<ul>
+<li>不同網域（Domain）</li>
+<li>不同通訊協定：HTTP, HTTPS, FTP</li>
+<li>不同連接埠號（Port）</li>
+</ul>
+<p>只要瀏覽器發的 request 與 server 所屬不同源，request 就會被瀏覽器阻擋。不過即便擋下來，其實 request 已經發出去，server 也確實給予瀏覽器 response，只是瀏覽器基於同源政策，因此不把拿到的回應給你的 JavaScript 去做進一步的處理。</p>
+<p>一般來說跨來源寫（Cross-origin writes）、跨來源嵌入（Cross-origin embedding）是被允許的，而跨來源讀取（Cross-origin reads）是受限制的。</p>
+<ol>
+<li>受同源政策管理的跨來源請求：<br>XMLHttpRequest 及 Fetch 都遵守同源政策(same-origin policy)，<strong>這代表網路應用程式所使用的 API 除非使用 CORS 標頭否則只能請求與應用程式相同網域的 HTTP 資源</strong>。<br>如果想開啟跨來源 HTTP 請求的話， server 必須在 response 的 header 加上 <code>Access-Control-Allow-Origin: *</code>表示接受所有不同來源的跨域請求，或者可以指定接受特定網址的跨域請求：<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Access-Control-Allow-Origin: http://foo.example</span><br></pre></td></tr></table></figure>
+
+</li>
+</ol>
+<p>其他方法還有：</p>
+<ul>
+<li>Access-Control-Allow-Headers：指定哪些 HTTP 標頭可以於實際請求中使用。</li>
+<li>Access-Control-Allow-Methods：GET, POST, PUT，存取資源所允許的方法，用來回應預檢請求。</li>
+<li>Access-Control-Expose-Headers：瀏覽器能夠存取伺服器回應當中哪些標頭。</li>
+<li>Access-Control-Max-Age：預檢請求之結果可以被快取的秒數。</li>
+<li>Access-Control-Allow-Credentials：用於驗證請求中，用來告知瀏覽器是否允許 client-side 向 server-side 傳送 cookie，默認為 false：CORS 規範會阻止跨域 AJAX 向 server-side 發送 cookie。</li>
+</ul>
+<ol start="2">
+<li>不受同源政策管理的 html tags 包括：<code>&lt;script src=&#39;&#39; /&gt;</code>、<code>&lt;img/&gt;</code>、<code>&lt;video/&gt;</code>、<code>&lt;audio/&gt;</code>、<code>&lt;iframe/&gt;</code>、<code>&lt;link rel=&#39;stylesheet&#39; href /&gt;</code> 這些資源本來就能夠跨域存取。</li>
+</ol>
+<h2 id="JSON-with-Padding-JSONP"><a href="#JSON-with-Padding-JSONP" class="headerlink" title="JSON with Padding(JSONP)"></a>JSON with Padding(JSONP)</h2><p>JSONP 是一個利用 script tag 不受同源政策限制的特性，直接載入帶參數的 js 程式碼的跨來源請求實作方法，實務上在操作 JSONP 的時候，Server 通常會提供一個callback的參數讓 client 端帶過去。</p>
+<p>Twitch API 有提供 JSONP 的版本，我們可以直接來看範例：</p>
+<p>URL: <a href="https://api.twitch.tv/kraken/games/top?client_id=xxx&amp;callback=receiveData&amp;limit=1" target="_blank" rel="noopener">https://api.twitch.tv/kraken/games/top?client_id=xxx&amp;callback=receiveData&amp;limit=1</a></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">receiveData(&#123;&quot;_total&quot;:1067,&quot;_links&quot;:&#123;&quot;self&quot;:&quot;https://api.twitch.tv/kraken/games/top?limit=1&quot;,&quot;next&quot;:&quot;https://api.twitch.tv/kraken/games/top?limit=1\u0026offset=1&quot;&#125;,&quot;top&quot;:[&#123;&quot;game&quot;:&#123;&quot;name&quot;:&quot;Dota 2&quot;,&quot;popularity&quot;:63361,&quot;_id&quot;:29595,&quot;giantbomb_id&quot;:32887,&quot;box&quot;:&#123;&quot;large&quot;:&quot;https://static-cdn.jtvnw.net/ttv-boxart/Dota%202-272x380.jpg&quot;,&quot;medium&quot;:&quot;https://static-cdn.jtvnw.net/ttv-boxart/Dota%202-136x190.jpg&quot;,&quot;small&quot;:&quot;https://static-cdn.jtvnw.net/ttv-boxart/Dota%202-52x72.jpg&quot;,&quot;template&quot;:&quot;https://static-cdn.jtvnw.net/ttv-boxart/Dota%202-&#123;width&#125;x&#123;height&#125;.jpg&quot;&#125;,&quot;logo&quot;:&#123;&quot;large&quot;:&quot;https://static-cdn.jtvnw.net/ttv-logoart/Dota%202-240x144.jpg&quot;,&quot;medium&quot;:&quot;https://static-cdn.jtvnw.net/ttv-logoart/Dota%202-120x72.jpg&quot;,&quot;small&quot;:&quot;https://static-cdn.jtvnw.net/ttv-logoart/Dota%202-60x36.jpg&quot;,&quot;template&quot;:&quot;https://static-cdn.jtvnw.net/ttv-logoart/Dota%202-&#123;width&#125;x&#123;height&#125;.jpg&quot;&#125;,&quot;_links&quot;:&#123;&#125;,&quot;localized_name&quot;:&quot;Dota 2&quot;,&quot;locale&quot;:&quot;zh-tw&quot;&#125;,&quot;viewers&quot;:65622,&quot;channels&quot;:376&#125;]&#125;)</span><br></pre></td></tr></table></figure>
+
+<p>結合起來就是：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&lt;script src=&quot;https://api.twitch.tv/kraken/games/top?client_id=xxx&amp;callback=receiveData&amp;limit=1&quot;&gt;&lt;/script&gt;</span><br><span class="line">&lt;script&gt;</span><br><span class="line">  function receiveData (response) &#123;</span><br><span class="line">    console.log(response);</span><br><span class="line">  &#125;</span><br><span class="line">&lt;/script&gt;</span><br></pre></td></tr></table></figure>
+
+<p>利用 JSONP 也可以存取跨來源的資料。但 JSONP 的缺點就是你要帶的那些參數永遠都只能用附加在網址上的方式（GET）帶過去，沒辦法用 POST。</p>
+<h1 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h1><p><a href="https://blog.techbridge.cc/2017/05/20/api-ajax-cors-and-jsonp/" target="_blank" rel="noopener">輕鬆理解 Ajax 與跨來源請求</a><br><a href="https://pjchender.github.io/2018/08/20/%E5%90%8C%E6%BA%90%E6%94%BF%E7%AD%96%E8%88%87%E8%B7%A8%E4%BE%86%E6%BA%90%E8%B3%87%E6%BA%90%E5%85%B1%E7%94%A8%EF%BC%88cors%EF%BC%89/" target="_blank" rel="noopener">[JS] 同源政策與跨來源資源共用（CORS）</a></p>
+
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+          <div class="post-eof"></div>
+        
+      </footer>
+  </div>
+  
+  
+  
+  </article>
+
+    
+        <article itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block home">
     <link itemprop="mainEntityOfPage" href="https://chinyun.github.io/myblog/myblog/2019/11/02/CSRF-XSS-SQL-injection/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -233,7 +350,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2019-11-11 15:21:42" itemprop="dateModified" datetime="2019-11-11T15:21:42+00:00">2019-11-11</time>
+                <time title="Modified: 2019-11-12 11:57:44" itemprop="dateModified" datetime="2019-11-12T11:57:44+00:00">2019-11-12</time>
               </span>
             
           
@@ -380,7 +497,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2019-11-11 15:21:42" itemprop="dateModified" datetime="2019-11-11T15:21:42+00:00">2019-11-11</time>
+                <time title="Modified: 2019-11-12 11:57:44" itemprop="dateModified" datetime="2019-11-12T11:57:44+00:00">2019-11-12</time>
               </span>
             
           
@@ -537,7 +654,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2019-11-11 15:21:42" itemprop="dateModified" datetime="2019-11-11T15:21:42+00:00">2019-11-11</time>
+                <time title="Modified: 2019-11-12 11:57:44" itemprop="dateModified" datetime="2019-11-12T11:57:44+00:00">2019-11-12</time>
               </span>
             
           
@@ -648,7 +765,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2019-11-11 15:21:42" itemprop="dateModified" datetime="2019-11-11T15:21:42+00:00">2019-11-11</time>
+                <time title="Modified: 2019-11-12 11:57:44" itemprop="dateModified" datetime="2019-11-12T11:57:44+00:00">2019-11-12</time>
               </span>
             
           
@@ -773,7 +890,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2019-11-11 15:21:42" itemprop="dateModified" datetime="2019-11-11T15:21:42+00:00">2019-11-11</time>
+                <time title="Modified: 2019-11-12 11:57:44" itemprop="dateModified" datetime="2019-11-12T11:57:44+00:00">2019-11-12</time>
               </span>
             
           
@@ -894,7 +1011,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2019-11-11 15:21:42" itemprop="dateModified" datetime="2019-11-11T15:21:42+00:00">2019-11-11</time>
+                <time title="Modified: 2019-11-12 11:57:44" itemprop="dateModified" datetime="2019-11-12T11:57:44+00:00">2019-11-12</time>
               </span>
             
           
@@ -987,7 +1104,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2019-11-11 15:21:42" itemprop="dateModified" datetime="2019-11-11T15:21:42+00:00">2019-11-11</time>
+                <time title="Modified: 2019-11-12 11:57:44" itemprop="dateModified" datetime="2019-11-12T11:57:44+00:00">2019-11-12</time>
               </span>
             
           
@@ -1106,7 +1223,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2019-11-11 15:21:42" itemprop="dateModified" datetime="2019-11-11T15:21:42+00:00">2019-11-11</time>
+                <time title="Modified: 2019-11-12 11:57:44" itemprop="dateModified" datetime="2019-11-12T11:57:44+00:00">2019-11-12</time>
               </span>
             
           
@@ -1215,7 +1332,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2019-11-11 15:21:42" itemprop="dateModified" datetime="2019-11-11T15:21:42+00:00">2019-11-11</time>
+                <time title="Modified: 2019-11-12 11:57:44" itemprop="dateModified" datetime="2019-11-12T11:57:44+00:00">2019-11-12</time>
               </span>
             
           
@@ -1263,148 +1380,6 @@
 <p>若使用其他 theme 設置方法不太相同需要查看官方文件</p>
 </blockquote>
 <h1 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h1><p><a href="https://mermaidjs.github.io/#/" target="_blank" rel="noopener">mermaid</a><br><a href="https://github.com/webappdevelp/hexo-filter-mermaid-diagrams" target="_blank" rel="noopener">hexo-filter-mermaid-diagrams</a></p>
-
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-          <div class="post-eof"></div>
-        
-      </footer>
-  </div>
-  
-  
-  
-  </article>
-
-    
-        <article itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block home">
-    <link itemprop="mainEntityOfPage" href="https://chinyun.github.io/myblog/myblog/2019/10/09/React-State-Management-Redux/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="chinyun">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/myblog/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Jinny's blog">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-            
-            <a href="/myblog/2019/10/09/React-State-Management-Redux/" class="post-title-link" itemprop="url">React State Management & Redux</a>
-          
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              
-                
-              
-
-              <time title="Created: 2019-10-09 15:42:37" itemprop="dateCreated datePublished" datetime="2019-10-09T15:42:37+00:00">2019-10-09</time>
-            </span>
-          
-            
-
-            
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2019-11-11 15:21:42" itemprop="dateModified" datetime="2019-11-11T15:21:42+00:00">2019-11-11</time>
-              </span>
-            
-          
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="How-React-manage-State"><a href="#How-React-manage-State" class="headerlink" title="How React manage State"></a>How React manage State</h1><p>React 使用單向數據流，父元件會把自身的 state 作為 props 傳遞給子元件，以此來共享資料。</p>
-<p>根據官方文件描述：「 React Componenet 除了接收資料外（ 透過 <code>this.props</code> 存取 ），也可以保存自身的 state （透過 <code>this.state</code> 存取）。當一個 component 的 state 改變的時候，產生的標記語法將會透過自動重新呼叫 <code>render()</code> 更新。」</p>
-<p>React Componenet 變更 state 的唯一方法是用 <code>this.setState()</code>，而且 state 只能在自身的 Componenet 內變更，所以當應用程式的規模越來越大、元件越來越多，需要共通使用的 state 也會越來越多。 </p>
-<h1 id="Lifting-State-Up"><a href="#Lifting-State-Up" class="headerlink" title="Lifting State Up"></a>Lifting State Up</h1><p>隨著應用程式增加更多功能，同一個 state 可能需要被多個同層級或非父子關係的元件使用，以反應相同的資料變化。此時這個 state 必須被<strong>提升</strong>到最靠近他們的共同上層元件(ancestor)，再以 props 的形式傳遞給其他元件使用，這個過程稱為<strong>狀態提升</strong>(Lifting State Up)。</p>
-<p>根據官方文件：「 在 React 應用程式中，對於資料的變化只能有一個唯一的「真相來源」。通常來說，state 會優先被加入到需要 render 的 component。接著，如果其他的 component 也需要的話，你可以提升 state 到共同最靠近的 ancestor。你應該依賴<strong>上至下的資料流</strong>，而不是嘗試在不同 component 之間同步 state。」</p>
-<p>但不斷提升 state 的結果可能是許多 state 被以 props 形式不斷傳遞到子元件，而需要改變 state 時也必須將 function 以 props 傳遞到子元件，在子元件被觸發後，在上層元件內呼叫 <code>this.setState()</code>。如此一來，使用者操作應用程式改變資料等不同的 functions 被分散在各個元件，不僅不好維護，也容易因為 state 更新先後的問題引起錯誤。</p>
-<h1 id="Why-Redux"><a href="#Why-Redux" class="headerlink" title="Why Redux"></a>Why Redux</h1><p>Redux 由 Dan Abramov 開發：「 Redux provides a solid, stable and mature solution to managing state in your React application. Through a handful of small, useful patterns, Redux can transform your application from a total mess of confusing and scattered state, into a delightfully organized, easy to understand modern JavaScript powerhouse.」</p>
-<p>Redux 受到幾個 Flux Pattern 重要特質的影響，過去的 MVC(Model-View-Controller) Pattern 是這樣的：</p>
-<pre class="mermaid">graph LR;
-A(Action) --> B(Controller);
-B --> C(Model);
-C --> D(View);
-C --> G(View);
-B --> E(Model);
-E --> G(View);
-B --> F(Model);
-F --> G(View);
-E --> H(View);</pre>
-
-<p>而 Flux Pattern 是這樣的：</p>
-<pre class="mermaid">graph LR;
-A(Action) --> B(Dispatcher);
-B --> C(Store);
-C --> D(View);</pre>
-
-<p>隨著 App 成長， state management 越來越複雜，所以我們會發現使用 Flux Pattern 這樣的邏輯是有效率的。</p>
-<h3 id="Redux-Pattern"><a href="#Redux-Pattern" class="headerlink" title="Redux Pattern"></a>Redux Pattern</h3><pre class="mermaid">graph LR;
-A(Action) -- Middleware --> B(Reducer);
-B --> C(Store);
-C --> D(Make changes);</pre>
-
-<h3 id="Redux-的優點"><a href="#Redux-的優點" class="headerlink" title="Redux 的優點"></a>Redux 的優點</h3><ul>
-<li>Good for managing large state.</li>
-<li>Useful for sharing data between containers.</li>
-<li>Predictable state management using the 3 principles:<ol>
-<li>Single source of truth - have one big object that describes the entire state</li>
-<li>State is read only - can only be modified by dispatching actions.</li>
-<li>Changes using pure function - receives an input and always return s an output that is predictable.</li>
-</ol>
-</li>
-</ul>
-<blockquote>
-<p>To dispatch state mutations you have to write a function that takes the previous state of the app and the action being dispatched, then return the next state of the app. This function is called the <strong>Reducer</strong>.</p>
-</blockquote>
-<p>Redux help developer thinking in a way of “how can we build an app that is able to scale with thousands of user interactions” and “how can we make it that the information flows from one to another into a predictable view, a system that is predictable.”</p>
-<h3 id="Conclusion"><a href="#Conclusion" class="headerlink" title="Conclusion"></a>Conclusion</h3><p>整理為什麼使用 Redux + React 的方式管理 state 的理由：</p>
-<ol>
-<li><p>更有效率的管理 state：<br>Redux 採集中管理 state，再分配給需要該 state 的元件，因此不需要一直傳遞 props。</p>
-</li>
-<li><p>更有邏輯的管理 state：<br>在 Redux 管理下，一律透過 action 描述更新動作，經過 Reducer 來變更 state。</p>
-</li>
-<li><p>更好維護：<br>使用上結合兩者，將 UI 的 state 交給 React，將 Data 的 state 交給 Redux，當需要修改時，可以更快找到需要修改的地方。</p>
-</li>
-</ol>
-<p>但並不是所有 React 應用程式都需要 Redux，需要判斷 state tree 是否很複雜：</p>
-<ol>
-<li>應用程式需要經常變化 UI</li>
-<li>許多非父子關係的元件共用相同資料或以相同方式更新 state</li>
-<li>同一個 state 受到多種不同方式更新</li>
-</ol>
-<p>如果有這些狀況可以使用 Redux 來管理 state。</p>
-<h1 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h1><p><a href="https://zh-hant.reactjs.org/docs/lifting-state-up.html" target="_blank" rel="noopener">React Docs</a><br><a href="https://egghead.io/courses/getting-started-with-redux" target="_blank" rel="noopener">Redux Docs</a></p>
 
         
       
@@ -1472,7 +1447,7 @@ C --> D(Make changes);</pre>
         
           <a href="/myblog/archives/">
         
-          <span class="site-state-item-count">23</span>
+          <span class="site-state-item-count">24</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>

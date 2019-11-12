@@ -193,6 +193,119 @@
   
   
   <div class="post-block home">
+    <link itemprop="mainEntityOfPage" href="https://chinyun.github.io/myblog/myblog/2019/11/11/JS-this/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="chinyun">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/myblog/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Jinny's blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+            
+            <a href="/myblog/2019/11/11/JS-this/" class="post-title-link" itemprop="url">JS this</a>
+          
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              
+                
+              
+
+              <time title="Created: 2019-11-11 23:25:13" itemprop="dateCreated datePublished" datetime="2019-11-11T23:25:13+00:00">2019-11-11</time>
+            </span>
+          
+            
+
+            
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2019-11-12 11:57:44" itemprop="dateModified" datetime="2019-11-12T11:57:44+00:00">2019-11-12</time>
+              </span>
+            
+          
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="this"><a href="#this" class="headerlink" title="this"></a>this</h1><p>在物件導向程式語言裡面，this 概念指的是 instance 本身。<br>舉例：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">class Car &#123;</span><br><span class="line">  setName(name) &#123;</span><br><span class="line">    this.name = name</span><br><span class="line">  &#125;</span><br><span class="line">  </span><br><span class="line">  getName() &#123;</span><br><span class="line">    return this.name</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line">  </span><br><span class="line">const myCar = new Car()</span><br><span class="line">myCar.setName(&apos;hello&apos;)</span><br><span class="line">console.log(myCar.getName()) // hello</span><br></pre></td></tr></table></figure>
+
+<p>然而和一般物件導向的程式語言 Java 或 C++ 等不同，在 JavaScript 裡面，你在任何地方都可以存取到 this，所以在 JavaScript 裡的 this 跟其他程式語言慣用的那個 this 有了差異，這就是為什麼 this 難懂的原因。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">function hello()&#123;</span><br><span class="line">  console.log(this)</span><br><span class="line">&#125;</span><br><span class="line">  </span><br><span class="line">hello()</span><br></pre></td></tr></table></figure>
+
+<p>一旦脫離了物件導向，也就是在 class 外面的 this，其實沒有太大的意義。<br>在這種很沒意義的情況下，this 的值在瀏覽器底下就會是 <code>window</code>，在 node.js 底下會是 <code>global</code>，如果是在嚴格模式，this 的值就會是 <code>undefined</code>。這個規則就是所謂的「預設綁定」。</p>
+<h2 id="this-值的改變"><a href="#this-值的改變" class="headerlink" title="this 值的改變"></a>this 值的改變</h2><p>可以用 call、apply 與 bind 改變 this 的值：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">&apos;use strict&apos;;</span><br><span class="line">function hello(a, b) &#123;</span><br><span class="line">  console.log(this, a, b)</span><br><span class="line">&#125;</span><br><span class="line">  </span><br><span class="line">hello.call(&apos;yo&apos;, 1, 2) // yo 1 2</span><br><span class="line">hello.apply(&apos;hihihi&apos;, [1, 2]) // hihihi 1 2</span><br></pre></td></tr></table></figure>
+
+<p>call 跟 apply 的差別就是 apply 在傳參數時要用 array 包起來。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">class Car &#123;</span><br><span class="line">  hello() &#123;</span><br><span class="line">    console.log(this)</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line">  </span><br><span class="line">const myCar = new Car()</span><br><span class="line">myCar.hello() // myCar instance</span><br><span class="line">myCar.hello.call(&apos;yaaaa&apos;) // yaaaa</span><br></pre></td></tr></table></figure>
+
+<p>可以把原本的 this 值覆蓋掉。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">&apos;use strict&apos;;</span><br><span class="line">function hello() &#123;</span><br><span class="line">  console.log(this)</span><br><span class="line">&#125;</span><br><span class="line">  </span><br><span class="line">const myHello = hello.bind(&apos;my&apos;)</span><br><span class="line">myHello() // my</span><br><span class="line">myHello.call(&apos;call&apos;) // my</span><br></pre></td></tr></table></figure>
+
+<p>使用 bind 之後，call 方法也沒有辦法覆蓋掉。<br>如果是在<strong>非嚴格模式</strong>底下，無論是用 call、apply 還是 bind，你傳進去的如果是 primitive 都會被轉成 object：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">function hello() &#123;</span><br><span class="line">  console.log(this)</span><br><span class="line">&#125;</span><br><span class="line">  </span><br><span class="line">hello.call(123) // [Number: 123]</span><br><span class="line">const myHello = hello.bind(&apos;my&apos;)</span><br><span class="line">myHello() // [String: &apos;my&apos;]</span><br></pre></td></tr></table></figure>
+
+<h2 id="JavaScript-object-裡的-this"><a href="#JavaScript-object-裡的-this" class="headerlink" title="JavaScript object 裡的 this"></a>JavaScript object 裡的 this</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">const obj = &#123;</span><br><span class="line">  value: 1,</span><br><span class="line">  hello: function() &#123;</span><br><span class="line">    console.log(this.value)</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line">  </span><br><span class="line">obj.hello() // 1</span><br></pre></td></tr></table></figure>
+
+<p>this 的值跟作用域跟程式碼的位置在哪裡完全無關，只跟「你如何呼叫」有關。</p>
+<p>作用域的概念舉例：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">var a = 10</span><br><span class="line">function test()&#123;</span><br><span class="line">  console.log(a)</span><br><span class="line">&#125;</span><br><span class="line">  </span><br><span class="line">const obj = &#123;</span><br><span class="line">  a: &apos;ojb&apos;,</span><br><span class="line">  hello: function() &#123;</span><br><span class="line">    test() // 10</span><br><span class="line">  &#125;,</span><br><span class="line">  hello2: function() &#123;</span><br><span class="line">    var a = 200</span><br><span class="line">    test() // 10</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line">  </span><br><span class="line">test() // 10</span><br><span class="line">obj.hello()  </span><br><span class="line">obj.hello2()</span><br></pre></td></tr></table></figure>
+
+<p>無論我在哪裡，無論我怎麼呼叫test這個 function，他印出來的 a 永遠都會是全域變數的那個 a(// 10)，因為作用域就是這樣運作，test 在自己的作用域裡面找不到 a 於是往上一層找，而上一層就是 global scope，這跟你在哪裡呼叫 test 一點關係都沒有。test 這個 function 在宣告的時候就把 scope 給決定好了。</p>
+<p>但 this 卻是完全相反，this 的值會根據你怎麼呼叫它而變得不一樣，例如使用 call、apply 跟 bind 可以用不同的方式去呼叫改變 this 的值。如果 function 是在物件下調用，那麼 this 則會指向此物件，無論 function 是在哪裡宣告。使用物件的方法調用時 this 會指向調用的物件。<strong>宣告的位置不重要，重要的是呼叫的方法。</strong></p>
+<h2 id="reference"><a href="#reference" class="headerlink" title="reference"></a>reference</h2><p><a href="https://wcc723.github.io/javascript/2017/12/12/javascript-this/" target="_blank" rel="noopener">JavaScript 的 this 到底是誰？</a><br><a href="https://blog.techbridge.cc/2019/02/23/javascript-this/" target="_blank" rel="noopener">淺談 JavaScript 頭號難題 this：絕對不完整，但保證好懂</a></p>
+<h2 id="補充-在-react-中的-bind-this-用法"><a href="#補充-在-react-中的-bind-this-用法" class="headerlink" title="補充:在 react 中的 bind(this)用法"></a>補充:在 react 中的 bind(this)用法</h2><p><a href="https://stackoverflow.com/questions/42434232/what-is-the-usage-of-this-method-bindthis" target="_blank" rel="noopener">what is the usage of : this.method.bind(this)</a></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line">import React from &apos;react&apos;;</span><br><span class="line"></span><br><span class="line">class App extends React.Component &#123;</span><br><span class="line">   constructor() &#123;</span><br><span class="line">      super();</span><br><span class="line">      this.state = &#123;</span><br><span class="line">         data: []</span><br><span class="line">      &#125;</span><br><span class="line">      this.setStateHandler = this.setStateHandler.bind(this);</span><br><span class="line">   &#125;;</span><br><span class="line"></span><br><span class="line">   setStateHandler() &#123;</span><br><span class="line">      var item = &quot;setState...&quot;</span><br><span class="line">      var myArray = this.state.data;</span><br><span class="line">      myArray.push(item)</span><br><span class="line">      this.setState(&#123;data: myArray&#125;)</span><br><span class="line">   &#125;;</span><br><span class="line"></span><br><span class="line">   render() &#123;</span><br><span class="line">      return (</span><br><span class="line">         &lt;div&gt;</span><br><span class="line">            &lt;button onClick = &#123;this.setStateHandler&#125;&gt;SET STATE&lt;/button&gt;</span><br><span class="line">            &lt;h4&gt;State Array: &#123;this.state.data&#125;&lt;/h4&gt;</span><br><span class="line">         &lt;/div&gt;</span><br><span class="line">      );</span><br><span class="line">   &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">export default App;</span><br></pre></td></tr></table></figure>
+
+<p><code>this.setStateHandler().bind(this)</code> sets the context for the function <code>setStateHandler()</code> to be the class object. This is necessary so that you could call <code>this.setState({...})</code> inside the method, because <code>setState()</code> is the method of React.Component. If you do not <code>.bind(this)</code> you would get an error that <code>setState()</code> method is undefined.</p>
+<p><a href="https://medium.com/reactmaker/react-%E8%88%87-bind-this-%E7%9A%84%E4%B8%80%E4%BA%9B%E5%BF%83%E5%BE%97-323c8d3d395d" target="_blank" rel="noopener">React 與 bind this 的一些心得</a><br>當使用 extend React.Component 的方式去宣告元件的時候，React 確實會綁定 this 到元件內，但是卻有以下特定的地方才會被綁進去生命周期函式，例如 componentDidMount 等等<br>render 內其他自己定義的 property 就不會被綁入 this ，而且 this 會被指到 windows 這個全域上。</p>
+
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+          <div class="post-eof"></div>
+        
+      </footer>
+  </div>
+  
+  
+  
+  </article>
+
+    
+        <article itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block home">
     <link itemprop="mainEntityOfPage" href="https://chinyun.github.io/myblog/myblog/2019/11/11/JS-prototype/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -222,11 +335,19 @@
                 
               
 
-              <time title="Created: 2019-11-11 21:09:26 / Modified: 15:21:42" itemprop="dateCreated datePublished" datetime="2019-11-11T21:09:26+00:00">2019-11-11</time>
+              <time title="Created: 2019-11-11 21:09:26" itemprop="dateCreated datePublished" datetime="2019-11-11T21:09:26+00:00">2019-11-11</time>
             </span>
           
             
 
+            
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2019-11-12 11:57:44" itemprop="dateModified" datetime="2019-11-12T11:57:44+00:00">2019-11-12</time>
+              </span>
             
           
 
@@ -318,11 +439,19 @@
                 
               
 
-              <time title="Created: 2019-11-11 18:30:54 / Modified: 15:21:42" itemprop="dateCreated datePublished" datetime="2019-11-11T18:30:54+00:00">2019-11-11</time>
+              <time title="Created: 2019-11-11 18:30:54" itemprop="dateCreated datePublished" datetime="2019-11-11T18:30:54+00:00">2019-11-11</time>
             </span>
           
             
 
+            
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2019-11-12 11:57:44" itemprop="dateModified" datetime="2019-11-12T11:57:44+00:00">2019-11-12</time>
+              </span>
             
           
 
@@ -440,11 +569,19 @@
                 
               
 
-              <time title="Created: 2019-11-11 17:50:01 / Modified: 15:21:42" itemprop="dateCreated datePublished" datetime="2019-11-11T17:50:01+00:00">2019-11-11</time>
+              <time title="Created: 2019-11-11 17:50:01" itemprop="dateCreated datePublished" datetime="2019-11-11T17:50:01+00:00">2019-11-11</time>
             </span>
           
             
 
+            
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2019-11-12 11:57:44" itemprop="dateModified" datetime="2019-11-12T11:57:44+00:00">2019-11-12</time>
+              </span>
             
           
 
@@ -595,7 +732,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2019-11-11 15:21:42" itemprop="dateModified" datetime="2019-11-11T15:21:42+00:00">2019-11-11</time>
+                <time title="Modified: 2019-11-12 11:57:44" itemprop="dateModified" datetime="2019-11-12T11:57:44+00:00">2019-11-12</time>
               </span>
             
           
@@ -697,7 +834,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2019-11-11 15:21:42" itemprop="dateModified" datetime="2019-11-11T15:21:42+00:00">2019-11-11</time>
+                <time title="Modified: 2019-11-12 11:57:44" itemprop="dateModified" datetime="2019-11-12T11:57:44+00:00">2019-11-12</time>
               </span>
             
           
@@ -807,7 +944,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2019-11-11 15:21:42" itemprop="dateModified" datetime="2019-11-11T15:21:42+00:00">2019-11-11</time>
+                <time title="Modified: 2019-11-12 11:57:44" itemprop="dateModified" datetime="2019-11-12T11:57:44+00:00">2019-11-12</time>
               </span>
             
           
@@ -931,7 +1068,7 @@ C --> D(Make changes);</pre>
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2019-11-11 15:21:42" itemprop="dateModified" datetime="2019-11-11T15:21:42+00:00">2019-11-11</time>
+                <time title="Modified: 2019-11-12 11:57:44" itemprop="dateModified" datetime="2019-11-12T11:57:44+00:00">2019-11-12</time>
               </span>
             
           
@@ -1083,7 +1220,7 @@ C --> D(Make changes);</pre>
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2019-11-11 15:21:42" itemprop="dateModified" datetime="2019-11-11T15:21:42+00:00">2019-11-11</time>
+                <time title="Modified: 2019-11-12 11:57:44" itemprop="dateModified" datetime="2019-11-12T11:57:44+00:00">2019-11-12</time>
               </span>
             
           
@@ -1230,7 +1367,7 @@ C --> D(Make changes);</pre>
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2019-11-11 15:21:42" itemprop="dateModified" datetime="2019-11-11T15:21:42+00:00">2019-11-11</time>
+                <time title="Modified: 2019-11-12 11:57:44" itemprop="dateModified" datetime="2019-11-12T11:57:44+00:00">2019-11-12</time>
               </span>
             
           
@@ -1464,123 +1601,6 @@ C --> D(Make changes);</pre>
   </article>
 
     
-        <article itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block home">
-    <link itemprop="mainEntityOfPage" href="https://chinyun.github.io/myblog/myblog/2019/11/02/CORS/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="chinyun">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/myblog/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Jinny's blog">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-            
-            <a href="/myblog/2019/11/02/CORS/" class="post-title-link" itemprop="url">CORS</a>
-          
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              
-                
-              
-
-              <time title="Created: 2019-11-02 21:00:05" itemprop="dateCreated datePublished" datetime="2019-11-02T21:00:05+00:00">2019-11-02</time>
-            </span>
-          
-            
-
-            
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2019-11-11 15:21:42" itemprop="dateModified" datetime="2019-11-11T15:21:42+00:00">2019-11-11</time>
-              </span>
-            
-          
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="什麼是-CORS"><a href="#什麼是-CORS" class="headerlink" title="什麼是 CORS?"></a>什麼是 CORS?</h1><p>Cross-Origin Resource Sharing 跨來源資源共享，這是由 W3C 頒布的一種瀏覽器技術規範，透過傳輸 HTTP Header 判斷阻擋或允許不同來源網域的資源存取。</p>
-<p>當使用者請求一個不是目前文件來源，例如不同網域(domain/host)、通訊協定(protocol)或通訊埠(port)的資源時，會建立一個<strong>跨來源 HTTP 請求</strong>(cross-origin http request)。</p>
-<p>而瀏覽器基於安全性考量，程式碼所發出的跨來源 HTTP 請求會受到限制，若不受限制的話，駭客可以透過撰寫程式碼跨域撈資料來進行跨站腳本攻擊(XSS)，而這個限制只有在瀏覽器上，若在本機使用 node.js 則沒有限制。</p>
-<h2 id="同源政策（same-origin-policy）"><a href="#同源政策（same-origin-policy）" class="headerlink" title="同源政策（same-origin policy）"></a>同源政策（same-origin policy）</h2><p>在同源政策（same-origin policy）中規範了那寫資源可以跨源存取，哪些會受到限制。<br>同源的定義簡單如下：</p>
-<ul>
-<li>不同網域（Domain）</li>
-<li>不同通訊協定：HTTP, HTTPS, FTP</li>
-<li>不同連接埠號（Port）</li>
-</ul>
-<p>只要瀏覽器發的 request 與 server 所屬不同源，request 就會被瀏覽器阻擋。不過即便擋下來，其實 request 已經發出去，server 也確實給予瀏覽器 response，只是瀏覽器基於同源政策，因此不把拿到的回應給你的 JavaScript 去做進一步的處理。</p>
-<p>一般來說跨來源寫（Cross-origin writes）、跨來源嵌入（Cross-origin embedding）是被允許的，而跨來源讀取（Cross-origin reads）是受限制的。</p>
-<ol>
-<li>受同源政策管理的跨來源請求：<br>XMLHttpRequest 及 Fetch 都遵守同源政策(same-origin policy)，<strong>這代表網路應用程式所使用的 API 除非使用 CORS 標頭否則只能請求與應用程式相同網域的 HTTP 資源</strong>。<br>如果想開啟跨來源 HTTP 請求的話， server 必須在 response 的 header 加上 <code>Access-Control-Allow-Origin: *</code>表示接受所有不同來源的跨域請求，或者可以指定接受特定網址的跨域請求：<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Access-Control-Allow-Origin: http://foo.example</span><br></pre></td></tr></table></figure>
-
-</li>
-</ol>
-<p>其他方法還有：</p>
-<ul>
-<li>Access-Control-Allow-Headers：指定哪些 HTTP 標頭可以於實際請求中使用。</li>
-<li>Access-Control-Allow-Methods：GET, POST, PUT，存取資源所允許的方法，用來回應預檢請求。</li>
-<li>Access-Control-Expose-Headers：瀏覽器能夠存取伺服器回應當中哪些標頭。</li>
-<li>Access-Control-Max-Age：預檢請求之結果可以被快取的秒數。</li>
-<li>Access-Control-Allow-Credentials：用於驗證請求中，用來告知瀏覽器是否允許 client-side 向 server-side 傳送 cookie，默認為 false：CORS 規範會阻止跨域 AJAX 向 server-side 發送 cookie。</li>
-</ul>
-<ol start="2">
-<li>不受同源政策管理的 html tags 包括：<code>&lt;script src=&#39;&#39; /&gt;</code>、<code>&lt;img/&gt;</code>、<code>&lt;video/&gt;</code>、<code>&lt;audio/&gt;</code>、<code>&lt;iframe/&gt;</code>、<code>&lt;link rel=&#39;stylesheet&#39; href /&gt;</code> 這些資源本來就能夠跨域存取。</li>
-</ol>
-<h2 id="JSON-with-Padding-JSONP"><a href="#JSON-with-Padding-JSONP" class="headerlink" title="JSON with Padding(JSONP)"></a>JSON with Padding(JSONP)</h2><p>JSONP 是一個利用 script tag 不受同源政策限制的特性，直接載入帶參數的 js 程式碼的跨來源請求實作方法，實務上在操作 JSONP 的時候，Server 通常會提供一個callback的參數讓 client 端帶過去。</p>
-<p>Twitch API 有提供 JSONP 的版本，我們可以直接來看範例：</p>
-<p>URL: <a href="https://api.twitch.tv/kraken/games/top?client_id=xxx&amp;callback=receiveData&amp;limit=1" target="_blank" rel="noopener">https://api.twitch.tv/kraken/games/top?client_id=xxx&amp;callback=receiveData&amp;limit=1</a></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">receiveData(&#123;&quot;_total&quot;:1067,&quot;_links&quot;:&#123;&quot;self&quot;:&quot;https://api.twitch.tv/kraken/games/top?limit=1&quot;,&quot;next&quot;:&quot;https://api.twitch.tv/kraken/games/top?limit=1\u0026offset=1&quot;&#125;,&quot;top&quot;:[&#123;&quot;game&quot;:&#123;&quot;name&quot;:&quot;Dota 2&quot;,&quot;popularity&quot;:63361,&quot;_id&quot;:29595,&quot;giantbomb_id&quot;:32887,&quot;box&quot;:&#123;&quot;large&quot;:&quot;https://static-cdn.jtvnw.net/ttv-boxart/Dota%202-272x380.jpg&quot;,&quot;medium&quot;:&quot;https://static-cdn.jtvnw.net/ttv-boxart/Dota%202-136x190.jpg&quot;,&quot;small&quot;:&quot;https://static-cdn.jtvnw.net/ttv-boxart/Dota%202-52x72.jpg&quot;,&quot;template&quot;:&quot;https://static-cdn.jtvnw.net/ttv-boxart/Dota%202-&#123;width&#125;x&#123;height&#125;.jpg&quot;&#125;,&quot;logo&quot;:&#123;&quot;large&quot;:&quot;https://static-cdn.jtvnw.net/ttv-logoart/Dota%202-240x144.jpg&quot;,&quot;medium&quot;:&quot;https://static-cdn.jtvnw.net/ttv-logoart/Dota%202-120x72.jpg&quot;,&quot;small&quot;:&quot;https://static-cdn.jtvnw.net/ttv-logoart/Dota%202-60x36.jpg&quot;,&quot;template&quot;:&quot;https://static-cdn.jtvnw.net/ttv-logoart/Dota%202-&#123;width&#125;x&#123;height&#125;.jpg&quot;&#125;,&quot;_links&quot;:&#123;&#125;,&quot;localized_name&quot;:&quot;Dota 2&quot;,&quot;locale&quot;:&quot;zh-tw&quot;&#125;,&quot;viewers&quot;:65622,&quot;channels&quot;:376&#125;]&#125;)</span><br></pre></td></tr></table></figure>
-
-<p>結合起來就是：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&lt;script src=&quot;https://api.twitch.tv/kraken/games/top?client_id=xxx&amp;callback=receiveData&amp;limit=1&quot;&gt;&lt;/script&gt;</span><br><span class="line">&lt;script&gt;</span><br><span class="line">  function receiveData (response) &#123;</span><br><span class="line">    console.log(response);</span><br><span class="line">  &#125;</span><br><span class="line">&lt;/script&gt;</span><br></pre></td></tr></table></figure>
-
-<p>利用 JSONP 也可以存取跨來源的資料。但 JSONP 的缺點就是你要帶的那些參數永遠都只能用附加在網址上的方式（GET）帶過去，沒辦法用 POST。</p>
-<h1 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h1><p><a href="https://blog.techbridge.cc/2017/05/20/api-ajax-cors-and-jsonp/" target="_blank" rel="noopener">輕鬆理解 Ajax 與跨來源請求</a><br><a href="https://pjchender.github.io/2018/08/20/%E5%90%8C%E6%BA%90%E6%94%BF%E7%AD%96%E8%88%87%E8%B7%A8%E4%BE%86%E6%BA%90%E8%B3%87%E6%BA%90%E5%85%B1%E7%94%A8%EF%BC%88cors%EF%BC%89/" target="_blank" rel="noopener">[JS] 同源政策與跨來源資源共用（CORS）</a></p>
-
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-          <div class="post-eof"></div>
-        
-      </footer>
-  </div>
-  
-  
-  
-  </article>
-
-    
   </div>
 
   
@@ -1629,7 +1649,7 @@ C --> D(Make changes);</pre>
         
           <a href="/myblog/archives/">
         
-          <span class="site-state-item-count">23</span>
+          <span class="site-state-item-count">24</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
