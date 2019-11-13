@@ -193,6 +193,128 @@
   
   
   <div class="post-block home">
+    <link itemprop="mainEntityOfPage" href="https://chinyun.github.io/myblog/myblog/2019/11/13/JS-pass-by-value-or-reference/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="chinyun">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/myblog/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Jinny's blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+            
+            <a href="/myblog/2019/11/13/JS-pass-by-value-or-reference/" class="post-title-link" itemprop="url">JS-pass by value or reference</a>
+          
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              
+                
+              
+
+              <time title="Created: 2019-11-13 17:35:56 / Modified: 11:10:58" itemprop="dateCreated datePublished" datetime="2019-11-13T17:35:56+00:00">2019-11-13</time>
+            </span>
+          
+            
+
+            
+          
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>問題：JavaScript 的 Object 到底是 pass by value 還是 pass by referece？</p>
+<p>根據 JavaScript 的資料型態，可以分為兩大類：基本型別 primitive 和 物件型別 object。<br>基本型別的資料以 純值的形態存在，例如：number、string、boolean、null、undefined、symbol，而 object 的資料可能為 純值或多種不同型別組合而成的物件。</p>
+<h1 id="基本型別的傳值-pass-by-value-vs-object型別的傳址-pass-by-referece"><a href="#基本型別的傳值-pass-by-value-vs-object型別的傳址-pass-by-referece" class="headerlink" title="基本型別的傳值 pass by value  vs. object型別的傳址 pass by referece"></a>基本型別的傳值 pass by value  vs. object型別的傳址 pass by referece</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">var a = 10;</span><br><span class="line">var b = a;</span><br><span class="line">console.log(a === b); //true</span><br><span class="line"></span><br><span class="line">var c = 5;</span><br><span class="line">var d = 5;</span><br><span class="line">console.log(c === d); //true</span><br></pre></td></tr></table></figure>
+
+<p><code>var b = a;</code> 表面上看起來變數 b 的內容是透過複製變數 a 而來，實際上變數 b 是去建立了一個新的值，然後將變數 a 的內容複製了一份存放到記憶體， a 和 b 其實是存在於兩個不同的記憶體位置，因此變數 a 和變數 b 彼此獨立互不相干，即使更改 a 的內容， b 的值也不會變：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">a + 2;</span><br><span class="line">console.log(a); //12</span><br><span class="line">console.log(b); //10</span><br><span class="line">``` </span><br><span class="line">像這種情況，我們通常會稱作「傳值」 (pass by value)。</span><br><span class="line"></span><br><span class="line">如果是物件型別的資料：</span><br></pre></td></tr></table></figure>
+
+<p>var obj1 = { a: 10 };<br>var obj2 = { a: 10 };<br>console.log(obj1 === obj2); //false</p>
+<p>var obj3 = { b: 20 };<br>var obj4 = obj3;<br>console.log(obj3 === obj4); //true</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">「物件」這類資料型態，在 JavaScript 中是透過「引用」的方式傳遞資料的。</span><br><span class="line">當建立起一個新的物件並賦值給一個變數(`var obj3 = &#123; b: 20 &#125;;`)的時候，JavaScript 會在記憶體的某處存放這個物件(`&#123; b: 20 &#125;`)，再將變數(`obj3`)指向這個物件的存放位置，因此當`var obj4 = obj3;`的時候，其實是將 obj4 這個變數也指向了 `&#123; b: 20 &#125;`這個實體。</span><br><span class="line">這種透過引用的方式來傳遞資料，接收的其實是引用的「參考」而不是值的副本時，</span><br><span class="line">我們通常會稱作「傳址」 (pass by reference)。</span><br><span class="line"></span><br><span class="line"># 例外情況： pass by sharing</span><br></pre></td></tr></table></figure>
+
+<p>var coin1 = { value: 10 };</p>
+<p>function changeValue(obj) {<br>  obj = { value: 123 };<br>}</p>
+<p>changeValue(coin1);<br>console.log(coin1.value);   // ？</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">答案會是 10，因為當coin1指向的資料被做為 function 的參數傳入 function 時，即使資料在 function 內部被重新賦值，外部變數的內容都不會被影響。</span><br><span class="line">在這種情況底下，就代表你要讓這個 obj 指向一個新的 object`&#123; value: 123 &#125;`。因此不會影響到外部的 coin1 指向的位址的物件內容。</span><br><span class="line"></span><br><span class="line">但是如果不是重新賦值而是直接修改傳入的內容：</span><br></pre></td></tr></table></figure>
+
+<p>var coin1 = { value: 10 };</p>
+<p>function changeValue(obj) {<br>  obj.value = 123;<br>}</p>
+<p>changeValue(coin1);<br>console.log(coin1.value);   // 123</p>
+<pre><code>答案是 123。此時變數 coin1 所指向的資料內容被改變，代表你要讓 function 裡面的那個 obj 跟外面的 coin1「共享」同一個 object，所以透過裡面的 obj，你可以去修改「共享到的那個 object」的資料。
+
+# 小結
+
+在 JavaScript 中的物件類型(object)是可變的 (mutable)，**當物件更新時，會影響到所有引用這個物件的變數與其副本，修改時會變動到原本的參考，但當賦與新值時，會產生新的實體參考**。
+
+而基本型別(primitive)則是不可變的 (immutable)，當你更新了某個基本型別的值時，與那個值的副本完全無關。
+
+# 垃圾回收 Garbage collection
+
+對於開發者來說，JavaScript 的內存管理是自動的、無形的。我們創建的原始值、對象、函數……這一切都會佔用內存。當某個東西我們不再需要時會發生什麼？ JavaScript 引擎如何發現它、清理它？
+JavaScript 中主要的內存管理概念是**可達性 Reachability**，簡言之，可達值是那些以某種方式可訪問或可用的值，它們保證存儲在內存中。
+這裡列出固有的可達值基本集合，這些值明顯不能被釋放：
+
+1. 當前函數的局部變數和參數。Local variables and parameters of the current function.
+2. 嵌套調用時，當前調用鏈上所有函數的變量與參數。Variables and parameters for other functions on the current chain of nested calls.
+3. 全局變數。Global variables.
+4. 還有一些其他的內部變數。(there are some other, internal ones as well)
+
+這些值被稱作根 root。
+
+如果一個值可以通過 引用 或 引用鏈，從根值訪問到，則認為這個值是 可達的。
+比方說，如果局部變量中有一個對象，並且該對象具有引用另一個對象的 property，則該對像被認為是可達的。而且它引用的內容也是可達的。
+
+在 JavaScript 引擎中有一個被稱作垃圾回收器(garbage collector)的東西在後台執行。它監控著所有對象的狀態，並刪除掉那些已經不可達的。
+
+# Reference
+
+[深入探討 JavaScript 中的參數傳遞：call by value 還是 reference？](https://blog.techbridge.cc/2018/06/23/javascript-call-by-value-or-reference/)
+[重新認識 JavaScript: Day 05 JavaScript 是「傳值」或「傳址」？](https://ithelp.ithome.com.tw/articles/10191057)
+[Garbage collection](https://zh.javascript.info/garbage-collection)
+[[筆記] 談談 JavaScript 中 by reference 和 by value 的重要觀念](https://pjchender.blogspot.com/2016/03/javascriptby-referenceby-value.html)</code></pre>
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+          <div class="post-eof"></div>
+        
+      </footer>
+  </div>
+  
+  
+  
+  </article>
+
+    
+        <article itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block home">
     <link itemprop="mainEntityOfPage" href="https://chinyun.github.io/myblog/myblog/2019/11/12/JS-hoisting-scope-closure/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -233,7 +355,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2019-11-13 09:24:23" itemprop="dateModified" datetime="2019-11-13T09:24:23+00:00">2019-11-13</time>
+                <time title="Modified: 2019-11-13 11:10:58" itemprop="dateModified" datetime="2019-11-13T11:10:58+00:00">2019-11-13</time>
               </span>
             
           
@@ -381,7 +503,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2019-11-13 09:24:23" itemprop="dateModified" datetime="2019-11-13T09:24:23+00:00">2019-11-13</time>
+                <time title="Modified: 2019-11-13 11:10:58" itemprop="dateModified" datetime="2019-11-13T11:10:58+00:00">2019-11-13</time>
               </span>
             
           
@@ -499,7 +621,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2019-11-13 09:24:23" itemprop="dateModified" datetime="2019-11-13T09:24:23+00:00">2019-11-13</time>
+                <time title="Modified: 2019-11-13 11:10:58" itemprop="dateModified" datetime="2019-11-13T11:10:58+00:00">2019-11-13</time>
               </span>
             
           
@@ -603,7 +725,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2019-11-13 09:24:23" itemprop="dateModified" datetime="2019-11-13T09:24:23+00:00">2019-11-13</time>
+                <time title="Modified: 2019-11-13 11:10:58" itemprop="dateModified" datetime="2019-11-13T11:10:58+00:00">2019-11-13</time>
               </span>
             
           
@@ -733,7 +855,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2019-11-13 09:24:23" itemprop="dateModified" datetime="2019-11-13T09:24:23+00:00">2019-11-13</time>
+                <time title="Modified: 2019-11-13 11:10:58" itemprop="dateModified" datetime="2019-11-13T11:10:58+00:00">2019-11-13</time>
               </span>
             
           
@@ -885,7 +1007,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2019-11-13 09:24:23" itemprop="dateModified" datetime="2019-11-13T09:24:23+00:00">2019-11-13</time>
+                <time title="Modified: 2019-11-13 11:10:58" itemprop="dateModified" datetime="2019-11-13T11:10:58+00:00">2019-11-13</time>
               </span>
             
           
@@ -987,7 +1109,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2019-11-13 09:24:23" itemprop="dateModified" datetime="2019-11-13T09:24:23+00:00">2019-11-13</time>
+                <time title="Modified: 2019-11-13 11:10:58" itemprop="dateModified" datetime="2019-11-13T11:10:58+00:00">2019-11-13</time>
               </span>
             
           
@@ -1097,7 +1219,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2019-11-13 09:24:23" itemprop="dateModified" datetime="2019-11-13T09:24:23+00:00">2019-11-13</time>
+                <time title="Modified: 2019-11-13 11:10:58" itemprop="dateModified" datetime="2019-11-13T11:10:58+00:00">2019-11-13</time>
               </span>
             
           
@@ -1221,7 +1343,7 @@ C --> D(Make changes);</pre>
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2019-11-13 09:24:23" itemprop="dateModified" datetime="2019-11-13T09:24:23+00:00">2019-11-13</time>
+                <time title="Modified: 2019-11-13 11:10:58" itemprop="dateModified" datetime="2019-11-13T11:10:58+00:00">2019-11-13</time>
               </span>
             
           
@@ -1328,153 +1450,6 @@ C --> D(Make changes);</pre>
   </article>
 
     
-        <article itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block home">
-    <link itemprop="mainEntityOfPage" href="https://chinyun.github.io/myblog/myblog/2019/11/04/Knex-js-PostgreSQL/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="chinyun">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/myblog/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Jinny's blog">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-            
-            <a href="/myblog/2019/11/04/Knex-js-PostgreSQL/" class="post-title-link" itemprop="url">Knex.js+PostgreSQL</a>
-          
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              
-                
-              
-
-              <time title="Created: 2019-11-04 16:18:24" itemprop="dateCreated datePublished" datetime="2019-11-04T16:18:24+00:00">2019-11-04</time>
-            </span>
-          
-            
-
-            
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2019-11-13 09:24:23" itemprop="dateModified" datetime="2019-11-13T09:24:23+00:00">2019-11-13</time>
-              </span>
-            
-          
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="What-is-Knex-js"><a href="#What-is-Knex-js" class="headerlink" title="What is Knex.js?"></a>What is Knex.js?</h1><p>Knex.js is a tool in the Database Tools category of a tech stack.<br>Knex.js is an open source tool with 10.8K GitHub stars and 1.3K GitHub forks. </p>
-<p>Knex.js is a JavaScript query builder for relational databases including PostgreSQL, MySQL, SQLite3, Oracle, MSSQL, MariaDB and Amazon Redshift. It can be used with callbacks and promises. It supports transactions and connection pooling.</p>
-<p>可以將操作資料庫的方式分成三種層次： low-level Database Drivers、middle-level Query Builders、high-level ORMs。</p>
-<ol>
-<li>Database Drivers<br>This is basically as low-level as you can get — short of manually generating TCP packets and delivering them to the database. A database driver is going to handle connecting to a database (and sometimes connection pooling). At this level you’re going to be writing raw SQL strings and delivering them to a database, and receiving a response from the database. In the Node.js ecosystem there are many libraries operating at this layer. Here are three popular libraries:</li>
-</ol>
-<ul>
-<li>mysql: MySQL (13k stars / 330k weekly downloads)</li>
-<li>pg: PostgreSQL (6k stars / 520k weekly downloads)</li>
-<li>sqlite3: SQLite (3k stars / 120k weekly downloads)</li>
-</ul>
-<p>Each of these libraries essentially works the same way: take the database credentials, instantiate a new database instance, connect to the database, and send it queries in the form of a string and asynchronously handle the result.</p>
-<ol start="2">
-<li>Query Builders<br>This is the intermediary level between using the simpler Database Driver module vs a full-fledged ORM. The most notable module which operates at this layer is Knex. This module is able to generate queries for a few different SQL dialects. This module depends on one of the aforementioned libraries — you’ll need to install the particular ones you plan on using with Knex.</li>
-</ol>
-<ul>
-<li>knex: Query Builder (8k stars / 170k weekly downloads)</li>
-</ul>
-<ol start="3">
-<li>ORMs<br>ORMs are powerful tools. The ORMs we’ll be examining in this post are able to communicate with SQL backends such as SQLite, PostgreSQL, MySQL, and MSSQL.<br>This is the highest level of abstraction we’re going to consider. When working with ORMs we typically need to do a lot more configuration ahead of time. The point of an ORM, as the name implies, is to map a record in a relational database to an object (typically, but not always, a class instance) in our application. What this means is that we’re defining the structure of these objects, as well as their relationships, in our application code.<br>Bust there are some reasons that you should be wary of using an ORM:</li>
-</ol>
-<p>(1) <strong>Take time to learn but it is not SQL.</strong> An ORM is going to be written in the same language as the rest of the application, while SQL is a completely different syntax. A lot of people pick up an ORM because they don’t want to take the time to learn the underlying SQL (Structured Query Language).The syntax for a simple read operation varies greatly between these examples. As the operation you’re trying to perform increases in complexity, such as operations involving multiple tables, the ORM syntax will vary from between implementations even more.</p>
-<p>(2) <strong>Complex ORM calls can be Inefficient</strong>: Recall that the purpose of an ORM is to take the underlying data stored in a database and map it into an object that we can interact within our application. This often comes with some inefficiencies when we use an ORM to fetch certain data.</p>
-<p>(3) <strong>Not all queries can be represented as an ORM operation</strong>. When we need to generate these queries we have to fall back to generating the SQL query by hand. This often means a codebase with heavy ORM usage will still have a few handwritten queries strewn about it. A common situation which doesn’t work too well with ORMs is when a query contains a subquery. </p>
-<h1 id="Why-use-Knex-js"><a href="#Why-use-Knex-js" class="headerlink" title="Why use Knex.js?"></a>Why use Knex.js?</h1><p>與 SQL 原生語法相近，卻更簡潔、容易使用。語法設計讓參數和查詢字串分別傳遞給 database driver，保護查詢不會受到 SQL injection。</p>
-<p>One nicety is that you’re able to programmatically generate dynamic queries in a much more convenient way than if you were to concatenate strings together to form SQL (which often introduces security vulnerabilities).</p>
-<p>Parameters and query string are passed separately to database driver protecting query from SQL injection. Other query builder methods always uses binding format internally so they are safe too.</p>
-<h1 id="How-to-use"><a href="#How-to-use" class="headerlink" title="How to use?"></a>How to use?</h1><p>When creating a Knex instance you provide the connection details, along with the dialect you plan on using and are then able to start making queries. The queries you write will <strong>closely resemble the underlying SQL queries</strong>.<br>詳細的使用說明可以查詢<a href="http://knexjs.org/" target="_blank" rel="noopener">官方文件</a></p>
-<p>Here is the example of using knex.js to connect postgreSQL:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">// $ npm install pg knex</span><br><span class="line"></span><br><span class="line">const knex = require(&apos;knex&apos;);</span><br><span class="line">const connection = require(&apos;./connection.json&apos;);</span><br><span class="line">const client = knex(&#123;</span><br><span class="line">  client: &apos;pg&apos;,</span><br><span class="line">  connection</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
-
-<p>要小心使用 <code>knex.raw()</code>，避免允許植入 SQL 語句。</p>
-<h1 id="What-is-PostgreSQL-compare-with-MySQL"><a href="#What-is-PostgreSQL-compare-with-MySQL" class="headerlink" title="What is PostgreSQL? compare with MySQL?"></a>What is PostgreSQL? compare with MySQL?</h1><p>PostgreSQL 和 MySQL 兩個資料庫之間有許多相似之處和重疊，但也有非常明顯的差異，使用 PostgreSQL 的優點：</p>
-<p>-Open Source:<br>PostgreSQL 由 PostgreSQL 全球開發小組（PostgreSQL Global Development Group）開發，PostgreSQL 全球開發組由多個公司和個人貢獻者所組成。它是免費的開源軟體。PostgreSQL 是在 PostgreSQL 使用許可發布的，這是一個自由的開源許可，類似於 BSD 或 MIT 使用許可。</p>
-<p>MySQL 開發專案根據 GNU GPL 的條款提供了它的原始碼以及各種各樣的專有協議。它現在由 Oracle 公司擁有，並且提供了幾個商業使用的付費版本。</p>
-<ul>
-<li>ACID Compliance:<br>ACID（Atomicity，Consistency，Isolation，Durability）是一組資料庫交易安全的特性，ACID 要求確保在單一的資料交易中發生多個更新時也不會在整個系統中遺失數據或發生錯誤。<br>PostgreSQL 完全符合 ACID 特性，並確保滿足所有要求。</li>
-</ul>
-<p>MySQL 只有在使用 InnoDB 和 NDB 叢集儲存引擎時，才符合ACID 標準。</p>
-<ul>
-<li>Performance:<br>PostgreSQL 被廣泛應用於讀寫速度至關重要且資料需要驗證的大型系統中。 此外，它在商業解決方案中，還支持各種效能優化，（如地理空間資料支持，不需要讀取鎖定的資料一致性支援，如 Oracle、SQL Server）。 整體來看，PostgreSQL 的效能在需要執行複雜查詢的系統中會得到了最好的展現。 PostgreSQL 在 OLTP / OLAP 系統中運行良好，尤其在需要讀/寫速度和需要大量的資料分析時。 PostgreSQL 也適用於商業智慧應用服務，但更適合需要快速讀/寫速度的資料倉庫和資料分析應用服務。</li>
-</ul>
-<p>MySQL 被廣泛採用，是由於 Web 應用，只需要一個簡單的資料交易資料庫。然而，在一般的情況下，如果 MySQL 的表現不佳，都是當負載過重或試圖進行複雜查詢的時候。MySQL 在 OLAP / OLTP 系統只需要讀取速度時表現良好。MySQL + InnoDB為 OLTP 場景提供了非常好的讀/寫速度。 整體來說，MySQL在高度資料一致性需求的情況下表現良好。MySQL 是可靠的，並且適用於商業智慧應用服務，因為商業智慧應用服務通常是更重視讀取效能的。</p>
-<ul>
-<li>Security:<br>PostgreSQL 具有角色並可繼承角色來設定和維護權限。 PostgreSQL 內建支援 SSL連線來加密客戶端/伺服器通訊。 它具有資料列級的安全性。除此之外，PostgreSQL 還附帶了一個名為 SE-PostgreSQL 的增強功能，可以根據 SELinux 安全策略提供額外的存取控制。</li>
-</ul>
-<p>MySQL 為所有連線、查詢和用戶可能嘗試執行的其他操作實作了存取控制列表（ACL）的安全性。 對 MySQL 客戶端和伺服器之間的 SSL 加密連接也有支援。</p>
-<ul>
-<li>NoSQL Features/JSON Support:<br>NoSQL 和 JSON 都非常流行，NoSQL資料庫變得越來越普及。JSON 是一種簡單的資料格式，它允許程式設計師儲存和傳遞跨系統的資料內容、資料列表和 key-value 對應。<br>PostgreSQL 支援 JSON 和其他 NoSQL 的功能，如內建 XML 支援和 HSTORE 的 key-value 對應。 它還支援將 JSON 資料索引以加快存取速度。</li>
-</ul>
-<p>MySQL 具有 JSON 資料類型支援，但沒有其他 NoSQL功能，也不支援 JSON 索引。</p>
-<ul>
-<li>Programming Languages Support:<br>PostgreSQL 支援各種程式語言，包括：C / C ++，Java，JavaScript，.Net，R，Perl，Python，Ruby，Tcl 等等。 甚至可以在單獨的程序中執行用戶提供的程式（即作為背景執行程式）。</li>
-</ul>
-<p>MySQL 一些支援伺服器端不可擴展的程式語言。</p>
-<ul>
-<li>Extensible Type System:<br>PostgreSQL有幾個專用於延伸套件的功能，可以增加新的資料型別、新的函數功能、新的索引類型。</li>
-</ul>
-<p>MySQL 不支援增加延伸功能。</p>
-<p>更多比較可以查看 PostgreSQL官方文件：<a href="https://faq.postgresql.tw/postgresql-vs-mysql" target="_blank" rel="noopener">PostgreSQL vs MySQL</a></p>
-<p>PostgreSQL 相對於 MySQL 的優勢：</p>
-<p>　　1、在 SQL 的標準實現上要比 MySQL 完善，而且功能實現比較嚴謹；<br>　　2、存儲過程的功能支持要比 MySQL 好，具備本地緩存執行計劃的能力；<br>　　3、對表連接支持較完整，優化器的功能較完整，支持的索引類型很多，復雜查詢能力較強；<br>　　4、PG 主表采用堆表存放，MySQL 采用索引組織表，能夠支持比MySQL更大的數據量。<br>　　5、PG 的主備復制屬於物理復制，相對於 MySQL 基於 binlog 的邏輯復制，數據的一致性更加可靠，復制性能更高，對主機性能的影響也更小。<br>　　6、MySQL 的存儲引擎插件化機制，存在鎖機制復雜影響並發的問題，而 PG 不存在。</p>
-<p>　　MySQL 相對於 PG 的優勢：</p>
-<p>　　1、innodb 的基於回滾段實現的 MVCC 機制，相對 PG 新老數據一起存放的基於 XID 的 MVCC 機制，是占優的。新老數據一起存放，需要定時觸發 VACUUM，會帶來多余的 IO和數據庫對象加鎖開銷，引起數據庫整體的並發能力下降。而且 VACUUM清理不及時，還可能會引發數據膨脹；<br>　　2、MySQL采用索引組織表，這種存儲方式非常適合基於主鍵匹配的查詢、刪改操作，但是對表結構設計存在約束；<br>　　3、MySQL的優化器較簡單，系統表、運算符、數據類型的實現都很精簡，非常適合簡單的查詢操作；<br>　　4、MySQL分區表的實現要優於PG的基於繼承表的分區實現，主要體現在分區個數達到上千上萬後的處理性能差異較大。<br>　　5、MySQL的存儲引擎插件化機制，使得它的應用場景更加廣泛，比如除了innodb適合事務處理場景外，myisam適合靜態數據的查詢場景。</p>
-<p>總體上來說，開源數據庫都不是很完善，商業數據庫oracle在架構和功能方面都還是完善很多的。從應用場景來說，PG更加適合嚴格的企業應用場景（比如金融、電信、ERP、CRM），而MySQL更加適合業務邏輯相對簡單、數據可靠性要求較低的互聯網場景（比如Google、facebook、alibaba）。</p>
-<p>雖然有不同的歷史、引擎與工具，不過並沒有明確的參考能夠表明這兩個數據庫哪一個能夠適用於所有情況。很多組織喜歡使用PostgreSQL，因為它的可靠性好，在保護數據方面很擅長，而且是個社區項目，不會陷入廠商的牢籠之中。MySQL更加靈活，提供了更多選項來針對不同的任務進行裁剪。很多時候，對於一個組織來說，對某個軟件使用的熟練程度要比特性上的原因更重要。</p>
-<h1 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h1><p><a href="https://blog.logrocket.com/why-you-should-avoid-orms-with-examples-in-node-js-e0baab73fa5/" target="_blank" rel="noopener">Why you should avoid ORMs (with examples in Node.js)</a><br><a href="http://knexjs.org/" target="_blank" rel="noopener">Knex.js</a><br><a href="https://faq.postgresql.tw/postgresql-vs-mysql" target="_blank" rel="noopener">PostgreSQL vs MySQL</a><br><a href="https://www.itread01.com/articles/1502570301.html" target="_blank" rel="noopener">PostgreSQL 與 MySQL的比較</a></p>
-
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-          <div class="post-eof"></div>
-        
-      </footer>
-  </div>
-  
-  
-  
-  </article>
-
-    
   </div>
 
   
@@ -1523,7 +1498,7 @@ C --> D(Make changes);</pre>
         
           <a href="/myblog/archives/">
         
-          <span class="site-state-item-count">25</span>
+          <span class="site-state-item-count">26</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
