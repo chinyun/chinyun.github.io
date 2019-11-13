@@ -193,6 +193,133 @@
   
   
   <div class="post-block home">
+    <link itemprop="mainEntityOfPage" href="https://chinyun.github.io/myblog/myblog/2019/11/13/JS-Shallow-Copy-Deep-Copy/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="chinyun">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/myblog/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Jinny's blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+            
+            <a href="/myblog/2019/11/13/JS-Shallow-Copy-Deep-Copy/" class="post-title-link" itemprop="url">JS-Shallow Copy & Deep Copy</a>
+          
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              
+                
+              
+
+              <time title="Created: 2019-11-13 19:12:02 / Modified: 12:13:55" itemprop="dateCreated datePublished" datetime="2019-11-13T19:12:02+00:00">2019-11-13</time>
+            </span>
+          
+            
+
+            
+          
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="為什麼會有深淺拷貝的差異？"><a href="#為什麼會有深淺拷貝的差異？" class="headerlink" title="為什麼會有深淺拷貝的差異？"></a>為什麼會有深淺拷貝的差異？</h1><p>因為 JavaScript 中，基本型別(primitve)與物件型別(object)的值的賦予方式不同，基本型別是 pass by value，物件型別是 pass by sharing。相關介紹可看：<a href="https://chinyun.github.io/myblog/2019/11/13/JS-pass-by-value-or-reference/">JS-pass by value or reference</a></p>
+<p>因為值賦予方式的差異，在複製物件例如 object, array 等資料類型時，根據拷貝資料的形式，可以分為淺拷貝(shallow copy)及深拷貝(deep copy)。<br>對淺拷貝來說，只是複製 collection structure，而不是 element，With a shallow copy, two collections now share the individual elements. Collections can be diverse data structures which stores multiple data items.<br>因此對於基本型別來說，淺拷貝(用等號賦值)會傳值，但對物件型別來說，淺拷貝是傳遞 reference，讓兩者可以共用一個記憶體的物件資料，這樣的話在指派物件型別的資料的第二層或更深層內容時，會同時影響兩個地方。</p>
+<p>淺拷貝只複製指向某個物件的指標，而不複製物件本身，新舊物件還是共用同一塊記憶體。<br>而深拷貝是整個複製，包含element，會另外創造一個一模一樣的物件，新物件跟原物件不共用記憶體，修改新物件不會改到原物件。所以當我們在使用有多層結構的物件資料時，要盡量用深拷貝。<br>一般物件如果用等號賦值：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">var obj1 = &#123; a: 10, b: 20, c: 30 &#125;;</span><br><span class="line">var obj2 = obj1;</span><br><span class="line">obj2.b = 100;</span><br><span class="line"></span><br><span class="line">console.log(obj1); // &#123; a: 10, b: 100, c: 30 &#125; &lt;-- b 被改到了</span><br><span class="line">console.log(obj2); // &#123; a: 10, b: 100, c: 30 &#125;</span><br></pre></td></tr></table></figure>
+
+<h1 id="如何進行淺拷貝、深拷貝？"><a href="#如何進行淺拷貝、深拷貝？" class="headerlink" title="如何進行淺拷貝、深拷貝？"></a>如何進行淺拷貝、深拷貝？</h1><p>一般而言 基本型別的拷貝方法就是用 等號賦值，而物件型別例如 array 或 object等就有很多方式，依照拷貝的層次深度可以分為淺拷貝和深拷貝：如果物件中屬性的值也是物件，只能複製到<strong>第一層</strong>物件的屬性，而無法複製到屬性值的物件(第二層)，就無法達到實際的複製，而是會與舊物件一起共用同一塊記憶體；這樣的複製方法稱為「淺拷貝」。相反地，深拷貝會另外創造一個一模一樣的物件，新物件跟原物件不共用記憶體，修改新物件不會改到原物件。</p>
+<ul>
+<li><p>淺拷貝方法</p>
+<ul>
+<li><p><strong>Array.concat</strong>：一般Array.concat的用法是合併兩個陣列</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">  var alpha = [&apos;a&apos;, &apos;b&apos;, &apos;c&apos;],</span><br><span class="line">    numeric = [1, 2, 3];</span><br><span class="line">  var alphaNumeric = alpha.concat(numeric);</span><br><span class="line">​  console.log(alphaNumeric); // [&apos;a&apos;, &apos;b&apos;, &apos;c&apos;, 1, 2, 3]</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><strong>Array.slice</strong>：一般Array.slice()的方法是複製一個新的陣列，可帶入參數 <code>Array.slice(start, end)</code>，當不輸入參數值的話會直接複製一個。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">var animals = [&apos;ant&apos;, &apos;bison&apos;, &apos;camel&apos;, &apos;duck&apos;, &apos;elephant&apos;];</span><br><span class="line">console.log(animals.slice(2));</span><br><span class="line">// Array [&quot;camel&quot;, &quot;duck&quot;, &quot;elephant&quot;]</span><br><span class="line">​</span><br><span class="line">console.log(animals.slice(2, 4));</span><br><span class="line">// Array [&quot;camel&quot;, &quot;duck&quot;]</span><br><span class="line">​</span><br><span class="line">console.log(animals.slice());</span><br><span class="line">// Array [&apos;ant&apos;, &apos;bison&apos;, &apos;camel&apos;, &apos;duck&apos;, &apos;elephant&apos;];</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><strong>手動複製</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">var obj1 = &#123; a: 10, b: 20, c: 30 &#125;;</span><br><span class="line">var obj2 = &#123; a: obj1.a, b: obj1.b, c: obj1.c &#125;;</span><br><span class="line">obj2.b = 100;</span><br><span class="line"></span><br><span class="line">console.log(obj1); // &#123; a: 10, b: 20, c: 30 &#125; &lt;-- 沒被改到</span><br><span class="line">console.log(obj2); // &#123; a: 10, b: 100, c: 30 &#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><strong>Object.assign</strong>：用來合併物件，用法為 <code>Object.assign(target, ...source)</code>若目標物件為空物件則可視為複製一個source的物件。<br><code>Object.assign({}, obj1)</code>的意思是先建立一個空物件{}，接著把obj1中所有的屬性複製過去，因為Object.assign跟我們手動複製的效果相同，所以一樣<strong>只能處理深度只有一層的物件</strong>，沒辦法做到真正的 Deep Copy，不過如果要複製的物件只有一層的話可以使用他。</p>
+</li>
+<li><p><strong>展開運算子(Spread Operator)</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">let obj = &#123;name: &apos;王康寶&apos;, age:&#123;child: 18&#125;&#125;</span><br><span class="line">let copy = &#123;...obj&#125;;</span><br><span class="line"></span><br><span class="line">copy.name = &apos;盧卡斯&apos;;</span><br><span class="line">copy.age.child = 99;</span><br><span class="line"></span><br><span class="line">console.log(obj);  //&#123;name: &quot;王康寶&quot;, age:&#123;child: 99&#125;&#125;</span><br><span class="line">console.log(copy); //&#123;name: &quot;盧卡斯&quot;, age:&#123;child: 99&#125;&#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+<li><p>深拷貝方法</p>
+<ul>
+<li><strong>JSON.parse(JSON.stringify(object_array))</strong>:<ul>
+<li>JSON.parse():把字串轉成物件</li>
+<li>JSON.stringify():把物件轉成字串<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">  let obj1 = &#123; a:&#123;b:10&#125; &#125;;</span><br><span class="line">  let obj2_string = JSON.stringify(obj1);</span><br><span class="line">  console.log(obj2_string); //&quot;&#123;&quot;a&quot;:&#123;&quot;b&quot;:10&#125;&#125;&quot;;</span><br><span class="line">​</span><br><span class="line">  let obj2 = JSON.parse(obj2_string);</span><br><span class="line">  console.log(obj2); //&#123;a:&#123;b:10&#125;&#125;</span><br><span class="line">​</span><br><span class="line">  obj2.a.b = 20;</span><br><span class="line">  console.log(obj1); //&#123;a:&#123;b:10&#125;&#125;</span><br><span class="line">  console.log(obj2); //&#123;a:&#123;b:20&#125;&#125;</span><br><span class="line">  ``` </span><br><span class="line">  只有可以轉成JSON格式的物件才可以這樣用，像 function、Set、Map..等型態就沒辦法轉成 JSON。</span><br><span class="line"></span><br><span class="line">  - **jQuery `$.extend`**</span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+</li>
+</ul>
+<p>var $ = require(‘jquery’);</p>
+<p>var obj1 = {<br>  a: 1,<br>  b: { f: { g: 1 } },<br>  c: [1, 2, 3]<br>};</p>
+<p>var obj2 = $.extend(true, {}, obj1);<br>console.log(obj1.b.f === obj2.b.f); // false</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">- **lodash `_.cloneDeep`**</span><br></pre></td></tr></table></figure>
+
+<p>var _ = require(‘lodash’);<br>var obj1 = {<br>  a: 1,<br>  b: { f: { g: 1 } },<br>  c: [1, 2, 3]<br>};</p>
+<p>var obj2 = _.cloneDeep(obj1);<br>console.log(obj1.b.f === obj2.b.f); // false</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">- **自己寫**</span><br><span class="line">例如下面這個在 react app 裡面用 slice() 和 Object.assign(target, ...sources) 來改變深層結構資料的方法：</span><br><span class="line">[GitHub Repo:Tripper-app](https://github.com/chinyun/Tripper-app/blob/master/src/containers/App.js)</span><br></pre></td></tr></table></figure>
+
+<p>updateBudgets = (journey, journeyId) =&gt; {<br>  const index = this.state.journeyList.findIndex(item =&gt; item.id === journeyId);<br>  if (index !== -1) {</p>
+<pre><code>this.setState({
+  journeys: [
+    ...this.state.journeys.slice(0, index),
+    Object.assign({}, this.state.journeys[index], journey[0]),
+    ...this.state.journeys.slice(index + 1)
+  ]
+})</code></pre><p>  }<br>};</p>
+<pre><code></code></pre></li>
+</ul>
+<h1 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h1><p><a href="https://dustinhsiao21.com/2018/01/07/javascript-shallow-copy-and-deep-copy/" target="_blank" rel="noopener">關於JAVASCRIPT中的SHALLOW COPY(淺拷貝)及DEEP COPY(深拷貝)</a><br><a href="https://larry850806.github.io/2016/09/20/shallow-vs-deep-copy/" target="_blank" rel="noopener">[Javascript] 關於 JS 中的淺拷貝和深拷貝</a></p>
+
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+          <div class="post-eof"></div>
+        
+      </footer>
+  </div>
+  
+  
+  
+  </article>
+
+    
+        <article itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block home">
     <link itemprop="mainEntityOfPage" href="https://chinyun.github.io/myblog/myblog/2019/11/13/JS-pass-by-value-or-reference/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -222,7 +349,7 @@
                 
               
 
-              <time title="Created: 2019-11-13 17:35:56 / Modified: 11:10:58" itemprop="dateCreated datePublished" datetime="2019-11-13T17:35:56+00:00">2019-11-13</time>
+              <time title="Created: 2019-11-13 17:35:56 / Modified: 12:13:55" itemprop="dateCreated datePublished" datetime="2019-11-13T17:35:56+00:00">2019-11-13</time>
             </span>
           
             
@@ -355,7 +482,7 @@ JavaScript 中主要的內存管理概念是**可達性 Reachability**，簡言�
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2019-11-13 11:10:58" itemprop="dateModified" datetime="2019-11-13T11:10:58+00:00">2019-11-13</time>
+                <time title="Modified: 2019-11-13 12:13:55" itemprop="dateModified" datetime="2019-11-13T12:13:55+00:00">2019-11-13</time>
               </span>
             
           
@@ -503,7 +630,7 @@ JavaScript 中主要的內存管理概念是**可達性 Reachability**，簡言�
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2019-11-13 11:10:58" itemprop="dateModified" datetime="2019-11-13T11:10:58+00:00">2019-11-13</time>
+                <time title="Modified: 2019-11-13 12:13:55" itemprop="dateModified" datetime="2019-11-13T12:13:55+00:00">2019-11-13</time>
               </span>
             
           
@@ -621,7 +748,7 @@ JavaScript 中主要的內存管理概念是**可達性 Reachability**，簡言�
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2019-11-13 11:10:58" itemprop="dateModified" datetime="2019-11-13T11:10:58+00:00">2019-11-13</time>
+                <time title="Modified: 2019-11-13 12:13:55" itemprop="dateModified" datetime="2019-11-13T12:13:55+00:00">2019-11-13</time>
               </span>
             
           
@@ -725,7 +852,7 @@ JavaScript 中主要的內存管理概念是**可達性 Reachability**，簡言�
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2019-11-13 11:10:58" itemprop="dateModified" datetime="2019-11-13T11:10:58+00:00">2019-11-13</time>
+                <time title="Modified: 2019-11-13 12:13:55" itemprop="dateModified" datetime="2019-11-13T12:13:55+00:00">2019-11-13</time>
               </span>
             
           
@@ -855,7 +982,7 @@ JavaScript 中主要的內存管理概念是**可達性 Reachability**，簡言�
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2019-11-13 11:10:58" itemprop="dateModified" datetime="2019-11-13T11:10:58+00:00">2019-11-13</time>
+                <time title="Modified: 2019-11-13 12:13:55" itemprop="dateModified" datetime="2019-11-13T12:13:55+00:00">2019-11-13</time>
               </span>
             
           
@@ -1007,7 +1134,7 @@ JavaScript 中主要的內存管理概念是**可達性 Reachability**，簡言�
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2019-11-13 11:10:58" itemprop="dateModified" datetime="2019-11-13T11:10:58+00:00">2019-11-13</time>
+                <time title="Modified: 2019-11-13 12:13:55" itemprop="dateModified" datetime="2019-11-13T12:13:55+00:00">2019-11-13</time>
               </span>
             
           
@@ -1109,7 +1236,7 @@ JavaScript 中主要的內存管理概念是**可達性 Reachability**，簡言�
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2019-11-13 11:10:58" itemprop="dateModified" datetime="2019-11-13T11:10:58+00:00">2019-11-13</time>
+                <time title="Modified: 2019-11-13 12:13:55" itemprop="dateModified" datetime="2019-11-13T12:13:55+00:00">2019-11-13</time>
               </span>
             
           
@@ -1219,7 +1346,7 @@ JavaScript 中主要的內存管理概念是**可達性 Reachability**，簡言�
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2019-11-13 11:10:58" itemprop="dateModified" datetime="2019-11-13T11:10:58+00:00">2019-11-13</time>
+                <time title="Modified: 2019-11-13 12:13:55" itemprop="dateModified" datetime="2019-11-13T12:13:55+00:00">2019-11-13</time>
               </span>
             
           
@@ -1298,158 +1425,6 @@ C --> D(Make changes);</pre>
   </article>
 
     
-        <article itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block home">
-    <link itemprop="mainEntityOfPage" href="https://chinyun.github.io/myblog/myblog/2019/11/04/MVC-framework-SSR-CSR-SPA/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="chinyun">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/myblog/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Jinny's blog">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-            
-            <a href="/myblog/2019/11/04/MVC-framework-SSR-CSR-SPA/" class="post-title-link" itemprop="url">MVC framework, SSR, CSR, SPA</a>
-          
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              
-                
-              
-
-              <time title="Created: 2019-11-04 21:18:49" itemprop="dateCreated datePublished" datetime="2019-11-04T21:18:49+00:00">2019-11-04</time>
-            </span>
-          
-            
-
-            
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2019-11-13 11:10:58" itemprop="dateModified" datetime="2019-11-13T11:10:58+00:00">2019-11-13</time>
-              </span>
-            
-          
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="What-is-MVC-framework-Why-we-need"><a href="#What-is-MVC-framework-Why-we-need" class="headerlink" title="What is MVC framework? Why we need?"></a>What is MVC framework? Why we need?</h1><p>MVC 架構是為了讓複雜程式碼能夠根據各自負責的功能目的做區分而出現的開發設計模式，分別是 modle、view、controller 三個部分，在權責區分清楚的情況下，可以有更好的擴充性和維護性。</p>
-<p>modle 代表邏輯處理，view 負責 UI 的呈現，controller 則串連 modle 和 view，作為程式的流程控制。</p>
-<p>舉例：</p>
-<p>使用者造訪一個部落格網站，點擊文章列表頁面，瀏覽器發出 request 給伺服器，server side 處理 request；將請求丟給對應的 controller，controller 向 model 存取資料，model 回應傳回資料並 render html 交給 controller，controller 再回傳一整份 html 檔給瀏覽器，瀏覽器顯示包含資料內容的 html 畫面。</p>
-<h1 id="前後端分離"><a href="#前後端分離" class="headerlink" title="前後端分離"></a>前後端分離</h1><p>後端專注在提供資料，前端專注在顯示資料，把 data 跟 view 完全切開來，這樣要替換語言或框架時也比較方便，後端只要確保 API 接口一致，就不會影響前端，反之也是一樣。</p>
-<p>假如 server 有一天掛了，API 也跟著掛了，使用者依然可以造訪網頁，只是看不到資料而已，或者是你可以顯示出一個錯誤的圖案。但如果是舊的那種綁在一起的架構，server 一旦掛掉，你連畫面都渲染不出來。</p>
-<p>而這樣的做法會讓前端自己管理 URL 的狀態，去決定現在要顯示哪一個頁面。</p>
-<h1 id="SSR-Sever-side-Rendering"><a href="#SSR-Sever-side-Rendering" class="headerlink" title="SSR(Sever-side Rendering)"></a>SSR(Sever-side Rendering)</h1><p>view 的畫面是在後端動態產生 html，render 完成再 response 給前端（瀏覽器），本質上是「每一個不同頁面就回傳一份不同的 html 檔案」，每一個頁面之間的狀態不會互相干擾。</p>
-<h1 id="CSR-Client-side-Rendering"><a href="#CSR-Client-side-Rendering" class="headerlink" title="CSR(Client-side Rendering)"></a>CSR(Client-side Rendering)</h1><p>view 的畫面當前端拿到資料以後，才用 JavaScript 動態的產生，把內容填到網頁上面，並且需要管理不同頁面，根據路徑或用 hashtag 管理畫面切換。<br>前端 render 的難題在：「要怎麼只更新部分畫面，而不是暴力的每次都砍掉重練」。</p>
-<h1 id="SPA-Single-Page-Application"><a href="#SPA-Single-Page-Application" class="headerlink" title="SPA(Single-Page-Application)"></a>SPA(Single-Page-Application)</h1><p>所有個內容都由前端用 JavaScript 動態產生，用 AJAX 拿資料並搭配 JavaScript 來做畫面上的處理。<br>與之對應的概念是 MPA，Multiple Page Application。</p>
-<ul>
-<li><p>前端、後端各自有 MVC 框架<br>前端如果利用 SPA 來實作的話，會把原本應該是後端處理的一部份職責給搬到前端去，例如說狀態的管理跟路由；以往 Server 根據不同的路徑對應到不同的 Controller，進而渲染出不同的 View，可是現在 Server 無論什麼路徑都會輸出同一個檔案（index.html），所以你在前端也要判斷現在的網址是哪個，才能決定在前端應該渲染出哪個畫面，因此前端也開始需要 MVC 架構了，也就是由 router 去分類路徑並交給 controller 去分別連接 model 和 view。<br>藉由前後端各自的架構，後端只負責輸出資料，前端來負責抓資料跟渲染畫面。把前後端完完全全的切開了，就算後端壞掉，前端還是看得到畫面（只是可能會顯示個錯誤畫面之類的）；前端壞掉，後端還是能安穩的輸出資料供其他服務使用。</p>
-</li>
-<li><p>SEO 問題<br>由於 SPA 是由前端的 JavaScript 動態產生內容，因此如果你對 SPA 的網站按下右鍵 -&gt; 檢視原始碼，只會看到空蕩蕩的一片，只看得到一個 JavaScript 檔案跟一些最基本的 tag，這對於 SEO 的影響而言是不好的。<br>強大的 Google 的爬蟲其實支援執行 JavaScript，所以他依然會 index 你在前端渲染之後的頁面，但還有其他很多搜尋引擎，有些可能沒有像 Google 這麼強大，碰到 SPA 就只能索引空蕩蕩的 HTML，內容幾乎空白。<br>既然問題出在「第一次渲染」，在第一次渲染的時候把該輸出的資料都輸出(運用 server-side rendering)，對使用者來說還是一個 SPA，差別在於使用者接收到 HTML 的時候，就已經有完整的資料了，第一個頁面由 Server side render，之後的操作還是由 Client side render。</p>
-</li>
-</ul>
-<h1 id="Flux"><a href="#Flux" class="headerlink" title="Flux"></a>Flux</h1><p>Flux 是一種架構設計模式，幫助你撰寫有條理的前端架構，用於管理控制應用程式中資料的流向，確保資料是 one-way data flow，資料的定義不限於指來自 server 的邏輯資料，也包括 view 的變化等。 在 flux 的架構中，Store基本上是你唯一可以操作資料與儲存資料的地方。</p>
-<p>Flux Pattern 是這樣的：</p>
-<pre class="mermaid">graph LR;
-A(Action) --> B(Dispatcher);
-B --> C(Store);
-C --> D(View);</pre>
-
-<ul>
-<li>Flux 中有四位主要角色：</li>
-</ul>
-<ol>
-<li>Action：規範所有改變資料的動作，讓你可以快速掌握整個 App 的行為。</li>
-<li>Dispatcher：將目前發生的行為，告知給所有已註冊的 Store。</li>
-<li>Store：存放資料和業務邏輯，並且只提供 getter API 讓人取得資料。</li>
-<li>View：根據資料渲染 UI 和傾聽使用者的操作事件。</li>
-</ol>
-<p>當 action 被觸發後，View 就會透過 Dispatcher dispatch 出一個 Action，該 Action 可以包含一個 payload，說明你想做什麼事情以及你需要操作什麼資料，在 Store 資料做完更新後，要告訴前端頁面去刷新視圖(view)。</p>
-<ul>
-<li>Flux 的特性：</li>
-</ul>
-<ol>
-<li>單向資料流：改變資料的行為都必須經過 Action、Dispatcher，再到 Store。</li>
-<li>Single Source of Truth：資料統一存放於 Store，View 要資料都需跟 Store 拿。</li>
-</ol>
-<ul>
-<li>Flux 的優點：<br>用更清晰的模式，規範資料和頁面複雜互動情境下的資料流。</li>
-</ul>
-<p>事實上，MVC 跟 Flux 都只是一個概念，因此有各種不同的實作，加上MVC在資料流的處理上，並不像Flux一般有較為明確的定義，多數時候Model的更動與View的刷新可能會透過Controller來管理，讓Model單純存放data。</p>
-<p>如此一來，假若今天 View 的操作更動了 Model，而 Model 的變化又刷新了 View，在系統龐大的時候，一來一往，就會讓資料與頁面狀態變得非常複雜，要追蹤某個頁面的變動到底是誰觸發的，或是哪個資料改變了，必須從 Controller 去慢慢 trace。而若是遵照 Flux 的流程，任何 View 的 update 都只要去追蹤其 State 的來源 Store 即可，有一個明確的 flow 可以遵循，並且每個 View 所需要監聽的資料來源，可以依照 Store 來區分，資料流不會互相干擾，而且 Flux 能夠更輕鬆的做出更小單元的 Unit test，這是複雜的 Controller 難以達成的。</p>
-<h1 id="React-Redux-gt-解決-MVC-架構問題"><a href="#React-Redux-gt-解決-MVC-架構問題" class="headerlink" title="React + Redux =&gt; 解決 MVC 架構問題"></a>React + Redux =&gt; 解決 MVC 架構問題</h1><ul>
-<li>React 解決什麼問題？<br>React 是專注在 MVC 架構中的 view，以 state 來管理介面變化的開發框架，透過 virtualDOM 在 state 改變時只重新 render 改變的地方，不需要在頁面切換或資料狀態更新、介面變化時重新 render 整個畫面，有效增進了應用程式的效能和使用者體驗。</li>
-</ul>
-<p>React 把更改 state 的邏輯寫在各自的 component，然而當項目的邏輯變得越來越複雜的時候，將難以釐清 state 和 view 之間的對應關係：一個 state 的變化可能引起多個 view 的變化，一個 view 上面觸發的事件可能引起多個 state 的改變，需要對所有引起 state 變化的情況進行統一管理，於是就需要 Redux。</p>
-<ul>
-<li>Redux 解決什麼問題？<br>Redux 受到幾個 Flux Pattern 重要特質的影響，Redux 透過單一的狀態樹將所有 state 存於一個物件中，並由 Store 去管理；一律透過 action 描述更新動作，經過 Reducer 來變更 state。<br>Reducer 根據 action 物件和舊資料回傳新資料，因此你可以紀錄 action，並重新調用 reducer 函數來得到一樣的狀態，幫助我們做可預測的狀態管理，能夠追蹤 state 和資料變化，更好維護而且資料之間不會互相干擾。</li>
-</ul>
-<p>Redux Pattern:</p>
-<pre class="mermaid">graph LR;
-A(Action) -- Middleware --> B(Reducer);
-B --> C(Store);
-C --> D(Make changes);</pre>
-
-<p><strong>所以使用 Redux + React，可以促進維護性和可擴展性。</strong></p>
-<p>Redux 和 Flux pattern 不同的地方在於： </p>
-<ol>
-<li><p>Redux 只有一個 store，業務資料都存於一個狀態物件中，並由 Store 去管理；Flux 裡面會有多個 store，分別管理不同資料。</p>
-</li>
-<li><p>Redux 中更新的邏輯不在 store 中執行而是由 reducer 負責執行；Flux 在 store 裡面執行更新邏輯，當 store 變化的時候再通知 controller-view 更新自己的數據。</p>
-</li>
-</ol>
-<p>reducer 是一個純函數，這個函數被表述為(previousState, action) =&gt; newState，它根據應用的狀態和當前的 action 推導出新的 state 。 Redux 中有多個 reducer，每個 reducer 負責維護應用整體 state 樹中的某一部分，多個 reducer 可以通過 combineReducers 方法合成一個根 reducer，這個根 reducer 負責維護完整的 state，當一個 action 被觸發，store 會調用 dispatch 方法向某個特定的 reducer 傳遞該 action，reducer 收到 action 之後執行對應的更新邏輯然後返回一個新的 state，state 的更新最終會傳遞到根 reducer 處，返回一個全新的完整的 state，然後傳遞給 view。</p>
-<ol start="2">
-<li>Redux 沒有 Dispatcher 的概念，它使用 reducer 來進行事件的處理，Store 提供 dispatch API 來傳遞 action 物件；<br>Flux 的 Dispatcher 負責將 action 物件傳遞給每個 Store</li>
-</ol>
-<p>Redux 和 Flux 之間最大的區別就是對 store/reducer 的抽象，Flux 中 store 是各自為陣的，每個 store 只對對應的 controller-view 負責，每次更新都只通知對應的 controller-view；而 Redux 中各子 reducer 都是由根 reducer 統一管理的，每個子 reducer 的變化都要經過根 reducer 的整合。</p>
-<h1 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h1><p><a href="https://medium.com/@hulitw/introduction-mvc-spa-and-ssr-545c941669e9" target="_blank" rel="noopener">跟著小明一起搞懂技術名詞：MVC、SPA 與 SSR 2018</a><br><a href="https://ithelp.ithome.com.tw/articles/10194968" target="_blank" rel="noopener">Node.js-Backend見聞錄(10)：關於後端觀念(六)-關於MVC 2017</a><br><a href="https://blog.techbridge.cc/2017/09/16/frontend-backend-mvc/" target="_blank" rel="noopener">前後端分離與 SPA 2017</a><br><a href="https://blog.techbridge.cc/2016/04/29/introduce-flux-from-flux-and-mvc/" target="_blank" rel="noopener">從 Flux 與 MVC 的差異來簡介 Flux 2016</a><br><a href="http://blog.turn.tw/?p=1539" target="_blank" rel="noopener">MVC是一個巨大誤會 2015</a><br><a href="https://imweb.io/topic/57711e37f0a5487b05f325b5" target="_blank" rel="noopener">浅谈 React、Flux 与 Redux 2016</a><br><a href="https://medium.com/4cats-io/%E6%B7%B1%E5%85%A5%E6%B7%BA%E5%87%BA-redux-7b08403c4957" target="_blank" rel="noopener">深入淺出 Redux 2016</a></p>
-
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-          <div class="post-eof"></div>
-        
-      </footer>
-  </div>
-  
-  
-  
-  </article>
-
-    
   </div>
 
   
@@ -1498,7 +1473,7 @@ C --> D(Make changes);</pre>
         
           <a href="/myblog/archives/">
         
-          <span class="site-state-item-count">26</span>
+          <span class="site-state-item-count">27</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>

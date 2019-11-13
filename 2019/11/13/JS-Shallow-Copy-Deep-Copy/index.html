@@ -1,0 +1,498 @@
+<!DOCTYPE html>
+
+
+
+
+
+<html lang="zh-tw">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 3.9.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/myblog/images/apple-touch-icon-next.png?v=7.4.1">
+  <link rel="icon" type="image/png" sizes="32x32" href="/myblog/images/favicon-32x32-next.png?v=7.4.1">
+  <link rel="icon" type="image/png" sizes="16x16" href="/myblog/images/favicon-16x16-next.png?v=7.4.1">
+  <link rel="mask-icon" href="/myblog/images/logo.svg?v=7.4.1" color="#222">
+
+<link rel="stylesheet" href="/myblog/css/main.css?v=7.4.1">
+
+
+<link rel="stylesheet" href="/myblog/lib/font-awesome/css/font-awesome.min.css?v=4.7.0">
+
+
+<script id="hexo-configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/myblog/',
+    scheme: 'Pisces',
+    version: '7.4.1',
+    exturl: false,
+    sidebar: {"position":"left","display":"post","offset":12,"onmobile":false},
+    copycode: {"enable":false,"show_result":false,"style":null},
+    back2top: {"enable":true,"sidebar":false,"scrollpercent":false},
+    bookmark: {"enable":false,"color":"#222","save":"auto"},
+    fancybox: false,
+    mediumzoom: false,
+    lazyload: false,
+    pangu: false,
+    algolia: {
+      appID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    },
+    localsearch: {"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},
+    path: '',
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    translation: {
+      copy_button: 'Copy',
+      copy_success: 'Copied',
+      copy_failure: 'Copy failed'
+    },
+    sidebarPadding: 40
+  };
+</script>
+
+  <meta name="description" content="為什麼會有深淺拷貝的差異？因為 JavaScript 中，基本型別(primitve)與物件型別(object)的值的賦予方式不同，基本型別是 pass by value，物件型別是 pass by sharing。相關介紹可看：JS-pass by value or reference 因為值賦予方式的差異，在複製物件例如 object, array 等資料類型時，根據拷貝資料的形式，可以分為淺">
+<meta name="keywords" content="JavaScript, React, d3, NodeJS, Web">
+<meta property="og:type" content="article">
+<meta property="og:title" content="JS-Shallow Copy &amp; Deep Copy">
+<meta property="og:url" content="https://chinyun.github.io/myblog/2019/11/13/JS-Shallow-Copy-Deep-Copy/index.html">
+<meta property="og:site_name" content="Jinny&#39;s blog">
+<meta property="og:description" content="為什麼會有深淺拷貝的差異？因為 JavaScript 中，基本型別(primitve)與物件型別(object)的值的賦予方式不同，基本型別是 pass by value，物件型別是 pass by sharing。相關介紹可看：JS-pass by value or reference 因為值賦予方式的差異，在複製物件例如 object, array 等資料類型時，根據拷貝資料的形式，可以分為淺">
+<meta property="og:locale" content="zh-tw">
+<meta property="og:updated_time" content="2019-11-13T12:13:55.737Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="JS-Shallow Copy &amp; Deep Copy">
+<meta name="twitter:description" content="為什麼會有深淺拷貝的差異？因為 JavaScript 中，基本型別(primitve)與物件型別(object)的值的賦予方式不同，基本型別是 pass by value，物件型別是 pass by sharing。相關介紹可看：JS-pass by value or reference 因為值賦予方式的差異，在複製物件例如 object, array 等資料類型時，根據拷貝資料的形式，可以分為淺">
+  <link rel="canonical" href="https://chinyun.github.io/myblog/2019/11/13/JS-Shallow-Copy-Deep-Copy/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome: false,
+    isPost: true,
+    isPage: false,
+    isArchive: false
+  };
+</script>
+
+  <title>JS-Shallow Copy & Deep Copy | Jinny's blog</title>
+  
+
+
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .logo,
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-tw">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-meta">
+
+    <div>
+      <a href="/myblog/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Jinny's blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+        <p class="site-subtitle">Writing For Sharing</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+      
+      
+      
+        
+        <li class="menu-item menu-item-home">
+      
+    
+
+    <a href="/myblog/" rel="section"><i class="fa fa-fw fa-home"></i>Home</a>
+
+  </li>
+      
+      
+      
+        
+        <li class="menu-item menu-item-archives">
+      
+    
+
+    <a href="/myblog/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>Archives</a>
+
+  </li>
+  </ul>
+
+</nav>
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+            
+
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+      <article itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block post">
+    <link itemprop="mainEntityOfPage" href="https://chinyun.github.io/myblog/myblog/2019/11/13/JS-Shallow-Copy-Deep-Copy/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="chinyun">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/myblog/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Jinny's blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">JS-Shallow Copy & Deep Copy
+
+          
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              
+                
+              
+
+              <time title="Created: 2019-11-13 19:12:02 / Modified: 12:13:55" itemprop="dateCreated datePublished" datetime="2019-11-13T19:12:02+00:00">2019-11-13</time>
+            </span>
+          
+            
+
+            
+          
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h1 id="為什麼會有深淺拷貝的差異？"><a href="#為什麼會有深淺拷貝的差異？" class="headerlink" title="為什麼會有深淺拷貝的差異？"></a>為什麼會有深淺拷貝的差異？</h1><p>因為 JavaScript 中，基本型別(primitve)與物件型別(object)的值的賦予方式不同，基本型別是 pass by value，物件型別是 pass by sharing。相關介紹可看：<a href="https://chinyun.github.io/myblog/2019/11/13/JS-pass-by-value-or-reference/">JS-pass by value or reference</a></p>
+<p>因為值賦予方式的差異，在複製物件例如 object, array 等資料類型時，根據拷貝資料的形式，可以分為淺拷貝(shallow copy)及深拷貝(deep copy)。<br>對淺拷貝來說，只是複製 collection structure，而不是 element，With a shallow copy, two collections now share the individual elements. Collections can be diverse data structures which stores multiple data items.<br>因此對於基本型別來說，淺拷貝(用等號賦值)會傳值，但對物件型別來說，淺拷貝是傳遞 reference，讓兩者可以共用一個記憶體的物件資料，這樣的話在指派物件型別的資料的第二層或更深層內容時，會同時影響兩個地方。</p>
+<p>淺拷貝只複製指向某個物件的指標，而不複製物件本身，新舊物件還是共用同一塊記憶體。<br>而深拷貝是整個複製，包含element，會另外創造一個一模一樣的物件，新物件跟原物件不共用記憶體，修改新物件不會改到原物件。所以當我們在使用有多層結構的物件資料時，要盡量用深拷貝。<br>一般物件如果用等號賦值：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">var obj1 = &#123; a: 10, b: 20, c: 30 &#125;;</span><br><span class="line">var obj2 = obj1;</span><br><span class="line">obj2.b = 100;</span><br><span class="line"></span><br><span class="line">console.log(obj1); // &#123; a: 10, b: 100, c: 30 &#125; &lt;-- b 被改到了</span><br><span class="line">console.log(obj2); // &#123; a: 10, b: 100, c: 30 &#125;</span><br></pre></td></tr></table></figure>
+
+<h1 id="如何進行淺拷貝、深拷貝？"><a href="#如何進行淺拷貝、深拷貝？" class="headerlink" title="如何進行淺拷貝、深拷貝？"></a>如何進行淺拷貝、深拷貝？</h1><p>一般而言 基本型別的拷貝方法就是用 等號賦值，而物件型別例如 array 或 object等就有很多方式，依照拷貝的層次深度可以分為淺拷貝和深拷貝：如果物件中屬性的值也是物件，只能複製到<strong>第一層</strong>物件的屬性，而無法複製到屬性值的物件(第二層)，就無法達到實際的複製，而是會與舊物件一起共用同一塊記憶體；這樣的複製方法稱為「淺拷貝」。相反地，深拷貝會另外創造一個一模一樣的物件，新物件跟原物件不共用記憶體，修改新物件不會改到原物件。</p>
+<ul>
+<li><p>淺拷貝方法</p>
+<ul>
+<li><p><strong>Array.concat</strong>：一般Array.concat的用法是合併兩個陣列</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">  var alpha = [&apos;a&apos;, &apos;b&apos;, &apos;c&apos;],</span><br><span class="line">    numeric = [1, 2, 3];</span><br><span class="line">  var alphaNumeric = alpha.concat(numeric);</span><br><span class="line">​  console.log(alphaNumeric); // [&apos;a&apos;, &apos;b&apos;, &apos;c&apos;, 1, 2, 3]</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><strong>Array.slice</strong>：一般Array.slice()的方法是複製一個新的陣列，可帶入參數 <code>Array.slice(start, end)</code>，當不輸入參數值的話會直接複製一個。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">var animals = [&apos;ant&apos;, &apos;bison&apos;, &apos;camel&apos;, &apos;duck&apos;, &apos;elephant&apos;];</span><br><span class="line">console.log(animals.slice(2));</span><br><span class="line">// Array [&quot;camel&quot;, &quot;duck&quot;, &quot;elephant&quot;]</span><br><span class="line">​</span><br><span class="line">console.log(animals.slice(2, 4));</span><br><span class="line">// Array [&quot;camel&quot;, &quot;duck&quot;]</span><br><span class="line">​</span><br><span class="line">console.log(animals.slice());</span><br><span class="line">// Array [&apos;ant&apos;, &apos;bison&apos;, &apos;camel&apos;, &apos;duck&apos;, &apos;elephant&apos;];</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><strong>手動複製</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">var obj1 = &#123; a: 10, b: 20, c: 30 &#125;;</span><br><span class="line">var obj2 = &#123; a: obj1.a, b: obj1.b, c: obj1.c &#125;;</span><br><span class="line">obj2.b = 100;</span><br><span class="line"></span><br><span class="line">console.log(obj1); // &#123; a: 10, b: 20, c: 30 &#125; &lt;-- 沒被改到</span><br><span class="line">console.log(obj2); // &#123; a: 10, b: 100, c: 30 &#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><strong>Object.assign</strong>：用來合併物件，用法為 <code>Object.assign(target, ...source)</code>若目標物件為空物件則可視為複製一個source的物件。<br><code>Object.assign({}, obj1)</code>的意思是先建立一個空物件{}，接著把obj1中所有的屬性複製過去，因為Object.assign跟我們手動複製的效果相同，所以一樣<strong>只能處理深度只有一層的物件</strong>，沒辦法做到真正的 Deep Copy，不過如果要複製的物件只有一層的話可以使用他。</p>
+</li>
+<li><p><strong>展開運算子(Spread Operator)</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">let obj = &#123;name: &apos;王康寶&apos;, age:&#123;child: 18&#125;&#125;</span><br><span class="line">let copy = &#123;...obj&#125;;</span><br><span class="line"></span><br><span class="line">copy.name = &apos;盧卡斯&apos;;</span><br><span class="line">copy.age.child = 99;</span><br><span class="line"></span><br><span class="line">console.log(obj);  //&#123;name: &quot;王康寶&quot;, age:&#123;child: 99&#125;&#125;</span><br><span class="line">console.log(copy); //&#123;name: &quot;盧卡斯&quot;, age:&#123;child: 99&#125;&#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+<li><p>深拷貝方法</p>
+<ul>
+<li><strong>JSON.parse(JSON.stringify(object_array))</strong>:<ul>
+<li>JSON.parse():把字串轉成物件</li>
+<li>JSON.stringify():把物件轉成字串<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">  let obj1 = &#123; a:&#123;b:10&#125; &#125;;</span><br><span class="line">  let obj2_string = JSON.stringify(obj1);</span><br><span class="line">  console.log(obj2_string); //&quot;&#123;&quot;a&quot;:&#123;&quot;b&quot;:10&#125;&#125;&quot;;</span><br><span class="line">​</span><br><span class="line">  let obj2 = JSON.parse(obj2_string);</span><br><span class="line">  console.log(obj2); //&#123;a:&#123;b:10&#125;&#125;</span><br><span class="line">​</span><br><span class="line">  obj2.a.b = 20;</span><br><span class="line">  console.log(obj1); //&#123;a:&#123;b:10&#125;&#125;</span><br><span class="line">  console.log(obj2); //&#123;a:&#123;b:20&#125;&#125;</span><br><span class="line">  ``` </span><br><span class="line">  只有可以轉成JSON格式的物件才可以這樣用，像 function、Set、Map..等型態就沒辦法轉成 JSON。</span><br><span class="line"></span><br><span class="line">  - **jQuery `$.extend`**</span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+</li>
+</ul>
+<p>var $ = require(‘jquery’);</p>
+<p>var obj1 = {<br>  a: 1,<br>  b: { f: { g: 1 } },<br>  c: [1, 2, 3]<br>};</p>
+<p>var obj2 = $.extend(true, {}, obj1);<br>console.log(obj1.b.f === obj2.b.f); // false</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">- **lodash `_.cloneDeep`**</span><br></pre></td></tr></table></figure>
+
+<p>var _ = require(‘lodash’);<br>var obj1 = {<br>  a: 1,<br>  b: { f: { g: 1 } },<br>  c: [1, 2, 3]<br>};</p>
+<p>var obj2 = _.cloneDeep(obj1);<br>console.log(obj1.b.f === obj2.b.f); // false</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">- **自己寫**</span><br><span class="line">例如下面這個在 react app 裡面用 slice() 和 Object.assign(target, ...sources) 來改變深層結構資料的方法：</span><br><span class="line">[GitHub Repo:Tripper-app](https://github.com/chinyun/Tripper-app/blob/master/src/containers/App.js)</span><br></pre></td></tr></table></figure>
+
+<p>updateBudgets = (journey, journeyId) =&gt; {<br>  const index = this.state.journeyList.findIndex(item =&gt; item.id === journeyId);<br>  if (index !== -1) {</p>
+<pre><code>this.setState({
+  journeys: [
+    ...this.state.journeys.slice(0, index),
+    Object.assign({}, this.state.journeys[index], journey[0]),
+    ...this.state.journeys.slice(index + 1)
+  ]
+})</code></pre><p>  }<br>};</p>
+<pre><code></code></pre></li>
+</ul>
+<h1 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h1><p><a href="https://dustinhsiao21.com/2018/01/07/javascript-shallow-copy-and-deep-copy/" target="_blank" rel="noopener">關於JAVASCRIPT中的SHALLOW COPY(淺拷貝)及DEEP COPY(深拷貝)</a><br><a href="https://larry850806.github.io/2016/09/20/shallow-vs-deep-copy/" target="_blank" rel="noopener">[Javascript] 關於 JS 中的淺拷貝和深拷貝</a></p>
+
+    </div>
+
+    
+    
+    
+        
+      
+
+      <footer class="post-footer">
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-next post-nav-item">
+              
+                <a href="/myblog/2019/11/13/JS-pass-by-value-or-reference/" rel="next" title="JS-pass by value or reference">
+                  <i class="fa fa-chevron-left"></i> JS-pass by value or reference
+                </a>
+              
+            </div>
+
+            <span class="post-nav-divider"></span>
+
+            <div class="post-nav-prev post-nav-item">
+              
+            </div>
+          </div>
+        
+      </footer>
+    
+  </div>
+  
+  
+  
+  </article>
+
+  </div>
+
+
+          </div>
+          
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+        
+        
+        
+        
+      
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#為什麼會有深淺拷貝的差異？"><span class="nav-number">1.</span> <span class="nav-text">為什麼會有深淺拷貝的差異？</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#如何進行淺拷貝、深拷貝？"><span class="nav-number">2.</span> <span class="nav-text">如何進行淺拷貝、深拷貝？</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Reference"><span class="nav-number">3.</span> <span class="nav-text">Reference</span></a></li></ol></div>
+        
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">chinyun</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        
+          <a href="/myblog/archives/">
+        
+          <span class="site-state-item-count">27</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+    
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">chinyun</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> v3.9.0</div>
+  <span class="post-meta-divider">|</span>
+  <div class="theme-info">Theme – <a href="https://theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Pisces</a> v7.4.1</div>
+  <script src='https://unpkg.com/mermaid@7.1.2/dist/mermaid.min.js'></script>
+  <script>
+    if (window.mermaid) {
+      mermaid.initialize("");
+    }
+  </script>
+
+        
+
+
+
+
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/myblog/lib/anime.min.js?v=3.1.0"></script>
+  <script src="/myblog/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  <script src="/myblog/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+<script src="/myblog/js/utils.js?v=7.4.1"></script><script src="/myblog/js/motion.js?v=7.4.1"></script>
+<script src="/myblog/js/schemes/pisces.js?v=7.4.1"></script>
+<script src="/myblog/js/next-boot.js?v=7.4.1"></script>
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<script>
+if (document.querySelectorAll('pre.mermaid').length) {
+  NexT.utils.getScript('//cdn.jsdelivr.net/npm/mermaid@8/dist/mermaid.min.js', () => {
+    mermaid.initialize({
+      theme: 'forest',
+      logLevel: 3,
+      flowchart: { curve: 'linear' },
+      gantt: { axisFormat: '%m/%d/%Y' },
+      sequence: { actorMargin: 50 }
+    });
+  }, window.mermaid);
+}
+</script>
+
+
+
+
+  
+
+  
+
+  
+
+</body>
+</html>
