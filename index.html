@@ -233,7 +233,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2019-11-13 09:23:13" itemprop="dateModified" datetime="2019-11-13T09:23:13+00:00">2019-11-13</time>
+                <time title="Modified: 2019-11-13 09:24:23" itemprop="dateModified" datetime="2019-11-13T09:24:23+00:00">2019-11-13</time>
               </span>
             
           
@@ -381,7 +381,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2019-11-13 09:23:13" itemprop="dateModified" datetime="2019-11-13T09:23:13+00:00">2019-11-13</time>
+                <time title="Modified: 2019-11-13 09:24:23" itemprop="dateModified" datetime="2019-11-13T09:24:23+00:00">2019-11-13</time>
               </span>
             
           
@@ -404,9 +404,11 @@
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">function hello()&#123;</span><br><span class="line">  console.log(this)</span><br><span class="line">&#125;</span><br><span class="line">  </span><br><span class="line">hello()</span><br></pre></td></tr></table></figure>
 
 <p>一旦脫離了物件導向，也就是在 class 外面的 this，其實沒有太大的意義。<br>在這種很沒意義的情況下，this 的值在瀏覽器底下就會是 <code>window</code>，在 node.js 底下會是 <code>global</code>，如果是在嚴格模式，this 的值就會是 <code>undefined</code>。這個規則就是所謂的「預設綁定」。</p>
-<h2 id="this-值的改變"><a href="#this-值的改變" class="headerlink" title="this 值的改變"></a>this 值的改變</h2><p>可以用 call、apply 與 bind 改變 this 的值：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">&apos;use strict&apos;;</span><br><span class="line">function hello(a, b) &#123;</span><br><span class="line">  console.log(this, a, b)</span><br><span class="line">&#125;</span><br><span class="line">  </span><br><span class="line">hello.call(&apos;yo&apos;, 1, 2) // yo 1 2</span><br><span class="line">hello.apply(&apos;hihihi&apos;, [1, 2]) // hihihi 1 2</span><br></pre></td></tr></table></figure>
+<h2 id="this-值的改變"><a href="#this-值的改變" class="headerlink" title="this 值的改變"></a>this 值的改變</h2><ul>
+<li>可以用 call、apply 與 bind 改變 this 的值：<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">&apos;use strict&apos;;</span><br><span class="line">function hello(a, b) &#123;</span><br><span class="line">  console.log(this, a, b)</span><br><span class="line">&#125;</span><br><span class="line">  </span><br><span class="line">hello.call(&apos;yo&apos;, 1, 2) // yo 1 2</span><br><span class="line">hello.apply(&apos;hihihi&apos;, [1, 2]) // hihihi 1 2</span><br></pre></td></tr></table></figure>
 
+</li>
+</ul>
 <p>call 跟 apply 的差別就是 apply 在傳參數時要用 array 包起來。</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">class Car &#123;</span><br><span class="line">  hello() &#123;</span><br><span class="line">    console.log(this)</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line">  </span><br><span class="line">const myCar = new Car()</span><br><span class="line">myCar.hello() // myCar instance</span><br><span class="line">myCar.hello.call(&apos;yaaaa&apos;) // yaaaa</span><br></pre></td></tr></table></figure>
 
@@ -416,7 +418,10 @@
 <p>使用 bind 之後，call 方法也沒有辦法覆蓋掉。<br>如果是在<strong>非嚴格模式</strong>底下，無論是用 call、apply 還是 bind，你傳進去的如果是 primitive 都會被轉成 object：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">function hello() &#123;</span><br><span class="line">  console.log(this)</span><br><span class="line">&#125;</span><br><span class="line">  </span><br><span class="line">hello.call(123) // [Number: 123]</span><br><span class="line">const myHello = hello.bind(&apos;my&apos;)</span><br><span class="line">myHello() // [String: &apos;my&apos;]</span><br></pre></td></tr></table></figure>
 
-<h2 id="JavaScript-object-裡的-this"><a href="#JavaScript-object-裡的-this" class="headerlink" title="JavaScript object 裡的 this"></a>JavaScript object 裡的 this</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">const obj = &#123;</span><br><span class="line">  value: 1,</span><br><span class="line">  hello: function() &#123;</span><br><span class="line">    console.log(this.value)</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line">  </span><br><span class="line">obj.hello() // 1</span><br></pre></td></tr></table></figure>
+<ul>
+<li>this 是在運行時求值的，可以適用於任何 function，從不同 object 調用同一個 function 可以會有不同 this 的值。</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">const obj = &#123;</span><br><span class="line">  value: 1,</span><br><span class="line">  hello: function() &#123;</span><br><span class="line">    console.log(this.value)</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line">  </span><br><span class="line">obj.hello() // 1</span><br></pre></td></tr></table></figure>
 
 <p>this 的值跟作用域跟程式碼的位置在哪裡完全無關，只跟「你如何呼叫」有關。</p>
 <p>作用域的概念舉例：</p>
@@ -494,7 +499,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2019-11-13 09:23:13" itemprop="dateModified" datetime="2019-11-13T09:23:13+00:00">2019-11-13</time>
+                <time title="Modified: 2019-11-13 09:24:23" itemprop="dateModified" datetime="2019-11-13T09:24:23+00:00">2019-11-13</time>
               </span>
             
           
@@ -598,7 +603,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2019-11-13 09:23:13" itemprop="dateModified" datetime="2019-11-13T09:23:13+00:00">2019-11-13</time>
+                <time title="Modified: 2019-11-13 09:24:23" itemprop="dateModified" datetime="2019-11-13T09:24:23+00:00">2019-11-13</time>
               </span>
             
           
@@ -728,7 +733,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2019-11-13 09:23:13" itemprop="dateModified" datetime="2019-11-13T09:23:13+00:00">2019-11-13</time>
+                <time title="Modified: 2019-11-13 09:24:23" itemprop="dateModified" datetime="2019-11-13T09:24:23+00:00">2019-11-13</time>
               </span>
             
           
@@ -880,7 +885,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2019-11-13 09:23:13" itemprop="dateModified" datetime="2019-11-13T09:23:13+00:00">2019-11-13</time>
+                <time title="Modified: 2019-11-13 09:24:23" itemprop="dateModified" datetime="2019-11-13T09:24:23+00:00">2019-11-13</time>
               </span>
             
           
@@ -982,7 +987,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2019-11-13 09:23:13" itemprop="dateModified" datetime="2019-11-13T09:23:13+00:00">2019-11-13</time>
+                <time title="Modified: 2019-11-13 09:24:23" itemprop="dateModified" datetime="2019-11-13T09:24:23+00:00">2019-11-13</time>
               </span>
             
           
@@ -1092,7 +1097,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2019-11-13 09:23:13" itemprop="dateModified" datetime="2019-11-13T09:23:13+00:00">2019-11-13</time>
+                <time title="Modified: 2019-11-13 09:24:23" itemprop="dateModified" datetime="2019-11-13T09:24:23+00:00">2019-11-13</time>
               </span>
             
           
@@ -1216,7 +1221,7 @@ C --> D(Make changes);</pre>
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2019-11-13 09:23:13" itemprop="dateModified" datetime="2019-11-13T09:23:13+00:00">2019-11-13</time>
+                <time title="Modified: 2019-11-13 09:24:23" itemprop="dateModified" datetime="2019-11-13T09:24:23+00:00">2019-11-13</time>
               </span>
             
           
@@ -1368,7 +1373,7 @@ C --> D(Make changes);</pre>
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2019-11-13 09:23:13" itemprop="dateModified" datetime="2019-11-13T09:23:13+00:00">2019-11-13</time>
+                <time title="Modified: 2019-11-13 09:24:23" itemprop="dateModified" datetime="2019-11-13T09:24:23+00:00">2019-11-13</time>
               </span>
             
           
