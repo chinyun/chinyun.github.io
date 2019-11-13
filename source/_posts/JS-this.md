@@ -39,7 +39,7 @@ hello()
 
 ## this 值的改變
 
-可以用 call、apply 與 bind 改變 this 的值：
+- 可以用 call、apply 與 bind 改變 this 的值：
 ```
 'use strict';
 function hello(a, b) {
@@ -86,7 +86,7 @@ const myHello = hello.bind('my')
 myHello() // [String: 'my']
 ```
 
-## JavaScript object 裡的 this
+- this 是在運行時求值的，可以適用於任何 function，從不同 object 調用同一個 function 可以會有不同 this 的值。
 
 ```
 const obj = {
