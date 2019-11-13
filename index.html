@@ -193,6 +193,154 @@
   
   
   <div class="post-block home">
+    <link itemprop="mainEntityOfPage" href="https://chinyun.github.io/myblog/myblog/2019/11/12/JS-hoisting-scope-closure/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="chinyun">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/myblog/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Jinny's blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+            
+            <a href="/myblog/2019/11/12/JS-hoisting-scope-closure/" class="post-title-link" itemprop="url">JS hoisting,scope,closure</a>
+          
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              
+                
+              
+
+              <time title="Created: 2019-11-12 19:59:07" itemprop="dateCreated datePublished" datetime="2019-11-12T19:59:07+00:00">2019-11-12</time>
+            </span>
+          
+            
+
+            
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2019-11-13 09:23:13" itemprop="dateModified" datetime="2019-11-13T09:23:13+00:00">2019-11-13</time>
+              </span>
+            
+          
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>Hoisting、Scope 和 Closure 在 JavaScript 中是很重要的觀念，因爲會影響我們如何撰寫 JavaScript。了解這三個概念可以幫助我們了解 JaveScript 在內文執行的運作原理，尤其是在創建和執行階段，JaveScript 的執行機制會如何理解我們寫的程式碼，並跑出我們想要的結果。</p>
+<h1 id="Hoisting"><a href="#Hoisting" class="headerlink" title="Hoisting"></a>Hoisting</h1><p>在執行任何程式碼前，JavaScript 會把變數和函數的宣告在編譯階段就放入記憶體，如此即便我們先寫調用某一函式的程式碼，再寫該函式的內容，JavaScript 也還是可以知道這段程式碼的意義：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">catName(&quot;Chloe&quot;);</span><br><span class="line"></span><br><span class="line">function catName(name) &#123;</span><br><span class="line">  console.log(&quot;My cat&apos;s name is &quot; + name);</span><br><span class="line">&#125;</span><br><span class="line">/*上面程式的結果是: &quot;My cat&apos;s name is Chloe&quot;*/</span><br></pre></td></tr></table></figure>
+
+<p>即使我們函式的程式碼之前就先呼叫它，程式碼仍然可以運作。這是出於 JavaScript 內文執行的運作原理。<br>提升也適用於其他型別和變數。變數可以在宣告之前進行初始化和使用，但如果沒有初始化，就不能使用它們。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">num = 6;</span><br><span class="line">num + 7;</span><br><span class="line">var num; </span><br><span class="line">/* 只要 num 有被宣告，就不會有錯誤 */</span><br></pre></td></tr></table></figure>
+
+<p>JavaScript 僅提升宣告的部分，而不是初始化。如果在使用該變數後才宣告和初始化，那麼該值將是 undefined。以下兩個範例顯示了這個特性。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">var x = 1; // 初始化 x</span><br><span class="line">console.log(x + &quot; &quot; + y);  // &apos;1 undefined&apos;</span><br><span class="line">var y = 2;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">var x = 1; // 初始化 x</span><br><span class="line">var y; // 宣告 y</span><br><span class="line">console.log(x + &quot; &quot; + y);  // &apos;1 undefined&apos;</span><br><span class="line">y = 2; // 初始化 y</span><br></pre></td></tr></table></figure>
+
+<p>函數宣告的優先權比變數宣告高，如果 function 調用時有傳參數進來，就會宣告該參數代表的變數意義並賦值。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">function test(v) &#123;</span><br><span class="line">  var v</span><br><span class="line">  console.log(v)</span><br><span class="line">  v = 3</span><br><span class="line">&#125;</span><br><span class="line">test(10) // 10</span><br></pre></td></tr></table></figure>
+
+<p>需要注意的是，只有 declaration 宣告式的 function (ex:<code>function func(){...}</code>)會被在編譯階段提升，而 expression 表達式宣告的 function (ex:<code>let func = function(){...}</code>)會在執行階段才被存放到記憶體中。</p>
+<h1 id="Scope-作用域"><a href="#Scope-作用域" class="headerlink" title="Scope 作用域"></a>Scope 作用域</h1><ul>
+<li>Execution Context 執行環境<br>要了解 Scope 須先知道 <strong>Execution Context 執行環境</strong> 的概念。<br>Execution Context is a fancy word for describing the environment in which your Javascript code runs.</li>
+</ul>
+<p>當 JavaScript engine start up 程式碼準備好開始運行時，就會先建立 <strong>global execution context全域執行環境</strong>，然後建立一個 global object 和 this，在 browser 的環境中，global object 是 window， this === window，在 node.js 環境中， global object 是 global，this === global。<br>我們可以 assign variable、function 到 global object 中。</p>
+<p>執行環境在建立時會經歷兩個階段，分別是 ：</p>
+<ul>
+<li>Creation Phase 創造階段：變數宣告和函數宣告提升，自動跳過函式裡的程式碼。</li>
+<li>Execution Phase 執行階段：由上到下、一行一行地執行程式</li>
+</ul>
+<p>當 JavaScript engine 看到 function name() 函數被執行，就會創建一個 function name() execution context，新的 function execution context 會被加入到<strong>Execution stack 執行堆疊</strong>，並依序執行(Javascript 是單一執行緒，一次只能做一件事)，執行環境 的堆疊過程是具有 順序性 的：first in last out。</p>
+<ul>
+<li>Scope 作用域是什麼？</li>
+</ul>
+<p>Scope is where can I access the variable where’s that variable in my code. It just defines the accessibility, of variables and functions in the code.</p>
+<p>Scope 可以說是一個變數的生存範圍，出了這個範圍就無法存取到。在 JavaScript 裡面，可以分為兩種 Scope 作用域：</p>
+<ul>
+<li>Global Scope：表示全域、任何地方都能存取得到</li>
+<li>Lexical Scope：variable 被寫下來的那個地方，就是作用域<ul>
+<li>function scope</li>
+<li>block scope<br>it means that only by looking at the source code we can determine which environment the variables in data are avaliable in.<br>這與 Lexical Environment 有關，在物理上我們將 code 寫在哪裡，那就是該 variable 或 function 的 Lexical Environment。 In JS our lexical scope (avalible data + variables where the function was defined) determines our avalible variables. Not the function is called.(相反地，有一種叫做 Dynamic scope 的作用域機制 就是在程式執行時才動態決定的) </li>
+</ul>
+</li>
+</ul>
+<ul>
+<li>Scope Chain<br>透過程式碼層層的包裹，由內而外，直到 global scope 的這一條 scope chain，可以幫助找到要找的對象(通常是 variables)被寫下的地方(lexical environment)。</li>
+</ul>
+<p>在 ES6 以前，唯一產生作用域的方法就是 function，每一個 function 都有自己的作用域，在作用域外面你就存取不到這個 function 內部所定義的變數，然而 ES6 的時候引入了 let 跟 const，多了 block-scope 的概念。<br>延伸：<a href="https://cythilya.github.io/2016/10/28/es6-let-const-block-level-scope/" target="_blank" rel="noopener">ES6: let, const, Block-Level Scope</a></p>
+<p>因應ES6的出現，使用上建議大家不要再用var來宣告變數，改用let與const，而且優先使用const。<br>因為const在宣告時必須給定值，並且不能再被更改，這可以有效降低出現錯誤的機會。<br>同理，如果是需要變更的數值則改用作用範圍較小的let做宣告，來減少錯誤出現的機率，Ex: for迴圈。<br>– <a href="https://www.iware.com.tw/blog-JavaScript%20%E5%AE%A3%E5%91%8A:%20var%E3%80%81let%E3%80%81const.html" target="_blank" rel="noopener">JavaScript 宣告: var、let、const</a></p>
+<h1 id="Closure-閉包"><a href="#Closure-閉包" class="headerlink" title="Closure 閉包"></a>Closure 閉包</h1><p>「閉包（英語：Closure），又稱詞法閉包（Lexical Closure）或函式閉包（function closures），是參照了自由變數的函式。這個被參照的自由變數將和這個函式一同存在，即使已經離開了創造它的環境也不例外。閉包是由函式和與其相關的參照環境組合而成的實體。」–wiki<br>每個宣告的 function 都會儲存著[[Scope]]，而這個資訊裡面就是參照的環境。<br>「that all functions, independently from their type: anonymous, named, function expression or function declaration, because of the scope chain mechanism, are closures.</p>
+<p>from the theoretical viewpoint: all functions, since all they save at creation variables of a parent context. Even a simple global function, referencing a global variable refers a free variable and therefore, the general scope chain mechanism is used;<br>from the practical viewpoint: those functions are interesting which:</p>
+<ul>
+<li>continue to exist after their parent context is finished, e.g. inner functions returned from a parent function;</li>
+<li>use free variables.」–<a href="http://dmitrysoshnikov.com/ecmascript/chapter-6-closures/" target="_blank" rel="noopener">ECMA-262-3 in detail. Chapter 6. Closures.</a></li>
+</ul>
+<p>scopeChain 把每一層的 AO 和 VO 記錄下來，而變數就紀錄在AO 或 VO 裡，也因為 return 才把 AO 和 VO 保留下來。<br>closure 其實就是因為 scopeChain 有 reference 到其他 Execution Context 的 AO(active object) 或是 VO(variable object)，所以在離開之後還是可以存取到上層的變數，如果你是以會記住上層資訊的角度來看 closure，那所有的 function 都是 closure</p>
+<ul>
+<li><p>閉包是函式記得並存取 Lexical Scope 語彙範疇的能力，可說是指向特定 scope 的參考，因此當函式是在其宣告的 Lexical Scope 語彙範疇之外執行時也能正常運作。</p>
+</li>
+<li><p>迴圈與閉包搭配使用時的謬誤與陷阱。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">for (var i = 1; i &lt;= 5; i++) &#123;</span><br><span class="line">  setTimeout(function timer() &#123;</span><br><span class="line">    console.log(i);</span><br><span class="line">  &#125;, i * 1000 );</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>由於 console.log(i) 中的 i 會存取的範疇是 for 所在的範疇（目前看起來是全域範疇，因為 var 宣告的變數不具區塊範疇的特性），因此當 1 秒、2 秒…5 秒後執行 console.log(i) 時，就會去取 i 的值，而此時 for 迴圈已跑完，i 變成 6，因此就會每隔一秒印出一個「6」。<br>解決方法可以利用 IIFE（Immediately Invoked Function Expression）把一個 function 包起來並傳入 i 立即執行，所以迴圈每跑一圈其實就會立刻呼叫一個新的 function，因此就產生了新的作用域。如果你都覺得太麻煩不想用，恭喜，在 ES6 裡面有了 block scope 以後，你只要簡單地把迴圈裡面用的 var 改成 let 就行了：因為 let 的特性，所以其實迴圈每跑一圈都會產生一個新的作用域，因此 alert 出來的值就會是你想要的那個值。</p>
+</li>
+<li><p>模組模式可經由建立一個模組實體來調用內層函式，而內層函式由於具有閉包的特性，因此可存取外層的變數和函式。透過模組模式，可隱藏私密資訊，並選擇對外公開的 API。</p>
+</li>
+<li><p>利用模組依存性載入器或管理器或 ES6 模組來管理模組。</p>
+</li>
+</ul>
+<h1 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h1><p><a href="https://developer.mozilla.org/zh-TW/docs/Glossary/Hoisting" target="_blank" rel="noopener">提升（Hoisting）</a><br><a href="https://github.com/aszx87410/blog/issues/34#" target="_blank" rel="noopener">我知道你懂 hoisting，可是你了解到多深？</a><br><a href="https://medium.com/%E9%AD%94%E9%AC%BC%E8%97%8F%E5%9C%A8%E7%A8%8B%E5%BC%8F%E7%B4%B0%E7%AF%80%E8%A3%A1/%E6%B7%BA%E8%AB%87-javascript-%E5%9F%B7%E8%A1%8C%E7%92%B0%E5%A2%83-2976b3eaf248" target="_blank" rel="noopener">秒懂！JavaSript 執行環境與堆疊</a><br><a href="https://github.com/aszx87410/blog/issues/35" target="_blank" rel="noopener">所有的函式都是閉包：談 JS 中的作用域與 Closure</a><br><a href="https://cythilya.github.io/2018/10/22/closure/" target="_blank" rel="noopener">你懂 JavaScript 嗎？#15 閉包（Closure）</a><br><a href="https://github.com/healthyspi/weekly-notes/issues/8" target="_blank" rel="noopener">[2019-10-12] 進階 JavaScript - Closure </a><br><a href="https://openhome.cc/Gossip/JavaScript/Closure.html" target="_blank" rel="noopener">閉包（Closure）</a></p>
+<blockquote>
+<p>閉包也會用來作為物件私用（private）的模擬，以及名稱空間的管理等</p>
+</blockquote>
+
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+          <div class="post-eof"></div>
+        
+      </footer>
+  </div>
+  
+  
+  
+  </article>
+
+    
+        <article itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block home">
     <link itemprop="mainEntityOfPage" href="https://chinyun.github.io/myblog/myblog/2019/11/11/JS-this/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -233,7 +381,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2019-11-12 11:57:44" itemprop="dateModified" datetime="2019-11-12T11:57:44+00:00">2019-11-12</time>
+                <time title="Modified: 2019-11-13 09:23:13" itemprop="dateModified" datetime="2019-11-13T09:23:13+00:00">2019-11-13</time>
               </span>
             
           
@@ -346,7 +494,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2019-11-12 11:57:44" itemprop="dateModified" datetime="2019-11-12T11:57:44+00:00">2019-11-12</time>
+                <time title="Modified: 2019-11-13 09:23:13" itemprop="dateModified" datetime="2019-11-13T09:23:13+00:00">2019-11-13</time>
               </span>
             
           
@@ -450,7 +598,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2019-11-12 11:57:44" itemprop="dateModified" datetime="2019-11-12T11:57:44+00:00">2019-11-12</time>
+                <time title="Modified: 2019-11-13 09:23:13" itemprop="dateModified" datetime="2019-11-13T09:23:13+00:00">2019-11-13</time>
               </span>
             
           
@@ -580,7 +728,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2019-11-12 11:57:44" itemprop="dateModified" datetime="2019-11-12T11:57:44+00:00">2019-11-12</time>
+                <time title="Modified: 2019-11-13 09:23:13" itemprop="dateModified" datetime="2019-11-13T09:23:13+00:00">2019-11-13</time>
               </span>
             
           
@@ -732,7 +880,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2019-11-12 11:57:44" itemprop="dateModified" datetime="2019-11-12T11:57:44+00:00">2019-11-12</time>
+                <time title="Modified: 2019-11-13 09:23:13" itemprop="dateModified" datetime="2019-11-13T09:23:13+00:00">2019-11-13</time>
               </span>
             
           
@@ -834,7 +982,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2019-11-12 11:57:44" itemprop="dateModified" datetime="2019-11-12T11:57:44+00:00">2019-11-12</time>
+                <time title="Modified: 2019-11-13 09:23:13" itemprop="dateModified" datetime="2019-11-13T09:23:13+00:00">2019-11-13</time>
               </span>
             
           
@@ -944,7 +1092,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2019-11-12 11:57:44" itemprop="dateModified" datetime="2019-11-12T11:57:44+00:00">2019-11-12</time>
+                <time title="Modified: 2019-11-13 09:23:13" itemprop="dateModified" datetime="2019-11-13T09:23:13+00:00">2019-11-13</time>
               </span>
             
           
@@ -1068,7 +1216,7 @@ C --> D(Make changes);</pre>
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2019-11-12 11:57:44" itemprop="dateModified" datetime="2019-11-12T11:57:44+00:00">2019-11-12</time>
+                <time title="Modified: 2019-11-13 09:23:13" itemprop="dateModified" datetime="2019-11-13T09:23:13+00:00">2019-11-13</time>
               </span>
             
           
@@ -1220,7 +1368,7 @@ C --> D(Make changes);</pre>
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2019-11-12 11:57:44" itemprop="dateModified" datetime="2019-11-12T11:57:44+00:00">2019-11-12</time>
+                <time title="Modified: 2019-11-13 09:23:13" itemprop="dateModified" datetime="2019-11-13T09:23:13+00:00">2019-11-13</time>
               </span>
             
           
@@ -1322,285 +1470,6 @@ C --> D(Make changes);</pre>
   </article>
 
     
-        <article itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block home">
-    <link itemprop="mainEntityOfPage" href="https://chinyun.github.io/myblog/myblog/2019/11/02/HTTPS-HTTP-JSON-AJAX/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="chinyun">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/myblog/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Jinny's blog">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-            
-            <a href="/myblog/2019/11/02/HTTPS-HTTP-JSON-AJAX/" class="post-title-link" itemprop="url">HTTPS/HTTP/JSON/AJAX/RestfulAPI</a>
-          
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              
-                
-              
-
-              <time title="Created: 2019-11-02 23:52:26" itemprop="dateCreated datePublished" datetime="2019-11-02T23:52:26+00:00">2019-11-02</time>
-            </span>
-          
-            
-
-            
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2019-11-12 11:57:44" itemprop="dateModified" datetime="2019-11-12T11:57:44+00:00">2019-11-12</time>
-              </span>
-            
-          
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="How-is-the-Internet-work"><a href="#How-is-the-Internet-work" class="headerlink" title="How is the Internet work?"></a>How is the Internet work?</h1><p>現代網路運作的基礎主要由瀏覽器、伺服器以及網路資料的傳遞組成，在網路世界中，最小的資訊單位是 bit，遍佈世界的光纖纜線以光速傳輸資訊，所以當我們用 wifi 上網時，就像用電台傳送廣播一樣，將資訊波段以無線的方式傳送 wifi路由器，再透過電纜運送連結到世界上的任何一處。<br>當使用者在自己電腦透過瀏覽器瀏覽網頁時，會從瀏覽器發出造訪某網頁網址的請求，而該網址所屬的網站伺服器接收到請求內容後，返回包含了 HTML、CSS、JavaScript 等的檔案，瀏覽器接到回應之後將網站呈現在畫面上，上述這個瀏覽器發出請求(request)、伺服器給予回應(response)的過程就是一般我們在瀏覽器輸入網址後，到瀏覽器渲染出頁面之間發生的事情，而這個過程其實仰賴許多機制共同建立，包括：</p>
-<ul>
-<li><p><strong>域名系統 - DNS (Domain Name System)</strong>：由於我們平常用的網址是 Domain，而電腦都是用 IP 在溝通的，DNS 會負責將網址分析為 IP 位址，回報給本地電腦，本地電腦獲得 IP 位址，就能成功連上對方主機並請求主機回傳網頁資料。</p>
-</li>
-<li><p><strong>資料傳輸的單位 - 封包 (packet)</strong>：封包帶有起始和終點的 IP 位址資訊，網路傳輸時會將資料拆分成多個封包傳遞；若某網路定義的封包大小為 1500 bytes，一部影音為 500MB 的資料就會被拆為 35萬個左右的封包發送至目的地 IP 位址。（1MB = 1,048,576 bytes）</p>
-</li>
-<li><p><strong>指引封包走對的路線 - 路由器 (router)</strong>：一種專門電腦，根據纜線的「交通狀況」幫封包選擇最易通行、最省時且風險最低的路徑，確保網路傳輸可靠度。</p>
-</li>
-<li><p><strong>確保資料完整抵達 - 傳輸控制協定 (TCP-Transmission Control Protocol)</strong>：在資料送達時，根據 IP 封包裡的資訊檢查是否有全部送達，只有全數送達時才會簽收，若發現資料短少就會通知伺服器主機要求重新發送資料。</p>
-</li>
-<li><p><strong>通訊協定：伺服器和瀏覽器的對話 - HTTP</strong>：通訊協定事電腦之間互相索取資料的溝通語言，設計 HTTP 的最初目的是發布和接收 HTML 頁面。</p>
-</li>
-</ul>
-<p>透過以上的機制維持網路的運作，我們可以在自家電腦使用瀏覽器發送請求以連上世界各地的網站，獲得世界各地主機的資料。</p>
-<p>事實上，網路除了瀏覽器和伺服器，根據網路的架構還可以將網路運作分為四個層級：應用層、傳送層、網路層、鏈結層，可以對應到 OSI 七層級，如下表：</p>
-<table>
-<thead>
-<tr>
-<th>OSI 七層級</th>
-<th>TCP/IP 模型</th>
-<th>相關通訊協定和標準</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>應用層、表現層、會談層</td>
-<td>應用層</td>
-<td>HTTP/FTP/SMTP/DNS/SSH</td>
-</tr>
-<tr>
-<td>傳送層</td>
-<td>傳送層</td>
-<td>TCP</td>
-</tr>
-<tr>
-<td>網路層</td>
-<td>網路層</td>
-<td>IP</td>
-</tr>
-<tr>
-<td>資訊鏈結層、實體層</td>
-<td>鏈結層</td>
-<td>LAN/WAN</td>
-</tr>
-</tbody></table>
-<p>TCP/IP 模型由 OSI(open system interconnecttion)模型簡化而來，OSI是由 ISO組織制定，作為制定網路標準的參考，依網路運作方式將網路架構分為七個層次。<br><strong>鏈結層</strong>將數位訊號組成符合邏輯的傳輸資料(資訊框 data frame)，定義網路裝置之間的位元資料傳輸，主要跟硬體有關。<br><strong>網路層</strong>定義網路路由、定址功能，IP(Internet Protocol)會將 IP 位址加入傳輸資料內，並將資料組成封包。<br><strong>傳送層</strong>負責資料傳輸和控制，將大型資料切割成適合傳輸的大小型式，替應用層提供流量管制及錯誤控制。<br><strong>應用層</strong>建立網路連線、將ASCII編碼轉成應用層可用資料，負責加密、解密資料等，連結瀏覽器和伺服器之間的溝通。</p>
-<h1 id="HTTP-vs-HTTPS"><a href="#HTTP-vs-HTTPS" class="headerlink" title="HTTP vs. HTTPS"></a>HTTP vs. HTTPS</h1><p>現代網路資料傳遞的原則有：</p>
-<ol>
-<li>標準化的內容格式</li>
-<li>資料結構分為 header 和 body</li>
-<li>使用狀態碼 HTTP Status Code 標準化傳輸結果<ul>
-<li>HTTP Status Code<ul>
-<li>2XX 成功：<ul>
-<li>200 ok</li>
-<li>204 no content</li>
-</ul>
-</li>
-<li>3xx 重新導向:<ul>
-<li>301 永久搬遷</li>
-<li>302 暫時搬遷</li>
-</ul>
-</li>
-<li>4xx 用戶端錯誤:<ul>
-<li>404 Not Found</li>
-<li>401 Unauthorized：未認證，表示 client-side 沒有必要的憑證或伺服器拒絕了 client-side 提供的憑證。</li>
-<li>403 Forbidden：伺服器理解請求，但是拒絕執行，表示 client-side 沒有權限。</li>
-</ul>
-</li>
-<li>5xx 伺服器端錯誤<br>502 Bad Gateway：表示伺服器的某個服務沒有正確執行，可能是處理請求的時間太長或伺服器主機問題。</li>
-</ul>
-</li>
-</ul>
-</li>
-</ol>
-<blockquote>
-<p><a href="https://noob.tw/http-status-code/" target="_blank" rel="noopener">常見與不常見的 HTTP Status Code</a></p>
-</blockquote>
-<ol start="4">
-<li><p>用動詞 HTTP Method 標準化動作： GET、POST、DELETE、PUT、PATCH</p>
-<ul>
-<li>HTTP Method<ul>
-<li>GET：透過 API 把資料內容撈出來，這些內容通常是可以對外公布，不需要密碼帳號就可以取得的資料。</li>
-<li>POST：新增一筆資料</li>
-<li>DELETE：刪除資料</li>
-<li>PUT：更新一筆資料，如果存在這筆資料就會覆蓋過去</li>
-<li>PATCH：部分更新資料</li>
-</ul>
-</li>
-</ul>
-</li>
-<li><p>protocol 通訊協定：定義資料交換的格式，標準化促成規模化 ex: HTTP、HTTPS</p>
-<ul>
-<li><p>HTTP(Hyper Text Transfer Protocol) 超文本傳輸協定<br>In 1989 Tim Berners-Lee invented the World Wide Web and built the HTTP for transferring HTML document around the world. HTTP is a protocol or the rules that we use over the wires. It is a foundation of any data exchange on the web.</p>
-</li>
-<li><p>HTTPS(Hyper Text Transfer Protocol Secure) 超文本安全傳輸協定<br>HTTPS(Hyper Text Transfer Protocol Secure) use TLS and SSL technology to encrypt the information that transported. Only the server or client web could have the secret key to read the message.</p>
-</li>
-</ul>
-<p>主要是由網景公司(Netscape)開發並內建於其瀏覽器中，之後廣泛發展於網際網路上，用於對資料進行壓縮傳輸及傳輸後解壓縮回正確資訊的操作。隨著網路的發達，資訊技術越來越透明，HTTP 的開放明文顯得在網際網路中，不再是這麼安全的傳送協定，知名企業網站及全球級大型網站 Google、Facebook 等皆採用 HTTPS 加密，作為預設連線方式，因此有使用者登入系統或或存取到機密敏感資料頁面等有建立會員、購物車、金流、刷卡機制服務的網站選擇使用HTTPS的傳送協定。HTTPS 其實就是在原本的 HTTP 協定中延伸加入 SSL(Secure Sockets Layer,傳輸層安全協議) 或 TLS(Transport Layer Security，傳輸層安全) 憑證的安全連線技術。</p>
-<p>SSL/TLS 憑證是網頁伺服器和瀏覽器之間以加解密方式溝通的安全技術標準，透過憑證內的公開金鑰加密資料傳輸至伺服器端，伺服器端用私密金鑰解密來證明自己的身份，取得有效憑證後在網際網路上傳輸加密過的資料以達到資安的目的。當您在伺服器與連線至伺服器的瀏覽器上安裝 SSL 憑證時，SSL 憑證的存在會觸發 SLL (或 TLS) 協議，這將加密伺服器與瀏覽器之間 (或伺服器之間) 發送的資訊；詳細資料顯然更加複雜一些。</p>
-<p>運作流程：</p>
-<ol>
-<li>SSL 在 TCP 連線建立後開始運作，啟動 SSL信號交換。</li>
-<li>伺服器發送憑證至使用者，同時附上大量規格 (包括哪個版本的 SSL/TLS 以及使用哪個加密方法等。)</li>
-<li>使用者檢查憑證的有效性，選擇雙方都支援的最高等級的加密，並使用這些方法啟動安全的工作階段。有很多組方法可用優勢各異，被稱為密碼組。</li>
-<li>為了確保所有傳輸訊息的完整性與真實性，SSL 與 TLS 協議也包括使用訊息驗證程式碼的驗證程序。<br>這些方法聽上去冗長又複雜，但在現實生活中是瞬間實現的。<br>SSL 直接在傳輸控制協議之上 (TCP) 運作，像安全感毛毯一樣有效。其允許最高的協議層不變，同時仍然提供安全連線。所以在 SSL 層下，其他協議層可以照常運作。若 SSL 憑證使用正確，所有攻擊者將看到哪個 IP 與通訊埠已連線以及大概在發送多少資料。他們或許可以終止連線，但是伺服器與使用者可以知道這是由第三方造成的。但是，他們無法攔截任何資料，所以使攻擊從根本上變得無效。</li>
-</ol>
-<p>取得SSL憑證的方法就是向憑證廠商購買，SSL憑證費用依照加密的等級、販售廠商而有所不同，可以依照網站性質與企業規模選擇SSL的加密程度以及衡量費用支出。一般來說，SSL憑證的發行廠商是不會影響搜尋排名，但是Google Chrome於2017年公布賽門鐵克(Symantec)發行的SSL視為無效化，並於2018/3/7公布Chrome 66連上賽門鐵克的SSL時呈現的警告畫面，被Chrome 視為無效的SSL憑證發行商名單:Thawte、VeriSign、Equifax、GeoTrust、RapidSSL、Symantec。</p>
-</li>
-</ol>
-<h1 id="AJAX-and-JSON"><a href="#AJAX-and-JSON" class="headerlink" title="AJAX and JSON"></a>AJAX and JSON</h1><p>AJAX (<strong>Asynchronous JavaScript And XML/JSON</strong>) 非同步的 JavaScript 與 XML 技術，這是在2005年由Jesse James Garrett所發明的術語，描述一個使用多種既有技術的新方法。這些技術包括 HTTPS/HTTP 通訊協定、發 HTTP Request 方法(例如 fetch api)、XHR(XMLHttpRequest)或 JSON。使用 AJAX 能使網頁應用程式更快速、即時的更動介面內容，而不需要刷新整個頁面，讓程式更快回應使用者的操作，可以在網頁操作過程當中，不用刷新網頁就可以得到新的資訊。</p>
-<ul>
-<li><p>JavaScript：在 AJAX 技術裡，使用 JavaScript 將所有技術串連，當 server 回傳對應的資料給 client 時，我們可以透過 JavaScript 去解析和拆解這些資料，並使用 DOM 提供的方法把資料放進網頁。</p>
-</li>
-<li><p>非同步的 JavaScript：使用非同步的請求和回應，這表示當使用者點擊網頁中的一個連結時，即使該操作還未結束，仍可以對網頁做其他操作，同步的話則無法。</p>
-</li>
-</ul>
-<blockquote>
-<p>非同步 Asynchronous：指可以同時進行多件任務，而不需等待前一任務結束。同步 Synchronous:必須等待上一任務完成才能進行下一個。</p>
-</blockquote>
-<ul>
-<li>XML/JSON：<ul>
-<li>XML(Extensible Markup Language)：可延伸標記式語言是一種標記式語言，設計用來傳輸和儲存 data。標記指電腦所能理解的資訊符號，通過此種標記，電腦之間可以處理包含各種資訊的文章等。如何定義這些標記，既可以選擇國際通用的標記式語言，比如HTML，也可以使用像XML這樣由相關人士自由決定的標記式語言，這就是語言的可延伸性。XML是從標準通用標記式語言中簡化修改出來的。</li>
-<li>JSON(JavaScript Object Notation)：是一種由道格拉斯·克羅克福特構想和設計、輕量級的資料交換語言，將結構化資料 (structured data) 呈現為 JavaScript 物件的標準格式，常用於網站上的資料呈現、傳輸 (例如將資料從伺服器送至用戶端，以利顯示網頁) JSON 可能是物件或字串，當你想從 JSON中讀取資料時，JSON可作為物件；當要跨網路傳送 JSON 時，就會是字串，因為 JSON 可以通過一個標準的 JS 函數解析(JSON.parse()將接收到的 JSON 內容解析成 JavaScript Object、JSON.stringfy()將 Object 轉成 sever 可以傳輸的 JSON string)，我們可以將任何 Object 轉換成 JSON，並使用 JSON 和 server 溝通，再由 JSON 轉換收到的訊息成 JavaScript Object。</li>
-</ul>
-</li>
-</ul>
-<p>兩者都是以讓人閱讀的文字為基礎，可以被轉譯成程式語言使用，讓文件能夠很容易地讓人去閱讀，同時又很容易讓電腦程式去辨識的語言格式和語法，不過 XML 相較之下更難被解析(parse)，須使用專屬的解析器，而 JSON 不須使用 end tag，JSON is parse into a ready-to-use JS Object，讀寫更簡潔、快速，可以使用 arrays(objects)格式來儲存資料，雖然 JSON 是以 JavaScript 語法為基礎，但可獨立使用，且許多程式設計環境亦可讀取 (剖析) 並產生 JSON。所以現在多使用 JSON 格式來傳輸資料。</p>
-<ul>
-<li><p>XHR(XMLHttpRequest)：是一個 JavaScript 物件，他的功能是用來向 server 發送非同步請求，在 XHR 技術剛被開發出來時，<br>使用 XML 作為請求、回應的資料格式，因此被稱為 XMLHttpRequest。現今提到 XMLHttpRequest 時已經不限於使用 XML 資料格式，也可以傳遞 XML、JSON、String 等多種資料格式。</p>
-</li>
-<li><p>AJAX 進化史：</p>
-<ul>
-<li>XHR(XMLHttpRequest) 大約10幾年前</li>
-<li>XHR(XMLHttpRequest) v2 大約10年前</li>
-<li>jQuery + XHR</li>
-<li>現在：Fetch API、Axios、Request、SuperAgent、Supertest等<ul>
-<li>Fetch：由 Mozilla 和 Google browser 在 2015年3月發佈實作的消息，它有不同於XHR思考角度的設計，基於 promise 的語法結構，而且設計足夠低階所以有更多彈性可擴展設定。目前不同瀏覽器版本還有不完全支援的，所以需要安裝 polyfill 當作暫時的解決方案。</li>
-<li>Axios：Promise-based HTTP library for performing HTTP requests on both Node.js and Browser. It supports all mordern browser, even an included support for IE 8+. It’s built on top of XMLHttpRequest for making AJAX calls. It lets you make HTTP requests from both the browser and the server. <ul>
-<li>Intercept requests and responses before they are carried out.</li>
-<li>Transform request and response data using promises.</li>
-<li>Automatically transforms JSON data.</li>
-<li>Cancel live requests.</li>
-<li>可以對 response setTimeout</li>
-<li>Support protection against CSRF.</li>
-<li>Has support for upload progress.</li>
-</ul>
-</li>
-<li>Request - A Simplified HTTP Client：The Request library is one of the simplest ways to make HTTP calls. The structure and syntax are very similar to that of how requests are handled in Node.js.<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">var request = require(&apos;request&apos;);</span><br><span class="line">request(&apos;http://www.google.com&apos;, function (error, response, body) &#123;</span><br><span class="line">  console.log(&apos;error:&apos;, error); // Print the error if one occurred</span><br><span class="line">  console.log(&apos;statusCode:&apos;, response &amp;&amp; response.statusCode); // Print the response status code if a response was received</span><br><span class="line">  console.log(&apos;body:&apos;, body); // Print the HTML for the Google homepage.</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
-
-</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-<p>Making HTTP calls from the client-side wasn’t this easy a decade ago. A front-end developer would have to rely on XMLHttpRequest which was hard to use and implement. The modern libraries and HTTP clients make the front-end features like user interactions, animations, asynchronous file uploads, etc., easier. </p>
-<h1 id="RESTful-API"><a href="#RESTful-API" class="headerlink" title="RESTful API"></a>RESTful API</h1><ul>
-<li>API (Application Programming Interface) 應用程式介面<br>是一種廣義的稱呼，主要是指 Application 與資料庫的互動介面。透過這個介面，開發者可以了解如何和提供這個介面的 Application 互動。<br>其中一種 API 又可以稱作 Web API，也是現在最廣泛出現的，他是指程式開發者提供一個網址 url 來讓其他開發者訪問，並提供使用這個 API 的文件（說明書），這樣其他開發者就可以閱讀文件了解如何使用這個 API 來存取所需的資料。</li>
-</ul>
-<p>串接 API 指的就是在開發時透過程式介面操作資料；一個應用程式通常會開發其程式介面提供串接、讀取資料或應用服務，提供一套標準讓任何想接入應用程式服務的開發者，可以遵循規範、根據介面的設計撰寫程式碼，來得到想要的服務或資料。串接 API 的本質就是交換資料，通常我們會根據文件說明來使用他人寫好的 API，若要主動提供 API 時則需定義要給什麼資料。</p>
-<ul>
-<li>Web API 或 HTTP API<br>透過 HTTP 協定的 API，也就是用 HTTP 格式來提供資料的 API 可以稱為 Web API/HTTP API。根據 HTTP 規範，伺服器端和客戶端進行請求和回應時，會使用定義明確的請求格式(request format)和回應格式(response format)，request format 指的是 client-side 需使用特定的 HTTP verb 對 url 發出請求，response format 則是指 server-side 回應時採用的資料格式，有可能是 XML、JSON等。</li>
-</ul>
-<p>HTTP 的組成元素：</p>
-<table>
-<thead>
-<tr>
-<th>HTTP request</th>
-<th>HTTP response</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>HTTP Method</td>
-<td>Response Status</td>
-</tr>
-<tr>
-<td>HTTP Headers</td>
-<td>Response Headers</td>
-</tr>
-<tr>
-<td>Request Body</td>
-<td>Response Body</td>
-</tr>
-</tbody></table>
-<p>HTTP URL 組成：例如<code>https://www.example.com/photos?page=1</code><br>通訊協定 <code>https://</code>、網域名稱 DNS <code>www.example.com</code>、路徑 path <code>/photos</code>、參數 parameter<code>?page=1</code>(又稱 query string)</p>
-<ul>
-<li><p>RESTful API<br>RESTful 風格也是一種格式(format)，<strong>RESTful API 就是指一種寫 API 格式的風格建議，目的是讓大家的寫法更有一致性。</strong></p>
-<ul>
-<li>REST<br>REST 是 Representational State Transfer 的縮寫，由 Roy Fielding 博士在 2000 年的博士論文中所提出。他同時也是 HTTP 規範的主要作者之一。REST 是一種軟體架構風格（並非標準），目的是幫助在世界各地不同軟體、程式在網際網路中能夠互相傳遞訊息。而每一個網頁都可視為一個資源（resource）提供使用者使用，以資源操作的概念(指的是對某項資源，譬如 User、Post 等，指派 Show、Edit 等動作)，結合 URL path 與 HTTP Method ，目的是使 URL path 更為簡潔、容易被理解，除了介面簡潔之外，尚有增加快取 cache 效率、提升 api 活用性等優點。換句話說， REST 風格可以單從 HTTP request 就能看出如何操作伺服器的資料。</li>
-</ul>
-<p>REST 的一個最重要的觀念就是 resources (特定資訊的資源)，每一個 resource 由一個 global identifier (即 URL)所表示。為了操作這些 resources，網路的 components (client 跟 server) 透過標準化的介面 (HTTP) 來溝通並交換這些 resources 的 representations (實際上傳達資訊的文件)。<br>任意數量的 connectors (如 clients, servers, caches, tunnels 等) 可以居中 request，但是都不可以 “seeing past” (不需要其他layer層)。這樣的應用程式跟一個 resource 互動根據兩件事情: resource 的 URL 跟要做的動作 — 它不需要知道是否有 caches, proxies, gateways, firewalls, tunnels, 或其他任何藏在 sever 之間的東西。這個應用程式只需要知道資訊的格式 (representation)，通常是 HTML 或 XML 或圖片什麼的。</p>
-<ul>
-<li>RESTful<br>設計為 REST 的系統稱為 RESTful。RESTful 路由便是充分應用 REST 風格的路由設置。而你可以透過 HTTP URL(Uniform Resource Locator)，也就是這些資源的地址(俗稱網址)，來取得這些資源並在你的瀏覽器上使用。<br>RESTful API 建議我們使用 Standard HTTP Verb 來撰寫 API，並根據 API 接口的提供目的規劃 URL，例如 /resouces、/resouces/:id 來代表 resource collection 以及 individual resource 的 path 來規劃 API 介面。<br>路由(routing)是指定義 app 如何將 client requset 指向一個正確的接口(endpoint)並做出相應的後續處理(給予 response)，一個 route 通常由下組成：<br><code>app.METHOD(PATH, HANDLER)</code><br>METHOD means HTTP request method, PATH is a path on the server and the HANDLER is the function executed when the routes is matched. PATH 是開放給 client 的 route，透過不同 path 導向不同動作。<br>舉例：一個簡單的 route based on express.js：<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">app.get(&apos;/&apos;, function(req, res)&#123;</span><br><span class="line">  res.send(&apos;hello world&apos;);</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
-
-</li>
-</ul>
-<p><code>&#39;/&#39;</code>表示根目錄(root route)</p>
-</li>
-</ul>
-<h1 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h1><p><a href="https://dzone.com/articles/top-javascript-libraries-for-making-ajax-calls" target="_blank" rel="noopener">Top JavaScript Libraries for Making AJAX Calls</a><br><a href="https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API" target="_blank" rel="noopener">Fetch API</a><br><a href="https://www.awoo.com.tw/blog/https-seo/" target="_blank" rel="noopener">HTTPS的威力？「S」對SEO與網站經營的四大重要性</a><br><a href="https://www.websecurity.digicert.com/zh/hk/security-topics/what-is-ssl-tls-https" target="_blank" rel="noopener">SSL 憑證</a><br><a href="https://progressbar.tw/posts/98" target="_blank" rel="noopener">為何HTTPS憑證有貴有便宜還更可以免費？讓我們從CA原理開始講起。</a></p>
-
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-          <div class="post-eof"></div>
-        
-      </footer>
-  </div>
-  
-  
-  
-  </article>
-
-    
   </div>
 
   
@@ -1649,7 +1518,7 @@ C --> D(Make changes);</pre>
         
           <a href="/myblog/archives/">
         
-          <span class="site-state-item-count">24</span>
+          <span class="site-state-item-count">25</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>

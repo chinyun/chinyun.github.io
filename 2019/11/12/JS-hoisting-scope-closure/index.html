@@ -1,0 +1,519 @@
+<!DOCTYPE html>
+
+
+
+
+
+<html lang="zh-tw">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 3.9.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/myblog/images/apple-touch-icon-next.png?v=7.4.1">
+  <link rel="icon" type="image/png" sizes="32x32" href="/myblog/images/favicon-32x32-next.png?v=7.4.1">
+  <link rel="icon" type="image/png" sizes="16x16" href="/myblog/images/favicon-16x16-next.png?v=7.4.1">
+  <link rel="mask-icon" href="/myblog/images/logo.svg?v=7.4.1" color="#222">
+
+<link rel="stylesheet" href="/myblog/css/main.css?v=7.4.1">
+
+
+<link rel="stylesheet" href="/myblog/lib/font-awesome/css/font-awesome.min.css?v=4.7.0">
+
+
+<script id="hexo-configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/myblog/',
+    scheme: 'Pisces',
+    version: '7.4.1',
+    exturl: false,
+    sidebar: {"position":"left","display":"post","offset":12,"onmobile":false},
+    copycode: {"enable":false,"show_result":false,"style":null},
+    back2top: {"enable":true,"sidebar":false,"scrollpercent":false},
+    bookmark: {"enable":false,"color":"#222","save":"auto"},
+    fancybox: false,
+    mediumzoom: false,
+    lazyload: false,
+    pangu: false,
+    algolia: {
+      appID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    },
+    localsearch: {"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},
+    path: '',
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    translation: {
+      copy_button: 'Copy',
+      copy_success: 'Copied',
+      copy_failure: 'Copy failed'
+    },
+    sidebarPadding: 40
+  };
+</script>
+
+  <meta name="description" content="Hoisting、Scope 和 Closure 在 JavaScript 中是很重要的觀念，因爲會影響我們如何撰寫 JavaScript。了解這三個概念可以幫助我們了解 JaveScript 在內文執行的運作原理，尤其是在創建和執行階段，JaveScript 的執行機制會如何理解我們寫的程式碼，並跑出我們想要的結果。 Hoisting在執行任何程式碼前，JavaScript 會把變數和函數的宣告">
+<meta name="keywords" content="JavaScript, React, d3, NodeJS, Web">
+<meta property="og:type" content="article">
+<meta property="og:title" content="JS hoisting,scope,closure">
+<meta property="og:url" content="https://chinyun.github.io/myblog/2019/11/12/JS-hoisting-scope-closure/index.html">
+<meta property="og:site_name" content="Jinny&#39;s blog">
+<meta property="og:description" content="Hoisting、Scope 和 Closure 在 JavaScript 中是很重要的觀念，因爲會影響我們如何撰寫 JavaScript。了解這三個概念可以幫助我們了解 JaveScript 在內文執行的運作原理，尤其是在創建和執行階段，JaveScript 的執行機制會如何理解我們寫的程式碼，並跑出我們想要的結果。 Hoisting在執行任何程式碼前，JavaScript 會把變數和函數的宣告">
+<meta property="og:locale" content="zh-tw">
+<meta property="og:updated_time" content="2019-11-13T09:23:13.973Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="JS hoisting,scope,closure">
+<meta name="twitter:description" content="Hoisting、Scope 和 Closure 在 JavaScript 中是很重要的觀念，因爲會影響我們如何撰寫 JavaScript。了解這三個概念可以幫助我們了解 JaveScript 在內文執行的運作原理，尤其是在創建和執行階段，JaveScript 的執行機制會如何理解我們寫的程式碼，並跑出我們想要的結果。 Hoisting在執行任何程式碼前，JavaScript 會把變數和函數的宣告">
+  <link rel="canonical" href="https://chinyun.github.io/myblog/2019/11/12/JS-hoisting-scope-closure/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome: false,
+    isPost: true,
+    isPage: false,
+    isArchive: false
+  };
+</script>
+
+  <title>JS hoisting,scope,closure | Jinny's blog</title>
+  
+
+
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .logo,
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-tw">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-meta">
+
+    <div>
+      <a href="/myblog/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Jinny's blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+        <p class="site-subtitle">Writing For Sharing</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+      
+      
+      
+        
+        <li class="menu-item menu-item-home">
+      
+    
+
+    <a href="/myblog/" rel="section"><i class="fa fa-fw fa-home"></i>Home</a>
+
+  </li>
+      
+      
+      
+        
+        <li class="menu-item menu-item-archives">
+      
+    
+
+    <a href="/myblog/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>Archives</a>
+
+  </li>
+  </ul>
+
+</nav>
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+            
+
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+      <article itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block post">
+    <link itemprop="mainEntityOfPage" href="https://chinyun.github.io/myblog/myblog/2019/11/12/JS-hoisting-scope-closure/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="chinyun">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/myblog/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Jinny's blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">JS hoisting,scope,closure
+
+          
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              
+                
+              
+
+              <time title="Created: 2019-11-12 19:59:07" itemprop="dateCreated datePublished" datetime="2019-11-12T19:59:07+00:00">2019-11-12</time>
+            </span>
+          
+            
+
+            
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2019-11-13 09:23:13" itemprop="dateModified" datetime="2019-11-13T09:23:13+00:00">2019-11-13</time>
+              </span>
+            
+          
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p>Hoisting、Scope 和 Closure 在 JavaScript 中是很重要的觀念，因爲會影響我們如何撰寫 JavaScript。了解這三個概念可以幫助我們了解 JaveScript 在內文執行的運作原理，尤其是在創建和執行階段，JaveScript 的執行機制會如何理解我們寫的程式碼，並跑出我們想要的結果。</p>
+<h1 id="Hoisting"><a href="#Hoisting" class="headerlink" title="Hoisting"></a>Hoisting</h1><p>在執行任何程式碼前，JavaScript 會把變數和函數的宣告在編譯階段就放入記憶體，如此即便我們先寫調用某一函式的程式碼，再寫該函式的內容，JavaScript 也還是可以知道這段程式碼的意義：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">catName(&quot;Chloe&quot;);</span><br><span class="line"></span><br><span class="line">function catName(name) &#123;</span><br><span class="line">  console.log(&quot;My cat&apos;s name is &quot; + name);</span><br><span class="line">&#125;</span><br><span class="line">/*上面程式的結果是: &quot;My cat&apos;s name is Chloe&quot;*/</span><br></pre></td></tr></table></figure>
+
+<p>即使我們函式的程式碼之前就先呼叫它，程式碼仍然可以運作。這是出於 JavaScript 內文執行的運作原理。<br>提升也適用於其他型別和變數。變數可以在宣告之前進行初始化和使用，但如果沒有初始化，就不能使用它們。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">num = 6;</span><br><span class="line">num + 7;</span><br><span class="line">var num; </span><br><span class="line">/* 只要 num 有被宣告，就不會有錯誤 */</span><br></pre></td></tr></table></figure>
+
+<p>JavaScript 僅提升宣告的部分，而不是初始化。如果在使用該變數後才宣告和初始化，那麼該值將是 undefined。以下兩個範例顯示了這個特性。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">var x = 1; // 初始化 x</span><br><span class="line">console.log(x + &quot; &quot; + y);  // &apos;1 undefined&apos;</span><br><span class="line">var y = 2;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">var x = 1; // 初始化 x</span><br><span class="line">var y; // 宣告 y</span><br><span class="line">console.log(x + &quot; &quot; + y);  // &apos;1 undefined&apos;</span><br><span class="line">y = 2; // 初始化 y</span><br></pre></td></tr></table></figure>
+
+<p>函數宣告的優先權比變數宣告高，如果 function 調用時有傳參數進來，就會宣告該參數代表的變數意義並賦值。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">function test(v) &#123;</span><br><span class="line">  var v</span><br><span class="line">  console.log(v)</span><br><span class="line">  v = 3</span><br><span class="line">&#125;</span><br><span class="line">test(10) // 10</span><br></pre></td></tr></table></figure>
+
+<p>需要注意的是，只有 declaration 宣告式的 function (ex:<code>function func(){...}</code>)會被在編譯階段提升，而 expression 表達式宣告的 function (ex:<code>let func = function(){...}</code>)會在執行階段才被存放到記憶體中。</p>
+<h1 id="Scope-作用域"><a href="#Scope-作用域" class="headerlink" title="Scope 作用域"></a>Scope 作用域</h1><ul>
+<li>Execution Context 執行環境<br>要了解 Scope 須先知道 <strong>Execution Context 執行環境</strong> 的概念。<br>Execution Context is a fancy word for describing the environment in which your Javascript code runs.</li>
+</ul>
+<p>當 JavaScript engine start up 程式碼準備好開始運行時，就會先建立 <strong>global execution context全域執行環境</strong>，然後建立一個 global object 和 this，在 browser 的環境中，global object 是 window， this === window，在 node.js 環境中， global object 是 global，this === global。<br>我們可以 assign variable、function 到 global object 中。</p>
+<p>執行環境在建立時會經歷兩個階段，分別是 ：</p>
+<ul>
+<li>Creation Phase 創造階段：變數宣告和函數宣告提升，自動跳過函式裡的程式碼。</li>
+<li>Execution Phase 執行階段：由上到下、一行一行地執行程式</li>
+</ul>
+<p>當 JavaScript engine 看到 function name() 函數被執行，就會創建一個 function name() execution context，新的 function execution context 會被加入到<strong>Execution stack 執行堆疊</strong>，並依序執行(Javascript 是單一執行緒，一次只能做一件事)，執行環境 的堆疊過程是具有 順序性 的：first in last out。</p>
+<ul>
+<li>Scope 作用域是什麼？</li>
+</ul>
+<p>Scope is where can I access the variable where’s that variable in my code. It just defines the accessibility, of variables and functions in the code.</p>
+<p>Scope 可以說是一個變數的生存範圍，出了這個範圍就無法存取到。在 JavaScript 裡面，可以分為兩種 Scope 作用域：</p>
+<ul>
+<li>Global Scope：表示全域、任何地方都能存取得到</li>
+<li>Lexical Scope：variable 被寫下來的那個地方，就是作用域<ul>
+<li>function scope</li>
+<li>block scope<br>it means that only by looking at the source code we can determine which environment the variables in data are avaliable in.<br>這與 Lexical Environment 有關，在物理上我們將 code 寫在哪裡，那就是該 variable 或 function 的 Lexical Environment。 In JS our lexical scope (avalible data + variables where the function was defined) determines our avalible variables. Not the function is called.(相反地，有一種叫做 Dynamic scope 的作用域機制 就是在程式執行時才動態決定的) </li>
+</ul>
+</li>
+</ul>
+<ul>
+<li>Scope Chain<br>透過程式碼層層的包裹，由內而外，直到 global scope 的這一條 scope chain，可以幫助找到要找的對象(通常是 variables)被寫下的地方(lexical environment)。</li>
+</ul>
+<p>在 ES6 以前，唯一產生作用域的方法就是 function，每一個 function 都有自己的作用域，在作用域外面你就存取不到這個 function 內部所定義的變數，然而 ES6 的時候引入了 let 跟 const，多了 block-scope 的概念。<br>延伸：<a href="https://cythilya.github.io/2016/10/28/es6-let-const-block-level-scope/" target="_blank" rel="noopener">ES6: let, const, Block-Level Scope</a></p>
+<p>因應ES6的出現，使用上建議大家不要再用var來宣告變數，改用let與const，而且優先使用const。<br>因為const在宣告時必須給定值，並且不能再被更改，這可以有效降低出現錯誤的機會。<br>同理，如果是需要變更的數值則改用作用範圍較小的let做宣告，來減少錯誤出現的機率，Ex: for迴圈。<br>– <a href="https://www.iware.com.tw/blog-JavaScript%20%E5%AE%A3%E5%91%8A:%20var%E3%80%81let%E3%80%81const.html" target="_blank" rel="noopener">JavaScript 宣告: var、let、const</a></p>
+<h1 id="Closure-閉包"><a href="#Closure-閉包" class="headerlink" title="Closure 閉包"></a>Closure 閉包</h1><p>「閉包（英語：Closure），又稱詞法閉包（Lexical Closure）或函式閉包（function closures），是參照了自由變數的函式。這個被參照的自由變數將和這個函式一同存在，即使已經離開了創造它的環境也不例外。閉包是由函式和與其相關的參照環境組合而成的實體。」–wiki<br>每個宣告的 function 都會儲存著[[Scope]]，而這個資訊裡面就是參照的環境。<br>「that all functions, independently from their type: anonymous, named, function expression or function declaration, because of the scope chain mechanism, are closures.</p>
+<p>from the theoretical viewpoint: all functions, since all they save at creation variables of a parent context. Even a simple global function, referencing a global variable refers a free variable and therefore, the general scope chain mechanism is used;<br>from the practical viewpoint: those functions are interesting which:</p>
+<ul>
+<li>continue to exist after their parent context is finished, e.g. inner functions returned from a parent function;</li>
+<li>use free variables.」–<a href="http://dmitrysoshnikov.com/ecmascript/chapter-6-closures/" target="_blank" rel="noopener">ECMA-262-3 in detail. Chapter 6. Closures.</a></li>
+</ul>
+<p>scopeChain 把每一層的 AO 和 VO 記錄下來，而變數就紀錄在AO 或 VO 裡，也因為 return 才把 AO 和 VO 保留下來。<br>closure 其實就是因為 scopeChain 有 reference 到其他 Execution Context 的 AO(active object) 或是 VO(variable object)，所以在離開之後還是可以存取到上層的變數，如果你是以會記住上層資訊的角度來看 closure，那所有的 function 都是 closure</p>
+<ul>
+<li><p>閉包是函式記得並存取 Lexical Scope 語彙範疇的能力，可說是指向特定 scope 的參考，因此當函式是在其宣告的 Lexical Scope 語彙範疇之外執行時也能正常運作。</p>
+</li>
+<li><p>迴圈與閉包搭配使用時的謬誤與陷阱。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">for (var i = 1; i &lt;= 5; i++) &#123;</span><br><span class="line">  setTimeout(function timer() &#123;</span><br><span class="line">    console.log(i);</span><br><span class="line">  &#125;, i * 1000 );</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>由於 console.log(i) 中的 i 會存取的範疇是 for 所在的範疇（目前看起來是全域範疇，因為 var 宣告的變數不具區塊範疇的特性），因此當 1 秒、2 秒…5 秒後執行 console.log(i) 時，就會去取 i 的值，而此時 for 迴圈已跑完，i 變成 6，因此就會每隔一秒印出一個「6」。<br>解決方法可以利用 IIFE（Immediately Invoked Function Expression）把一個 function 包起來並傳入 i 立即執行，所以迴圈每跑一圈其實就會立刻呼叫一個新的 function，因此就產生了新的作用域。如果你都覺得太麻煩不想用，恭喜，在 ES6 裡面有了 block scope 以後，你只要簡單地把迴圈裡面用的 var 改成 let 就行了：因為 let 的特性，所以其實迴圈每跑一圈都會產生一個新的作用域，因此 alert 出來的值就會是你想要的那個值。</p>
+</li>
+<li><p>模組模式可經由建立一個模組實體來調用內層函式，而內層函式由於具有閉包的特性，因此可存取外層的變數和函式。透過模組模式，可隱藏私密資訊，並選擇對外公開的 API。</p>
+</li>
+<li><p>利用模組依存性載入器或管理器或 ES6 模組來管理模組。</p>
+</li>
+</ul>
+<h1 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h1><p><a href="https://developer.mozilla.org/zh-TW/docs/Glossary/Hoisting" target="_blank" rel="noopener">提升（Hoisting）</a><br><a href="https://github.com/aszx87410/blog/issues/34#" target="_blank" rel="noopener">我知道你懂 hoisting，可是你了解到多深？</a><br><a href="https://medium.com/%E9%AD%94%E9%AC%BC%E8%97%8F%E5%9C%A8%E7%A8%8B%E5%BC%8F%E7%B4%B0%E7%AF%80%E8%A3%A1/%E6%B7%BA%E8%AB%87-javascript-%E5%9F%B7%E8%A1%8C%E7%92%B0%E5%A2%83-2976b3eaf248" target="_blank" rel="noopener">秒懂！JavaSript 執行環境與堆疊</a><br><a href="https://github.com/aszx87410/blog/issues/35" target="_blank" rel="noopener">所有的函式都是閉包：談 JS 中的作用域與 Closure</a><br><a href="https://cythilya.github.io/2018/10/22/closure/" target="_blank" rel="noopener">你懂 JavaScript 嗎？#15 閉包（Closure）</a><br><a href="https://github.com/healthyspi/weekly-notes/issues/8" target="_blank" rel="noopener">[2019-10-12] 進階 JavaScript - Closure </a><br><a href="https://openhome.cc/Gossip/JavaScript/Closure.html" target="_blank" rel="noopener">閉包（Closure）</a></p>
+<blockquote>
+<p>閉包也會用來作為物件私用（private）的模擬，以及名稱空間的管理等</p>
+</blockquote>
+
+    </div>
+
+    
+    
+    
+        
+      
+
+      <footer class="post-footer">
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-next post-nav-item">
+              
+                <a href="/myblog/2019/11/11/JS-this/" rel="next" title="JS this">
+                  <i class="fa fa-chevron-left"></i> JS this
+                </a>
+              
+            </div>
+
+            <span class="post-nav-divider"></span>
+
+            <div class="post-nav-prev post-nav-item">
+              
+            </div>
+          </div>
+        
+      </footer>
+    
+  </div>
+  
+  
+  
+  </article>
+
+  </div>
+
+
+          </div>
+          
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+        
+        
+        
+        
+      
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Hoisting"><span class="nav-number">1.</span> <span class="nav-text">Hoisting</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Scope-作用域"><span class="nav-number">2.</span> <span class="nav-text">Scope 作用域</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Closure-閉包"><span class="nav-number">3.</span> <span class="nav-text">Closure 閉包</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Reference"><span class="nav-number">4.</span> <span class="nav-text">Reference</span></a></li></ol></div>
+        
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">chinyun</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        
+          <a href="/myblog/archives/">
+        
+          <span class="site-state-item-count">25</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+    
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">chinyun</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> v3.9.0</div>
+  <span class="post-meta-divider">|</span>
+  <div class="theme-info">Theme – <a href="https://theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Pisces</a> v7.4.1</div>
+  <script src='https://unpkg.com/mermaid@7.1.2/dist/mermaid.min.js'></script>
+  <script>
+    if (window.mermaid) {
+      mermaid.initialize("");
+    }
+  </script>
+
+        
+
+
+
+
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/myblog/lib/anime.min.js?v=3.1.0"></script>
+  <script src="/myblog/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  <script src="/myblog/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+<script src="/myblog/js/utils.js?v=7.4.1"></script><script src="/myblog/js/motion.js?v=7.4.1"></script>
+<script src="/myblog/js/schemes/pisces.js?v=7.4.1"></script>
+<script src="/myblog/js/next-boot.js?v=7.4.1"></script>
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<script>
+if (document.querySelectorAll('pre.mermaid').length) {
+  NexT.utils.getScript('//cdn.jsdelivr.net/npm/mermaid@8/dist/mermaid.min.js', () => {
+    mermaid.initialize({
+      theme: 'forest',
+      logLevel: 3,
+      flowchart: { curve: 'linear' },
+      gantt: { axisFormat: '%m/%d/%Y' },
+      sequence: { actorMargin: 50 }
+    });
+  }, window.mermaid);
+}
+</script>
+
+
+
+
+  
+
+  
+
+  
+
+</body>
+</html>
