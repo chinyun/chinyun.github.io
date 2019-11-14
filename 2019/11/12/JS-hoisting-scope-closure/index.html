@@ -63,7 +63,7 @@
 <meta property="og:site_name" content="Jinny&#39;s blog">
 <meta property="og:description" content="Hoisting、Scope 和 Closure 在 JavaScript 中是很重要的觀念，因爲會影響我們如何撰寫 JavaScript。了解這三個概念可以幫助我們了解 JaveScript 在內文執行的運作原理，尤其是在創建和執行階段，JaveScript 的執行機制會如何理解我們寫的程式碼，並跑出我們想要的結果。 Hoisting在執行任何程式碼前，JavaScript 會把變數和函數的宣告">
 <meta property="og:locale" content="zh-tw">
-<meta property="og:updated_time" content="2019-11-13T12:13:55.737Z">
+<meta property="og:updated_time" content="2019-11-14T12:57:05.850Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="JS hoisting,scope,closure">
 <meta name="twitter:description" content="Hoisting、Scope 和 Closure 在 JavaScript 中是很重要的觀念，因爲會影響我們如何撰寫 JavaScript。了解這三個概念可以幫助我們了解 JaveScript 在內文執行的運作原理，尤其是在創建和執行階段，JaveScript 的執行機制會如何理解我們寫的程式碼，並跑出我們想要的結果。 Hoisting在執行任何程式碼前，JavaScript 會把變數和函數的宣告">
@@ -237,7 +237,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2019-11-13 12:13:55" itemprop="dateModified" datetime="2019-11-13T12:13:55+00:00">2019-11-13</time>
+                <time title="Modified: 2019-11-14 12:57:05" itemprop="dateModified" datetime="2019-11-14T12:57:05+00:00">2019-11-14</time>
               </span>
             
           
@@ -282,7 +282,7 @@
 <ul>
 <li>Scope 作用域是什麼？</li>
 </ul>
-<p>Scope is where can I access the variable where’s that variable in my code. It just defines the accessibility, of variables and functions in the code.</p>
+<p><strong>Scope determines the accessibility (visibility) of variables.</strong> Scope is where can I access the variable where’s that variable in my code. It just defines the accessibility of variables and functions in the code. JavaScript has function scope: Each function creates a new scope. Variables defined inside a function are not accessible (visible) from outside the function.</p>
 <p>Scope 可以說是一個變數的生存範圍，出了這個範圍就無法存取到。在 JavaScript 裡面，可以分為兩種 Scope 作用域：</p>
 <ul>
 <li>Global Scope：表示全域、任何地方都能存取得到</li>
@@ -317,7 +317,7 @@
 <li><p>利用模組依存性載入器或管理器或 ES6 模組來管理模組。</p>
 </li>
 </ul>
-<h1 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h1><p><a href="https://developer.mozilla.org/zh-TW/docs/Glossary/Hoisting" target="_blank" rel="noopener">提升（Hoisting）</a><br><a href="https://github.com/aszx87410/blog/issues/34#" target="_blank" rel="noopener">我知道你懂 hoisting，可是你了解到多深？</a><br><a href="https://medium.com/%E9%AD%94%E9%AC%BC%E8%97%8F%E5%9C%A8%E7%A8%8B%E5%BC%8F%E7%B4%B0%E7%AF%80%E8%A3%A1/%E6%B7%BA%E8%AB%87-javascript-%E5%9F%B7%E8%A1%8C%E7%92%B0%E5%A2%83-2976b3eaf248" target="_blank" rel="noopener">秒懂！JavaSript 執行環境與堆疊</a><br><a href="https://github.com/aszx87410/blog/issues/35" target="_blank" rel="noopener">所有的函式都是閉包：談 JS 中的作用域與 Closure</a><br><a href="https://cythilya.github.io/2018/10/22/closure/" target="_blank" rel="noopener">你懂 JavaScript 嗎？#15 閉包（Closure）</a><br><a href="https://github.com/healthyspi/weekly-notes/issues/8" target="_blank" rel="noopener">[2019-10-12] 進階 JavaScript - Closure </a><br><a href="https://openhome.cc/Gossip/JavaScript/Closure.html" target="_blank" rel="noopener">閉包（Closure）</a></p>
+<h1 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h1><p><a href="https://developer.mozilla.org/zh-TW/docs/Glossary/Hoisting" target="_blank" rel="noopener">提升（Hoisting）</a><br><a href="https://github.com/aszx87410/blog/issues/34#" target="_blank" rel="noopener">我知道你懂 hoisting，可是你了解到多深？</a><br><a href="https://medium.com/%E9%AD%94%E9%AC%BC%E8%97%8F%E5%9C%A8%E7%A8%8B%E5%BC%8F%E7%B4%B0%E7%AF%80%E8%A3%A1/%E6%B7%BA%E8%AB%87-javascript-%E5%9F%B7%E8%A1%8C%E7%92%B0%E5%A2%83-2976b3eaf248" target="_blank" rel="noopener">秒懂！JavaSript 執行環境與堆疊</a><br><a href="https://www.w3schools.com/js/js_scope.asp" target="_blank" rel="noopener">W3C</a><br><a href="https://github.com/aszx87410/blog/issues/35" target="_blank" rel="noopener">所有的函式都是閉包：談 JS 中的作用域與 Closure</a><br><a href="https://cythilya.github.io/2018/10/22/closure/" target="_blank" rel="noopener">你懂 JavaScript 嗎？#15 閉包（Closure）</a><br><a href="https://github.com/healthyspi/weekly-notes/issues/8" target="_blank" rel="noopener">[2019-10-12] 進階 JavaScript - Closure </a><br><a href="https://openhome.cc/Gossip/JavaScript/Closure.html" target="_blank" rel="noopener">閉包（Closure）</a></p>
 <blockquote>
 <p>閉包也會用來作為物件私用（private）的模擬，以及名稱空間的管理等</p>
 </blockquote>
