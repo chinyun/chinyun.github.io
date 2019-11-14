@@ -69,7 +69,7 @@ Execution Context is a fancy word for describing the environment in which your J
 
 - Scope 作用域是什麼？
 
-Scope is where can I access the variable where's that variable in my code. It just defines the accessibility, of variables and functions in the code.
+**Scope determines the accessibility (visibility) of variables.** Scope is where can I access the variable where's that variable in my code. It just defines the accessibility of variables and functions in the code. JavaScript has function scope: Each function creates a new scope. Variables defined inside a function are not accessible (visible) from outside the function.
 
 Scope 可以說是一個變數的生存範圍，出了這個範圍就無法存取到。在 JavaScript 裡面，可以分為兩種 Scope 作用域：
   - Global Scope：表示全域、任何地方都能存取得到
@@ -125,6 +125,7 @@ closure 其實就是因為 scopeChain 有 reference 到其他 Execution Context 
 [提升（Hoisting）](https://developer.mozilla.org/zh-TW/docs/Glossary/Hoisting)
 [我知道你懂 hoisting，可是你了解到多深？](https://github.com/aszx87410/blog/issues/34#)
 [秒懂！JavaSript 執行環境與堆疊](https://medium.com/%E9%AD%94%E9%AC%BC%E8%97%8F%E5%9C%A8%E7%A8%8B%E5%BC%8F%E7%B4%B0%E7%AF%80%E8%A3%A1/%E6%B7%BA%E8%AB%87-javascript-%E5%9F%B7%E8%A1%8C%E7%92%B0%E5%A2%83-2976b3eaf248)
+[W3C](https://www.w3schools.com/js/js_scope.asp)
 [所有的函式都是閉包：談 JS 中的作用域與 Closure](https://github.com/aszx87410/blog/issues/35)
 [你懂 JavaScript 嗎？#15 閉包（Closure）](https://cythilya.github.io/2018/10/22/closure/)
 [[2019-10-12] 進階 JavaScript - Closure ](https://github.com/healthyspi/weekly-notes/issues/8)
