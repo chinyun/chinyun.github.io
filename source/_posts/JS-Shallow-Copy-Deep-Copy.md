@@ -62,14 +62,14 @@ console.log(obj2); // { a: 10, b: 100, c: 30 }
 
   - **展開運算子(Spread Operator)**
   ```
-  let obj = {name: '王康寶', age:{child: 18}}
+  let obj = {name:'王康寶', age:{child: 18}}
   let copy = {...obj};
 
   copy.name = '盧卡斯';
   copy.age.child = 99;
 
-  console.log(obj);  //{name: "王康寶", age:{child: 99}}
-  console.log(copy); //{name: "盧卡斯", age:{child: 99}}
+  console.log(obj);  //{name:"王康寶", age:{child: 99}}
+  console.log(copy); //{name:"盧卡斯", age:{child: 99}}
   ```
 
 - 深拷貝方法
