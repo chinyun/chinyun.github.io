@@ -132,19 +132,16 @@ JavaScript 允許訪問字符串，數字，布爾值和符號的方法和屬性
     如果沒有找到字符，[] 返回 undefined，而 charAt 返回一個空字符串
   - toLowerCase()
   - toUpperCase()
+  - trim() 刪除前後的空格
   - 查找字符的方法：
-    - str.indexOf(substr, pos)
-    - includes()
+    - indexOf(substr, pos)
+    - includes(substr, pos)
     - endsWith()
     - startsWith()
   - 獲取字符串的方法：
-    - str.slice(start [, end]) 返回從 start 到（但不包括）end 的字符串部分。
-    - str.substring(start [, end]) 返回 start 和 end 之間的字符串部分。這與 slice 幾乎相同，但它允許 start 大於 end。
-    - str.substr(start [, length]) 從 start 開始返回給定 length 的字符串部分。
-
-- Boolean
-- Symbol
-
+    - slice(start [, end]) 返回從 start 到（但不包括）end 的字符串部分。
+    - substring(start [, end]) 返回 start 和 end 之間的字符串部分。這與 slice 幾乎相同，但它允許 start 大於 end。
+    - substr(start [, length]) 從 start 開始返回給定 length 的字符串部分。
 
 # reference
 
