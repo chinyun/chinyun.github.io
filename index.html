@@ -193,6 +193,245 @@
   
   
   <div class="post-block home">
+    <link itemprop="mainEntityOfPage" href="https://chinyun.github.io/myblog/myblog/2019/11/14/JS-Data-Structure/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="chinyun">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/myblog/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Jinny's blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+            
+            <a href="/myblog/2019/11/14/JS-Data-Structure/" class="post-title-link" itemprop="url">JS-Data Structure</a>
+          
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              
+                
+              
+
+              <time title="Created: 2019-11-14 21:34:23" itemprop="dateCreated datePublished" datetime="2019-11-14T21:34:23+00:00">2019-11-14</time>
+            </span>
+          
+            
+
+            
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2019-11-15 15:59:13" itemprop="dateModified" datetime="2019-11-15T15:59:13+00:00">2019-11-15</time>
+              </span>
+            
+          
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="JavaScript-資料結構"><a href="#JavaScript-資料結構" class="headerlink" title="JavaScript 資料結構"></a>JavaScript 資料結構</h1><p>資料結構是電腦中儲存、組織資料的方式，在 JavaScript 中，資料可以分做基本型別和物件型別，基本型別儲存一個值，物件型別儲存更複雜的資料，為了更簡便的存取複雜的資料，JavaScript 使用有規則可循的結構來管理資料。</p>
+<p>The key distinctions between primitives and objects:</p>
+<ul>
+<li>A primitive<ul>
+<li>Is a value of a primitive type.</li>
+<li>There are 6 primitive types: string, number, boolean, symbol, null and undefined.</li>
+</ul>
+</li>
+<li>An object<ul>
+<li>Is capable of storing multiple values as properties.</li>
+<li>Can be created with {}, for instance: {name: “John”, age: 30}. There are other kinds of objects in JavaScript: functions, for example, are objects.</li>
+<li>One of the best things about objects is that we can store a function as one of its properties.</li>
+</ul>
+</li>
+</ul>
+<p>資料結構：</p>
+<ul>
+<li>index 管理：透過索引(index)數字，一個數字代表一個資料</li>
+<li>key-value-pair：使用 key-value(通常是一個字串)對應到資料</li>
+</ul>
+<p>在 Ruby 語言中，使用 index 的叫做 Array，使用 key-value-pair 的叫做 Hash。<br>而在 JavaScript 中，使用 index 的也叫做 Array，使用 key-value-pair 的有兩種： Object 和 Map。</p>
+<p>這些資料結構內建一些方法來方便開發者使用、管理資料。</p>
+<h1 id="JavaScrip-Objects-amp-methods-list"><a href="#JavaScrip-Objects-amp-methods-list" class="headerlink" title="JavaScrip Objects &amp; methods list"></a>JavaScrip Objects &amp; methods list</h1><ul>
+<li><p>Array 陣列</p>
+<ul>
+<li>其他資料結構：<ul>
+<li>Stack 堆疊：last-in-first-out，支持 push, pop operation</li>
+<li>Queue 佇列：first-in-first-out. A Queue is one of most common uses of an array. In computer science, this means an ordered collection of elements which supports two operations: push, shift.<br>在 JavaScript 中的 array 可以用作 queue 也可以用作 stack，從陣列的前/後來添加或刪除元素。</li>
+</ul>
+</li>
+<li>JavaScrip 陣列內建支援的方法<ul>
+<li>pop()：對 array 從尾刪除元素</li>
+<li>push()：對 array 從尾添加元素</li>
+<li>shift()：對 array 從頭刪除元素</li>
+<li>unshift()：對 array 從頭添加元素</li>
+<li>concat()：返回一個新數組：複製當前數組的所有成員並向其中添加 items。如果有任何items 是一個數組，那麼就取其元素。不會改變原 array。</li>
+<li>slice(start, end)：複製並返回切下的部分，不會改變原 array。 </li>
+<li>splice(index, 刪除幾個, “插入”)：返回切下的部分，會改變原 array。</li>
+<li>split()：複製一組 array，將 string 轉為 array。</li>
+<li>join()：複製一組 array，將 array 內容轉為 string。</li>
+<li>sort()：對原 array 做排序</li>
+<li>reverse()：對原 array 做倒序</li>
+<li>indexOf(item, from)：從 from index 開始由右至左找 item，返回符合的第一個 index</li>
+<li>lastIndexOf(item, from)：從 from index 開始由左至右找 item，返回符合的第一個 index</li>
+<li>includes(item, from)：從 from index 開始由右至左找 item，返回 true/false</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>Object Array 物件陣列<br>是指陣列元素為 object 或 array 的多層結構資料。針對這種類型的資料，JavaScrip也提供一些有用的方法來協助管理：</p>
+<ul>
+<li>map(function(item, index, array){ 遍歷每一個元素後，返回新 array })</li>
+<li>find(function(item, index, array){ 查詢到返回 true，return 第一個符合的元素 })</li>
+<li>filter(function(item, index, array){ 元素通過過濾器時返回 true，return 符合元素 })</li>
+<li>reduce(function(accumulator, num){})</li>
+</ul>
+</li>
+<li><p>Object</p>
+<ul>
+<li>Object.assign(target, …source) 產生一個新的 object 或合併 objects</li>
+<li>Object.keys(obj) 返回一個由 keys 組成的陣列</li>
+<li>Object.values(obj) 返回一個由 values 組成的陣列</li>
+<li>Object.entries(obj) 返回一個 key-value-pair 組成的陣列</li>
+<li>自創 methods</li>
+</ul>
+</li>
+<li><p>Map 也是 key-value-pair 物件，但是他可以直接被 iterate、 key 可以使用任何資料型別；object的 key 只能是 string。</p>
+<ul>
+<li>set(key, value): stores the value by the key.</li>
+<li>get(key): return the value if the key exists, <code>undefined</code> if keys don’t exist.</li>
+<li>has(key): return true/false whether the key exists or not</li>
+<li>delete(key): remove value by the key</li>
+<li>clear(): removes every thing from the set</li>
+<li>size: counts the elements</li>
+<li>keys()</li>
+<li>values()</li>
+<li>entries()</li>
+</ul>
+</li>
+<li><p>Set is a collection of values, where each value may occur only once.</p>
+<ul>
+<li>add(value): add a value, return set itself.</li>
+<li>delete(value): removes the value, return true/false.</li>
+<li>has(value): return true/false whether the value exists or not.</li>
+<li>clear(): removes every thing from the set</li>
+<li>size: counts the elements</li>
+<li>keys()</li>
+<li>values()</li>
+<li>entries()</li>
+</ul>
+</li>
+<li><p>WeakMap &amp; WeakSet<br>通常情況下，當某數據存在於內存中時，對象的屬性或者數組的元素或其他的數據結構將被認為是可以獲取的並留存於內存。在一個正常 Map 中，我們將某對象存儲為鍵還是值並不重要。它將會被一直保留在內存中，就算已經沒有指向它的引用。</p>
+<ul>
+<li><p>WeakSet</p>
+<ul>
+<li>WeakSet 是一種特殊的 Set，它不會阻止 JavaScript 將它的元素從內存中移除。</li>
+<li>它和 Set 類似，但是我們僅能將對象添加進 WeakSet（不可以是基礎類型）</li>
+<li>僅當對象存在其他位置的引用時它才存在於 set 中。</li>
+<li>支持 add()、has() 和 delete()，不支持 size、keys() 也不支持迭代器。</li>
+</ul>
+</li>
+<li><p>WeakMap</p>
+<ul>
+<li>WeakMap 也不會阻止 JavaScript 將它的元素從內存中移除，而且它和 Map 的區別是它的鍵必須是對象，不能是基礎類型的值。</li>
+<li>支持 get(key)、set(key, value)、delete(key, value)、has(key)</li>
+<li>但不支持 keys()、values()、entries()，我們不能對它進行迭代，所以沒有辦法獲取它的所有鍵值。</li>
+<li>WeakMap 的目的是，我們可以僅<strong>當該對象存在時，為對象存儲一些內容</strong>。但我們並不會因為存儲了對象的一些內容，就強制對像一直保留在內存中。</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h1 id="基本型別資料的-methods"><a href="#基本型別資料的-methods" class="headerlink" title="基本型別資料的 methods"></a>基本型別資料的 methods</h1><p>There are many things one would want to do with a primitive. So JavaScript provides methods to call. JavaScript allows us to work with primitives (strings, numbers, etc.) as if they were objects. </p>
+<p>The solution is:<br>The “object wrappers” are different for each primitive type and are called: String, Number, Boolean and Symbol. Thus, they provide different sets of methods.</p>
+<p>JavaScript 允許訪問字符串，數字，布爾值和符號的方法和屬性。當進行訪問時，創建一個特殊的“包裝對象”，它提供額外的功能，運行後即被銷毀。除 null 和 undefined 以外的基本類型都提供了許多有用的方法。從形式上講，這些方法通過臨時對象工作，但 JavaScript 引擎可以很好地調整以優化內部，因此調用它們並不需要太高的成本。</p>
+<ul>
+<li><p>Number<br>JavaScript 有一個內置的 Math 對象，它包含了一個小型的數學函數和常量庫。</p>
+<ul>
+<li>Math.random()</li>
+<li>Math.max(a, b, c…) / Math.min(a, b, c…)</li>
+<li>Math.pow(n, power)<br>分數可使用(須記住使用分數時會損失精度):</li>
+<li>Math.floor 向下舍入，3.1 變成 3，-1.1 變成 -2。</li>
+<li>Math.ceil 向上舍入，3.1 變成 4，-1.1 變成 -1。</li>
+<li>Math.trunc 刪除小數點後的所有內容而不捨入：3.1 變成 3，-1.1 變成-1，IE 瀏覽器不支援。</li>
+<li>Math.round 向最近的整數舍入：3.1 變成 3，3.6變成4，-1.1變成-1。</li>
+<li>num.toFixed(precision) 將點數後的數字四捨五入到 n 個數字並返回結果以字符串表示<br>檢查是否為特殊 Number？</li>
+<li>isNaN</li>
+<li>isFinite<br>檢視字符串並返回 Number：他們從字符串中“讀出”一個數字。如果發生錯誤，則返回收集的數字。有時候 parseInt / parseFloat 會返回 NaN。一般發生在沒有數字可讀的情況下。</li>
+<li>parseInt(str, radix) 返回整數。第二個參數指定了數字系統的基礎，因此 parseInt 還可以解析十六進制數字，二進制數字等字符串。</li>
+<li>parseFloat() 可以返回浮點數</li>
+</ul>
+</li>
+<li><p>String</p>
+<ul>
+<li>string.length 字符串長度</li>
+<li>string[0] 或 string.charAt(0):<br>如果沒有找到字符，[] 返回 undefined，而 charAt 返回一個空字符串</li>
+<li>toLowerCase()</li>
+<li>toUpperCase()</li>
+<li>查找字符的方法：<ul>
+<li>str.indexOf(substr, pos)</li>
+<li>includes()</li>
+<li>endsWith()</li>
+<li>startsWith()</li>
+</ul>
+</li>
+<li>獲取字符串的方法：<ul>
+<li>str.slice(start [, end]) 返回從 start 到（但不包括）end 的字符串部分。</li>
+<li>str.substring(start [, end]) 返回 start 和 end 之間的字符串部分。這與 slice 幾乎相同，但它允許 start 大於 end。</li>
+<li>str.substr(start [, length]) 從 start 開始返回給定 length 的字符串部分。</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>Boolean</p>
+</li>
+<li><p>Symbol</p>
+</li>
+</ul>
+<h1 id="reference"><a href="#reference" class="headerlink" title="reference"></a>reference</h1><p><a href="https://zh.javascript.info/map-set-weakmap-weakset" target="_blank" rel="noopener">javascript.info/map-set-weakmap-weakset</a><br><a href="https://javascript.info/primitives-methods" target="_blank" rel="noopener">javascript.info/primitives-methods</a></p>
+
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+          <div class="post-eof"></div>
+        
+      </footer>
+  </div>
+  
+  
+  
+  </article>
+
+    
+        <article itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block home">
     <link itemprop="mainEntityOfPage" href="https://chinyun.github.io/myblog/myblog/2019/11/13/JS-Shallow-Copy-Deep-Copy/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -233,7 +472,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2019-11-14 12:57:05" itemprop="dateModified" datetime="2019-11-14T12:57:05+00:00">2019-11-14</time>
+                <time title="Modified: 2019-11-15 15:59:13" itemprop="dateModified" datetime="2019-11-15T15:59:13+00:00">2019-11-15</time>
               </span>
             
           
@@ -368,7 +607,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2019-11-14 12:57:05" itemprop="dateModified" datetime="2019-11-14T12:57:05+00:00">2019-11-14</time>
+                <time title="Modified: 2019-11-15 15:59:13" itemprop="dateModified" datetime="2019-11-15T15:59:13+00:00">2019-11-15</time>
               </span>
             
           
@@ -498,7 +737,7 @@ JavaScript 中主要的內存管理概念是**可達性 Reachability**，簡言�
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2019-11-14 12:57:05" itemprop="dateModified" datetime="2019-11-14T12:57:05+00:00">2019-11-14</time>
+                <time title="Modified: 2019-11-15 15:59:13" itemprop="dateModified" datetime="2019-11-15T15:59:13+00:00">2019-11-15</time>
               </span>
             
           
@@ -646,7 +885,7 @@ JavaScript 中主要的內存管理概念是**可達性 Reachability**，簡言�
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2019-11-14 12:57:05" itemprop="dateModified" datetime="2019-11-14T12:57:05+00:00">2019-11-14</time>
+                <time title="Modified: 2019-11-15 15:59:13" itemprop="dateModified" datetime="2019-11-15T15:59:13+00:00">2019-11-15</time>
               </span>
             
           
@@ -764,7 +1003,7 @@ JavaScript 中主要的內存管理概念是**可達性 Reachability**，簡言�
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2019-11-14 12:57:05" itemprop="dateModified" datetime="2019-11-14T12:57:05+00:00">2019-11-14</time>
+                <time title="Modified: 2019-11-15 15:59:13" itemprop="dateModified" datetime="2019-11-15T15:59:13+00:00">2019-11-15</time>
               </span>
             
           
@@ -868,7 +1107,7 @@ JavaScript 中主要的內存管理概念是**可達性 Reachability**，簡言�
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2019-11-14 12:57:05" itemprop="dateModified" datetime="2019-11-14T12:57:05+00:00">2019-11-14</time>
+                <time title="Modified: 2019-11-15 15:59:13" itemprop="dateModified" datetime="2019-11-15T15:59:13+00:00">2019-11-15</time>
               </span>
             
           
@@ -998,7 +1237,7 @@ JavaScript 中主要的內存管理概念是**可達性 Reachability**，簡言�
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2019-11-14 12:57:05" itemprop="dateModified" datetime="2019-11-14T12:57:05+00:00">2019-11-14</time>
+                <time title="Modified: 2019-11-15 15:59:13" itemprop="dateModified" datetime="2019-11-15T15:59:13+00:00">2019-11-15</time>
               </span>
             
           
@@ -1150,7 +1389,7 @@ JavaScript 中主要的內存管理概念是**可達性 Reachability**，簡言�
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2019-11-14 12:57:05" itemprop="dateModified" datetime="2019-11-14T12:57:05+00:00">2019-11-14</time>
+                <time title="Modified: 2019-11-15 15:59:13" itemprop="dateModified" datetime="2019-11-15T15:59:13+00:00">2019-11-15</time>
               </span>
             
           
@@ -1252,7 +1491,7 @@ JavaScript 中主要的內存管理概念是**可達性 Reachability**，簡言�
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2019-11-14 12:57:05" itemprop="dateModified" datetime="2019-11-14T12:57:05+00:00">2019-11-14</time>
+                <time title="Modified: 2019-11-15 15:59:13" itemprop="dateModified" datetime="2019-11-15T15:59:13+00:00">2019-11-15</time>
               </span>
             
           
@@ -1298,130 +1537,6 @@ JavaScript 中主要的內存管理概念是**可達性 Reachability**，簡言�
 <li><strong>::selection</strong> 選取文字反白後</li>
 </ul>
 <h1 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h1><p><a href="https://stringpiggy.hpd.io/pseudo-element-pseudo-class-difference/" target="_blank" rel="noopener">偽元素 (pseudo element) 和偽類 (pseudo class) 差在哪？</a><br><a href="https://www.itread01.com/content/1549211047.html" target="_blank" rel="noopener">css偽類元素的運用以及相應的hover的使用</a><br><a href="https://ithelp.ithome.com.tw/articles/10196924" target="_blank" rel="noopener">CSS 偽類 與 偽元素</a><br><a href="http://csscoke.com/2013/09/21/%E4%BD%BF%E7%94%A8css3-nth-childn-%E9%81%B8%E5%8F%96%E5%99%A8%E8%A9%B3%E8%A7%A3/" target="_blank" rel="noopener">使用CSS3 :nth-child(n) 選取器教學</a><br><a href="https://www.oxxostudio.tw/articles/201405/css-selector.html" target="_blank" rel="noopener">CSS 偽類 child 和 of-type</a><br><a href="https://www.oxxostudio.tw/articles/201706/pseudo-element-1.html" target="_blank" rel="noopener">CSS 偽元素 ( before 與 after )</a></p>
-
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-          <div class="post-eof"></div>
-        
-      </footer>
-  </div>
-  
-  
-  
-  </article>
-
-    
-        <article itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block home">
-    <link itemprop="mainEntityOfPage" href="https://chinyun.github.io/myblog/myblog/2019/11/05/Redux-connect-Redux-part-to-React/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="chinyun">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/myblog/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Jinny's blog">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-            
-            <a href="/myblog/2019/11/05/Redux-connect-Redux-part-to-React/" class="post-title-link" itemprop="url">Connect Redux part to React</a>
-          
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              
-                
-              
-
-              <time title="Created: 2019-11-05 16:13:00" itemprop="dateCreated datePublished" datetime="2019-11-05T16:13:00+00:00">2019-11-05</time>
-            </span>
-          
-            
-
-            
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2019-11-14 12:57:05" itemprop="dateModified" datetime="2019-11-14T12:57:05+00:00">2019-11-14</time>
-              </span>
-            
-          
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>以下筆記如何在 react app 中引入 redux：<br>示範 code 專案：<a href="https://github.com/chinyun/Tripper-app-redux/blob/master/src/index.js" target="_blank" rel="noopener">Tripper-app-redux</a></p>
-<h1 id="程式碼"><a href="#程式碼" class="headerlink" title="程式碼"></a>程式碼</h1><p>in Tripper-app-redux’s index.js:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">import React from &apos;react&apos;;</span><br><span class="line">import ReactDOM from &apos;react-dom&apos;;</span><br><span class="line">import &#123; Provider &#125; from &apos;react-redux&apos;;</span><br><span class="line">import &#123; createStore, applyMiddleware, combineReducers &#125; from &apos;redux&apos;;</span><br><span class="line">import &#123; createLogger &#125; from &apos;redux-logger&apos;;</span><br><span class="line">import thunkMiddleware from &apos;redux-thunk&apos;;</span><br><span class="line">import &#123; requestLogIn, routeChange, requestData &#125; from &apos;./reducers&apos;;</span><br><span class="line">import App from &apos;./containers/App&apos;;</span><br><span class="line"></span><br><span class="line">const logger = createLogger();</span><br><span class="line"></span><br><span class="line">const rootReducer = combineReducers(&#123;requestLogIn, routeChange, requestData&#125;);</span><br><span class="line">const store = createStore(rootReducer, applyMiddleware(thunkMiddleware, logger));</span><br><span class="line"></span><br><span class="line">ReactDOM.render(</span><br><span class="line">  &lt;Provider store=&#123;store&#125;&gt;</span><br><span class="line">    &lt;App/&gt;</span><br><span class="line">  &lt;/Provider&gt;, document.getElementById(&apos;root&apos;));</span><br></pre></td></tr></table></figure>
-
-<p>in Tripper-app-redux’s App.js:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">import &#123; connect &#125; from &apos;react-redux&apos;;</span><br><span class="line">import &#123; routeChange &#125; from &apos;../actions&apos;;</span><br><span class="line">.</span><br><span class="line">.</span><br><span class="line">.</span><br><span class="line">const mapStateToProps = (state) =&gt; &#123;</span><br><span class="line">  return &#123;</span><br><span class="line">    user: state.requestData.user,</span><br><span class="line">    journeys: state.requestData.journeys,</span><br><span class="line">    initialJourney: state.requestData.initialJourney,</span><br><span class="line">    journeyList: state.requestData.journeyList,</span><br><span class="line">    route: state.routeChange.route,</span><br><span class="line">    isSignedIn: state.requestLogIn.isSignedIn</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">const mapDispatchToProps = (dispatch) =&gt; &#123;</span><br><span class="line">  return &#123;</span><br><span class="line">    onRouteChange: (route) =&gt; dispatch(routeChange(route))</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line">.</span><br><span class="line">.</span><br><span class="line">.</span><br><span class="line"></span><br><span class="line">export default connect(mapStateToProps, mapDispatchToProps)(App);</span><br></pre></td></tr></table></figure>
-
-<h1 id="Redux-Store-and-Provider"><a href="#Redux-Store-and-Provider" class="headerlink" title="Redux Store and Provider"></a>Redux Store and Provider</h1><p><code>&lt;Provider&gt;&lt;/Provider&gt;</code>包住<code>&lt;App&gt;</code>他會把 store 用 props 傳給所有 App 包含的子組件。<br>The logger will catch the actions and console.log() the action that is going to go to the reducer.</p>
-<p>Store binds together the 3 principles fo Redux:</p>
-<ol>
-<li>The entire state of the application will be represented by one JavaScript Object. -&gt;  Store holds the current application state object. </li>
-<li>The state is read only, and can only be modified by dispatching actions. -&gt; Store allows you to dispatch actions.</li>
-<li>To specify how actions change state tree, the reducers should be pure functions. -&gt; When you create the Store, <strong>you need to specify the Reducer that tells how states updated with actions.</strong></li>
-</ol>
-<p>Store 有三個重要的 methods:</p>
-<ol>
-<li>getState(): run console.log(store.getState()) =&gt; get the current state of the Redux Store.</li>
-<li><strong>dispatch(): dispatch actions to change the state of the application.</strong></li>
-<li>subscribe(): register a callback that the redux store will call any time an action has been dispatched. So you can update the UI of application to reflect the current application’s state.</li>
-</ol>
-<p>運用 <code>combineReducers()</code> method 將多個 reducer 綁在一起變成一個，<code>createStore()</code>則負責建立 store，接受兩個參數：要監聽的 reducer、用 applyMiddleware() 加入要使用的 middleware。</p>
-<h1 id="Connect"><a href="#Connect" class="headerlink" title="Connect"></a>Connect</h1><p><code>connect()</code> are those which one of these components we want to be smart or be aware that the redux library exists and they subscribe to the changes. The connect function is optimized in order for us to avoid using somthing called <code>store.subscribe()</code>. It is a higher order function, means that a function that return another function. Through connect function, App component now could listen to the states that <code>mapStateToProps</code> gives and interested in actions that <code>mapDispatchToProps</code> gives to the component.</p>
-<h1 id="Redux-Middleware"><a href="#Redux-Middleware" class="headerlink" title="Redux Middleware"></a>Redux Middleware</h1><p>Middleware is the suggested way to extend Redux with custom functionality. Middleware lets you wrap the store’s dispatch method for fun and profit. The key feature of middleware is that it is composable. Multiple middleware can be combined together, where each middleware requires no knowledge of what comes before or after it in the chain.<br>Middleware 就像一個 tunnel，在 action 到 reducer 的階段之間建立通道，在 dispatch actions 時適時採取相應的行為。 Middleware helps us to handle side effects, monitor each one of our actions. We can listen to what logging output each one of these actions happen. It provides a third-party extension point between dispatching an action, and the moment it reaches the reducer.</p>
-<p>Redux Pattern:</p>
-<pre class="mermaid">graph LR;
-A(Action) -- Middleware --> B(Reducer);
-B --> C(Store);
-C --> D(Make changes);</pre>
-<p>在 Action 和 Reducer 之間的 Middleware 作用是輔助處理，當 dispatch action 的時候透過 middleware 進行額外動作。<br>常用的 Middleware 例如：</p>
-<ul>
-<li>redux-logger：監聽 actions，在 console 印出 action type、以及更新前、後的狀態</li>
-<li>redux-thunk：額外或是非同步的 dispatch</li>
-<li>redux-observable、redux-saga：複雜邏輯 dispatch</li>
-</ul>
-<p>使用的方法：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">const store = createStore(rootReducer, applyMiddleware(thunkMiddleware, logger));</span><br></pre></td></tr></table></figure>
-
-<p>在建立 store 的時候一併設定，透過 applyMiddleware() 放入多個 middleware，表示當 action dispatch時會依序經過 thunkMiddleware、logger 這些 middleware，然後再到 reducer。</p>
-<h1 id="Asynchronous-Redux"><a href="#Asynchronous-Redux" class="headerlink" title="Asynchronous Redux"></a>Asynchronous Redux</h1><p>The redux-thunk package that provides a getState and dispatch functions that are passed on. <strong>Redux-thunk can handle asynchronous actions like AJAX calls.</strong> How does this middleware work? Thunk middleware is waiting for a function, it waits and sees if any actions return a function instead of an object. And if it is a function, <strong>give a dispatch so we can call the actions to run</strong> the function as we thought.  </p>
-<p>Asynchronous Action 可以寫作這樣：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">export const editBudgets = (data, id, index) =&gt; (dispatch) =&gt; &#123;</span><br><span class="line">  dispatch(&#123; type: REQUEST_DATA_FAILED &#125;);</span><br><span class="line">  fetch(`$&#123;Url&#125;/journeys_budgets/$&#123;id&#125;`, &#123;</span><br><span class="line">    method: &apos;PATCH&apos;,</span><br><span class="line">    headers: &#123;&apos;Content-Type&apos;: &apos;application/json&apos;&#125;,</span><br><span class="line">    body: JSON.stringify(data)</span><br><span class="line">  &#125;)</span><br><span class="line">  .then(response =&gt; response.json())</span><br><span class="line">  .then(journey =&gt; &#123;</span><br><span class="line">    if (journey) &#123;</span><br><span class="line">      dispatch(&#123;</span><br><span class="line">        type: REQUEST_UPDATE_BUDGETS_SUCCESS,</span><br><span class="line">        payload: &#123;</span><br><span class="line">          data: journey,</span><br><span class="line">          index: index</span><br><span class="line">        &#125;</span><br><span class="line">      &#125;)</span><br><span class="line">    &#125; else &#123;</span><br><span class="line">      alert(&apos;unable to edit budget&apos;)</span><br><span class="line">    &#125;    </span><br><span class="line">  &#125;)</span><br><span class="line">  .catch(err =&gt; dispatch(&#123; type: REQUEST_DATA_FAILED, payload: err &#125;));</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>其中 <code>const editBudgets = (data, id, index) =&gt; (dispatch) =&gt; {...}</code> 表示 A function that return another function, redux wouldn’t understand it. Because it’s not an object, as it expects for an action. With the redux-thunk middleware, now we’re listening to actions. Anytime the actions get triggered it’s going to return a function and trigger redux-thunk and redux-thunk is going to know whether it is a function or not then give it a dispatch to call action to run.</p>
-<h1 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h1><p><a href="https://redux.js.org/introduction/getting-started" target="_blank" rel="noopener">redux 官方</a></p>
 
         
       
@@ -1489,7 +1604,7 @@ C --> D(Make changes);</pre>
         
           <a href="/myblog/archives/">
         
-          <span class="site-state-item-count">27</span>
+          <span class="site-state-item-count">28</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>

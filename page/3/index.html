@@ -193,6 +193,99 @@
   
   
   <div class="post-block home">
+    <link itemprop="mainEntityOfPage" href="https://chinyun.github.io/myblog/myblog/2019/10/12/React-lifecycle-and-state/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="chinyun">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/myblog/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Jinny's blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+            
+            <a href="/myblog/2019/10/12/React-lifecycle-and-state/" class="post-title-link" itemprop="url">React lifecycle and state</a>
+          
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              
+                
+              
+
+              <time title="Created: 2019-10-12 20:15:41" itemprop="dateCreated datePublished" datetime="2019-10-12T20:15:41+00:00">2019-10-12</time>
+            </span>
+          
+            
+
+            
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2019-11-15 15:59:13" itemprop="dateModified" datetime="2019-11-15T15:59:13+00:00">2019-11-15</time>
+              </span>
+            
+          
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="React-lifecycle-method-amp-state-updating"><a href="#React-lifecycle-method-amp-state-updating" class="headerlink" title="React lifecycle method &amp; state updating"></a>React lifecycle method &amp; state updating</h1><h1 id="提升-React-效能：保持-virtual-DOM-的一致"><a href="#提升-React-效能：保持-virtual-DOM-的一致" class="headerlink" title="提升 React 效能：保持 virtual DOM 的一致"></a>提升 React 效能：保持 virtual DOM 的一致</h1><ul>
+<li>DOM (Document Object Model)是什麼？</li>
+</ul>
+<p>DOM 文件物件模型，是 Html, XML, SVG 等文件的程式介面，提供一種文件樹的結構化表示方法，可以讓程式存取並改變文件架構、風格（style）和內容，透過 DOM 結構，文件擁有屬性、函式節點，物件可以和事件處理程序連結，當事件被觸發，執行處理程序來存取或改變文件。</p>
+<ul>
+<li>React 如何改變 DOM 以及如何提升效能？</li>
+</ul>
+<p>由於讀取更新 DOM 損耗 browser 的執行率，每一次改變便 render 整個頁面在 JavaScript 是很慢的，React 使用 Virtual DOM 虛擬 DOM 的一個強大的 Render 系統，只需更新 DOM 而不需要從 DOM 讀取，以減少運算。<br>同時， React 的 diff 演算法，當 render function running 得時候，讓 virtual dom 和 real dom 比對只重繪有更新的部分，做出最低必要的更新。</p>
+<p>官方文件：<br>When you use React, at a single point in time you can think of the render() function as creating a tree of React elements. On the next state or props update, that render() function will return a different tree of React elements. React then needs to figure out how to efficiently update the UI to match the most recent tree.</p>
+<ul>
+<li>開發者提升 React 應用程式的方法</li>
+</ul>
+<p>盡可能的減少讀取和更新 DOM<br>We must minimize the amount of work that we do to the DOM.</p>
+
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+          <div class="post-eof"></div>
+        
+      </footer>
+  </div>
+  
+  
+  
+  </article>
+
+    
+        <article itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block home">
     <link itemprop="mainEntityOfPage" href="https://chinyun.github.io/myblog/myblog/2019/10/12/React-Updating-state-when-state-is-an-array-of-objects/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -233,7 +326,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2019-11-14 12:57:05" itemprop="dateModified" datetime="2019-11-14T12:57:05+00:00">2019-11-14</time>
+                <time title="Modified: 2019-11-15 15:59:13" itemprop="dateModified" datetime="2019-11-15T15:59:13+00:00">2019-11-15</time>
               </span>
             
           
@@ -352,7 +445,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2019-11-14 12:57:05" itemprop="dateModified" datetime="2019-11-14T12:57:05+00:00">2019-11-14</time>
+                <time title="Modified: 2019-11-15 15:59:13" itemprop="dateModified" datetime="2019-11-15T15:59:13+00:00">2019-11-15</time>
               </span>
             
           
@@ -461,7 +554,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2019-11-14 12:57:05" itemprop="dateModified" datetime="2019-11-14T12:57:05+00:00">2019-11-14</time>
+                <time title="Modified: 2019-11-15 15:59:13" itemprop="dateModified" datetime="2019-11-15T15:59:13+00:00">2019-11-15</time>
               </span>
             
           
@@ -573,7 +666,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2019-11-14 12:57:05" itemprop="dateModified" datetime="2019-11-14T12:57:05+00:00">2019-11-14</time>
+                <time title="Modified: 2019-11-15 15:59:13" itemprop="dateModified" datetime="2019-11-15T15:59:13+00:00">2019-11-15</time>
               </span>
             
           
@@ -715,7 +808,7 @@ C --> D(Make changes);</pre>
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2019-11-14 12:57:05" itemprop="dateModified" datetime="2019-11-14T12:57:05+00:00">2019-11-14</time>
+                <time title="Modified: 2019-11-15 15:59:13" itemprop="dateModified" datetime="2019-11-15T15:59:13+00:00">2019-11-15</time>
               </span>
             
           
@@ -859,7 +952,7 @@ C --> D(Make changes);</pre>
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2019-11-14 12:57:05" itemprop="dateModified" datetime="2019-11-14T12:57:05+00:00">2019-11-14</time>
+                <time title="Modified: 2019-11-15 15:59:13" itemprop="dateModified" datetime="2019-11-15T15:59:13+00:00">2019-11-15</time>
               </span>
             
           
@@ -1010,7 +1103,7 @@ C --> D(Make changes);</pre>
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2019-11-14 12:57:05" itemprop="dateModified" datetime="2019-11-14T12:57:05+00:00">2019-11-14</time>
+                <time title="Modified: 2019-11-15 15:59:13" itemprop="dateModified" datetime="2019-11-15T15:59:13+00:00">2019-11-15</time>
               </span>
             
           
@@ -1106,7 +1199,7 @@ C --> D(Make changes);</pre>
         
           <a href="/myblog/archives/">
         
-          <span class="site-state-item-count">27</span>
+          <span class="site-state-item-count">28</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>

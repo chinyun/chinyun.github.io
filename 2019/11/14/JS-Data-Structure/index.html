@@ -1,0 +1,610 @@
+<!DOCTYPE html>
+
+
+
+
+
+<html lang="zh-tw">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 3.9.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/myblog/images/apple-touch-icon-next.png?v=7.4.1">
+  <link rel="icon" type="image/png" sizes="32x32" href="/myblog/images/favicon-32x32-next.png?v=7.4.1">
+  <link rel="icon" type="image/png" sizes="16x16" href="/myblog/images/favicon-16x16-next.png?v=7.4.1">
+  <link rel="mask-icon" href="/myblog/images/logo.svg?v=7.4.1" color="#222">
+
+<link rel="stylesheet" href="/myblog/css/main.css?v=7.4.1">
+
+
+<link rel="stylesheet" href="/myblog/lib/font-awesome/css/font-awesome.min.css?v=4.7.0">
+
+
+<script id="hexo-configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/myblog/',
+    scheme: 'Pisces',
+    version: '7.4.1',
+    exturl: false,
+    sidebar: {"position":"left","display":"post","offset":12,"onmobile":false},
+    copycode: {"enable":false,"show_result":false,"style":null},
+    back2top: {"enable":true,"sidebar":false,"scrollpercent":false},
+    bookmark: {"enable":false,"color":"#222","save":"auto"},
+    fancybox: false,
+    mediumzoom: false,
+    lazyload: false,
+    pangu: false,
+    algolia: {
+      appID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    },
+    localsearch: {"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},
+    path: '',
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    translation: {
+      copy_button: 'Copy',
+      copy_success: 'Copied',
+      copy_failure: 'Copy failed'
+    },
+    sidebarPadding: 40
+  };
+</script>
+
+  <meta name="description" content="JavaScript 資料結構資料結構是電腦中儲存、組織資料的方式，在 JavaScript 中，資料可以分做基本型別和物件型別，基本型別儲存一個值，物件型別儲存更複雜的資料，為了更簡便的存取複雜的資料，JavaScript 使用有規則可循的結構來管理資料。 The key distinctions between primitives and objects:  A primitive Is a">
+<meta name="keywords" content="JavaScript, React, d3, NodeJS, Web">
+<meta property="og:type" content="article">
+<meta property="og:title" content="JS-Data Structure">
+<meta property="og:url" content="https://chinyun.github.io/myblog/2019/11/14/JS-Data-Structure/index.html">
+<meta property="og:site_name" content="Jinny&#39;s blog">
+<meta property="og:description" content="JavaScript 資料結構資料結構是電腦中儲存、組織資料的方式，在 JavaScript 中，資料可以分做基本型別和物件型別，基本型別儲存一個值，物件型別儲存更複雜的資料，為了更簡便的存取複雜的資料，JavaScript 使用有規則可循的結構來管理資料。 The key distinctions between primitives and objects:  A primitive Is a">
+<meta property="og:locale" content="zh-tw">
+<meta property="og:updated_time" content="2019-11-15T15:59:13.420Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="JS-Data Structure">
+<meta name="twitter:description" content="JavaScript 資料結構資料結構是電腦中儲存、組織資料的方式，在 JavaScript 中，資料可以分做基本型別和物件型別，基本型別儲存一個值，物件型別儲存更複雜的資料，為了更簡便的存取複雜的資料，JavaScript 使用有規則可循的結構來管理資料。 The key distinctions between primitives and objects:  A primitive Is a">
+  <link rel="canonical" href="https://chinyun.github.io/myblog/2019/11/14/JS-Data-Structure/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome: false,
+    isPost: true,
+    isPage: false,
+    isArchive: false
+  };
+</script>
+
+  <title>JS-Data Structure | Jinny's blog</title>
+  
+
+
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .logo,
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-tw">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-meta">
+
+    <div>
+      <a href="/myblog/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Jinny's blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+        <p class="site-subtitle">Writing For Sharing</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+      
+      
+      
+        
+        <li class="menu-item menu-item-home">
+      
+    
+
+    <a href="/myblog/" rel="section"><i class="fa fa-fw fa-home"></i>Home</a>
+
+  </li>
+      
+      
+      
+        
+        <li class="menu-item menu-item-archives">
+      
+    
+
+    <a href="/myblog/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>Archives</a>
+
+  </li>
+  </ul>
+
+</nav>
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+            
+
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+      <article itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block post">
+    <link itemprop="mainEntityOfPage" href="https://chinyun.github.io/myblog/myblog/2019/11/14/JS-Data-Structure/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="chinyun">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/myblog/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Jinny's blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">JS-Data Structure
+
+          
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              
+                
+              
+
+              <time title="Created: 2019-11-14 21:34:23" itemprop="dateCreated datePublished" datetime="2019-11-14T21:34:23+00:00">2019-11-14</time>
+            </span>
+          
+            
+
+            
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2019-11-15 15:59:13" itemprop="dateModified" datetime="2019-11-15T15:59:13+00:00">2019-11-15</time>
+              </span>
+            
+          
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h1 id="JavaScript-資料結構"><a href="#JavaScript-資料結構" class="headerlink" title="JavaScript 資料結構"></a>JavaScript 資料結構</h1><p>資料結構是電腦中儲存、組織資料的方式，在 JavaScript 中，資料可以分做基本型別和物件型別，基本型別儲存一個值，物件型別儲存更複雜的資料，為了更簡便的存取複雜的資料，JavaScript 使用有規則可循的結構來管理資料。</p>
+<p>The key distinctions between primitives and objects:</p>
+<ul>
+<li>A primitive<ul>
+<li>Is a value of a primitive type.</li>
+<li>There are 6 primitive types: string, number, boolean, symbol, null and undefined.</li>
+</ul>
+</li>
+<li>An object<ul>
+<li>Is capable of storing multiple values as properties.</li>
+<li>Can be created with {}, for instance: {name: “John”, age: 30}. There are other kinds of objects in JavaScript: functions, for example, are objects.</li>
+<li>One of the best things about objects is that we can store a function as one of its properties.</li>
+</ul>
+</li>
+</ul>
+<p>資料結構：</p>
+<ul>
+<li>index 管理：透過索引(index)數字，一個數字代表一個資料</li>
+<li>key-value-pair：使用 key-value(通常是一個字串)對應到資料</li>
+</ul>
+<p>在 Ruby 語言中，使用 index 的叫做 Array，使用 key-value-pair 的叫做 Hash。<br>而在 JavaScript 中，使用 index 的也叫做 Array，使用 key-value-pair 的有兩種： Object 和 Map。</p>
+<p>這些資料結構內建一些方法來方便開發者使用、管理資料。</p>
+<h1 id="JavaScrip-Objects-amp-methods-list"><a href="#JavaScrip-Objects-amp-methods-list" class="headerlink" title="JavaScrip Objects &amp; methods list"></a>JavaScrip Objects &amp; methods list</h1><ul>
+<li><p>Array 陣列</p>
+<ul>
+<li>其他資料結構：<ul>
+<li>Stack 堆疊：last-in-first-out，支持 push, pop operation</li>
+<li>Queue 佇列：first-in-first-out. A Queue is one of most common uses of an array. In computer science, this means an ordered collection of elements which supports two operations: push, shift.<br>在 JavaScript 中的 array 可以用作 queue 也可以用作 stack，從陣列的前/後來添加或刪除元素。</li>
+</ul>
+</li>
+<li>JavaScrip 陣列內建支援的方法<ul>
+<li>pop()：對 array 從尾刪除元素</li>
+<li>push()：對 array 從尾添加元素</li>
+<li>shift()：對 array 從頭刪除元素</li>
+<li>unshift()：對 array 從頭添加元素</li>
+<li>concat()：返回一個新數組：複製當前數組的所有成員並向其中添加 items。如果有任何items 是一個數組，那麼就取其元素。不會改變原 array。</li>
+<li>slice(start, end)：複製並返回切下的部分，不會改變原 array。 </li>
+<li>splice(index, 刪除幾個, “插入”)：返回切下的部分，會改變原 array。</li>
+<li>split()：複製一組 array，將 string 轉為 array。</li>
+<li>join()：複製一組 array，將 array 內容轉為 string。</li>
+<li>sort()：對原 array 做排序</li>
+<li>reverse()：對原 array 做倒序</li>
+<li>indexOf(item, from)：從 from index 開始由右至左找 item，返回符合的第一個 index</li>
+<li>lastIndexOf(item, from)：從 from index 開始由左至右找 item，返回符合的第一個 index</li>
+<li>includes(item, from)：從 from index 開始由右至左找 item，返回 true/false</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>Object Array 物件陣列<br>是指陣列元素為 object 或 array 的多層結構資料。針對這種類型的資料，JavaScrip也提供一些有用的方法來協助管理：</p>
+<ul>
+<li>map(function(item, index, array){ 遍歷每一個元素後，返回新 array })</li>
+<li>find(function(item, index, array){ 查詢到返回 true，return 第一個符合的元素 })</li>
+<li>filter(function(item, index, array){ 元素通過過濾器時返回 true，return 符合元素 })</li>
+<li>reduce(function(accumulator, num){})</li>
+</ul>
+</li>
+<li><p>Object</p>
+<ul>
+<li>Object.assign(target, …source) 產生一個新的 object 或合併 objects</li>
+<li>Object.keys(obj) 返回一個由 keys 組成的陣列</li>
+<li>Object.values(obj) 返回一個由 values 組成的陣列</li>
+<li>Object.entries(obj) 返回一個 key-value-pair 組成的陣列</li>
+<li>自創 methods</li>
+</ul>
+</li>
+<li><p>Map 也是 key-value-pair 物件，但是他可以直接被 iterate、 key 可以使用任何資料型別；object的 key 只能是 string。</p>
+<ul>
+<li>set(key, value): stores the value by the key.</li>
+<li>get(key): return the value if the key exists, <code>undefined</code> if keys don’t exist.</li>
+<li>has(key): return true/false whether the key exists or not</li>
+<li>delete(key): remove value by the key</li>
+<li>clear(): removes every thing from the set</li>
+<li>size: counts the elements</li>
+<li>keys()</li>
+<li>values()</li>
+<li>entries()</li>
+</ul>
+</li>
+<li><p>Set is a collection of values, where each value may occur only once.</p>
+<ul>
+<li>add(value): add a value, return set itself.</li>
+<li>delete(value): removes the value, return true/false.</li>
+<li>has(value): return true/false whether the value exists or not.</li>
+<li>clear(): removes every thing from the set</li>
+<li>size: counts the elements</li>
+<li>keys()</li>
+<li>values()</li>
+<li>entries()</li>
+</ul>
+</li>
+<li><p>WeakMap &amp; WeakSet<br>通常情況下，當某數據存在於內存中時，對象的屬性或者數組的元素或其他的數據結構將被認為是可以獲取的並留存於內存。在一個正常 Map 中，我們將某對象存儲為鍵還是值並不重要。它將會被一直保留在內存中，就算已經沒有指向它的引用。</p>
+<ul>
+<li><p>WeakSet</p>
+<ul>
+<li>WeakSet 是一種特殊的 Set，它不會阻止 JavaScript 將它的元素從內存中移除。</li>
+<li>它和 Set 類似，但是我們僅能將對象添加進 WeakSet（不可以是基礎類型）</li>
+<li>僅當對象存在其他位置的引用時它才存在於 set 中。</li>
+<li>支持 add()、has() 和 delete()，不支持 size、keys() 也不支持迭代器。</li>
+</ul>
+</li>
+<li><p>WeakMap</p>
+<ul>
+<li>WeakMap 也不會阻止 JavaScript 將它的元素從內存中移除，而且它和 Map 的區別是它的鍵必須是對象，不能是基礎類型的值。</li>
+<li>支持 get(key)、set(key, value)、delete(key, value)、has(key)</li>
+<li>但不支持 keys()、values()、entries()，我們不能對它進行迭代，所以沒有辦法獲取它的所有鍵值。</li>
+<li>WeakMap 的目的是，我們可以僅<strong>當該對象存在時，為對象存儲一些內容</strong>。但我們並不會因為存儲了對象的一些內容，就強制對像一直保留在內存中。</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h1 id="基本型別資料的-methods"><a href="#基本型別資料的-methods" class="headerlink" title="基本型別資料的 methods"></a>基本型別資料的 methods</h1><p>There are many things one would want to do with a primitive. So JavaScript provides methods to call. JavaScript allows us to work with primitives (strings, numbers, etc.) as if they were objects. </p>
+<p>The solution is:<br>The “object wrappers” are different for each primitive type and are called: String, Number, Boolean and Symbol. Thus, they provide different sets of methods.</p>
+<p>JavaScript 允許訪問字符串，數字，布爾值和符號的方法和屬性。當進行訪問時，創建一個特殊的“包裝對象”，它提供額外的功能，運行後即被銷毀。除 null 和 undefined 以外的基本類型都提供了許多有用的方法。從形式上講，這些方法通過臨時對象工作，但 JavaScript 引擎可以很好地調整以優化內部，因此調用它們並不需要太高的成本。</p>
+<ul>
+<li><p>Number<br>JavaScript 有一個內置的 Math 對象，它包含了一個小型的數學函數和常量庫。</p>
+<ul>
+<li>Math.random()</li>
+<li>Math.max(a, b, c…) / Math.min(a, b, c…)</li>
+<li>Math.pow(n, power)<br>分數可使用(須記住使用分數時會損失精度):</li>
+<li>Math.floor 向下舍入，3.1 變成 3，-1.1 變成 -2。</li>
+<li>Math.ceil 向上舍入，3.1 變成 4，-1.1 變成 -1。</li>
+<li>Math.trunc 刪除小數點後的所有內容而不捨入：3.1 變成 3，-1.1 變成-1，IE 瀏覽器不支援。</li>
+<li>Math.round 向最近的整數舍入：3.1 變成 3，3.6變成4，-1.1變成-1。</li>
+<li>num.toFixed(precision) 將點數後的數字四捨五入到 n 個數字並返回結果以字符串表示<br>檢查是否為特殊 Number？</li>
+<li>isNaN</li>
+<li>isFinite<br>檢視字符串並返回 Number：他們從字符串中“讀出”一個數字。如果發生錯誤，則返回收集的數字。有時候 parseInt / parseFloat 會返回 NaN。一般發生在沒有數字可讀的情況下。</li>
+<li>parseInt(str, radix) 返回整數。第二個參數指定了數字系統的基礎，因此 parseInt 還可以解析十六進制數字，二進制數字等字符串。</li>
+<li>parseFloat() 可以返回浮點數</li>
+</ul>
+</li>
+<li><p>String</p>
+<ul>
+<li>string.length 字符串長度</li>
+<li>string[0] 或 string.charAt(0):<br>如果沒有找到字符，[] 返回 undefined，而 charAt 返回一個空字符串</li>
+<li>toLowerCase()</li>
+<li>toUpperCase()</li>
+<li>查找字符的方法：<ul>
+<li>str.indexOf(substr, pos)</li>
+<li>includes()</li>
+<li>endsWith()</li>
+<li>startsWith()</li>
+</ul>
+</li>
+<li>獲取字符串的方法：<ul>
+<li>str.slice(start [, end]) 返回從 start 到（但不包括）end 的字符串部分。</li>
+<li>str.substring(start [, end]) 返回 start 和 end 之間的字符串部分。這與 slice 幾乎相同，但它允許 start 大於 end。</li>
+<li>str.substr(start [, length]) 從 start 開始返回給定 length 的字符串部分。</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>Boolean</p>
+</li>
+<li><p>Symbol</p>
+</li>
+</ul>
+<h1 id="reference"><a href="#reference" class="headerlink" title="reference"></a>reference</h1><p><a href="https://zh.javascript.info/map-set-weakmap-weakset" target="_blank" rel="noopener">javascript.info/map-set-weakmap-weakset</a><br><a href="https://javascript.info/primitives-methods" target="_blank" rel="noopener">javascript.info/primitives-methods</a></p>
+
+    </div>
+
+    
+    
+    
+        
+      
+
+      <footer class="post-footer">
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-next post-nav-item">
+              
+                <a href="/myblog/2019/11/13/JS-Shallow-Copy-Deep-Copy/" rel="next" title="JS-Shallow Copy & Deep Copy">
+                  <i class="fa fa-chevron-left"></i> JS-Shallow Copy & Deep Copy
+                </a>
+              
+            </div>
+
+            <span class="post-nav-divider"></span>
+
+            <div class="post-nav-prev post-nav-item">
+              
+            </div>
+          </div>
+        
+      </footer>
+    
+  </div>
+  
+  
+  
+  </article>
+
+  </div>
+
+
+          </div>
+          
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+        
+        
+        
+        
+      
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#JavaScript-資料結構"><span class="nav-number">1.</span> <span class="nav-text">JavaScript 資料結構</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#JavaScrip-Objects-amp-methods-list"><span class="nav-number">2.</span> <span class="nav-text">JavaScrip Objects &amp; methods list</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#基本型別資料的-methods"><span class="nav-number">3.</span> <span class="nav-text">基本型別資料的 methods</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#reference"><span class="nav-number">4.</span> <span class="nav-text">reference</span></a></li></ol></div>
+        
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">chinyun</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        
+          <a href="/myblog/archives/">
+        
+          <span class="site-state-item-count">28</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+    
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">chinyun</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> v3.9.0</div>
+  <span class="post-meta-divider">|</span>
+  <div class="theme-info">Theme – <a href="https://theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Pisces</a> v7.4.1</div>
+  <script src='https://unpkg.com/mermaid@7.1.2/dist/mermaid.min.js'></script>
+  <script>
+    if (window.mermaid) {
+      mermaid.initialize("");
+    }
+  </script>
+
+        
+
+
+
+
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/myblog/lib/anime.min.js?v=3.1.0"></script>
+  <script src="/myblog/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  <script src="/myblog/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+<script src="/myblog/js/utils.js?v=7.4.1"></script><script src="/myblog/js/motion.js?v=7.4.1"></script>
+<script src="/myblog/js/schemes/pisces.js?v=7.4.1"></script>
+<script src="/myblog/js/next-boot.js?v=7.4.1"></script>
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<script>
+if (document.querySelectorAll('pre.mermaid').length) {
+  NexT.utils.getScript('//cdn.jsdelivr.net/npm/mermaid@8/dist/mermaid.min.js', () => {
+    mermaid.initialize({
+      theme: 'forest',
+      logLevel: 3,
+      flowchart: { curve: 'linear' },
+      gantt: { axisFormat: '%m/%d/%Y' },
+      sequence: { actorMargin: 50 }
+    });
+  }, window.mermaid);
+}
+</script>
+
+
+
+
+  
+
+  
+
+  
+
+</body>
+</html>

@@ -193,6 +193,130 @@
   
   
   <div class="post-block home">
+    <link itemprop="mainEntityOfPage" href="https://chinyun.github.io/myblog/myblog/2019/11/05/Redux-connect-Redux-part-to-React/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="chinyun">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/myblog/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Jinny's blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+            
+            <a href="/myblog/2019/11/05/Redux-connect-Redux-part-to-React/" class="post-title-link" itemprop="url">Connect Redux part to React</a>
+          
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              
+                
+              
+
+              <time title="Created: 2019-11-05 16:13:00" itemprop="dateCreated datePublished" datetime="2019-11-05T16:13:00+00:00">2019-11-05</time>
+            </span>
+          
+            
+
+            
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2019-11-15 15:59:13" itemprop="dateModified" datetime="2019-11-15T15:59:13+00:00">2019-11-15</time>
+              </span>
+            
+          
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>以下筆記如何在 react app 中引入 redux：<br>示範 code 專案：<a href="https://github.com/chinyun/Tripper-app-redux/blob/master/src/index.js" target="_blank" rel="noopener">Tripper-app-redux</a></p>
+<h1 id="程式碼"><a href="#程式碼" class="headerlink" title="程式碼"></a>程式碼</h1><p>in Tripper-app-redux’s index.js:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">import React from &apos;react&apos;;</span><br><span class="line">import ReactDOM from &apos;react-dom&apos;;</span><br><span class="line">import &#123; Provider &#125; from &apos;react-redux&apos;;</span><br><span class="line">import &#123; createStore, applyMiddleware, combineReducers &#125; from &apos;redux&apos;;</span><br><span class="line">import &#123; createLogger &#125; from &apos;redux-logger&apos;;</span><br><span class="line">import thunkMiddleware from &apos;redux-thunk&apos;;</span><br><span class="line">import &#123; requestLogIn, routeChange, requestData &#125; from &apos;./reducers&apos;;</span><br><span class="line">import App from &apos;./containers/App&apos;;</span><br><span class="line"></span><br><span class="line">const logger = createLogger();</span><br><span class="line"></span><br><span class="line">const rootReducer = combineReducers(&#123;requestLogIn, routeChange, requestData&#125;);</span><br><span class="line">const store = createStore(rootReducer, applyMiddleware(thunkMiddleware, logger));</span><br><span class="line"></span><br><span class="line">ReactDOM.render(</span><br><span class="line">  &lt;Provider store=&#123;store&#125;&gt;</span><br><span class="line">    &lt;App/&gt;</span><br><span class="line">  &lt;/Provider&gt;, document.getElementById(&apos;root&apos;));</span><br></pre></td></tr></table></figure>
+
+<p>in Tripper-app-redux’s App.js:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">import &#123; connect &#125; from &apos;react-redux&apos;;</span><br><span class="line">import &#123; routeChange &#125; from &apos;../actions&apos;;</span><br><span class="line">.</span><br><span class="line">.</span><br><span class="line">.</span><br><span class="line">const mapStateToProps = (state) =&gt; &#123;</span><br><span class="line">  return &#123;</span><br><span class="line">    user: state.requestData.user,</span><br><span class="line">    journeys: state.requestData.journeys,</span><br><span class="line">    initialJourney: state.requestData.initialJourney,</span><br><span class="line">    journeyList: state.requestData.journeyList,</span><br><span class="line">    route: state.routeChange.route,</span><br><span class="line">    isSignedIn: state.requestLogIn.isSignedIn</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">const mapDispatchToProps = (dispatch) =&gt; &#123;</span><br><span class="line">  return &#123;</span><br><span class="line">    onRouteChange: (route) =&gt; dispatch(routeChange(route))</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line">.</span><br><span class="line">.</span><br><span class="line">.</span><br><span class="line"></span><br><span class="line">export default connect(mapStateToProps, mapDispatchToProps)(App);</span><br></pre></td></tr></table></figure>
+
+<h1 id="Redux-Store-and-Provider"><a href="#Redux-Store-and-Provider" class="headerlink" title="Redux Store and Provider"></a>Redux Store and Provider</h1><p><code>&lt;Provider&gt;&lt;/Provider&gt;</code>包住<code>&lt;App&gt;</code>他會把 store 用 props 傳給所有 App 包含的子組件。<br>The logger will catch the actions and console.log() the action that is going to go to the reducer.</p>
+<p>Store binds together the 3 principles fo Redux:</p>
+<ol>
+<li>The entire state of the application will be represented by one JavaScript Object. -&gt;  Store holds the current application state object. </li>
+<li>The state is read only, and can only be modified by dispatching actions. -&gt; Store allows you to dispatch actions.</li>
+<li>To specify how actions change state tree, the reducers should be pure functions. -&gt; When you create the Store, <strong>you need to specify the Reducer that tells how states updated with actions.</strong></li>
+</ol>
+<p>Store 有三個重要的 methods:</p>
+<ol>
+<li>getState(): run console.log(store.getState()) =&gt; get the current state of the Redux Store.</li>
+<li><strong>dispatch(): dispatch actions to change the state of the application.</strong></li>
+<li>subscribe(): register a callback that the redux store will call any time an action has been dispatched. So you can update the UI of application to reflect the current application’s state.</li>
+</ol>
+<p>運用 <code>combineReducers()</code> method 將多個 reducer 綁在一起變成一個，<code>createStore()</code>則負責建立 store，接受兩個參數：要監聽的 reducer、用 applyMiddleware() 加入要使用的 middleware。</p>
+<h1 id="Connect"><a href="#Connect" class="headerlink" title="Connect"></a>Connect</h1><p><code>connect()</code> are those which one of these components we want to be smart or be aware that the redux library exists and they subscribe to the changes. The connect function is optimized in order for us to avoid using somthing called <code>store.subscribe()</code>. It is a higher order function, means that a function that return another function. Through connect function, App component now could listen to the states that <code>mapStateToProps</code> gives and interested in actions that <code>mapDispatchToProps</code> gives to the component.</p>
+<h1 id="Redux-Middleware"><a href="#Redux-Middleware" class="headerlink" title="Redux Middleware"></a>Redux Middleware</h1><p>Middleware is the suggested way to extend Redux with custom functionality. Middleware lets you wrap the store’s dispatch method for fun and profit. The key feature of middleware is that it is composable. Multiple middleware can be combined together, where each middleware requires no knowledge of what comes before or after it in the chain.<br>Middleware 就像一個 tunnel，在 action 到 reducer 的階段之間建立通道，在 dispatch actions 時適時採取相應的行為。 Middleware helps us to handle side effects, monitor each one of our actions. We can listen to what logging output each one of these actions happen. It provides a third-party extension point between dispatching an action, and the moment it reaches the reducer.</p>
+<p>Redux Pattern:</p>
+<pre class="mermaid">graph LR;
+A(Action) -- Middleware --> B(Reducer);
+B --> C(Store);
+C --> D(Make changes);</pre>
+<p>在 Action 和 Reducer 之間的 Middleware 作用是輔助處理，當 dispatch action 的時候透過 middleware 進行額外動作。<br>常用的 Middleware 例如：</p>
+<ul>
+<li>redux-logger：監聽 actions，在 console 印出 action type、以及更新前、後的狀態</li>
+<li>redux-thunk：額外或是非同步的 dispatch</li>
+<li>redux-observable、redux-saga：複雜邏輯 dispatch</li>
+</ul>
+<p>使用的方法：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">const store = createStore(rootReducer, applyMiddleware(thunkMiddleware, logger));</span><br></pre></td></tr></table></figure>
+
+<p>在建立 store 的時候一併設定，透過 applyMiddleware() 放入多個 middleware，表示當 action dispatch時會依序經過 thunkMiddleware、logger 這些 middleware，然後再到 reducer。</p>
+<h1 id="Asynchronous-Redux"><a href="#Asynchronous-Redux" class="headerlink" title="Asynchronous Redux"></a>Asynchronous Redux</h1><p>The redux-thunk package that provides a getState and dispatch functions that are passed on. <strong>Redux-thunk can handle asynchronous actions like AJAX calls.</strong> How does this middleware work? Thunk middleware is waiting for a function, it waits and sees if any actions return a function instead of an object. And if it is a function, <strong>give a dispatch so we can call the actions to run</strong> the function as we thought.  </p>
+<p>Asynchronous Action 可以寫作這樣：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">export const editBudgets = (data, id, index) =&gt; (dispatch) =&gt; &#123;</span><br><span class="line">  dispatch(&#123; type: REQUEST_DATA_FAILED &#125;);</span><br><span class="line">  fetch(`$&#123;Url&#125;/journeys_budgets/$&#123;id&#125;`, &#123;</span><br><span class="line">    method: &apos;PATCH&apos;,</span><br><span class="line">    headers: &#123;&apos;Content-Type&apos;: &apos;application/json&apos;&#125;,</span><br><span class="line">    body: JSON.stringify(data)</span><br><span class="line">  &#125;)</span><br><span class="line">  .then(response =&gt; response.json())</span><br><span class="line">  .then(journey =&gt; &#123;</span><br><span class="line">    if (journey) &#123;</span><br><span class="line">      dispatch(&#123;</span><br><span class="line">        type: REQUEST_UPDATE_BUDGETS_SUCCESS,</span><br><span class="line">        payload: &#123;</span><br><span class="line">          data: journey,</span><br><span class="line">          index: index</span><br><span class="line">        &#125;</span><br><span class="line">      &#125;)</span><br><span class="line">    &#125; else &#123;</span><br><span class="line">      alert(&apos;unable to edit budget&apos;)</span><br><span class="line">    &#125;    </span><br><span class="line">  &#125;)</span><br><span class="line">  .catch(err =&gt; dispatch(&#123; type: REQUEST_DATA_FAILED, payload: err &#125;));</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>其中 <code>const editBudgets = (data, id, index) =&gt; (dispatch) =&gt; {...}</code> 表示 A function that return another function, redux wouldn’t understand it. Because it’s not an object, as it expects for an action. With the redux-thunk middleware, now we’re listening to actions. Anytime the actions get triggered it’s going to return a function and trigger redux-thunk and redux-thunk is going to know whether it is a function or not then give it a dispatch to call action to run.</p>
+<h1 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h1><p><a href="https://redux.js.org/introduction/getting-started" target="_blank" rel="noopener">redux 官方</a></p>
+
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+          <div class="post-eof"></div>
+        
+      </footer>
+  </div>
+  
+  
+  
+  </article>
+
+    
+        <article itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block home">
     <link itemprop="mainEntityOfPage" href="https://chinyun.github.io/myblog/myblog/2019/11/04/MVC-framework-SSR-CSR-SPA/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -233,7 +357,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2019-11-14 12:57:05" itemprop="dateModified" datetime="2019-11-14T12:57:05+00:00">2019-11-14</time>
+                <time title="Modified: 2019-11-15 15:59:13" itemprop="dateModified" datetime="2019-11-15T15:59:13+00:00">2019-11-15</time>
               </span>
             
           
@@ -385,7 +509,7 @@ C --> D(Make changes);</pre>
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2019-11-14 12:57:05" itemprop="dateModified" datetime="2019-11-14T12:57:05+00:00">2019-11-14</time>
+                <time title="Modified: 2019-11-15 15:59:13" itemprop="dateModified" datetime="2019-11-15T15:59:13+00:00">2019-11-15</time>
               </span>
             
           
@@ -532,7 +656,7 @@ C --> D(Make changes);</pre>
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2019-11-14 12:57:05" itemprop="dateModified" datetime="2019-11-14T12:57:05+00:00">2019-11-14</time>
+                <time title="Modified: 2019-11-15 15:59:13" itemprop="dateModified" datetime="2019-11-15T15:59:13+00:00">2019-11-15</time>
               </span>
             
           
@@ -811,7 +935,7 @@ C --> D(Make changes);</pre>
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2019-11-14 12:57:05" itemprop="dateModified" datetime="2019-11-14T12:57:05+00:00">2019-11-14</time>
+                <time title="Modified: 2019-11-15 15:59:13" itemprop="dateModified" datetime="2019-11-15T15:59:13+00:00">2019-11-15</time>
               </span>
             
           
@@ -928,7 +1052,7 @@ C --> D(Make changes);</pre>
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2019-11-14 12:57:05" itemprop="dateModified" datetime="2019-11-14T12:57:05+00:00">2019-11-14</time>
+                <time title="Modified: 2019-11-15 15:59:13" itemprop="dateModified" datetime="2019-11-15T15:59:13+00:00">2019-11-15</time>
               </span>
             
           
@@ -1075,7 +1199,7 @@ C --> D(Make changes);</pre>
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2019-11-14 12:57:05" itemprop="dateModified" datetime="2019-11-14T12:57:05+00:00">2019-11-14</time>
+                <time title="Modified: 2019-11-15 15:59:13" itemprop="dateModified" datetime="2019-11-15T15:59:13+00:00">2019-11-15</time>
               </span>
             
           
@@ -1232,7 +1356,7 @@ C --> D(Make changes);</pre>
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2019-11-14 12:57:05" itemprop="dateModified" datetime="2019-11-14T12:57:05+00:00">2019-11-14</time>
+                <time title="Modified: 2019-11-15 15:59:13" itemprop="dateModified" datetime="2019-11-15T15:59:13+00:00">2019-11-15</time>
               </span>
             
           
@@ -1343,7 +1467,7 @@ C --> D(Make changes);</pre>
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2019-11-14 12:57:05" itemprop="dateModified" datetime="2019-11-14T12:57:05+00:00">2019-11-14</time>
+                <time title="Modified: 2019-11-15 15:59:13" itemprop="dateModified" datetime="2019-11-15T15:59:13+00:00">2019-11-15</time>
               </span>
             
           
@@ -1468,7 +1592,7 @@ C --> D(Make changes);</pre>
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2019-11-14 12:57:05" itemprop="dateModified" datetime="2019-11-14T12:57:05+00:00">2019-11-14</time>
+                <time title="Modified: 2019-11-15 15:59:13" itemprop="dateModified" datetime="2019-11-15T15:59:13+00:00">2019-11-15</time>
               </span>
             
           
@@ -1544,99 +1668,6 @@ C --> D(Make changes);</pre>
   </article>
 
     
-        <article itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block home">
-    <link itemprop="mainEntityOfPage" href="https://chinyun.github.io/myblog/myblog/2019/10/12/React-lifecycle-and-state/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="chinyun">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/myblog/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Jinny's blog">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-            
-            <a href="/myblog/2019/10/12/React-lifecycle-and-state/" class="post-title-link" itemprop="url">React lifecycle and state</a>
-          
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              
-                
-              
-
-              <time title="Created: 2019-10-12 20:15:41" itemprop="dateCreated datePublished" datetime="2019-10-12T20:15:41+00:00">2019-10-12</time>
-            </span>
-          
-            
-
-            
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2019-11-14 12:57:05" itemprop="dateModified" datetime="2019-11-14T12:57:05+00:00">2019-11-14</time>
-              </span>
-            
-          
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="React-lifecycle-method-amp-state-updating"><a href="#React-lifecycle-method-amp-state-updating" class="headerlink" title="React lifecycle method &amp; state updating"></a>React lifecycle method &amp; state updating</h1><h1 id="提升-React-效能：保持-virtual-DOM-的一致"><a href="#提升-React-效能：保持-virtual-DOM-的一致" class="headerlink" title="提升 React 效能：保持 virtual DOM 的一致"></a>提升 React 效能：保持 virtual DOM 的一致</h1><ul>
-<li>DOM (Document Object Model)是什麼？</li>
-</ul>
-<p>DOM 文件物件模型，是 Html, XML, SVG 等文件的程式介面，提供一種文件樹的結構化表示方法，可以讓程式存取並改變文件架構、風格（style）和內容，透過 DOM 結構，文件擁有屬性、函式節點，物件可以和事件處理程序連結，當事件被觸發，執行處理程序來存取或改變文件。</p>
-<ul>
-<li>React 如何改變 DOM 以及如何提升效能？</li>
-</ul>
-<p>由於讀取更新 DOM 損耗 browser 的執行率，每一次改變便 render 整個頁面在 JavaScript 是很慢的，React 使用 Virtual DOM 虛擬 DOM 的一個強大的 Render 系統，只需更新 DOM 而不需要從 DOM 讀取，以減少運算。<br>同時， React 的 diff 演算法，當 render function running 得時候，讓 virtual dom 和 real dom 比對只重繪有更新的部分，做出最低必要的更新。</p>
-<p>官方文件：<br>When you use React, at a single point in time you can think of the render() function as creating a tree of React elements. On the next state or props update, that render() function will return a different tree of React elements. React then needs to figure out how to efficiently update the UI to match the most recent tree.</p>
-<ul>
-<li>開發者提升 React 應用程式的方法</li>
-</ul>
-<p>盡可能的減少讀取和更新 DOM<br>We must minimize the amount of work that we do to the DOM.</p>
-
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-          <div class="post-eof"></div>
-        
-      </footer>
-  </div>
-  
-  
-  
-  </article>
-
-    
   </div>
 
   
@@ -1685,7 +1716,7 @@ C --> D(Make changes);</pre>
         
           <a href="/myblog/archives/">
         
-          <span class="site-state-item-count">27</span>
+          <span class="site-state-item-count">28</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
