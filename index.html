@@ -193,6 +193,125 @@
   
   
   <div class="post-block home">
+    <link itemprop="mainEntityOfPage" href="https://chinyun.github.io/myblog/myblog/2019/11/16/JS-module/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="chinyun">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/myblog/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Jinny's blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+            
+            <a href="/myblog/2019/11/16/JS-module/" class="post-title-link" itemprop="url">JS-module</a>
+          
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              
+                
+              
+
+              <time title="Created: 2019-11-16 00:19:36" itemprop="dateCreated datePublished" datetime="2019-11-16T00:19:36+00:00">2019-11-16</time>
+            </span>
+          
+            
+
+            
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2019-11-18 07:36:24" itemprop="dateModified" datetime="2019-11-18T07:36:24+00:00">2019-11-18</time>
+              </span>
+            
+          
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="什麼是-module？為什麼要用-module？"><a href="#什麼是-module？為什麼要用-module？" class="headerlink" title="什麼是 module？為什麼要用 module？"></a>什麼是 module？為什麼要用 module？</h1><ul>
+<li>什麼是 module？<br>Modules are just clusters of code. Good authors divide their books into chapters and sections; good programmers divide their programs into modules.</li>
+</ul>
+<p>在進行軟體專案時，複雜性總是伴隨，妥善應用抽象、介面和他們底層的概念，將某項功能的需要注意的複雜性最小化，直到他變成單一功能的分支，也就是將一個大的 program 拆分成互相依賴的小文件、再用簡單的方法拼裝起來，透過妥善設計的介面(API)讓使用者知道如何引用一個 module ，這樣的思維就是模組化開發思維。</p>
+<p>Good module should be highly self-contained with distinct functionally, allowing them to be shuffled, removed, or added as neccesary, without disrupting the system as a whole.</p>
+<p>透過提供一個讓系統其他部分操作的公開介面(API)，這個介面(API)裡面有元件公開的方法或屬性，那些方法和屬性也可以稱為接觸點，也就是可在介面(API)公開互動的東西。接觸點越多，需要操作的地方也越多，也有較高的彈性，因為有大量的功能，所以可能也會更難理解、使用。<br>介面(API)有兩種用途：幫助我們開發元件的新功能、讓使用介面的人(元件、系統)可以受惠於公開的功能，而不需考慮那項功能的背後細節如何實作。因此設計良好合適的介面可以增加功能開發的生產力，當我們持續使用類似的API外貌，就不需要每次都重新擬定新的設計，使用者也可以放心使用。</p>
+<ul>
+<li>為什麼要模組化開發？<br>隨著專案日漸複雜，全域變量容易互相衝突，影響專案的維護性和可拓展性。使用模組化開發方法的好處有：<ol>
+<li>提升維護性 (Maintainability)</li>
+<li>命名空間 (Namingspacing)</li>
+<li>提供可重用性 (Reusability)</li>
+</ol>
+</li>
+</ul>
+<p>在 JavaScript 中，管理變量 variable 是一切 coding 的基礎，看起來似乎是越少變量越容易管理，不過透過 scope 的概念可以讓變量在單一作用域內產生作用，不同作用域的變量便不會互相干擾，然而當你想要共用變量或資料時卻只能透過全域變量的設定，或用 callback function 將變量傳出來，設定全域變量容易產生命名衝突，而且當所有變量都需要在全域中，就必須按照一定順序編程。當需要移除舊程式碼、製作新功能時，就會有困難。所以有 module 開發的必要性。</p>
+<h1 id="JavaScript-Module-History"><a href="#JavaScript-Module-History" class="headerlink" title="JavaScript Module History"></a>JavaScript Module History</h1><p>早期 JavaScript 沒有 module 體系，其他語言都有這個功能，例如：Ruby 的 require、Python 的 import，連 css 都有 @import。因為有開發上的實際需要，所以社群制定了一些 module pattern 的加載方法，最主要的有 CommonJS 和 AMD 規範，前者用於 server 後者用於 browser。 </p>
+<ul>
+<li><strong>AMD(Async Module Definition)</strong> 非同步載入模組規範</li>
+<li><strong>CommonJS</strong> 同步模組載入規範，Node.js 遵守其規範，透過 require 進行模組同步載入，並透過 exports, module.exports 來輸出模組。主要實現為 Node.js 伺服器端的同步載入和瀏覽器端的 Browserify。</li>
+<li>CMD(Common Module Definition) 依賴就近，延遲執行</li>
+<li><strong>CND-Based, inline-script, Script Tags</strong> 最傳統的 <code>&lt;script&gt;&lt;/script&gt;</code>引入方式，但開發大型專案時容易產生弊端：<ul>
+<li>global variable 污染、衝突</li>
+<li>文件只能按照順序載入，須由開發者自行判斷模組與函式庫之間的依賴性</li>
+<li>資源與版本難以維護</li>
+</ul>
+</li>
+<li>UMD(Universal Module Definition) 為了兼容 AMD 和 CommonJS。</li>
+<li><strong>ES6 Module</strong> (2015年)<br>ES6 Module 的標準中定義了 JavaScript 的模組化方式，自此產生了 JavaScript 原生的模組語法，其功能可以取代之前社群使用的規範，提供靜態的宣告式 API、以及採用 promise 的動態宣告式，在編譯時就確定 module 之間的依賴關係，以及輸出和輸入的變量。而 CommonJS 只能在運行時確定這些東西。目前 browser 和 Node.js 對 ES6 模組支援度還不完整，大部分還需要透過 babel 轉譯器進行轉譯。</li>
+</ul>
+<h1 id="ES6-module-現代模組化開發方法"><a href="#ES6-module-現代模組化開發方法" class="headerlink" title="ES6 module 現代模組化開發方法"></a>ES6 module 現代模組化開發方法</h1><p>在 ES6 module 中，每個檔案都是一個模組，有自己的範圍和環境，通過 <code>export</code> 命令輸出指定 code，再用 <code>import</code> 命令輸入文件。（自動採用嚴格模式）<br>過去 server 開發時會使用一個叫做 Browserify 的 module bundler， Browserify  使用 CommonJS 語法，會產生一個 bundle.js 檔案，讓我們能夠上傳並發佈網站。而現在我們會使用 <strong>ES6 module + Webpack + Babel</strong>，Webpack 也是一個類似於 Browserify 的 module bundler，但 Webpack 可以結合 Babel 轉譯器，讓瀏覽器也讀懂 ES6，並產生 bundle.js 檔案。</p>
+<h1 id="NPM-Node-Package-Manager"><a href="#NPM-Node-Package-Manager" class="headerlink" title="NPM (Node Package Manager)"></a>NPM (Node Package Manager)</h1><p>一個強大的套件管理工具、線上資料庫，擁有龐大的社群支持，一開始是為了 Node.js 而發展出來的套件工具，隨著發展變成開發者社群用來 share code、package 的資料庫，透過 npm 提供的指令，可以管理套件版本、加載套件、卸除套件等。使用套件做開發，簡化重複的程式碼，可以加快開發速度和提升程式維護性。</p>
+<p>npm 在初始化專案時會產生一個 package.json 的檔案，裡面紀錄專案所使用的 packages 版本紀錄，透過檔案紀錄可以確保團隊工作時所有人使用的版本一致。</p>
+<p>其他套件管理工具還有由 facebook 開發的 Yarn，目前也有部分人在使用。</p>
+<h1 id="Wepack"><a href="#Wepack" class="headerlink" title="Wepack"></a>Wepack</h1><p>Wepack is a static module bundler for morden JavaScript applications.<br>運行在 Node.js 上，可以使用 CommonJS + AMD + ES6 語法。因為使用 import 語法和 export 的語法，也可以在 browser 上實現模組化。能夠將圖片和 js 檔案都打包。</p>
+<p>實作方法：在 <code>webpack.config.js</code> 中設定要進行 bundle 的檔案。自己編寫設定檔，透過指令去驅動的自動化工具，所有的動作都需要自己寫規則去做編譯，將我們寫好的前端框架檔案(preprocess)編譯成目前 browser 看得懂的內容並打包成一包的完整檔案，提交給 server，會在專案底下創建一個 webpack.config.js 和 index.js 檔案。</p>
+<h1 id="Babel"><a href="#Babel" class="headerlink" title="Babel"></a>Babel</h1><p>Babel is a JavaScript compiler that takes your morden JS code and returns browser compatible JS(older JS code).<br>有很多開發工具（ex:create-react-app）都自動搭載了 babel 作為轉譯工具。他也可以轉換 react 的 jsx 還有 typescript。</p>
+<h1 id="Gulp"><a href="#Gulp" class="headerlink" title="Gulp"></a>Gulp</h1><p>自動化工作流程的 library。可以 compile css 也可以 compile JavaScript。<br><a href="https://gulpjs.com" target="_blank" rel="noopener">官網</a></p>
+<h1 id="Eslint"><a href="#Eslint" class="headerlink" title="Eslint"></a>Eslint</h1><p>程式碼 coding style 檢查工具。</p>
+<h1 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h1><p>深入學習 JavaScript 模組化設計 - NICOLAS BEVACQUA 著 O’REILLY </p>
+
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+          <div class="post-eof"></div>
+        
+      </footer>
+  </div>
+  
+  
+  
+  </article>
+
+    
+        <article itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block home">
     <link itemprop="mainEntityOfPage" href="https://chinyun.github.io/myblog/myblog/2019/11/14/JS-Data-Structure/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -233,7 +352,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2019-11-15 16:04:33" itemprop="dateModified" datetime="2019-11-15T16:04:33+00:00">2019-11-15</time>
+                <time title="Modified: 2019-11-18 07:36:24" itemprop="dateModified" datetime="2019-11-18T07:36:24+00:00">2019-11-18</time>
               </span>
             
           
@@ -469,7 +588,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2019-11-15 16:04:33" itemprop="dateModified" datetime="2019-11-15T16:04:33+00:00">2019-11-15</time>
+                <time title="Modified: 2019-11-18 07:36:24" itemprop="dateModified" datetime="2019-11-18T07:36:24+00:00">2019-11-18</time>
               </span>
             
           
@@ -604,7 +723,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2019-11-15 16:04:33" itemprop="dateModified" datetime="2019-11-15T16:04:33+00:00">2019-11-15</time>
+                <time title="Modified: 2019-11-18 07:36:24" itemprop="dateModified" datetime="2019-11-18T07:36:24+00:00">2019-11-18</time>
               </span>
             
           
@@ -734,7 +853,7 @@ JavaScript 中主要的內存管理概念是**可達性 Reachability**，簡言�
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2019-11-15 16:04:33" itemprop="dateModified" datetime="2019-11-15T16:04:33+00:00">2019-11-15</time>
+                <time title="Modified: 2019-11-18 07:36:24" itemprop="dateModified" datetime="2019-11-18T07:36:24+00:00">2019-11-18</time>
               </span>
             
           
@@ -882,7 +1001,7 @@ JavaScript 中主要的內存管理概念是**可達性 Reachability**，簡言�
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2019-11-15 16:04:33" itemprop="dateModified" datetime="2019-11-15T16:04:33+00:00">2019-11-15</time>
+                <time title="Modified: 2019-11-18 07:36:24" itemprop="dateModified" datetime="2019-11-18T07:36:24+00:00">2019-11-18</time>
               </span>
             
           
@@ -1000,7 +1119,7 @@ JavaScript 中主要的內存管理概念是**可達性 Reachability**，簡言�
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2019-11-15 16:04:33" itemprop="dateModified" datetime="2019-11-15T16:04:33+00:00">2019-11-15</time>
+                <time title="Modified: 2019-11-18 07:36:24" itemprop="dateModified" datetime="2019-11-18T07:36:24+00:00">2019-11-18</time>
               </span>
             
           
@@ -1104,7 +1223,7 @@ JavaScript 中主要的內存管理概念是**可達性 Reachability**，簡言�
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2019-11-15 16:04:33" itemprop="dateModified" datetime="2019-11-15T16:04:33+00:00">2019-11-15</time>
+                <time title="Modified: 2019-11-18 07:36:24" itemprop="dateModified" datetime="2019-11-18T07:36:24+00:00">2019-11-18</time>
               </span>
             
           
@@ -1234,7 +1353,7 @@ JavaScript 中主要的內存管理概念是**可達性 Reachability**，簡言�
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2019-11-15 16:04:33" itemprop="dateModified" datetime="2019-11-15T16:04:33+00:00">2019-11-15</time>
+                <time title="Modified: 2019-11-18 07:36:24" itemprop="dateModified" datetime="2019-11-18T07:36:24+00:00">2019-11-18</time>
               </span>
             
           
@@ -1386,7 +1505,7 @@ JavaScript 中主要的內存管理概念是**可達性 Reachability**，簡言�
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2019-11-15 16:04:33" itemprop="dateModified" datetime="2019-11-15T16:04:33+00:00">2019-11-15</time>
+                <time title="Modified: 2019-11-18 07:36:24" itemprop="dateModified" datetime="2019-11-18T07:36:24+00:00">2019-11-18</time>
               </span>
             
           
@@ -1424,116 +1543,6 @@ JavaScript 中主要的內存管理概念是**可達性 Reachability**，簡言�
 </ul>
 <h1 id="Event-Delegation"><a href="#Event-Delegation" class="headerlink" title="Event Delegation"></a>Event Delegation</h1><p>事件代理機制是將許多事件綁定在同一節點，透過該節點使下層的子節點都可以觸發事件，因為只要綁定一個地方不需要每個子節點或後來新增的節點都綁定所以叫做事件代理。</p>
 <h1 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h1><p><a href="https://medium.com/@realdennis/javascript-%E4%BA%8B%E4%BB%B6-event-da8104c5c98c" target="_blank" rel="noopener">事件 (Event) 的註冊、觸發與傳遞</a><br><a href="https://blog.techbridge.cc/2017/07/15/javascript-event-propagation/" target="_blank" rel="noopener">DOM 的事件傳遞機制：捕獲與冒泡</a></p>
-
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-          <div class="post-eof"></div>
-        
-      </footer>
-  </div>
-  
-  
-  
-  </article>
-
-    
-        <article itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block home">
-    <link itemprop="mainEntityOfPage" href="https://chinyun.github.io/myblog/myblog/2019/11/08/css-pseudo-class-pseudo-element/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="chinyun">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/myblog/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Jinny's blog">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-            
-            <a href="/myblog/2019/11/08/css-pseudo-class-pseudo-element/" class="post-title-link" itemprop="url">css pseudo class & pseudo element</a>
-          
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              
-                
-              
-
-              <time title="Created: 2019-11-08 18:39:38" itemprop="dateCreated datePublished" datetime="2019-11-08T18:39:38+00:00">2019-11-08</time>
-            </span>
-          
-            
-
-            
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2019-11-15 16:04:33" itemprop="dateModified" datetime="2019-11-15T16:04:33+00:00">2019-11-15</time>
-              </span>
-            
-          
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>單冒號 (:) 是用在偽類<br>雙冒號 (::) 則是用在偽元素<br>偽類 (pseudo class) 就是在選已經存在的東西，比方說 <code>a:hover</code> 就是選了已經存在的 <code>&lt;a&gt;</code> 的某一個狀態<br>偽元素 (pseudo element) 就是在創造一個新的假元素，因為他不在 DOM 裡面，而是創造的了一個我們看不見的元素。比如說 <code>::first-line</code>，第一行並沒有被任何的 tag 包住，所以在選取的過程就像是用了一個看不到的 tag 把第一行包起來，所以才選得到這行。</p>
-<p>使用偽類元素，一方面可以減少頁面中的節點元素，加速頁面渲染速度，另一方面可以為設計動畫提供很多新思維。</p>
-<h1 id="pseudo-class"><a href="#pseudo-class" class="headerlink" title="pseudo class"></a>pseudo class</h1><p>Pseudo-classes are used to provide styles not for elements, but for various states of elements. The pseudo-class concept is introduced to permit selection based on information that lies outside of the document tree or that cannot be expressed using the other <em>simple selectors</em>.<br>用於定義元素的特殊狀態，為了選擇 DOM tree 之外的信息，或者使用其他簡單選擇器不能表達的信息，不會出現在 DOM tree。</p>
-<p>Simple selectors includes:</p>
-<ul>
-<li>type selector (<code>h1, p, div</code>)</li>
-<li>universal selector (<code>*</code>)</li>
-<li>attribute selector (<code>img[alt]</code>)</li>
-<li>class selector (<code>.class</code>)</li>
-<li>ID selector (<code>#id</code>)</li>
-<li>pseudo-class (<code>:</code>) <ul>
-<li><strong>:active</strong> </li>
-<li><strong>:hover</strong> 設定滑鼠滑過的樣式</li>
-<li><strong>:visited</strong> 被訪問過的連結的樣式</li>
-<li><strong>:link</strong></li>
-<li><strong>:nth-child()</strong></li>
-<li><strong>:checked</strong></li>
-</ul>
-</li>
-</ul>
-<p>狀態不存在 DOM 裡面，或是這幾種 simple selectors 選不到的東西，就是 pseudo-class 要去解決的問題。</p>
-<h1 id="pseudo-element"><a href="#pseudo-element" class="headerlink" title="pseudo element"></a>pseudo element</h1><p>Pseudo elements differ from pseudo-classes in that they don’t select states of elements; they select parts of an element. 用於選擇元素的指定部分，創造一個關於 DOM tree 的抽象內容，提供一種方法來引用源文檔中不存在的內容，創造之後會出現在 DOM tree，偽元素也會「繼承」原本元素的屬性。</p>
-<ul>
-<li><strong>::first-line</strong> 選取第一行</li>
-<li><strong>::first-letter</strong> 選取第一個字</li>
-<li><strong>::before</strong> 在原本的元素「之前」加入內容</li>
-<li><strong>::after</strong> 在原本的元素「之後」加入內容</li>
-<li><strong>::selection</strong> 選取文字反白後</li>
-</ul>
-<h1 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h1><p><a href="https://stringpiggy.hpd.io/pseudo-element-pseudo-class-difference/" target="_blank" rel="noopener">偽元素 (pseudo element) 和偽類 (pseudo class) 差在哪？</a><br><a href="https://www.itread01.com/content/1549211047.html" target="_blank" rel="noopener">css偽類元素的運用以及相應的hover的使用</a><br><a href="https://ithelp.ithome.com.tw/articles/10196924" target="_blank" rel="noopener">CSS 偽類 與 偽元素</a><br><a href="http://csscoke.com/2013/09/21/%E4%BD%BF%E7%94%A8css3-nth-childn-%E9%81%B8%E5%8F%96%E5%99%A8%E8%A9%B3%E8%A7%A3/" target="_blank" rel="noopener">使用CSS3 :nth-child(n) 選取器教學</a><br><a href="https://www.oxxostudio.tw/articles/201405/css-selector.html" target="_blank" rel="noopener">CSS 偽類 child 和 of-type</a><br><a href="https://www.oxxostudio.tw/articles/201706/pseudo-element-1.html" target="_blank" rel="noopener">CSS 偽元素 ( before 與 after )</a></p>
 
         
       
@@ -1601,7 +1610,7 @@ JavaScript 中主要的內存管理概念是**可達性 Reachability**，簡言�
         
           <a href="/myblog/archives/">
         
-          <span class="site-state-item-count">28</span>
+          <span class="site-state-item-count">29</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
