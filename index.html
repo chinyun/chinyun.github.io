@@ -233,7 +233,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2019-11-18 07:36:24" itemprop="dateModified" datetime="2019-11-18T07:36:24+00:00">2019-11-18</time>
+                <time title="Modified: 2019-11-19 08:16:59" itemprop="dateModified" datetime="2019-11-19T08:16:59+00:00">2019-11-19</time>
               </span>
             
           
@@ -249,21 +249,17 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <h1 id="什麼是-module？為什麼要用-module？"><a href="#什麼是-module？為什麼要用-module？" class="headerlink" title="什麼是 module？為什麼要用 module？"></a>什麼是 module？為什麼要用 module？</h1><ul>
-<li>什麼是 module？<br>Modules are just clusters of code. Good authors divide their books into chapters and sections; good programmers divide their programs into modules.</li>
-</ul>
-<p>在進行軟體專案時，複雜性總是伴隨，妥善應用抽象、介面和他們底層的概念，將某項功能的需要注意的複雜性最小化，直到他變成單一功能的分支，也就是將一個大的 program 拆分成互相依賴的小文件、再用簡單的方法拼裝起來，透過妥善設計的介面(API)讓使用者知道如何引用一個 module ，這樣的思維就是模組化開發思維。</p>
+          <h1 id="什麼是-module？為什麼要用-module？"><a href="#什麼是-module？為什麼要用-module？" class="headerlink" title="什麼是 module？為什麼要用 module？"></a>什麼是 module？為什麼要用 module？</h1><h3 id="什麼是-module？"><a href="#什麼是-module？" class="headerlink" title="什麼是 module？"></a>什麼是 module？</h3><p>Modules are just clusters of code. Good authors divide their books into chapters and sections; good programmers divide their programs into modules.<br>在進行軟體專案時，複雜性總是伴隨，妥善應用抽象、介面和他們底層的概念，將某項功能的需要注意的複雜性最小化，直到他變成單一功能的分支，也就是將一個大的 program 拆分成互相依賴的小文件、再用簡單的方法拼裝起來，透過妥善設計的介面(API)讓使用者知道如何引用一個 module ，這樣的思維就是模組化開發思維。</p>
 <p>Good module should be highly self-contained with distinct functionally, allowing them to be shuffled, removed, or added as neccesary, without disrupting the system as a whole.</p>
 <p>透過提供一個讓系統其他部分操作的公開介面(API)，這個介面(API)裡面有元件公開的方法或屬性，那些方法和屬性也可以稱為接觸點，也就是可在介面(API)公開互動的東西。接觸點越多，需要操作的地方也越多，也有較高的彈性，因為有大量的功能，所以可能也會更難理解、使用。<br>介面(API)有兩種用途：幫助我們開發元件的新功能、讓使用介面的人(元件、系統)可以受惠於公開的功能，而不需考慮那項功能的背後細節如何實作。因此設計良好合適的介面可以增加功能開發的生產力，當我們持續使用類似的API外貌，就不需要每次都重新擬定新的設計，使用者也可以放心使用。</p>
-<ul>
-<li>為什麼要模組化開發？<br>隨著專案日漸複雜，全域變量容易互相衝突，影響專案的維護性和可拓展性。使用模組化開發方法的好處有：<ol>
+<h3 id="為什麼要模組化開發？"><a href="#為什麼要模組化開發？" class="headerlink" title="為什麼要模組化開發？"></a>為什麼要模組化開發？</h3><p>隨著專案日漸複雜，全域變量容易互相衝突，影響專案的維護性和可拓展性。使用模組化開發方法的好處有：</p>
+<ol>
 <li>提升維護性 (Maintainability)</li>
 <li>命名空間 (Namingspacing)</li>
 <li>提供可重用性 (Reusability)</li>
 </ol>
-</li>
-</ul>
 <p>在 JavaScript 中，管理變量 variable 是一切 coding 的基礎，看起來似乎是越少變量越容易管理，不過透過 scope 的概念可以讓變量在單一作用域內產生作用，不同作用域的變量便不會互相干擾，然而當你想要共用變量或資料時卻只能透過全域變量的設定，或用 callback function 將變量傳出來，設定全域變量容易產生命名衝突，而且當所有變量都需要在全域中，就必須按照一定順序編程。當需要移除舊程式碼、製作新功能時，就會有困難。所以有 module 開發的必要性。</p>
+<hr>
 <h1 id="JavaScript-Module-History"><a href="#JavaScript-Module-History" class="headerlink" title="JavaScript Module History"></a>JavaScript Module History</h1><p>早期 JavaScript 沒有 module 體系，其他語言都有這個功能，例如：Ruby 的 require、Python 的 import，連 css 都有 @import。因為有開發上的實際需要，所以社群制定了一些 module pattern 的加載方法，最主要的有 CommonJS 和 AMD 規範，前者用於 server 後者用於 browser。 </p>
 <ul>
 <li><strong>AMD(Async Module Definition)</strong> 非同步載入模組規範</li>
@@ -278,16 +274,29 @@
 <li>UMD(Universal Module Definition) 為了兼容 AMD 和 CommonJS。</li>
 <li><strong>ES6 Module</strong> (2015年)<br>ES6 Module 的標準中定義了 JavaScript 的模組化方式，自此產生了 JavaScript 原生的模組語法，其功能可以取代之前社群使用的規範，提供靜態的宣告式 API、以及採用 promise 的動態宣告式，在編譯時就確定 module 之間的依賴關係，以及輸出和輸入的變量。而 CommonJS 只能在運行時確定這些東西。目前 browser 和 Node.js 對 ES6 模組支援度還不完整，大部分還需要透過 babel 轉譯器進行轉譯。</li>
 </ul>
-<h1 id="ES6-module-現代模組化開發方法"><a href="#ES6-module-現代模組化開發方法" class="headerlink" title="ES6 module 現代模組化開發方法"></a>ES6 module 現代模組化開發方法</h1><p>在 ES6 module 中，每個檔案都是一個模組，有自己的範圍和環境，通過 <code>export</code> 命令輸出指定 code，再用 <code>import</code> 命令輸入文件。（自動採用嚴格模式）<br>過去 server 開發時會使用一個叫做 Browserify 的 module bundler， Browserify  使用 CommonJS 語法，會產生一個 bundle.js 檔案，讓我們能夠上傳並發佈網站。而現在我們會使用 <strong>ES6 module + Webpack + Babel</strong>，Webpack 也是一個類似於 Browserify 的 module bundler，但 Webpack 可以結合 Babel 轉譯器，讓瀏覽器也讀懂 ES6，並產生 bundle.js 檔案。</p>
-<h1 id="NPM-Node-Package-Manager"><a href="#NPM-Node-Package-Manager" class="headerlink" title="NPM (Node Package Manager)"></a>NPM (Node Package Manager)</h1><p>一個強大的套件管理工具、線上資料庫，擁有龐大的社群支持，一開始是為了 Node.js 而發展出來的套件工具，隨著發展變成開發者社群用來 share code、package 的資料庫，透過 npm 提供的指令，可以管理套件版本、加載套件、卸除套件等。使用套件做開發，簡化重複的程式碼，可以加快開發速度和提升程式維護性。</p>
+<hr>
+<h1 id="ES6-module-現代模組化開發方法"><a href="#ES6-module-現代模組化開發方法" class="headerlink" title="ES6 module 現代模組化開發方法"></a>ES6 module 現代模組化開發方法</h1><p>在 ES6 module 中，每個檔案都是一個模組，有自己的範圍和環境，通過 <code>export</code> 命令輸出指定 code，再用 <code>import</code> 命令輸入文件。（自動採用嚴格模式）<br>過去 server 開發時會使用一個叫做 Browserify 的 module bundler， Browserify  使用 CommonJS 語法，會產生一個 bundle.js 檔案，讓我們能夠上傳並發佈網站。而現在我們會使用 <strong>ES6 module + Webpack + Babel</strong>，Webpack 也是一個類似於 Browserify 的 module bundler，但 Webpack 可以結合 Babel 轉譯器，讓瀏覽器也讀懂 ES6，並產生 bundle.js 檔案。<br>現代的模組化開發多使用以下工具(庫)：</p>
+<h3 id="NPM-Node-Package-Manager"><a href="#NPM-Node-Package-Manager" class="headerlink" title="NPM (Node Package Manager)"></a>NPM (Node Package Manager)</h3><p>一個強大的套件管理工具、線上資料庫，擁有龐大的社群支持，一開始是為了 Node.js 而發展出來的套件工具，隨著發展變成開發者社群用來 share code、package 的資料庫，透過 npm 提供的指令，可以管理套件版本、加載套件、卸除套件等。使用套件做開發，簡化重複的程式碼，可以加快開發速度和提升程式維護性。</p>
 <p>npm 在初始化專案時會產生一個 package.json 的檔案，裡面紀錄專案所使用的 packages 版本紀錄，透過檔案紀錄可以確保團隊工作時所有人使用的版本一致。</p>
 <p>其他套件管理工具還有由 facebook 開發的 Yarn，目前也有部分人在使用。</p>
-<h1 id="Wepack"><a href="#Wepack" class="headerlink" title="Wepack"></a>Wepack</h1><p>Wepack is a static module bundler for morden JavaScript applications.<br>運行在 Node.js 上，可以使用 CommonJS + AMD + ES6 語法。因為使用 import 語法和 export 的語法，也可以在 browser 上實現模組化。能夠將圖片和 js 檔案都打包。</p>
+<hr>
+<h3 id="Wepack"><a href="#Wepack" class="headerlink" title="Wepack"></a>Wepack</h3><p>Wepack is a static module bundler for morden JavaScript applications.<br>運行在 Node.js 環境的一個開發工具。</p>
+<ul>
+<li>可以使用 CommonJS + AMD + ES6 module 規範。</li>
+<li>使用 import 語法和 export 的語法，在 browser 上實現模組化。</li>
+<li>能夠將圖片、css 等資源，和 js 檔案都一併打包。</li>
+<li>能夠編譯 Sass、Less、JS 擴充語法(JSX, Coffee Script, TypeScript)</li>
+<li>可用的擴充 plugin 很多</li>
+</ul>
 <p>實作方法：在 <code>webpack.config.js</code> 中設定要進行 bundle 的檔案。自己編寫設定檔，透過指令去驅動的自動化工具，所有的動作都需要自己寫規則去做編譯，將我們寫好的前端框架檔案(preprocess)編譯成目前 browser 看得懂的內容並打包成一包的完整檔案，提交給 server，會在專案底下創建一個 webpack.config.js 和 index.js 檔案。</p>
-<h1 id="Babel"><a href="#Babel" class="headerlink" title="Babel"></a>Babel</h1><p>Babel is a JavaScript compiler that takes your morden JS code and returns browser compatible JS(older JS code).<br>有很多開發工具（ex:create-react-app）都自動搭載了 babel 作為轉譯工具。他也可以轉換 react 的 jsx 還有 typescript。</p>
-<h1 id="Gulp"><a href="#Gulp" class="headerlink" title="Gulp"></a>Gulp</h1><p>自動化工作流程的 library。可以 compile css 也可以 compile JavaScript。<br><a href="https://gulpjs.com" target="_blank" rel="noopener">官網</a></p>
-<h1 id="Eslint"><a href="#Eslint" class="headerlink" title="Eslint"></a>Eslint</h1><p>程式碼 coding style 檢查工具。</p>
-<h1 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h1><p>深入學習 JavaScript 模組化設計 - NICOLAS BEVACQUA 著 O’REILLY </p>
+<hr>
+<h3 id="Babel"><a href="#Babel" class="headerlink" title="Babel"></a>Babel</h3><p>Babel is a JavaScript compiler that takes your morden JS code and returns browser compatible JS(older JS code).<br>有很多開發工具（ex:create-react-app）都自動搭載了 babel 作為轉譯工具。他也可以轉換 react 的 jsx 還有 typescript。</p>
+<hr>
+<h3 id="Gulp"><a href="#Gulp" class="headerlink" title="Gulp"></a>Gulp</h3><p>自動化工作流程的 library。可以 compile css 也可以 compile JavaScript。<br><a href="https://gulpjs.com" target="_blank" rel="noopener">官網</a></p>
+<hr>
+<h3 id="Eslint"><a href="#Eslint" class="headerlink" title="Eslint"></a>Eslint</h3><p>程式碼 coding style 檢查工具。</p>
+<hr>
+<h1 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h1><p>深入學習 JavaScript 模組化設計 - NICOLAS BEVACQUA 著 O’REILLY<br><a href="http://blog.turn.tw/?p=3532" target="_blank" rel="noopener">搞懂為何設定 REACT、JSX、ES2015、BABEL、WEBPACK 的學習筆記</a></p>
 
         
       
@@ -352,7 +361,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2019-11-18 07:36:24" itemprop="dateModified" datetime="2019-11-18T07:36:24+00:00">2019-11-18</time>
+                <time title="Modified: 2019-11-19 08:16:59" itemprop="dateModified" datetime="2019-11-19T08:16:59+00:00">2019-11-19</time>
               </span>
             
           
@@ -588,7 +597,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2019-11-18 07:36:24" itemprop="dateModified" datetime="2019-11-18T07:36:24+00:00">2019-11-18</time>
+                <time title="Modified: 2019-11-19 08:16:59" itemprop="dateModified" datetime="2019-11-19T08:16:59+00:00">2019-11-19</time>
               </span>
             
           
@@ -624,8 +633,8 @@
 </li>
 <li><p><strong>Object.assign</strong>：用來合併物件，用法為 <code>Object.assign(target, ...source)</code>若目標物件為空物件則可視為複製一個source的物件。<br><code>Object.assign({}, obj1)</code>的意思是先建立一個空物件{}，接著把obj1中所有的屬性複製過去，因為Object.assign跟我們手動複製的效果相同，所以一樣<strong>只能處理深度只有一層的物件</strong>，沒辦法做到真正的 Deep Copy，不過如果要複製的物件只有一層的話可以使用他。</p>
 </li>
-<li><p><strong>展開運算子(Spread Operator)</strong></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">let obj = &#123;name:&apos;王康寶&apos;, age:&#123;child: 18&#125;&#125;</span><br><span class="line">let copy = &#123;...obj&#125;;</span><br><span class="line"></span><br><span class="line">copy.name = &apos;盧卡斯&apos;;</span><br><span class="line">copy.age.child = 99;</span><br><span class="line"></span><br><span class="line">console.log(obj);  //&#123;name:&quot;王康寶&quot;, age:&#123;child: 99&#125;&#125;</span><br><span class="line">console.log(copy); //&#123;name:&quot;盧卡斯&quot;, age:&#123;child: 99&#125;&#125;</span><br></pre></td></tr></table></figure>
+<li><p><strong>展開運算子(Spread Operator)</strong> 也只能實現一層的拷貝</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">let obj = &#123;name:&apos;john&apos;, age:&#123;child: 18&#125;&#125;</span><br><span class="line">let copy = &#123;...obj&#125;;</span><br><span class="line"></span><br><span class="line">copy.name = &apos;mike&apos;;</span><br><span class="line">copy.age.child = 99;</span><br><span class="line"></span><br><span class="line">console.log(obj);  //&#123;name:&quot;john&quot;, age:&#123;child: 99&#125;&#125;</span><br><span class="line">console.log(copy); //&#123;name:&quot;mike&quot;, age:&#123;child: 99&#125;&#125;</span><br></pre></td></tr></table></figure>
 </li>
 </ul>
 </li>
@@ -723,7 +732,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2019-11-18 07:36:24" itemprop="dateModified" datetime="2019-11-18T07:36:24+00:00">2019-11-18</time>
+                <time title="Modified: 2019-11-19 08:16:59" itemprop="dateModified" datetime="2019-11-19T08:16:59+00:00">2019-11-19</time>
               </span>
             
           
@@ -853,7 +862,7 @@ JavaScript 中主要的內存管理概念是**可達性 Reachability**，簡言�
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2019-11-18 07:36:24" itemprop="dateModified" datetime="2019-11-18T07:36:24+00:00">2019-11-18</time>
+                <time title="Modified: 2019-11-19 08:16:59" itemprop="dateModified" datetime="2019-11-19T08:16:59+00:00">2019-11-19</time>
               </span>
             
           
@@ -1001,7 +1010,7 @@ JavaScript 中主要的內存管理概念是**可達性 Reachability**，簡言�
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2019-11-18 07:36:24" itemprop="dateModified" datetime="2019-11-18T07:36:24+00:00">2019-11-18</time>
+                <time title="Modified: 2019-11-19 08:16:59" itemprop="dateModified" datetime="2019-11-19T08:16:59+00:00">2019-11-19</time>
               </span>
             
           
@@ -1119,7 +1128,7 @@ JavaScript 中主要的內存管理概念是**可達性 Reachability**，簡言�
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2019-11-18 07:36:24" itemprop="dateModified" datetime="2019-11-18T07:36:24+00:00">2019-11-18</time>
+                <time title="Modified: 2019-11-19 08:16:59" itemprop="dateModified" datetime="2019-11-19T08:16:59+00:00">2019-11-19</time>
               </span>
             
           
@@ -1223,7 +1232,7 @@ JavaScript 中主要的內存管理概念是**可達性 Reachability**，簡言�
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2019-11-18 07:36:24" itemprop="dateModified" datetime="2019-11-18T07:36:24+00:00">2019-11-18</time>
+                <time title="Modified: 2019-11-19 08:16:59" itemprop="dateModified" datetime="2019-11-19T08:16:59+00:00">2019-11-19</time>
               </span>
             
           
@@ -1353,7 +1362,7 @@ JavaScript 中主要的內存管理概念是**可達性 Reachability**，簡言�
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2019-11-18 07:36:24" itemprop="dateModified" datetime="2019-11-18T07:36:24+00:00">2019-11-18</time>
+                <time title="Modified: 2019-11-19 08:16:59" itemprop="dateModified" datetime="2019-11-19T08:16:59+00:00">2019-11-19</time>
               </span>
             
           
@@ -1505,7 +1514,7 @@ JavaScript 中主要的內存管理概念是**可達性 Reachability**，簡言�
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2019-11-18 07:36:24" itemprop="dateModified" datetime="2019-11-18T07:36:24+00:00">2019-11-18</time>
+                <time title="Modified: 2019-11-19 08:16:59" itemprop="dateModified" datetime="2019-11-19T08:16:59+00:00">2019-11-19</time>
               </span>
             
           
