@@ -60,16 +60,16 @@ console.log(obj2); // { a: 10, b: 100, c: 30 }
   - **Object.assign**：用來合併物件，用法為 `Object.assign(target, ...source)`若目標物件為空物件則可視為複製一個source的物件。
   `Object.assign({}, obj1)`的意思是先建立一個空物件{}，接著把obj1中所有的屬性複製過去，因為Object.assign跟我們手動複製的效果相同，所以一樣**只能處理深度只有一層的物件**，沒辦法做到真正的 Deep Copy，不過如果要複製的物件只有一層的話可以使用他。
 
-  - **展開運算子(Spread Operator)**
+  - **展開運算子(Spread Operator)** 也只能實現一層的拷貝
   ```
-  let obj = {name:'王康寶', age:{child: 18}}
+  let obj = {name:'john', age:{child: 18}}
   let copy = {...obj};
 
-  copy.name = '盧卡斯';
+  copy.name = 'mike';
   copy.age.child = 99;
 
-  console.log(obj);  //{name:"王康寶", age:{child: 99}}
-  console.log(copy); //{name:"盧卡斯", age:{child: 99}}
+  console.log(obj);  //{name:"john", age:{child: 99}}
+  console.log(copy); //{name:"mike", age:{child: 99}}
   ```
 
 - 深拷貝方法
