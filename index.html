@@ -233,7 +233,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2019-11-19 08:16:59" itemprop="dateModified" datetime="2019-11-19T08:16:59+00:00">2019-11-19</time>
+                <time title="Modified: 2019-11-19 15:05:59" itemprop="dateModified" datetime="2019-11-19T15:05:59+00:00">2019-11-19</time>
               </span>
             
           
@@ -259,7 +259,6 @@
 <li>提供可重用性 (Reusability)</li>
 </ol>
 <p>在 JavaScript 中，管理變量 variable 是一切 coding 的基礎，看起來似乎是越少變量越容易管理，不過透過 scope 的概念可以讓變量在單一作用域內產生作用，不同作用域的變量便不會互相干擾，然而當你想要共用變量或資料時卻只能透過全域變量的設定，或用 callback function 將變量傳出來，設定全域變量容易產生命名衝突，而且當所有變量都需要在全域中，就必須按照一定順序編程。當需要移除舊程式碼、製作新功能時，就會有困難。所以有 module 開發的必要性。</p>
-<hr>
 <h1 id="JavaScript-Module-History"><a href="#JavaScript-Module-History" class="headerlink" title="JavaScript Module History"></a>JavaScript Module History</h1><p>早期 JavaScript 沒有 module 體系，其他語言都有這個功能，例如：Ruby 的 require、Python 的 import，連 css 都有 @import。因為有開發上的實際需要，所以社群制定了一些 module pattern 的加載方法，最主要的有 CommonJS 和 AMD 規範，前者用於 server 後者用於 browser。 </p>
 <ul>
 <li><strong>AMD(Async Module Definition)</strong> 非同步載入模組規範</li>
@@ -274,7 +273,6 @@
 <li>UMD(Universal Module Definition) 為了兼容 AMD 和 CommonJS。</li>
 <li><strong>ES6 Module</strong> (2015年)<br>ES6 Module 的標準中定義了 JavaScript 的模組化方式，自此產生了 JavaScript 原生的模組語法，其功能可以取代之前社群使用的規範，提供靜態的宣告式 API、以及採用 promise 的動態宣告式，在編譯時就確定 module 之間的依賴關係，以及輸出和輸入的變量。而 CommonJS 只能在運行時確定這些東西。目前 browser 和 Node.js 對 ES6 模組支援度還不完整，大部分還需要透過 babel 轉譯器進行轉譯。</li>
 </ul>
-<hr>
 <h1 id="ES6-module-現代模組化開發方法"><a href="#ES6-module-現代模組化開發方法" class="headerlink" title="ES6 module 現代模組化開發方法"></a>ES6 module 現代模組化開發方法</h1><p>在 ES6 module 中，每個檔案都是一個模組，有自己的範圍和環境，通過 <code>export</code> 命令輸出指定 code，再用 <code>import</code> 命令輸入文件。（自動採用嚴格模式）<br>過去 server 開發時會使用一個叫做 Browserify 的 module bundler， Browserify  使用 CommonJS 語法，會產生一個 bundle.js 檔案，讓我們能夠上傳並發佈網站。而現在我們會使用 <strong>ES6 module + Webpack + Babel</strong>，Webpack 也是一個類似於 Browserify 的 module bundler，但 Webpack 可以結合 Babel 轉譯器，讓瀏覽器也讀懂 ES6，並產生 bundle.js 檔案。<br>現代的模組化開發多使用以下工具(庫)：</p>
 <h3 id="NPM-Node-Package-Manager"><a href="#NPM-Node-Package-Manager" class="headerlink" title="NPM (Node Package Manager)"></a>NPM (Node Package Manager)</h3><p>一個強大的套件管理工具、線上資料庫，擁有龐大的社群支持，一開始是為了 Node.js 而發展出來的套件工具，隨著發展變成開發者社群用來 share code、package 的資料庫，透過 npm 提供的指令，可以管理套件版本、加載套件、卸除套件等。使用套件做開發，簡化重複的程式碼，可以加快開發速度和提升程式維護性。</p>
 <p>npm 在初始化專案時會產生一個 package.json 的檔案，裡面紀錄專案所使用的 packages 版本紀錄，透過檔案紀錄可以確保團隊工作時所有人使用的版本一致。</p>
@@ -361,7 +359,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2019-11-19 08:16:59" itemprop="dateModified" datetime="2019-11-19T08:16:59+00:00">2019-11-19</time>
+                <time title="Modified: 2019-11-19 15:05:59" itemprop="dateModified" datetime="2019-11-19T15:05:59+00:00">2019-11-19</time>
               </span>
             
           
@@ -597,7 +595,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2019-11-19 08:16:59" itemprop="dateModified" datetime="2019-11-19T08:16:59+00:00">2019-11-19</time>
+                <time title="Modified: 2019-11-19 15:05:59" itemprop="dateModified" datetime="2019-11-19T15:05:59+00:00">2019-11-19</time>
               </span>
             
           
@@ -732,7 +730,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2019-11-19 08:16:59" itemprop="dateModified" datetime="2019-11-19T08:16:59+00:00">2019-11-19</time>
+                <time title="Modified: 2019-11-19 15:05:59" itemprop="dateModified" datetime="2019-11-19T15:05:59+00:00">2019-11-19</time>
               </span>
             
           
@@ -862,7 +860,7 @@ JavaScript 中主要的內存管理概念是**可達性 Reachability**，簡言�
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2019-11-19 08:16:59" itemprop="dateModified" datetime="2019-11-19T08:16:59+00:00">2019-11-19</time>
+                <time title="Modified: 2019-11-19 15:05:59" itemprop="dateModified" datetime="2019-11-19T15:05:59+00:00">2019-11-19</time>
               </span>
             
           
@@ -1010,7 +1008,7 @@ JavaScript 中主要的內存管理概念是**可達性 Reachability**，簡言�
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2019-11-19 08:16:59" itemprop="dateModified" datetime="2019-11-19T08:16:59+00:00">2019-11-19</time>
+                <time title="Modified: 2019-11-19 15:05:59" itemprop="dateModified" datetime="2019-11-19T15:05:59+00:00">2019-11-19</time>
               </span>
             
           
@@ -1128,7 +1126,7 @@ JavaScript 中主要的內存管理概念是**可達性 Reachability**，簡言�
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2019-11-19 08:16:59" itemprop="dateModified" datetime="2019-11-19T08:16:59+00:00">2019-11-19</time>
+                <time title="Modified: 2019-11-19 15:05:59" itemprop="dateModified" datetime="2019-11-19T15:05:59+00:00">2019-11-19</time>
               </span>
             
           
@@ -1232,7 +1230,7 @@ JavaScript 中主要的內存管理概念是**可達性 Reachability**，簡言�
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2019-11-19 08:16:59" itemprop="dateModified" datetime="2019-11-19T08:16:59+00:00">2019-11-19</time>
+                <time title="Modified: 2019-11-19 15:05:59" itemprop="dateModified" datetime="2019-11-19T15:05:59+00:00">2019-11-19</time>
               </span>
             
           
@@ -1362,7 +1360,7 @@ JavaScript 中主要的內存管理概念是**可達性 Reachability**，簡言�
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2019-11-19 08:16:59" itemprop="dateModified" datetime="2019-11-19T08:16:59+00:00">2019-11-19</time>
+                <time title="Modified: 2019-11-19 15:05:59" itemprop="dateModified" datetime="2019-11-19T15:05:59+00:00">2019-11-19</time>
               </span>
             
           
@@ -1514,7 +1512,7 @@ JavaScript 中主要的內存管理概念是**可達性 Reachability**，簡言�
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2019-11-19 08:16:59" itemprop="dateModified" datetime="2019-11-19T08:16:59+00:00">2019-11-19</time>
+                <time title="Modified: 2019-11-19 15:05:59" itemprop="dateModified" datetime="2019-11-19T15:05:59+00:00">2019-11-19</time>
               </span>
             
           
