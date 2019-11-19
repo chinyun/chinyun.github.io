@@ -24,8 +24,6 @@ Good module should be highly self-contained with distinct functionally, allowing
 
 在 JavaScript 中，管理變量 variable 是一切 coding 的基礎，看起來似乎是越少變量越容易管理，不過透過 scope 的概念可以讓變量在單一作用域內產生作用，不同作用域的變量便不會互相干擾，然而當你想要共用變量或資料時卻只能透過全域變量的設定，或用 callback function 將變量傳出來，設定全域變量容易產生命名衝突，而且當所有變量都需要在全域中，就必須按照一定順序編程。當需要移除舊程式碼、製作新功能時，就會有困難。所以有 module 開發的必要性。
 
-----------
-
 # JavaScript Module History
 
 早期 JavaScript 沒有 module 體系，其他語言都有這個功能，例如：Ruby 的 require、Python 的 import，連 css 都有 @import。因為有開發上的實際需要，所以社群制定了一些 module pattern 的加載方法，最主要的有 CommonJS 和 AMD 規範，前者用於 server 後者用於 browser。 
@@ -40,8 +38,6 @@ Good module should be highly self-contained with distinct functionally, allowing
 - UMD(Universal Module Definition) 為了兼容 AMD 和 CommonJS。
 - **ES6 Module** (2015年)
   ES6 Module 的標準中定義了 JavaScript 的模組化方式，自此產生了 JavaScript 原生的模組語法，其功能可以取代之前社群使用的規範，提供靜態的宣告式 API、以及採用 promise 的動態宣告式，在編譯時就確定 module 之間的依賴關係，以及輸出和輸入的變量。而 CommonJS 只能在運行時確定這些東西。目前 browser 和 Node.js 對 ES6 模組支援度還不完整，大部分還需要透過 babel 轉譯器進行轉譯。
-
-----------
 
 # ES6 module 現代模組化開發方法
 

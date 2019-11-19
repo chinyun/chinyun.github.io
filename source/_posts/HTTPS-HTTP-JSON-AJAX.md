@@ -110,8 +110,8 @@ AJAX (**Asynchronous JavaScript And XML/JSON**) 非同步的 JavaScript 與 XML 
   - XHR(XMLHttpRequest) 大約10幾年前
   - XHR(XMLHttpRequest) v2 大約10年前
   - jQuery + XHR
-  - 現在：Fetch API、Axios、Request、SuperAgent、Supertest等
-    - Fetch：由 Mozilla 和 Google browser 在 2015年3月發佈實作的消息，它有不同於XHR思考角度的設計，基於 promise 的語法結構，而且設計足夠低階所以有更多彈性可擴展設定。目前不同瀏覽器版本還有不完全支援的，所以需要安裝 polyfill 當作暫時的解決方案。
+  - 現在：**Fetch API**、Axios、Request、SuperAgent、Supertest等
+    - Fetch：由 Mozilla 和 Google browser 在 2015年3月發佈實作的消息，它有不同於 XHR 思考角度的設計，基於 promise 的語法結構，而且設計足夠低階所以有更多彈性可擴展設定。目前不同瀏覽器版本還有不完全支援的，所以需要安裝 polyfill 當作暫時的解決方案。
     - Axios：Promise-based HTTP library for performing HTTP requests on both Node.js and Browser. It supports all mordern browser, even an included support for IE 8+. It's built on top of XMLHttpRequest for making AJAX calls. It lets you make HTTP requests from both the browser and the server. 
       - Intercept requests and responses before they are carried out.
       - Transform request and response data using promises.
