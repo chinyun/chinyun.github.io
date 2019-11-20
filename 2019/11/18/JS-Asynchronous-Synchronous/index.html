@@ -1,0 +1,523 @@
+<!DOCTYPE html>
+
+
+
+
+
+<html lang="zh-tw">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 3.9.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/myblog/images/apple-touch-icon-next.png?v=7.4.1">
+  <link rel="icon" type="image/png" sizes="32x32" href="/myblog/images/favicon-32x32-next.png?v=7.4.1">
+  <link rel="icon" type="image/png" sizes="16x16" href="/myblog/images/favicon-16x16-next.png?v=7.4.1">
+  <link rel="mask-icon" href="/myblog/images/logo.svg?v=7.4.1" color="#222">
+
+<link rel="stylesheet" href="/myblog/css/main.css?v=7.4.1">
+
+
+<link rel="stylesheet" href="/myblog/lib/font-awesome/css/font-awesome.min.css?v=4.7.0">
+
+
+<script id="hexo-configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/myblog/',
+    scheme: 'Pisces',
+    version: '7.4.1',
+    exturl: false,
+    sidebar: {"position":"left","display":"post","offset":12,"onmobile":false},
+    copycode: {"enable":false,"show_result":false,"style":null},
+    back2top: {"enable":true,"sidebar":false,"scrollpercent":false},
+    bookmark: {"enable":false,"color":"#222","save":"auto"},
+    fancybox: false,
+    mediumzoom: false,
+    lazyload: false,
+    pangu: false,
+    algolia: {
+      appID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    },
+    localsearch: {"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},
+    path: '',
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    translation: {
+      copy_button: 'Copy',
+      copy_success: 'Copied',
+      copy_failure: 'Copy failed'
+    },
+    sidebarPadding: 40
+  };
+</script>
+
+  <meta name="description" content="什麼是同步、非同步？同步(synchronous)的意思是指一次只能進行一件事、一件任務，非同步或稱異步(asynchronous)的意思則是不用等上一任務完成再執行。只看名字容易搞混，但如果想成是同一個步道和不同步道，會比較好理解。同步道因為只有一個步道所以一次只能執行一項任務，而不同步道可以多個任務一起執行。 JavaScript 如何實現非同步？JavaScript 這種編程語言，我們稱之為">
+<meta name="keywords" content="JavaScript, React, d3, NodeJS, Web">
+<meta property="og:type" content="article">
+<meta property="og:title" content="JS-Asynchronous &amp; Synchronous">
+<meta property="og:url" content="https://chinyun.github.io/myblog/2019/11/18/JS-Asynchronous-Synchronous/index.html">
+<meta property="og:site_name" content="Jinny&#39;s blog">
+<meta property="og:description" content="什麼是同步、非同步？同步(synchronous)的意思是指一次只能進行一件事、一件任務，非同步或稱異步(asynchronous)的意思則是不用等上一任務完成再執行。只看名字容易搞混，但如果想成是同一個步道和不同步道，會比較好理解。同步道因為只有一個步道所以一次只能執行一項任務，而不同步道可以多個任務一起執行。 JavaScript 如何實現非同步？JavaScript 這種編程語言，我們稱之為">
+<meta property="og:locale" content="zh-tw">
+<meta property="og:image" content="https://miro.medium.com/max/1584/1*lZ-KXoVNUSOwaq7q8zUBDg.png">
+<meta property="og:image" content="https://hackaday.com/wp-content/uploads/2018/08/nojs-system-diagram-by-busyrich.jpg?w=800">
+<meta property="og:updated_time" content="2019-11-20T13:46:11.377Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="JS-Asynchronous &amp; Synchronous">
+<meta name="twitter:description" content="什麼是同步、非同步？同步(synchronous)的意思是指一次只能進行一件事、一件任務，非同步或稱異步(asynchronous)的意思則是不用等上一任務完成再執行。只看名字容易搞混，但如果想成是同一個步道和不同步道，會比較好理解。同步道因為只有一個步道所以一次只能執行一項任務，而不同步道可以多個任務一起執行。 JavaScript 如何實現非同步？JavaScript 這種編程語言，我們稱之為">
+<meta name="twitter:image" content="https://miro.medium.com/max/1584/1*lZ-KXoVNUSOwaq7q8zUBDg.png">
+  <link rel="canonical" href="https://chinyun.github.io/myblog/2019/11/18/JS-Asynchronous-Synchronous/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome: false,
+    isPost: true,
+    isPage: false,
+    isArchive: false
+  };
+</script>
+
+  <title>JS-Asynchronous & Synchronous | Jinny's blog</title>
+  
+
+
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .logo,
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-tw">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-meta">
+
+    <div>
+      <a href="/myblog/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Jinny's blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+        <p class="site-subtitle">Writing For Sharing</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+      
+      
+      
+        
+        <li class="menu-item menu-item-home">
+      
+    
+
+    <a href="/myblog/" rel="section"><i class="fa fa-fw fa-home"></i>Home</a>
+
+  </li>
+      
+      
+      
+        
+        <li class="menu-item menu-item-archives">
+      
+    
+
+    <a href="/myblog/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>Archives</a>
+
+  </li>
+  </ul>
+
+</nav>
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+            
+
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+      <article itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block post">
+    <link itemprop="mainEntityOfPage" href="https://chinyun.github.io/myblog/myblog/2019/11/18/JS-Asynchronous-Synchronous/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="chinyun">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/myblog/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Jinny's blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">JS-Asynchronous & Synchronous
+
+          
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              
+                
+              
+
+              <time title="Created: 2019-11-18 22:44:58" itemprop="dateCreated datePublished" datetime="2019-11-18T22:44:58+00:00">2019-11-18</time>
+            </span>
+          
+            
+
+            
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2019-11-20 13:46:11" itemprop="dateModified" datetime="2019-11-20T13:46:11+00:00">2019-11-20</time>
+              </span>
+            
+          
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h1 id="什麼是同步、非同步？"><a href="#什麼是同步、非同步？" class="headerlink" title="什麼是同步、非同步？"></a>什麼是同步、非同步？</h1><p>同步(synchronous)的意思是指一次只能進行一件事、一件任務，非同步或稱異步(asynchronous)的意思則是不用等上一任務完成再執行。只看名字容易搞混，但如果想成是同一個步道和不同步道，會比較好理解。同步道因為只有一個步道所以一次只能執行一項任務，而不同步道可以多個任務一起執行。</p>
+<h1 id="JavaScript-如何實現非同步？"><a href="#JavaScript-如何實現非同步？" class="headerlink" title="JavaScript 如何實現非同步？"></a>JavaScript 如何實現非同步？</h1><p>JavaScript 這種編程語言，我們稱之為腳本(script)、直譯式語言，可以寫在 HTML 中，在頁面加載的時候會自動執行。只要瀏覽器或伺服器有搭載 JavaScript Engine 在環境中，就可以執行 JavaScript。</p>
+<p>Scripts are provided and executed as a plain text. They don’t meed a special preparation or a compilation to run. In this aspect, JavaScript is very different from another language called JAVA. JAVA needs to be compiled into machine code.<br>在使用 C、C++、JAVA 之類傳統語言，執行前需要先編譯，這可以為程式碼產生機器的有效表達方式，通常可以優化執行時期的效能。早期的 JavaScript 因為直譯式語言的命令稿語言設計而在性能上表現不佳，但因其對 web 的發展重要性日益增長，許多企業資源和優秀人才的投入，現在既可收命令稿語言的便利性又可享有編譯式語言的性能。 </p>
+<p>直譯式和編譯式程式語言的差別在於：直譯式語言需要經過 直譯器 interpreter 逐行轉換，且它是在執行時才被直譯成執行碼，效能一部分取決於直譯器的速度，直譯式語言多為動態語言(dynamic language)，具有靈活的型別處理，在執行時才動態生成等彈性。直譯式語言仰賴一個執行環境(execution context)語言可用的功能由這個執行環境提供。<br>編譯式語言經由 編譯器 compiler 轉換成目的碼(object code)再由連結器(linker)轉換成可執行的二進位碼(byte code)。編譯式語言多為靜態語言(static langauge)有事先定義的型別、型別檢查及高效能執行速度等特性。</p>
+<p>由 Google 開發(2008)的 open source Engine：V8 是實現 JavaScript 在瀏覽器環境非同步執行的最佳功臣；在 V8 之前的 Engine 都太慢了，Google 為了讓 JavaScript 能夠在瀏覽器上跑得更快，開發了以 C++ 語言寫成的 V8。V8 將 JavaScript 在執行前編譯成了<a href="https://zh.wikipedia.org/wiki/%E6%9C%BA%E5%99%A8%E8%AF%AD%E8%A8%80" target="_blank" rel="noopener">機器碼</a>(machine code，是電腦的CPU可直接解讀的資料)；而<a href="https://zh.wikipedia.org/wiki/%E5%AD%97%E8%8A%82%E7%A0%81" target="_blank" rel="noopener">位元組碼</a>(bytecode，是為了實現特定軟體運行、軟體環境、與硬體環境無關)或是解釋執行它，並使用了 inline-caching 行內快取等方法，提升效能，使其速度能夠媲美二進制編譯。</p>
+<p>每個瀏覽器(Google Chrome, FireFox, IE, Safari)都有自己的 JavaScript Engine implementation and all of them have a JavaScript runtime that provide web APIs. 這些 web APIs 是種應用程式，負責許多瀏覽器運作所需的操作，包括 send HTTP Request, listen to DOM events, delay execution by using setTimeout and setInterval, caching, database storage…etc. 也可以儲存資料、暫存在瀏覽器。其他 Engine 還有 Spider Monkey(used by FireFox)以及 Chakra(used by IE) 等。</p>
+<p><strong>JavaScript is a single threaded language that can be non-blocking.</strong></p>
+<p>JavaScript 是單一執行緒(single threaded execution)的程式語言，意思是一次只能處理一個需求(任務)，所有的 line code 在執行堆疊(call stack)中記錄執行情況，每次只會執行一個程式碼片段(one thing at a time = one call stack)。</p>
+<p>執行堆疊(call stack)會紀錄目前執行到程式的哪個部分，如果進入了某個 function，便會把這個 function 添加到堆疊的最上方，如果 function 執行了 <code>return</code> 便會把 function 從堆疊中抽離(pop off)，在堆疊中的資料是遵守 first-in-last-out 的順序。</p>
+<p>雖然 JavaScript 執行程式是同步的，逐一執行，但<strong>因為在瀏覽器環境中，還有 Rendering Engine 和 HTTP Request，所以整個網頁在執行過程中可以達到非同步的運作</strong>。</p>
+<h2 id="JavaScript-Run-Time-Environment"><a href="#JavaScript-Run-Time-Environment" class="headerlink" title="JavaScript Run-Time Environment?"></a>JavaScript Run-Time Environment?</h2><p>JavaScript Run-Time Environment 就是指 JavaScript 的執行環境，下圖為執行環境的示意：</p>
+<p><img src="https://miro.medium.com/max/1584/1*lZ-KXoVNUSOwaq7q8zUBDg.png" alt="avaScript Run-Time Environment"></p>
+<blockquote>
+<p>圖片來源為<a href="https://itnext.io/how-javascript-works-in-browser-and-node-ab7d0d09ac2f" target="_blank" rel="noopener">How JavaScript works in browser and node?</a></p>
+</blockquote>
+<p>JavaScript 依靠這些機制運作執行：</p>
+<ul>
+<li><strong>Memory Heap</strong> 記憶、儲存。 JavaScript automatically allocates memory when objects are created and frees it when they are not used anymore(Garbage Collection).</li>
+<li><strong>Call Stack</strong> 執行堆疊，紀錄當前程序所在位置的數據結構，從最上方開始執行。</li>
+<li><strong>Event Loop</strong> 事件循環，不斷檢查 Call Stack 是否為空的。</li>
+<li><strong>Callback Queue</strong> 佇列，遵守 fisrt-in-first-out 的資料處理順序。</li>
+<li><strong>Web APIs</strong> 由瀏覽器提供的應用程式，例如：fetch(), DOM events, setTimeout, setInterval…etc. These Web APIs are asynchronous. That means, you can instruct these APIs to do something in background and return data once done, meanwhile we can continue further execution of JavaScript code. While instructing these APIs to do something in background, we have to provide a callback function. Responsibility of callback function is to execute some JavaScript once Web API is done with it’s work.</li>
+</ul>
+<p>在瀏覽器執行 JavaScript 時， call stack 會將不屬於 JavaScript 原生處理範圍的函式或程式碼，丟給 Web APIs 處理，再將處理結果丟到 Callback Queue，透過 Event Loop 不斷查詢是否 Call Stack is empty？如果沒有等待執行的程式碼，再將 Callback Queue 佇列中的第一項放到 Call Stack 中去執行。由於 Event Loop 運作的關係，瀏覽器的 JavaScript 可以同時執行多個需求，而不需要等待上個需求完成才進行下一個。</p>
+<h1 id="非同步的-JavaScript"><a href="#非同步的-JavaScript" class="headerlink" title="非同步的 JavaScript"></a>非同步的 JavaScript</h1><p>以下介紹幾個在 JavaScript 中實現非同步操作的語法：</p>
+<h3 id="setTimeout-amp-setInterval"><a href="#setTimeout-amp-setInterval" class="headerlink" title="setTimeout() &amp; setInterval()"></a>setTimeout() &amp; setInterval()</h3><p>setTimeout 和 setInterval 是由瀏覽器提供的 Web APIs，可以延遲任務執行時間，作為計時器使用。</p>
+<h3 id="ES6-Promise"><a href="#ES6-Promise" class="headerlink" title="ES6: Promise"></a>ES6: Promise</h3><p>為了解決 callback hell 的問題和串接 function 的需求，JavaScript 在 ES6 中加入了 Promise，Promise is saying that “hey, I am doing somthing and I promise to let you know when I have the result.” A promise is an object that may produce a single value some time in the future, either a resolved value, or a reason that it’s not resolved(rejected). Promise 讓非同步請求處理更容易，是一種非同步編程的解決方案。Promise object 是一個構造函數，需要用 <code>new</code> 語法來生成 promise 實例：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">const promise = new Promise( function(resolve, reject)&#123;</span><br><span class="line">  console.log(&apos;Promise&apos;);</span><br><span class="line">  if(true) &#123;</span><br><span class="line">    resolve(value);  //  state 由 pending 轉為 fulfilled</span><br><span class="line">  &#125; else &#123;</span><br><span class="line">    reject(error); // state 由 pending 轉為 rejected</span><br><span class="line">  &#125;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+<p>Promise 有三種狀態：pending、fulfilled、rejected，分別代表當前腳本任務的執行狀況。當 Promise 實例生成後，可以用 <code>.then(function(){}, function(){})</code> 方法分別指定 fulfilled 和 rejected 狀態時的回調函數(callback function)：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">promise.then(</span><br><span class="line">  function(value)&#123;</span><br><span class="line">    console.log(&apos;resolved&apos;);</span><br><span class="line">  &#125;, </span><br><span class="line">  function(error)&#123;</span><br><span class="line">    console.log(&apos;rejected&apos;); // rejected 狀態的 callback function 可選，不一定要指定</span><br><span class="line">  &#125;</span><br><span class="line">);</span><br></pre></td></tr></table></figure>
+
+<h3 id="fetch-API"><a href="#fetch-API" class="headerlink" title="fetch() API"></a>fetch() API</h3><p>A fetch simply return a promise.</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">fetch(&apos;url&apos;)</span><br><span class="line">  .then( response =&gt; response.json()) </span><br><span class="line">    // we would get a response which was a promise. </span><br><span class="line">    //.json() convert it into sth that can be used in js.</span><br><span class="line">  .then( data =&gt; console.log(data))</span><br><span class="line">  .catch((error) =&gt; console.log(error));</span><br><span class="line">    //it&apos;s going to check and run if anything before it fails.</span><br></pre></td></tr></table></figure>
+
+<p>fetch 實作基於 es6 promise，在 2015 年由 google 發佈，fetch 回傳的 promise 物件不會再有收到 response 但是 http status 呈現 404 或 500 的時後變成 rejected，只會在網路出現問題或是被阻止 request 時，狀態才會變成 rejected，其他都是 fulfilled。<br>由於 fetch 會返回一個 promise 所以可以使用 <code>.then</code> 來串接，避免撰寫 callback hell 程式碼，通常使用時會用 <code>.catch</code> 來捕捉 promise 發生的 error。</p>
+<h3 id="ES8-Async-Await"><a href="#ES8-Async-Await" class="headerlink" title="ES8: Async/Await"></a>ES8: Async/Await</h3><p><code>Async/Await</code> is bulit on top of Promises. 目的是簡化使用 promise 的行為。我們可以使用   <code>async ()=&gt;{}</code>來宣告一個非同步函式，這個非同步函式會返回一個 promise。 <strong>Every function that returns a promise can be considered as async function.</strong> <code>async</code> function 是不管怎樣都會回傳 <code>Promise</code> 的函式，雖然我們回傳的不是一個 <code>Promise</code>，但因為它是 <code>async</code> function 的關係，JS 會自動把它包成 <code>Promise</code>，所以可以使用 <code>then</code>：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">const foo = async () =&gt; &#123;</span><br><span class="line">    return 1;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">foo().then((res) =&gt; &#123;</span><br><span class="line">    console.log(res); // 1</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+<p><code>await</code> 必須在 <code>async</code> function 裡面才能使用，<code>await</code>可以在所有 return a promise 的程式碼前使用，<code>await</code> 會等 promise 執行完，再執行下一行。<code>await</code> 也能夠把 <code>Promise</code> 回傳的值接起來，通常我們在呼叫 API（例如執行 fetch、axios）的時候就很好用：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">fetch(&apos;https://jsonplaceholder.typicode.com/users&apos;)</span><br><span class="line">  .then(response =&gt; response.json())</span><br><span class="line">  .then((data) =&gt; console.log(data))</span><br></pre></td></tr></table></figure>
+
+<p>改寫成 async function：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">async function fetchUsers() &#123;</span><br><span class="line">  const resp = await fetch(&apos;https://jsonplaceholder.typicode.com/users&apos;);</span><br><span class="line">    // the function is going to pause until we get a response from fetch</span><br><span class="line">  const data = await response.json();</span><br><span class="line">  console.log(data);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>使用 async/await 處理多個 非同步請求以及除錯，比使用 promise 的 then 鏈，更容易除錯：</p>
+<p>這是使用 promise 和 try/catch 用法：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">function loadData() &#123; </span><br><span class="line">  // Catches synchronous errors</span><br><span class="line">  try &#123; </span><br><span class="line">    getJSON().then((response) =&gt; &#123;</span><br><span class="line">      var parsed = JSON.parse(response);</span><br><span class="line">      console.log(parsed);</span><br><span class="line">    &#125;).catch( err =&gt; console.log(err)); // Catches asynchronous errors</span><br><span class="line">  &#125; catch(e) &#123;</span><br><span class="line">    console.log(e);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>這是使用 asyn/await 和 try/catch：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">async function loadData() &#123;</span><br><span class="line">  try &#123;</span><br><span class="line">    var data = JSON.parse(await getJSON());</span><br><span class="line">    console.log(data);</span><br><span class="line">  &#125; catch(e) &#123;</span><br><span class="line">    console.log(e);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>在錯誤發生時，如果是用 .then 返回的錯誤堆疊不提供錯誤發生在哪裡，不容易找到錯誤發生原因：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">function loadData() &#123;</span><br><span class="line">  return callAPromise()</span><br><span class="line">    .then(callback1)</span><br><span class="line">    .then(callback2)</span><br><span class="line">    .then(callback3)</span><br><span class="line">    .then(() =&gt; &#123;throw new Error(&quot;boom&quot;)&#125;)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">loadData()</span><br><span class="line">  .catch((err) =&gt; &#123;console.log(err)&#125;);</span><br><span class="line">    // Error: boom at callAPromise.then.then.then.then (index.js:8:13)</span><br></pre></td></tr></table></figure>
+
+<p>使用 async/await 便可以逐行找到錯誤發生的地方：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">async function loadData() &#123;</span><br><span class="line">  await callAPromise1()</span><br><span class="line">  await callAPromise2()</span><br><span class="line">  await callAPromise3()</span><br><span class="line">  await callAPromise4()</span><br><span class="line">  await callAPromise5()</span><br><span class="line">  throw new Error(&quot;boom&quot;);</span><br><span class="line">&#125;</span><br><span class="line">loadData()</span><br><span class="line">  .catch((err) =&gt; &#123;console.log(err)&#125;);</span><br><span class="line">  // Error: boom at loadData (index.js:7:9)</span><br></pre></td></tr></table></figure>
+
+<h1 id="JavaScript-vs-Node-js"><a href="#JavaScript-vs-Node-js" class="headerlink" title="JavaScript vs Node.js"></a>JavaScript vs Node.js</h1><p><strong>Node.js is a JavaScript runtime bulit on Google chrome’s V8 engine</strong>. 2009 Ryan Doll decided it would be great to run it ouside the browser. So he created Node.js which is actually a C++ program. It’s an executable C++ program that provides JS runtime for us.<br>Node.js uses Google chrome’s V8 engine to provide JavaScript runtime but does not rely only on it’s event loop. It uses <strong>libuv library (written in c) to work along side V8 event loop</strong> to extend what can be done in background. Node follows same callback approach like Web APIs and works in similar fashion as the browser.</p>
+<p>Node.js 的執行系統圖示：</p>
+<p><img src="https://hackaday.com/wp-content/uploads/2018/08/nojs-system-diagram-by-busyrich.jpg?w=800" alt="nojs-system-diagram-by-busyrich"></p>
+<blockquote>
+<p>圖片來源為<a href="https://hackaday.com/wp-content/uploads/2018/08/nojs-system-diagram-by-busyrich.jpg?w=800" target="_blank" rel="noopener">nojs-system-diagram-by-busyrich</a></p>
+</blockquote>
+<p>If you compare browser diagram with above node diagram, you can see the similarities. The entire right section looks like Web API but it also contains event queue (callback queue/message queue) and the event loop. But V8, event queue and event loop runs on single thread while <strong>worker threads are responsible to provide asynchronous I/O operation</strong>. That’s why Node.js is said to have as non-blocking event driven asynchronous I/O architecture.</p>
+<p>I/O 指 input/output，資訊處理系統與外部世界(使用者、另一個資訊處理系統)之間的通訊，包括輸入：接收訊號或資料；輸出：發送訊號或資料。任何資訊傳入或傳出 CPU/記憶體組合，例如通過磁盤驅動器讀取資料，就會被認為是 I/O。</p>
+<h3 id="Asynchronous-Node-js"><a href="#Asynchronous-Node-js" class="headerlink" title="Asynchronous Node.js"></a>Asynchronous Node.js</h3><p>由 Node.js 建立的後端伺服器，可以使用 Express.js 框架來處理非同步請求的操作，Express.js 是一個基於 Node.js 平台，極簡、靈活的框架，擁有強大的特性可以幫助開放網頁應用。<br>使用 Express.js 就是調用各種中間件(middleware)來處理各種請求、管理路由，其本身也可以視為是一種中間件(middleware)。通過 Express.js 提供的執行函數調用對應的方法，比起直接在 Node.js 中寫處理程式，會更加方便和快捷。</p>
+<h1 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h1><p><a href="https://itnext.io/how-javascript-works-in-browser-and-node-ab7d0d09ac2f" target="_blank" rel="noopener">How JavaScript works in browser and node?</a><br><a href="https://www.udemy.com/course/advanced-javascript-concepts/" target="_blank" rel="noopener">Udemy course “Advanced JavaScript Concepts”</a><br><a href="https://kknews.cc/zh-hk/tech/eo352pq.amp" target="_blank" rel="noopener">學習Express前，都會搞懂這幾個問題</a></p>
+<h1 id="延伸閱讀"><a href="#延伸閱讀" class="headerlink" title="延伸閱讀"></a>延伸閱讀</h1><p><a href="https://chinyun.github.io/myblog/2019/11/02/HTTPS-HTTP-JSON-AJAX/">HTTPS/HTTP/JSON/AJAX/RestfulAPI</a><br><a href="https://chinyun.github.io/myblog/2019/11/17/JS-ECMAScript">JS-ECMAScript</a></p>
+
+    </div>
+
+    
+    
+    
+        
+      
+
+      <footer class="post-footer">
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-next post-nav-item">
+              
+                <a href="/myblog/2019/11/17/JS-ECMAScript/" rel="next" title="JS-ECMAScript">
+                  <i class="fa fa-chevron-left"></i> JS-ECMAScript
+                </a>
+              
+            </div>
+
+            <span class="post-nav-divider"></span>
+
+            <div class="post-nav-prev post-nav-item">
+              
+            </div>
+          </div>
+        
+      </footer>
+    
+  </div>
+  
+  
+  
+  </article>
+
+  </div>
+
+
+          </div>
+          
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+        
+        
+        
+        
+      
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#什麼是同步、非同步？"><span class="nav-number">1.</span> <span class="nav-text">什麼是同步、非同步？</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#JavaScript-如何實現非同步？"><span class="nav-number">2.</span> <span class="nav-text">JavaScript 如何實現非同步？</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#JavaScript-Run-Time-Environment"><span class="nav-number">2.1.</span> <span class="nav-text">JavaScript Run-Time Environment?</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#非同步的-JavaScript"><span class="nav-number">3.</span> <span class="nav-text">非同步的 JavaScript</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#setTimeout-amp-setInterval"><span class="nav-number">3.0.1.</span> <span class="nav-text">setTimeout() &amp; setInterval()</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#ES6-Promise"><span class="nav-number">3.0.2.</span> <span class="nav-text">ES6: Promise</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#fetch-API"><span class="nav-number">3.0.3.</span> <span class="nav-text">fetch() API</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#ES8-Async-Await"><span class="nav-number">3.0.4.</span> <span class="nav-text">ES8: Async/Await</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#JavaScript-vs-Node-js"><span class="nav-number">4.</span> <span class="nav-text">JavaScript vs Node.js</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Asynchronous-Node-js"><span class="nav-number">4.0.1.</span> <span class="nav-text">Asynchronous Node.js</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Reference"><span class="nav-number">5.</span> <span class="nav-text">Reference</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#延伸閱讀"><span class="nav-number">6.</span> <span class="nav-text">延伸閱讀</span></a></li></ol></div>
+        
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">chinyun</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        
+          <a href="/myblog/archives/">
+        
+          <span class="site-state-item-count">31</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+    
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">chinyun</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> v3.9.0</div>
+  <span class="post-meta-divider">|</span>
+  <div class="theme-info">Theme – <a href="https://theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Pisces</a> v7.4.1</div>
+  <script src='https://unpkg.com/mermaid@7.1.2/dist/mermaid.min.js'></script>
+  <script>
+    if (window.mermaid) {
+      mermaid.initialize("");
+    }
+  </script>
+
+        
+
+
+
+
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/myblog/lib/anime.min.js?v=3.1.0"></script>
+  <script src="/myblog/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  <script src="/myblog/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+<script src="/myblog/js/utils.js?v=7.4.1"></script><script src="/myblog/js/motion.js?v=7.4.1"></script>
+<script src="/myblog/js/schemes/pisces.js?v=7.4.1"></script>
+<script src="/myblog/js/next-boot.js?v=7.4.1"></script>
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<script>
+if (document.querySelectorAll('pre.mermaid').length) {
+  NexT.utils.getScript('//cdn.jsdelivr.net/npm/mermaid@8/dist/mermaid.min.js', () => {
+    mermaid.initialize({
+      theme: 'forest',
+      logLevel: 3,
+      flowchart: { curve: 'linear' },
+      gantt: { axisFormat: '%m/%d/%Y' },
+      sequence: { actorMargin: 50 }
+    });
+  }, window.mermaid);
+}
+</script>
+
+
+
+
+  
+
+  
+
+  
+
+</body>
+</html>
