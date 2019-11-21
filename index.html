@@ -233,7 +233,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2019-11-20 13:46:11" itemprop="dateModified" datetime="2019-11-20T13:46:11+00:00">2019-11-20</time>
+                <time title="Modified: 2019-11-21 12:07:53" itemprop="dateModified" datetime="2019-11-21T12:07:53+00:00">2019-11-21</time>
               </span>
             
           
@@ -382,7 +382,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2019-11-20 13:46:11" itemprop="dateModified" datetime="2019-11-20T13:46:11+00:00">2019-11-20</time>
+                <time title="Modified: 2019-11-21 12:07:53" itemprop="dateModified" datetime="2019-11-21T12:07:53+00:00">2019-11-21</time>
               </span>
             
           
@@ -452,23 +452,23 @@
 </li>
 <li><p><code>String.trimStart()</code> and <code>String.trimEnd()</code> 減少空白字串</p>
 </li>
-<li><p><code>try{} catch{}</code> 可以省略 catch 回傳的表達參數 catch(err){} -&gt; catch{}</p>
+<li><p><code>try{} catch{}</code> 可以省略 catch 回傳的表達參數 <code>catch(err){} -&gt; catch{}</code></p>
 </li>
 <li><p>revised Function#toString：<br>function.toString() 回傳確實的 Function 程式碼，包括空白字元和註解:</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">function exampleFuncton() &#123;</span><br><span class="line">  // Hello, I&apos;m an ordinary function</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">console.log(exampleFunction.toString());</span><br><span class="line">// function exampleFunction() &#123;</span><br><span class="line">//     // Hello, I&apos;m an ordinary function</span><br><span class="line">// &#125;</span><br></pre></td></tr></table></figure>
 </li>
-<li><p>Symbol Description：<br>在建構 symbol 時把 description 作第一個參數傳入，就可以通過 toString() 取得：</p>
+<li><p>Symbol Description：<br>在建構 symbol 時把 description 作第一個參數傳入，就可以通過 <code>toString()</code> 取得：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">const symbolExample = Symbol(&quot;Symbol description&quot;);</span><br><span class="line">console.log(symbolExample.toString());</span><br><span class="line">// &apos;Symbol(Symbol description)&apos;</span><br></pre></td></tr></table></figure>
 </li>
 <li><p>JSON ⊂ ECMAScript<br>The unescaped line separator U+2028 and paragraph separator U+2029 characters were not accepted in the pre-ES10 era.</p>
 </li>
-<li><p>well-formed JSON.stringify<br>JSON.stringify() may return characters between U+D800 and U+DFFF as values for which there are no equivalent UTF-8 characters. However, JSON format requires UTF-8 encoding. The proposed solution is to represent unpaired surrogate code points as JSON escape sequences rather than returning them as single UTF-16 code units.</p>
+<li><p>well-formed JSON.stringify<br><code>JSON.stringify()</code> may return characters between U+D800 and U+DFFF as values for which there are no equivalent UTF-8 characters. However, JSON format requires UTF-8 encoding. The proposed solution is to represent unpaired surrogate code points as JSON escape sequences rather than returning them as single UTF-16 code units.</p>
 </li>
-<li><p>stable Array#sort<br>The previous implementation of V8 used an unstable quick-sort algorithm for arrays containing more than 10 items. A stable sorting algorithm is when two objects with equal keys appear in the same order in the sorted output as they appear in the unsorted input.</p>
+<li><p>stable <code>Array.sort()</code><br>The previous implementation of V8 used an unstable quick-sort algorithm for arrays containing more than 10 items. A stable sorting algorithm is when two objects with equal keys appear in the same order in the sorted output as they appear in the unsorted input.</p>
 </li>
-<li><p>新增數據資料的基本型別：BigInt (stage 3)<br>BigInt is the 7th primitive type: an arbitrary precision integer. The variables can now represent 253 numbers and not just max out at 9007199254740992.</p>
+<li><p>新增數據資料的基本型別：<code>BigInt</code> (stage 3)<br>BigInt is the 7th primitive type: an arbitrary precision integer. The variables can now represent 253 numbers and not just max out at 9007199254740992.</p>
 </li>
-<li><p>Dynamic import (stage 3)<br>Dynamic import() returns a promise for the module namespace object of the requested module. Therefore, imports can now be assigned to a variable using async/await.</p>
+<li><p>Dynamic import (stage 3)<br>Dynamic <code>import()</code> returns a promise for the module namespace object of the requested module. Therefore, imports can now be assigned to a variable using async/await.</p>
 </li>
 <li><p>Standardized <code>globalThis</code> object (stage 3)</p>
 </li>
@@ -539,7 +539,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2019-11-20 13:46:11" itemprop="dateModified" datetime="2019-11-20T13:46:11+00:00">2019-11-20</time>
+                <time title="Modified: 2019-11-21 12:07:53" itemprop="dateModified" datetime="2019-11-21T12:07:53+00:00">2019-11-21</time>
               </span>
             
           
@@ -665,7 +665,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2019-11-20 13:46:11" itemprop="dateModified" datetime="2019-11-20T13:46:11+00:00">2019-11-20</time>
+                <time title="Modified: 2019-11-21 12:07:53" itemprop="dateModified" datetime="2019-11-21T12:07:53+00:00">2019-11-21</time>
               </span>
             
           
@@ -702,8 +702,8 @@
 <li>key-value-pair：使用 key-value(通常是一個字串)對應到資料</li>
 </ul>
 <p>在 Ruby 語言中，使用 index 的叫做 Array，使用 key-value-pair 的叫做 Hash。<br>而在 JavaScript 中，使用 index 的也叫做 Array，使用 key-value-pair 的有兩種： Object 和 Map。</p>
-<p>這些資料結構內建一些方法來方便開發者使用、管理資料。</p>
-<h1 id="JavaScrip-Objects-amp-methods-list"><a href="#JavaScrip-Objects-amp-methods-list" class="headerlink" title="JavaScrip Objects &amp; methods list"></a>JavaScrip Objects &amp; methods list</h1><ul>
+<p>JavaScript 為這些資料結構內建了一些方法來方便開發者使用、管理資料:</p>
+<h2 id="JavaScrip-Objects-methods-list"><a href="#JavaScrip-Objects-methods-list" class="headerlink" title="JavaScrip Objects methods list"></a>JavaScrip Objects methods list</h2><ul>
 <li><p>Array 陣列</p>
 <ul>
 <li>其他資料結構：<ul>
@@ -793,7 +793,7 @@
 </ul>
 </li>
 </ul>
-<h1 id="基本型別資料的-methods"><a href="#基本型別資料的-methods" class="headerlink" title="基本型別資料的 methods"></a>基本型別資料的 methods</h1><p>There are many things one would want to do with a primitive. So JavaScript provides methods to call. JavaScript allows us to work with primitives (strings, numbers, etc.) as if they were objects. </p>
+<h2 id="基本型別的-methods-list"><a href="#基本型別的-methods-list" class="headerlink" title="基本型別的 methods list"></a>基本型別的 methods list</h2><p>There are many things one would want to do with a primitive. So JavaScript provides methods to call. JavaScript allows us to work with primitives (strings, numbers, etc.) as if they were objects. </p>
 <p>The solution is:<br>The “object wrappers” are different for each primitive type and are called: String, Number, Boolean and Symbol. Thus, they provide different sets of methods.</p>
 <p>JavaScript 允許訪問字符串，數字，布爾值和符號的方法和屬性。當進行訪問時，創建一個特殊的“包裝對象”，它提供額外的功能，運行後即被銷毀。除 null 和 undefined 以外的基本類型都提供了許多有用的方法。從形式上講，這些方法通過臨時對象工作，但 JavaScript 引擎可以很好地調整以優化內部，因此調用它們並不需要太高的成本。</p>
 <ul>
@@ -836,7 +836,7 @@
 </ul>
 </li>
 </ul>
-<h1 id="reference"><a href="#reference" class="headerlink" title="reference"></a>reference</h1><p><a href="https://zh.javascript.info/map-set-weakmap-weakset" target="_blank" rel="noopener">javascript.info/map-set-weakmap-weakset</a><br><a href="https://javascript.info/primitives-methods" target="_blank" rel="noopener">javascript.info/primitives-methods</a></p>
+<h1 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h1><p><a href="https://zh.javascript.info/map-set-weakmap-weakset" target="_blank" rel="noopener">javascript.info/map-set-weakmap-weakset</a><br><a href="https://javascript.info/primitives-methods" target="_blank" rel="noopener">javascript.info/primitives-methods</a></p>
 
         
       
@@ -901,7 +901,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2019-11-20 13:46:11" itemprop="dateModified" datetime="2019-11-20T13:46:11+00:00">2019-11-20</time>
+                <time title="Modified: 2019-11-21 12:07:53" itemprop="dateModified" datetime="2019-11-21T12:07:53+00:00">2019-11-21</time>
               </span>
             
           
@@ -944,22 +944,18 @@
 </li>
 <li><p>深拷貝方法</p>
 <ul>
-<li><strong>JSON.parse(JSON.stringify(object_array))</strong>:<ul>
+<li><p><strong>JSON.parse(JSON.stringify(object_array))</strong>:</p>
+<ul>
 <li>JSON.parse():把字串轉成物件</li>
-<li>JSON.stringify():把物件轉成字串<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">  let obj1 = &#123; a:&#123;b:10&#125; &#125;;</span><br><span class="line">  let obj2_string = JSON.stringify(obj1);</span><br><span class="line">  console.log(obj2_string); //&quot;&#123;&quot;a&quot;:&#123;&quot;b&quot;:10&#125;&#125;&quot;;</span><br><span class="line">​</span><br><span class="line">  let obj2 = JSON.parse(obj2_string);</span><br><span class="line">  console.log(obj2); //&#123;a:&#123;b:10&#125;&#125;</span><br><span class="line">​</span><br><span class="line">  obj2.a.b = 20;</span><br><span class="line">  console.log(obj1); //&#123;a:&#123;b:10&#125;&#125;</span><br><span class="line">  console.log(obj2); //&#123;a:&#123;b:20&#125;&#125;</span><br><span class="line">  ``` </span><br><span class="line">  只有可以轉成JSON格式的物件才可以這樣用，像 function、Set、Map..等型態就沒辦法轉成 JSON。</span><br><span class="line"></span><br><span class="line">  - **jQuery `$.extend`**</span><br></pre></td></tr></table></figure>
+<li>JSON.stringify():把物件轉成字串<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">  let obj1 = &#123; a:&#123;b:10&#125; &#125;;</span><br><span class="line">  let obj2_string = JSON.stringify(obj1);</span><br><span class="line">  console.log(obj2_string); //&quot;&#123;&quot;a&quot;:&#123;&quot;b&quot;:10&#125;&#125;&quot;;</span><br><span class="line">​</span><br><span class="line">  let obj2 = JSON.parse(obj2_string);</span><br><span class="line">  console.log(obj2); //&#123;a:&#123;b:10&#125;&#125;</span><br><span class="line">​</span><br><span class="line">  obj2.a.b = 20;</span><br><span class="line">  console.log(obj1); //&#123;a:&#123;b:10&#125;&#125;</span><br><span class="line">  console.log(obj2); //&#123;a:&#123;b:20&#125;&#125;</span><br><span class="line">  ``` </span><br><span class="line"></span><br><span class="line">  只有可以轉成JSON格式的物件才可以這樣用，像 function、Set、Map..等型態就沒辦法轉成 JSON。</span><br><span class="line"></span><br><span class="line">- **jQuery `$.extend`**</span><br></pre></td></tr></table></figure>
 
 </li>
 </ul>
-</li>
-</ul>
-<p>var $ = require(‘jquery’);</p>
-<p>var obj1 = {<br>  a: 1,<br>  b: { f: { g: 1 } },<br>  c: [1, 2, 3]<br>};</p>
-<p>var obj2 = $.extend(true, {}, obj1);<br>console.log(obj1.b.f === obj2.b.f); // false</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">- **lodash `_.cloneDeep`**</span><br></pre></td></tr></table></figure>
+<p>var $ = require(‘jquery’);<br>var obj1 = {<br>  a: 1,<br>  b: { f: { g: 1 } },<br>  c: [1, 2, 3]<br>};<br>var obj2 = $.extend(true, {}, obj1);<br>console.log(obj1.b.f === obj2.b.f); // false</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">- **lodash `_.cloneDeep`**</span><br></pre></td></tr></table></figure>
 
-<p>var _ = require(‘lodash’);<br>var obj1 = {<br>  a: 1,<br>  b: { f: { g: 1 } },<br>  c: [1, 2, 3]<br>};</p>
-<p>var obj2 = _.cloneDeep(obj1);<br>console.log(obj1.b.f === obj2.b.f); // false</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">- **自己寫**</span><br><span class="line">例如下面這個在 react app 裡面用 slice() 和 Object.assign(target, ...sources) 來改變深層結構資料的方法：</span><br><span class="line">[GitHub Repo:Tripper-app](https://github.com/chinyun/Tripper-app/blob/master/src/containers/App.js)</span><br></pre></td></tr></table></figure>
+<p>var _ = require(‘lodash’);<br>var obj1 = {<br>  a: 1,<br>  b: { f: { g: 1 } },<br>  c: [1, 2, 3]<br>};<br>var obj2 = _.cloneDeep(obj1);<br>console.log(obj1.b.f === obj2.b.f); // false</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">- **自己寫**</span><br><span class="line">  例如下面這個在 react app 裡面用 slice() 和 Object.assign(target, ...sources) 來改變深層結構資料的方法：</span><br><span class="line">  [GitHub Repo:Tripper-app](https://github.com/chinyun/Tripper-app/blob/master/src/containers/App.js)</span><br></pre></td></tr></table></figure>
 
 <p>updateBudgets = (journey, journeyId) =&gt; {<br>  const index = this.state.journeyList.findIndex(item =&gt; item.id === journeyId);<br>  if (index !== -1) {</p>
 <pre><code>this.setState({
@@ -971,7 +967,10 @@
 })</code></pre><p>  }<br>};</p>
 <pre><code></code></pre></li>
 </ul>
+</li>
+</ul>
 <h1 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h1><p><a href="https://dustinhsiao21.com/2018/01/07/javascript-shallow-copy-and-deep-copy/" target="_blank" rel="noopener">關於JAVASCRIPT中的SHALLOW COPY(淺拷貝)及DEEP COPY(深拷貝)</a><br><a href="https://larry850806.github.io/2016/09/20/shallow-vs-deep-copy/" target="_blank" rel="noopener">[Javascript] 關於 JS 中的淺拷貝和深拷貝</a></p>
+<h1 id="延伸閱讀"><a href="#延伸閱讀" class="headerlink" title="延伸閱讀"></a>延伸閱讀</h1><p><a href="https://chinyun.github.io/myblog/2019/10/12/React-Updating-state-when-state-is-an-array-of-objects/">React: Updating state when state is an array of objects</a></p>
 
         
       
@@ -1036,7 +1035,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2019-11-20 13:46:11" itemprop="dateModified" datetime="2019-11-20T13:46:11+00:00">2019-11-20</time>
+                <time title="Modified: 2019-11-21 12:07:53" itemprop="dateModified" datetime="2019-11-21T12:07:53+00:00">2019-11-21</time>
               </span>
             
           
@@ -1052,57 +1051,37 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <p>問題：JavaScript 的 Object 到底是 pass by value 還是 pass by referece？</p>
-<p>根據 JavaScript 的資料型態，可以分為兩大類：基本型別 primitive 和 物件型別 object。<br>基本型別的資料以 純值的形態存在，例如：number、string、boolean、null、undefined、symbol，而 object 的資料可能為 純值或多種不同型別組合而成的物件。</p>
-<h1 id="基本型別的傳值-pass-by-value-vs-object型別的傳址-pass-by-referece"><a href="#基本型別的傳值-pass-by-value-vs-object型別的傳址-pass-by-referece" class="headerlink" title="基本型別的傳值 pass by value  vs. object型別的傳址 pass by referece"></a>基本型別的傳值 pass by value  vs. object型別的傳址 pass by referece</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">var a = 10;</span><br><span class="line">var b = a;</span><br><span class="line">console.log(a === b); //true</span><br><span class="line"></span><br><span class="line">var c = 5;</span><br><span class="line">var d = 5;</span><br><span class="line">console.log(c === d); //true</span><br></pre></td></tr></table></figure>
+          <p>問題：JavaScript 到底是 pass by value 還是 pass by referece？</p>
+<p>根據 JavaScript 的資料型態，可以分為兩大類：基本型別 primitive 和 物件型別 object。<br>基本型別的資料以 純值的形態存在，例如：number、string、boolean、null、undefined、symbol，而 object 的資料可能為 純值 或 多種不同型別組合而成的 物件。</p>
+<h1 id="基本型別傳值-pass-by-value，Object-型別傳址-pass-by-referece"><a href="#基本型別傳值-pass-by-value，Object-型別傳址-pass-by-referece" class="headerlink" title="基本型別傳值 pass by value，Object 型別傳址 pass by referece"></a>基本型別傳值 pass by value，Object 型別傳址 pass by referece</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">var a = 10;</span><br><span class="line">var b = a;</span><br><span class="line">console.log(a === b); //true</span><br><span class="line"></span><br><span class="line">var c = 5;</span><br><span class="line">var d = 5;</span><br><span class="line">console.log(c === d); //true</span><br></pre></td></tr></table></figure>
 
 <p><code>var b = a;</code> 表面上看起來變數 b 的內容是透過複製變數 a 而來，實際上變數 b 是去建立了一個新的值，然後將變數 a 的內容複製了一份存放到記憶體， a 和 b 其實是存在於兩個不同的記憶體位置，因此變數 a 和變數 b 彼此獨立互不相干，即使更改 a 的內容， b 的值也不會變：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">a + 2;</span><br><span class="line">console.log(a); //12</span><br><span class="line">console.log(b); //10</span><br><span class="line">``` </span><br><span class="line">像這種情況，我們通常會稱作「傳值」 (pass by value)。</span><br><span class="line"></span><br><span class="line">如果是物件型別的資料：</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">a + 2;</span><br><span class="line">console.log(a); //12</span><br><span class="line">console.log(b); //10</span><br></pre></td></tr></table></figure>
 
-<p>var obj1 = { a: 10 };<br>var obj2 = { a: 10 };<br>console.log(obj1 === obj2); //false</p>
-<p>var obj3 = { b: 20 };<br>var obj4 = obj3;<br>console.log(obj3 === obj4); //true</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">「物件」這類資料型態，在 JavaScript 中是透過「引用」的方式傳遞資料的。</span><br><span class="line">當建立起一個新的物件並賦值給一個變數(`var obj3 = &#123; b: 20 &#125;;`)的時候，JavaScript 會在記憶體的某處存放這個物件(`&#123; b: 20 &#125;`)，再將變數(`obj3`)指向這個物件的存放位置，因此當`var obj4 = obj3;`的時候，其實是將 obj4 這個變數也指向了 `&#123; b: 20 &#125;`這個實體。</span><br><span class="line">這種透過引用的方式來傳遞資料，接收的其實是引用的「參考」而不是值的副本時，</span><br><span class="line">我們通常會稱作「傳址」 (pass by reference)。</span><br><span class="line"></span><br><span class="line"># 例外情況： pass by sharing</span><br></pre></td></tr></table></figure>
+<p>基本型別是不可變的 (immutable)，當修改、更新值時，與那個值的副本完全無關，像這種情況，我們通常稱作「傳值」 (pass by value)。</p>
+<p>如果是物件型別的資料：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">var obj1 = &#123; a: 10 &#125;;</span><br><span class="line">var obj2 = &#123; a: 10 &#125;;</span><br><span class="line">console.log(obj1 === obj2); //false</span><br><span class="line"></span><br><span class="line">var obj3 = &#123; b: 20 &#125;;</span><br><span class="line">var obj4 = obj3;</span><br><span class="line">console.log(obj3 === obj4); //true</span><br></pre></td></tr></table></figure>
 
-<p>var coin1 = { value: 10 };</p>
-<p>function changeValue(obj) {<br>  obj = { value: 123 };<br>}</p>
-<p>changeValue(coin1);<br>console.log(coin1.value);   // ？</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">答案會是 10，因為當coin1指向的資料被做為 function 的參數傳入 function 時，即使資料在 function 內部被重新賦值，外部變數的內容都不會被影響。</span><br><span class="line">在這種情況底下，就代表你要讓這個 obj 指向一個新的 object`&#123; value: 123 &#125;`。因此不會影響到外部的 coin1 指向的位址的物件內容。</span><br><span class="line"></span><br><span class="line">但是如果不是重新賦值而是直接修改傳入的內容：</span><br></pre></td></tr></table></figure>
+<p>「物件」這類資料型態，在 JavaScript 中是透過「引用」的方式傳遞資料的。<br>當建立起一個新的物件並賦值給一個變數(<code>var obj3 = { b: 20 };</code>)的時候，JavaScript 會在記憶體的某處存放這個物件(<code>{ b: 20 }</code>)，再將變數(<code>obj3</code>)指向這個物件的存放位置，因此當<code>var obj4 = obj3;</code>的時候，其實是將 obj4 這個變數也指向了 <code>{ b: 20 }</code>這個實體。<br>這種透過引用的方式來傳遞資料，接收的其實是引用的「參考」而不是值的副本時，<br>我們通常會稱作「傳址」 (pass by reference)。</p>
+<h1 id="特殊情況："><a href="#特殊情況：" class="headerlink" title="特殊情況："></a>特殊情況：</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">var coin1 = &#123; value: 10 &#125;;</span><br><span class="line"></span><br><span class="line">function changeValue(obj) &#123;</span><br><span class="line">  obj = &#123; value: 123 &#125;;</span><br><span class="line">&#125;</span><br><span class="line">changeValue(coin1);</span><br><span class="line">console.log(coin1.value);   // ？</span><br></pre></td></tr></table></figure>
 
-<p>var coin1 = { value: 10 };</p>
-<p>function changeValue(obj) {<br>  obj.value = 123;<br>}</p>
-<p>changeValue(coin1);<br>console.log(coin1.value);   // 123</p>
-<pre><code>答案是 123。此時變數 coin1 所指向的資料內容被改變，代表你要讓 function 裡面的那個 obj 跟外面的 coin1「共享」同一個 object，所以透過裡面的 obj，你可以去修改「共享到的那個 object」的資料。
+<p>答案會是 10，因為當coin1指向的資料被做為 <strong>function 的參數</strong>傳入 function 時，即使資料在 function 內部被重新賦值，外部變數的內容都不會被影響。<br>在這種情況底下， JavaScript 會將 obj 指向一個新建的 object <code>{ value: 123 }</code>，不會影響到外部的 coin1 指向的位址的物件內容。</p>
+<p>如果不是 重新賦址 而是 修改傳入 的內容：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">var coin1 = &#123; value: 10 &#125;;</span><br><span class="line">function changeValue(obj) &#123;</span><br><span class="line">  obj.value = 123;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">changeValue(coin1);</span><br><span class="line">console.log(coin1.value);   // 123</span><br></pre></td></tr></table></figure>
 
-# 小結
+<p>此時變數 coin1 所指向的資料內容被改變，傳入 function 作為 obj 參數的值的 coin1 在 function 內被修改，改變了 value 的值。</p>
+<h1 id="垃圾回收-Garbage-collection"><a href="#垃圾回收-Garbage-collection" class="headerlink" title="垃圾回收 Garbage collection"></a>垃圾回收 Garbage collection</h1><p>對於開發者來說，JavaScript 的內存管理是自動的、無形的。我們創建的原始值、對象、函數……這一切都會佔用內存。當某個東西我們不再需要時會發生什麼？ JavaScript 引擎如何發現它、清理它？<br>JavaScript 中主要的內存管理概念是<strong>可達性 Reachability</strong>，簡言之，可達值是那些以某種方式可訪問或可用的值，它們保證存儲在內存中。<br>這裡列出固有的可達值基本集合，這些值明顯不能被釋放：</p>
+<ol>
+<li>當前函數的局部變數和參數。Local variables and parameters of the current function.</li>
+<li>嵌套調用時，當前調用鏈上所有函數的變量與參數。Variables and parameters for other functions on the current chain of nested calls.</li>
+<li>全局變數。Global variables.</li>
+<li>還有一些其他的內部變數。(there are some other, internal ones as well)</li>
+</ol>
+<p>這些值被稱作根 root。</p>
+<p>如果一個值可以通過 引用 或 引用鏈，從根值訪問到，則認為這個值是 可達的。<br>比方說，如果局部變量中有一個對象，並且該對象具有引用另一個對象的 property，則該對像被認為是可達的。而且它引用的內容也是可達的。</p>
+<p>在 JavaScript 引擎中有一個被稱作垃圾回收器(garbage collector)的東西在後台執行。它監控著所有對象的狀態，並刪除掉那些已經不可達的。</p>
+<h1 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h1><p><a href="https://blog.techbridge.cc/2018/06/23/javascript-call-by-value-or-reference/" target="_blank" rel="noopener">深入探討 JavaScript 中的參數傳遞：call by value 還是 reference？</a><br><a href="https://ithelp.ithome.com.tw/articles/10191057" target="_blank" rel="noopener">重新認識 JavaScript: Day 05 JavaScript 是「傳值」或「傳址」？</a><br><a href="https://zh.javascript.info/garbage-collection" target="_blank" rel="noopener">Garbage collection</a><br><a href="https://pjchender.blogspot.com/2016/03/javascriptby-referenceby-value.html" target="_blank" rel="noopener">[筆記] 談談 JavaScript 中 by reference 和 by value 的重要觀念</a></p>
 
-在 JavaScript 中的物件類型(object)是可變的 (mutable)，**當物件更新時，會影響到所有引用這個物件的變數與其副本，修改時會變動到原本的參考，但當賦與新值時，會產生新的實體參考**。
-
-而基本型別(primitive)則是不可變的 (immutable)，當你更新了某個基本型別的值時，與那個值的副本完全無關。
-
-# 垃圾回收 Garbage collection
-
-對於開發者來說，JavaScript 的內存管理是自動的、無形的。我們創建的原始值、對象、函數……這一切都會佔用內存。當某個東西我們不再需要時會發生什麼？ JavaScript 引擎如何發現它、清理它？
-JavaScript 中主要的內存管理概念是**可達性 Reachability**，簡言之，可達值是那些以某種方式可訪問或可用的值，它們保證存儲在內存中。
-這裡列出固有的可達值基本集合，這些值明顯不能被釋放：
-
-1. 當前函數的局部變數和參數。Local variables and parameters of the current function.
-2. 嵌套調用時，當前調用鏈上所有函數的變量與參數。Variables and parameters for other functions on the current chain of nested calls.
-3. 全局變數。Global variables.
-4. 還有一些其他的內部變數。(there are some other, internal ones as well)
-
-這些值被稱作根 root。
-
-如果一個值可以通過 引用 或 引用鏈，從根值訪問到，則認為這個值是 可達的。
-比方說，如果局部變量中有一個對象，並且該對象具有引用另一個對象的 property，則該對像被認為是可達的。而且它引用的內容也是可達的。
-
-在 JavaScript 引擎中有一個被稱作垃圾回收器(garbage collector)的東西在後台執行。它監控著所有對象的狀態，並刪除掉那些已經不可達的。
-
-# Reference
-
-[深入探討 JavaScript 中的參數傳遞：call by value 還是 reference？](https://blog.techbridge.cc/2018/06/23/javascript-call-by-value-or-reference/)
-[重新認識 JavaScript: Day 05 JavaScript 是「傳值」或「傳址」？](https://ithelp.ithome.com.tw/articles/10191057)
-[Garbage collection](https://zh.javascript.info/garbage-collection)
-[[筆記] 談談 JavaScript 中 by reference 和 by value 的重要觀念](https://pjchender.blogspot.com/2016/03/javascriptby-referenceby-value.html)</code></pre>
         
       
     </div>
@@ -1166,7 +1145,7 @@ JavaScript 中主要的內存管理概念是**可達性 Reachability**，簡言�
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2019-11-20 13:46:11" itemprop="dateModified" datetime="2019-11-20T13:46:11+00:00">2019-11-20</time>
+                <time title="Modified: 2019-11-21 12:07:53" itemprop="dateModified" datetime="2019-11-21T12:07:53+00:00">2019-11-21</time>
               </span>
             
           
@@ -1183,21 +1162,21 @@ JavaScript 中主要的內存管理概念是**可達性 Reachability**，簡言�
 
       
           <p>Hoisting、Scope 和 Closure 在 JavaScript 中是很重要的觀念，因爲會影響我們如何撰寫 JavaScript。了解這三個概念可以幫助我們了解 JaveScript 在內文執行的運作原理，尤其是在創建和執行階段，JaveScript 的執行機制會如何理解我們寫的程式碼，並跑出我們想要的結果。</p>
-<h1 id="Hoisting"><a href="#Hoisting" class="headerlink" title="Hoisting"></a>Hoisting</h1><p>在執行任何程式碼前，JavaScript 會把變數和函數的宣告在編譯階段就放入記憶體，如此即便我們先寫調用某一函式的程式碼，再寫該函式的內容，JavaScript 也還是可以知道這段程式碼的意義：</p>
+<h1 id="Hoisting"><a href="#Hoisting" class="headerlink" title="Hoisting"></a>Hoisting</h1><p>JavaScript 內文執行的運作方式有一個機制叫做：Hoisting 提升，在執行任何程式碼前，JavaScript 會把<strong>變數和函數的宣告</strong>在編譯階段就放入記憶體，編譯後執行時因為已經宣告了，所以如此即便我們先寫調用某一函式的程式碼，再寫該函式的內容，JavaScript 也還是可以知道這段程式碼的意義，程式碼仍然可以運作：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">catName(&quot;Chloe&quot;);</span><br><span class="line"></span><br><span class="line">function catName(name) &#123;</span><br><span class="line">  console.log(&quot;My cat&apos;s name is &quot; + name);</span><br><span class="line">&#125;</span><br><span class="line">/*上面程式的結果是: &quot;My cat&apos;s name is Chloe&quot;*/</span><br></pre></td></tr></table></figure>
 
-<p>即使我們函式的程式碼之前就先呼叫它，程式碼仍然可以運作。這是出於 JavaScript 內文執行的運作原理。<br>提升也適用於其他型別和變數。變數可以在宣告之前進行初始化和使用，但如果沒有初始化，就不能使用它們。</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">num = 6;</span><br><span class="line">num + 7;</span><br><span class="line">var num; </span><br><span class="line">/* 只要 num 有被宣告，就不會有錯誤 */</span><br></pre></td></tr></table></figure>
 
-<p>JavaScript 僅提升宣告的部分，而不是初始化。如果在使用該變數後才宣告和初始化，那麼該值將是 undefined。以下兩個範例顯示了這個特性。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">var x = 1; // 初始化 x</span><br><span class="line">console.log(x + &quot; &quot; + y);  // &apos;1 undefined&apos;</span><br><span class="line">var y = 2;</span><br></pre></td></tr></table></figure>
+<p>JavaScript 僅提升宣告的部分，而尚未賦值。如果在使用該變數後才宣告和初始化，那麼該值將是 undefined，以下範例顯示了這個特性。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">var x = 1; // 給予 x 值</span><br><span class="line">console.log(x + &quot; &quot; + y);  // &apos;1 undefined&apos;，此階段 y 尚未被賦予值</span><br><span class="line">var y = 2;</span><br></pre></td></tr></table></figure>
 
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">var x = 1; // 初始化 x</span><br><span class="line">var y; // 宣告 y</span><br><span class="line">console.log(x + &quot; &quot; + y);  // &apos;1 undefined&apos;</span><br><span class="line">y = 2; // 初始化 y</span><br></pre></td></tr></table></figure>
+<p>上述程式碼其實是這樣運作的：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">var x = 1; </span><br><span class="line">var y; // 宣告 y</span><br><span class="line">console.log(x + &quot; &quot; + y);  // &apos;1 undefined&apos;</span><br><span class="line">y = 2; // 賦值 y</span><br></pre></td></tr></table></figure>
 
-<p>函數宣告的優先權比變數宣告高，如果 function 調用時有傳參數進來，就會宣告該參數代表的變數意義並賦值。</p>
+<p><strong>函數宣告的優先權比變數宣告高</strong>，如果 function 調用時有傳參數進來，就會先宣告該參數代表的變數意義並賦值。</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">function test(v) &#123;</span><br><span class="line">  var v</span><br><span class="line">  console.log(v)</span><br><span class="line">  v = 3</span><br><span class="line">&#125;</span><br><span class="line">test(10) // 10</span><br></pre></td></tr></table></figure>
 
-<p>需要注意的是，只有 declaration 宣告式的 function (ex:<code>function func(){...}</code>)會被在編譯階段提升，而 expression 表達式宣告的 function (ex:<code>let func = function(){...}</code>)會在執行階段才被存放到記憶體中。</p>
+<p>需要注意的是，<strong>只有 declaration 宣告式的 function (ex:<code>function func(){...}</code>)會被在編譯階段提升</strong>，而 expression 表達式宣告的 function (ex:<code>let func = function(){...}</code>)會在執行階段才被存放到記憶體中。</p>
 <h1 id="Scope-作用域"><a href="#Scope-作用域" class="headerlink" title="Scope 作用域"></a>Scope 作用域</h1><ul>
 <li>Execution Context 執行環境<br>要了解 Scope 須先知道 <strong>Execution Context 執行環境</strong> 的概念。<br>Execution Context is a fancy word for describing the environment in which your Javascript code runs.</li>
 </ul>
@@ -1205,7 +1184,7 @@ JavaScript 中主要的內存管理概念是**可達性 Reachability**，簡言�
 <p>執行環境在建立時會經歷兩個階段，分別是 ：</p>
 <ul>
 <li>Creation Phase 創造階段：變數宣告和函數宣告提升，自動跳過函式裡的程式碼。</li>
-<li>Execution Phase 執行階段：由上到下、一行一行地執行程式</li>
+<li>Execution Phase 執行階段：由上到下、一行一行地執行程式，賦值也是在這階段。</li>
 </ul>
 <p>當 JavaScript engine 看到 function name() 函數被執行，就會創建一個 function name() execution context，新的 function execution context 會被加入到<strong>Execution stack 執行堆疊</strong>，並依序執行(Javascript 是單一執行緒，一次只能做一件事)，執行環境 的堆疊過程是具有 順序性 的：first in last out。</p>
 <ul>
@@ -1232,16 +1211,16 @@ JavaScript 中主要的內存管理概念是**可達性 Reachability**，簡言�
 <li>continue to exist after their parent context is finished, e.g. inner functions returned from a parent function;</li>
 <li>use free variables.」–<a href="http://dmitrysoshnikov.com/ecmascript/chapter-6-closures/" target="_blank" rel="noopener">ECMA-262-3 in detail. Chapter 6. Closures.</a></li>
 </ul>
-<p>scopeChain 把每一層的 AO 和 VO 記錄下來，而變數就紀錄在AO 或 VO 裡，也因為 return 才把 AO 和 VO 保留下來。<br>closure 其實就是因為 scopeChain 有 reference 到其他 Execution Context 的 AO(active object) 或是 VO(variable object)，所以在離開之後還是可以存取到上層的變數，如果你是以會記住上層資訊的角度來看 closure，那所有的 function 都是 closure</p>
+<p>scopeChain 把每一層的 AO 和 VO 記錄下來，而變數就紀錄在AO 或 VO 裡，也因為 return 才把 AO 和 VO 保留下來。<br>closure 其實就是因為 scopeChain 有 reference 到其他 Execution Context 的 AO(active object) 或是 VO(variable object)，所以在離開之後還是可以存取到上層的變數，如果你是以會記住上層資訊的角度來看 closure，那所有的 function 其實都是 closure。</p>
 <ul>
-<li><p>閉包是函式記得並存取 Lexical Scope 語彙範疇的能力，可說是指向特定 scope 的參考，因此當函式是在其宣告的 Lexical Scope 語彙範疇之外執行時也能正常運作。</p>
+<li><p><strong>閉包是函式記得並存取 Lexical Scope 語彙範疇的能力，可說是指向特定 scope 的參考，因此當函式是在其宣告的 Lexical Scope 語彙範疇之外執行時也能正常運作</strong>。</p>
 </li>
 <li><p>迴圈與閉包搭配使用時的謬誤與陷阱。</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">for (var i = 1; i &lt;= 5; i++) &#123;</span><br><span class="line">  setTimeout(function timer() &#123;</span><br><span class="line">    console.log(i);</span><br><span class="line">  &#125;, i * 1000 );</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-<p>由於 console.log(i) 中的 i 會存取的範疇是 for 所在的範疇（目前看起來是全域範疇，因為 var 宣告的變數不具區塊範疇的特性），因此當 1 秒、2 秒…5 秒後執行 console.log(i) 時，就會去取 i 的值，而此時 for 迴圈已跑完，i 變成 6，因此就會每隔一秒印出一個「6」。<br>解決方法可以利用 IIFE（Immediately Invoked Function Expression）把一個 function 包起來並傳入 i 立即執行，所以迴圈每跑一圈其實就會立刻呼叫一個新的 function，因此就產生了新的作用域。如果你都覺得太麻煩不想用，恭喜，在 ES6 裡面有了 block scope 以後，你只要簡單地把迴圈裡面用的 var 改成 let 就行了：因為 let 的特性，所以其實迴圈每跑一圈都會產生一個新的作用域，因此 alert 出來的值就會是你想要的那個值。</p>
+<p>由於 console.log(i) 中的 i 會存取的範疇是 for 所在的範疇（目前看起來是全域範疇，因為 var 宣告的變數不具區塊範疇的特性），因此當 1 秒、2 秒…5 秒後執行 console.log(i) 時，就會去取 i 的值，而此時 for 迴圈已跑完，i 變成 6，因此就會每隔一秒印出一個「6」。<br>解決方法可以利用 IIFE（Immediately Invoked Function Expression）把一個 function 包起來並傳入 i 立即執行，所以迴圈每跑一圈其實就會立刻呼叫一個新的 function，因此就產生了新的作用域。不過在 ES6 裡面有了 block scope 的概念以後，你只要簡單地把迴圈裡面用的 var 改成 let 就行了：因為 let 的特性，所以其實迴圈每跑一圈都會產生一個新的作用域。</p>
 </li>
-<li><p>模組模式可經由建立一個模組實體來調用內層函式，而內層函式由於具有閉包的特性，因此可存取外層的變數和函式。透過模組模式，可隱藏私密資訊，並選擇對外公開的 API。</p>
+<li><p>模組模式可經由<strong>建立一個模組實體來調用內層函式，而內層函式由於具有閉包的特性，因此可存取外層的變數和函式。透過模組模式，可隱藏私密資訊，並選擇對外公開的 API</strong>。</p>
 </li>
 <li><p>利用模組依存性載入器或管理器或 ES6 模組來管理模組。</p>
 </li>
@@ -1314,7 +1293,7 @@ JavaScript 中主要的內存管理概念是**可達性 Reachability**，簡言�
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2019-11-20 13:46:11" itemprop="dateModified" datetime="2019-11-20T13:46:11+00:00">2019-11-20</time>
+                <time title="Modified: 2019-11-21 12:07:53" itemprop="dateModified" datetime="2019-11-21T12:07:53+00:00">2019-11-21</time>
               </span>
             
           
@@ -1338,10 +1317,9 @@ JavaScript 中主要的內存管理概念是**可達性 Reachability**，簡言�
 
 <p>一旦脫離了物件導向，也就是在 class 外面的 this，其實沒有太大的意義。<br>在這種很沒意義的情況下，this 的值在瀏覽器底下就會是 <code>window</code>，在 node.js 底下會是 <code>global</code>，如果是在嚴格模式，this 的值就會是 <code>undefined</code>。這個規則就是所謂的「預設綁定」。</p>
 <h2 id="this-值的改變"><a href="#this-值的改變" class="headerlink" title="this 值的改變"></a>this 值的改變</h2><ul>
-<li>可以用 call、apply 與 bind 改變 this 的值：<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">&apos;use strict&apos;;</span><br><span class="line">function hello(a, b) &#123;</span><br><span class="line">  console.log(this, a, b)</span><br><span class="line">&#125;</span><br><span class="line">  </span><br><span class="line">hello.call(&apos;yo&apos;, 1, 2) // yo 1 2</span><br><span class="line">hello.apply(&apos;hihihi&apos;, [1, 2]) // hihihi 1 2</span><br></pre></td></tr></table></figure>
+<li><p>可以用 call、apply 與 bind 改變 this 的值：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">&apos;use strict&apos;;</span><br><span class="line">function hello(a, b) &#123;</span><br><span class="line">  console.log(this, a, b)</span><br><span class="line">&#125;</span><br><span class="line">  </span><br><span class="line">hello.call(&apos;yo&apos;, 1, 2) // yo 1 2</span><br><span class="line">hello.apply(&apos;hihihi&apos;, [1, 2]) // hihihi 1 2</span><br></pre></td></tr></table></figure>
 
-</li>
-</ul>
 <p>call 跟 apply 的差別就是 apply 在傳參數時要用 array 包起來。</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">class Car &#123;</span><br><span class="line">  hello() &#123;</span><br><span class="line">    console.log(this)</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line">  </span><br><span class="line">const myCar = new Car()</span><br><span class="line">myCar.hello() // myCar instance</span><br><span class="line">myCar.hello.call(&apos;yaaaa&apos;) // yaaaa</span><br></pre></td></tr></table></figure>
 
@@ -1350,23 +1328,23 @@ JavaScript 中主要的內存管理概念是**可達性 Reachability**，簡言�
 
 <p>使用 bind 之後，call 方法也沒有辦法覆蓋掉。<br>如果是在<strong>非嚴格模式</strong>底下，無論是用 call、apply 還是 bind，你傳進去的如果是 primitive 都會被轉成 object：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">function hello() &#123;</span><br><span class="line">  console.log(this)</span><br><span class="line">&#125;</span><br><span class="line">  </span><br><span class="line">hello.call(123) // [Number: 123]</span><br><span class="line">const myHello = hello.bind(&apos;my&apos;)</span><br><span class="line">myHello() // [String: &apos;my&apos;]</span><br></pre></td></tr></table></figure>
-
-<ul>
-<li>this 是在運行時求值的，可以適用於任何 function，從不同 object 調用同一個 function 可以會有不同 this 的值。</li>
-</ul>
+</li>
+<li><p>this 是在運行時求值的，可以適用於任何 function，從不同 object 調用同一個 function 可以會有不同 this 的值。</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">const obj = &#123;</span><br><span class="line">  value: 1,</span><br><span class="line">  hello: function() &#123;</span><br><span class="line">    console.log(this.value)</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line">  </span><br><span class="line">obj.hello() // 1</span><br></pre></td></tr></table></figure>
 
-<p>this 的值跟作用域跟程式碼的位置在哪裡完全無關，只跟「你如何呼叫」有關。</p>
+<p>this 的值跟 作用域 跟 程式碼的位置 在哪裡完全無關，只跟<strong>「你如何呼叫」</strong>有關。</p>
 <p>作用域的概念舉例：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">var a = 10</span><br><span class="line">function test()&#123;</span><br><span class="line">  console.log(a)</span><br><span class="line">&#125;</span><br><span class="line">  </span><br><span class="line">const obj = &#123;</span><br><span class="line">  a: &apos;ojb&apos;,</span><br><span class="line">  hello: function() &#123;</span><br><span class="line">    test() // 10</span><br><span class="line">  &#125;,</span><br><span class="line">  hello2: function() &#123;</span><br><span class="line">    var a = 200</span><br><span class="line">    test() // 10</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line">  </span><br><span class="line">test() // 10</span><br><span class="line">obj.hello()  </span><br><span class="line">obj.hello2()</span><br></pre></td></tr></table></figure>
 
 <p>無論我在哪裡，無論我怎麼呼叫test這個 function，他印出來的 a 永遠都會是全域變數的那個 a(// 10)，因為作用域就是這樣運作，test 在自己的作用域裡面找不到 a 於是往上一層找，而上一層就是 global scope，這跟你在哪裡呼叫 test 一點關係都沒有。test 這個 function 在宣告的時候就把 scope 給決定好了。</p>
-<p>但 this 卻是完全相反，this 的值會根據你怎麼呼叫它而變得不一樣，例如使用 call、apply 跟 bind 可以用不同的方式去呼叫改變 this 的值。如果 function 是在物件下調用，那麼 this 則會指向此物件，無論 function 是在哪裡宣告。使用物件的方法調用時 this 會指向調用的物件。<strong>宣告的位置不重要，重要的是呼叫的方法。</strong></p>
-<h2 id="reference"><a href="#reference" class="headerlink" title="reference"></a>reference</h2><p><a href="https://wcc723.github.io/javascript/2017/12/12/javascript-this/" target="_blank" rel="noopener">JavaScript 的 this 到底是誰？</a><br><a href="https://blog.techbridge.cc/2019/02/23/javascript-this/" target="_blank" rel="noopener">淺談 JavaScript 頭號難題 this：絕對不完整，但保證好懂</a></p>
-<h2 id="補充-在-react-中的-bind-this-用法"><a href="#補充-在-react-中的-bind-this-用法" class="headerlink" title="補充:在 react 中的 bind(this)用法"></a>補充:在 react 中的 bind(this)用法</h2><p><a href="https://stackoverflow.com/questions/42434232/what-is-the-usage-of-this-method-bindthis" target="_blank" rel="noopener">what is the usage of : this.method.bind(this)</a></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line">import React from &apos;react&apos;;</span><br><span class="line"></span><br><span class="line">class App extends React.Component &#123;</span><br><span class="line">   constructor() &#123;</span><br><span class="line">      super();</span><br><span class="line">      this.state = &#123;</span><br><span class="line">         data: []</span><br><span class="line">      &#125;</span><br><span class="line">      this.setStateHandler = this.setStateHandler.bind(this);</span><br><span class="line">   &#125;;</span><br><span class="line"></span><br><span class="line">   setStateHandler() &#123;</span><br><span class="line">      var item = &quot;setState...&quot;</span><br><span class="line">      var myArray = this.state.data;</span><br><span class="line">      myArray.push(item)</span><br><span class="line">      this.setState(&#123;data: myArray&#125;)</span><br><span class="line">   &#125;;</span><br><span class="line"></span><br><span class="line">   render() &#123;</span><br><span class="line">      return (</span><br><span class="line">         &lt;div&gt;</span><br><span class="line">            &lt;button onClick = &#123;this.setStateHandler&#125;&gt;SET STATE&lt;/button&gt;</span><br><span class="line">            &lt;h4&gt;State Array: &#123;this.state.data&#125;&lt;/h4&gt;</span><br><span class="line">         &lt;/div&gt;</span><br><span class="line">      );</span><br><span class="line">   &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">export default App;</span><br></pre></td></tr></table></figure>
+<p>但 this 卻是完全相反，this 的值會根據你怎麼呼叫它而變得不一樣，例如使用 call、apply 跟 bind 可以用不同的方式去呼叫改變 this 的值。如果 function 是在物件下調用，那麼 this 則會指向此物件，無論 function 是在哪裡宣告；使用物件的方法調用時 this 會指向調用的物件。<strong>宣告的位置不重要，重要的是呼叫的方式。</strong></p>
+</li>
+</ul>
+<h1 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h1><p><a href="https://wcc723.github.io/javascript/2017/12/12/javascript-this/" target="_blank" rel="noopener">JavaScript 的 this 到底是誰？</a><br><a href="https://blog.techbridge.cc/2019/02/23/javascript-this/" target="_blank" rel="noopener">淺談 JavaScript 頭號難題 this：絕對不完整，但保證好懂</a></p>
+<h1 id="補充-在-React-中的-bind-this-用法"><a href="#補充-在-React-中的-bind-this-用法" class="headerlink" title="補充:在 React 中的 bind(this)用法"></a>補充:在 React 中的 bind(this)用法</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line">import React from &apos;react&apos;;</span><br><span class="line"></span><br><span class="line">class App extends React.Component &#123;</span><br><span class="line">   constructor() &#123;</span><br><span class="line">      super();</span><br><span class="line">      this.state = &#123;</span><br><span class="line">         data: []</span><br><span class="line">      &#125;</span><br><span class="line">      this.setStateHandler = this.setStateHandler.bind(this);</span><br><span class="line">   &#125;;</span><br><span class="line"></span><br><span class="line">   setStateHandler() &#123;</span><br><span class="line">      var item = &quot;setState...&quot;</span><br><span class="line">      var myArray = this.state.data;</span><br><span class="line">      myArray.push(item)</span><br><span class="line">      this.setState(&#123;data: myArray&#125;)</span><br><span class="line">   &#125;;</span><br><span class="line"></span><br><span class="line">   render() &#123;</span><br><span class="line">      return (</span><br><span class="line">         &lt;div&gt;</span><br><span class="line">            &lt;button onClick = &#123;this.setStateHandler&#125;&gt;SET STATE&lt;/button&gt;</span><br><span class="line">            &lt;h4&gt;State Array: &#123;this.state.data&#125;&lt;/h4&gt;</span><br><span class="line">         &lt;/div&gt;</span><br><span class="line">      );</span><br><span class="line">   &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">export default App;</span><br></pre></td></tr></table></figure>
 
 <p><code>this.setStateHandler().bind(this)</code> sets the context for the function <code>setStateHandler()</code> to be the class object. This is necessary so that you could call <code>this.setState({...})</code> inside the method, because <code>setState()</code> is the method of React.Component. If you do not <code>.bind(this)</code> you would get an error that <code>setState()</code> method is undefined.</p>
+<p><a href="https://stackoverflow.com/questions/42434232/what-is-the-usage-of-this-method-bindthis" target="_blank" rel="noopener">what is the usage of : this.method.bind(this)</a></p>
 <p><a href="https://medium.com/reactmaker/react-%E8%88%87-bind-this-%E7%9A%84%E4%B8%80%E4%BA%9B%E5%BF%83%E5%BE%97-323c8d3d395d" target="_blank" rel="noopener">React 與 bind this 的一些心得</a><br>當使用 extend React.Component 的方式去宣告元件的時候，React 確實會綁定 this 到元件內，但是卻有以下特定的地方才會被綁進去生命周期函式，例如 componentDidMount 等等<br>render 內其他自己定義的 property 就不會被綁入 this ，而且 this 會被指到 windows 這個全域上。</p>
 
         
@@ -1432,7 +1410,7 @@ JavaScript 中主要的內存管理概念是**可達性 Reachability**，簡言�
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2019-11-20 13:46:11" itemprop="dateModified" datetime="2019-11-20T13:46:11+00:00">2019-11-20</time>
+                <time title="Modified: 2019-11-21 12:07:53" itemprop="dateModified" datetime="2019-11-21T12:07:53+00:00">2019-11-21</time>
               </span>
             
           
@@ -1449,29 +1427,29 @@ JavaScript 中主要的內存管理概念是**可達性 Reachability**，簡言�
 
       
           <p>筆記 JavaScript 中非常重要的概念：繼承 inheritance、原型 prototype 和原型鍊 prototype chain。</p>
-<h1 id="Object-oriented-programming-OOP"><a href="#Object-oriented-programming-OOP" class="headerlink" title="Object-oriented programming(OOP)"></a>Object-oriented programming(OOP)</h1><p>JavaScript 並不像 Java、C++ 這些典型的物件導向語言具有「類別」（class）來區分概念與實體（instance）或天生具有繼承的能力，而 JavaScript 只有「物件」，因此只能利用設計模式來模擬這些功能。在 JavaScript 世界中，到底是怎麼實現物件導向的概念的？<br>JavaScript 的物件透過原型 (Prototype) 機制相互繼承功能，與典型的物件導向 (OO) 程式語言相較，其運作方式有所差異。<br>在討論 物件導向 JavaScript 之前，需要先知道物件導向程式設計 (Object-oriented programming；OOP)的意義。<br>OOP 基本概念是：<strong>採用物件（objects）來模塑真實的實物世界</strong>：也就是在程式中的呈現是透過 objects 來塑造其模型，並提供簡單方式存取其「難以或不可能採用的功能」。物件可裝載相關的資料與程式碼，資料部分是你塑造某個模型的資訊，而程式碼部分則用是操作行為(Method)實現。</p>
-<p>為了簡化程式撰寫，我們可以為某個複雜東西建立簡單的模型，藉以代表其最重要的概念或特質，且該模型建立方式極易於搭配我們的程式設計用途：譬如用「類別」建立物件實體 Object instance — 該物件包含了類別中所定義的資料與功能。</p>
-<p>在根據類別建立物件實體時，就是執行類別的「建構子 Constructor 函式」所建立，而這個「根據類別來建立物件實體」的過程即稱為「實體化 Instantiation」，物件實體就是從類別實體化而來。</p>
-<p>我們可根據某一個類別建立許多新的子類別，新的子類別可繼承 (Inherit) 其母類別的資料與程式碼特性。你可重複使用所有物件類型共有的功能，而不需再複製之。若功能需與類別有所差異，則可直接於其上定義特殊功能。</p>
-<h1 id="inheritance"><a href="#inheritance" class="headerlink" title="inheritance"></a>inheritance</h1><p>一個物件可以存取其他物件的屬性 properties、方法 methods，就叫做繼承 inheritance。<br>繼承可以分成兩種，一種是 classical inheritance 類別繼承，這種方式用在 C# 或 JAVA 當中；另一種則是 JavaScript 所使用的，是屬於 prototypal inheritance 原型繼承。<br>在「典型 OO」中，你必須定義特定的類別物件，才能定義哪些類別所要繼承的類別，而 JavaScript 使用不同的系統：「繼承」的物件並不會一併複製功能過來，而是透過原型鍊連接其所繼承的功能，亦即所謂的原型繼承 (Prototypal inheritance)。<br>基於 JavaScript 運作的方式 (如原型鍊等)，物件之間的功能共享一般稱為「委託 (Delegation)」，即特定物件將功能委託至通用物件類型。「委託」其實比繼承更精確一點。因為「所繼承的功能」並不會複製到「進行繼承的物件」之上，卻是保留在通用物件之中。</p>
-<h1 id="prototype"><a href="#prototype" class="headerlink" title="prototype"></a>prototype</h1><p>Object 之間可以互相成為各自的 Prototype，被繼承的 Object 將會繼承父 Object 的 Prototype 所有屬性。[[Prototype]]，是一個設定（寫入） Object 的 Prototype 的接口，是一個內部屬性(internal property)，它并不允許外部存取。</p>
-<p>每個實例對象（object）都有一個私有屬性（稱之為 <code>__proto__</code>）指向它的構造函數的原型對象（prototype）。該原型對像也有一個自己的原型對象(<code>__proto__</code>) ，層層向上直到一個對象的原型對象為 <code>null</code>。根據定義，<code>null</code> 沒有原型，並作為這個原型鏈中的最後一個環節。</p>
-<p>幾乎所有 JavaScript 中的對象都是位於原型鏈頂端的 Object 的實例。</p>
-<p>prototype 這個屬性，是 JavaScript 中最讓人混淆的名稱之一。你可能會認為<code>this</code>屬性即指目前物件(current object)的原型物件(prototype object)，但它其實不是原型 (應該是可透過 <code>__proto__</code>存取的內部物件(internal object)才對)。prototype是一個物件(object)，內含了你定義所應該繼承的成員。</p>
-<p>遵循ECMAScript標準，<code>someObject.[[Prototype]]</code> 符號是用於指向 someObject 的原型。從 ECMAScript 6 開始，[[Prototype]] 可以通過 <code>Object.getPrototypeOf()</code> 和 <code>Object.setPrototypeOf()</code> 訪問器來訪問。這個等同於 JavaScript 的非標準但許多瀏覽器實現的屬性<code>__proto__</code>。</p>
-<p><code>__proto__</code> 發音 dunder prototype，最先被 Firefox使用，後來在 ES6 被列為Javascript 的標準內建屬性的。它的出現是為了解決讀寫 <code>Object.prototype</code>的麻煩，提供一個快捷讀寫的 API，而且它是透過連結內部屬性 <code>[[Prototype]]</code> 完成這個功能 (by javascripttutorial)。</p>
-<p>但它不應該與構造函數 func 的 prototype 屬性相混淆。被構造函數創建的實例對象的 [[prototype]] 指向 func 的 prototype 屬性。 Object.prototype 屬性表示 Object 的原型對象。</p>
+<h1 id="Object-oriented-programming-OOP-物件導向程式設計"><a href="#Object-oriented-programming-OOP-物件導向程式設計" class="headerlink" title="Object-oriented programming(OOP) 物件導向程式設計"></a>Object-oriented programming(OOP) 物件導向程式設計</h1><p>JavaScript 並不像 Java、C++ 這些典型的物件導向語言具有「類別」（class）來區分概念與實體（instance）或天生具有繼承的能力，而 JavaScript 只有「物件」，因此只能利用設計模式來模擬這些功能。在 JavaScript 世界中，到底是怎麼實現物件導向的概念的？ JavaScript 的物件透過原型 (Prototype) 機制相互繼承功能，與典型的物件導向程式語言相較，運作方式有所差異。<br>在討論 <strong>物件導向 JavaScript</strong> 之前，需要先知道物件導向程式設計的意義：OOP 基本概念是<strong>採用物件（objects）來模塑真實的實物世界</strong>；也就是在程式中透過 objects 來塑造模型，並提供簡單方式存取「難以或不可能採用的功能」，物件可裝載相關的資料與程式碼，資料部分是你塑造某個模型的資訊，而程式碼部分則用是操作行為(Method)實現。</p>
+<p>為了簡化程式撰寫，我們可以為某個複雜東西建立簡單的模型，藉以代表其最重要的概念或特質，且該模型建立方式極易於搭配我們的程式設計用途：譬如<strong>用「類別」建立物件實體 Object instance — 該物件包含了類別中所定義的資料與功能</strong>。</p>
+<p>在根據類別建立物件實體時，就是執行類別的「建構子 Constructor 函式」所建立，而這個「根據類別來建立物件實體」的過程即稱為「實體化 Instantiation」，物件實體就是從類別實體化而來。我們可根據某一個類別建立許多新的子類別，新的子類別可繼承 (Inherit) 其母類別的資料與程式碼特性。你可重複使用所有物件類型共有的功能，而不需再複製之。若功能需與類別有所差異，則可直接於其上定義特殊功能。</p>
+<h1 id="inheritance-繼承"><a href="#inheritance-繼承" class="headerlink" title="inheritance 繼承"></a>inheritance 繼承</h1><p><strong>一個物件可以存取其他物件的屬性 properties、方法 methods，就叫做繼承 inheritance</strong>。<br>繼承可以分成兩種，一種是 classical inheritance 類別繼承，這種方式用在 C# 或 JAVA 當中；另一種則是 JavaScript 使用的 prototypal inheritance 原型繼承。<br>在「典型 OO」中，你必須定義特定的類別物件，才能定義哪些類別所要繼承的類別，而 JavaScript 使用不同的系統：「繼承」的物件並不會一併複製功能過來，而是<strong>透過原型鍊連接其所繼承的功能，亦即所謂的原型繼承 (Prototypal inheritance)</strong>。<br>基於 JavaScript 運作的方式 (原型鍊)，物件之間的功能共享一般稱為「委託 (Delegation)」，即特定物件將功能委託至通用物件類型。「委託」其實比繼承更精確一點。因為「所繼承的功能」並不會複製到「進行繼承的物件」之上，卻是保留在通用物件之中。</p>
+<h1 id="Prototype原型-與-proto-＆-Prototype-的意義"><a href="#Prototype原型-與-proto-＆-Prototype-的意義" class="headerlink" title="Prototype原型 與 __proto__ ＆ [[Prototype]] 的意義"></a>Prototype原型 與 <code>__proto__</code> ＆ <code>[[Prototype]]</code> 的意義</h1><ul>
+<li>Prototype原型</li>
+</ul>
+<p><strong>物件之間可以互相成為各自的 Prototype 原型，被繼承的物件將會繼承 父物件本身的屬性和方法 以及 它的 Prototype 的所有屬性</strong>，原型鍊上可追溯的物件都可以找到其屬性、方法。</p>
+<p><strong>每個物件都有一個隱藏的內部屬性(internal property) <code>[[Prototype]]</code>，這個屬性指向一個物件，也就是繼承的物件；也可以說是該物件的原型</strong>。</p>
+<p>所謂的原型繼承就是指繼承上一個物件的 prototype 屬性 (你也能稱之為 子命名空間 sub namespace) 中定義的成員，也就是以「<code>Object.prototype.</code>」開頭的屬性內容。<code>Object.prototype.</code> 屬性值就是一個物件，儲存了許多我們想「讓原型鍊上的物件一路繼承下去」的屬性與函式。</p>
+<p><code>[[Prototype]]</code> 不允許外部存取，從 ES6 開始，[[Prototype]] 可以通過 <code>Object.getPrototypeOf()</code> 和 <code>Object.setPrototypeOf()</code> 訪問器來訪問，也可以使用物件屬性 <code>__proto__</code> 呼叫。</p>
+<p><code>__proto__</code> 發音 dunder prototype，它原先並非標準但許多瀏覽器實現，最先被 Firefox 使用，後來在 ES6 被列為 Javascript 的標準內建屬性的。它的出現是為了解決讀寫 <code>Object.prototype</code> 的麻煩，提供一個快捷讀寫的 API，而且它是透過連結內部屬性 <code>[[Prototype]]</code> 完成這個功能。</p>
 <p>舉例：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">function Person(name, age) &#123;</span><br><span class="line">  this.name = name;</span><br><span class="line">  this.age = age;</span><br><span class="line">&#125;</span><br><span class="line">  </span><br><span class="line">Person.prototype.log = function () &#123;</span><br><span class="line">  console.log(this.name + &apos;, age:&apos; + this.age);</span><br><span class="line">&#125;</span><br><span class="line">  </span><br><span class="line">var nick = new Person(&apos;nick&apos;, 18);</span><br><span class="line">console.log(nick.__proto__ === Person.prototype) // true</span><br><span class="line"></span><br><span class="line">var peter = new Person(&apos;peter&apos;, 20);</span><br><span class="line">console.log(nick.log === peter.log) // true</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">function Person(name, age) &#123;</span><br><span class="line">  this.name = name;</span><br><span class="line">  this.age = age;</span><br><span class="line">&#125;</span><br><span class="line">  </span><br><span class="line">Person.prototype.log = function () &#123;</span><br><span class="line">  console.log(this.name + &apos;, age:&apos; + this.age);</span><br><span class="line">&#125;</span><br><span class="line">  </span><br><span class="line">var nick = new Person(&apos;nick&apos;, 18);</span><br><span class="line">console.log(nick.__proto__ === Person.prototype) // true</span><br><span class="line">console.log(nick.__proto__ === Object.getPrototypeOf(nick)) // true</span><br><span class="line"></span><br><span class="line">var peter = new Person(&apos;peter&apos;, 20);</span><br><span class="line">console.log(nick.log === peter.log) // true</span><br></pre></td></tr></table></figure>
 
-<p>當我在呼叫nick.log()的時候，JavaScript 是怎麼找到這個 function 的？<br>因為 nick 這個 instance 本身並沒有 log 這個 function。但根據 JavaScript 的機制，nick 是 Person 的 instance，所以如果在 nick 本身找不到，它會試著從Person.prototype去找。<br>可是，JavaScript 怎麼知道要到這邊去找？所以一定是 nick 跟 Person.prototype 會透過某種方式連接起來，才知道說要往哪邊去找 log 這個 function。<br>而這個連接的方式，就是<code>__proto__</code>。<br>（附註：其實比較好的方式是用<code>Object.getPrototypeOf()</code>，但這邊為了方便起見，還是使用比較常見的<code>__proto__</code>，更詳細的說明可參考：<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/proto" target="_blank" rel="noopener">MDN: Object.prototype.proto</a>）<br><code>nick.__proto__</code> 會指向 <code>Person.prototype</code>，<code>Person.prototype</code> 和 <code>nick.__proto__</code>是兩個不同的概念：當一個 Person 的物件被創建，被創建物建 nick 的 api 街口 <code>nick.__proto__</code> 會被指向到 <code>Person.prototype</code> 指向的物建。</p>
-<p>假如Person.prototype還是沒找到 log，那就繼續依照這個規則，去看<code>Person.prototype.__proto__</code>裡面有沒有 log 這個 method，就這樣一直不斷找下去，直到找到某個東西的<code>__proto__</code>是 null 為止，就表示這邊是最上層了，而這一個透過<code>__proto__</code>不斷串起來的鍊，就叫做原型鍊。透過原型鍊可以達成類似繼承的功能，呼叫自己 parent class 的 method。</p>
-<h1 id="prototype-chain"><a href="#prototype-chain" class="headerlink" title="prototype chain"></a>prototype chain</h1><p>新的物件實例透過建構子函式 constructor() 產生後，其核心將透過一種稱為原型鏈 Prototype chain 的機制傳遞，由 prototype 定義的參照鏈連在一起。</p>
-<p>常有人說 JavaScript 是原型架構的程式語言 — 各個物件均具備 1 組原型物件作為範本物件，用以繼承函式與屬性。物件的原型物件可能也具備原型物件，並繼承了其上的函式與屬性。這就是我們所謂的「原型鍊 (Prototype chain)」，同時正好說明為何 A 物件的屬性與函式是透過 B 物件的屬性與函式所定義。</p>
-<p>精確點說，<strong>這些屬性與函式都是透過物件的建構子函式所定義，並非物件實例本身</strong>。</p>
-<p>傳統的 OOP 都是先定義了類別，接著在建立物件實例之後，在類型上定義的所有屬性與函式均複製到此實例。但 JavaScript 不會複製這些屬性與函式，卻是在物件實例與其建構子之間設定連結 (原型鍊中的連結)，只要順著原型鍊就能在建構子之中找到屬性與函式。</p>
-<p>繼承的成員是在一個物件的 prototype 屬性 (你也能稱之為子命名空間 sub namespace) 中定義的成員，也就是以「<code>Object.prototype.</code>」開頭的成員；並非只以「<code>Object.</code>」開頭的成員。prototype 屬性值就是 1 個物件，基本上儲存了許多我們想「讓原型鍊上的物件一路繼承下去」的屬性與函式。<br>在 JavaScript 主控台中輸入 <code>Object.prototype.</code> 會看到 Object 的 prototype 屬性中所定義的許多函式，而繼承自 Object 的物件也能找到這些函式。只要試著尋找如 String、Date、Number、Array 等全域物件的原型上定義的函式與屬性，就會看到 JavaScript 中的其他原型鍊繼承範例。</p>
-<h1 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h1><p><a href="https://pjchender.blogspot.com/2016/06/javascriptprototypeprototype.html" target="_blank" rel="noopener">了解 JavaScript 中，繼承 inheritance、原型 prototype 和原型鍊 prototype chain 的概念</a><br><a href="https://cythilya.github.io/2018/10/26/prototype/" target="_blank" rel="noopener">你懂 JavaScript 嗎？#19 原型（Prototype）</a><br><a href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Inheritance_and_the_prototype_chain" target="_blank" rel="noopener">MDN Web Docs:继承与原型链</a><br><a href="https://blog.techbridge.cc/2017/04/22/javascript-prototype/" target="_blank" rel="noopener">該來理解 JavaScript 的原型鍊了</a><br>[Javascripter 必須知道的繼承 prototype, [[prototype]], <code>__proto__</code>](<a href="https://medium.com/@peterchang_82818/javascripter-%E5%BF%85%E9%A0%88%E7%9F%A5%E9%81%93%E7%9A%84%E7%B9%BC%E6%89%BF%E5%9B%A0%E5%AD%90-prototype-prototype-proto-object-class-inheritace-nodejs-%E7%89%A9%E4%BB%B6-%E7%B9%BC%E6%89%BF-54102240a8b4" target="_blank" rel="noopener">https://medium.com/@peterchang_82818/javascripter-%E5%BF%85%E9%A0%88%E7%9F%A5%E9%81%93%E7%9A%84%E7%B9%BC%E6%89%BF%E5%9B%A0%E5%AD%90-prototype-prototype-proto-object-class-inheritace-nodejs-%E7%89%A9%E4%BB%B6-%E7%B9%BC%E6%89%BF-54102240a8b4</a>)</p>
+<p>使用 <code>__proto__</code> 屬性可以透過這個接口指向 class 的原型 也就是 <code>nick.__proto__</code> 會指向 <code>Person.prototype</code> 指向的物件；<code>Person.prototype</code> 指向 Person 的原型屬性。</p>
+<p>上述範例中，當呼叫 <code>nick.log()</code> 的時候，nick 這個 instance 本身並沒有 log 這個 function，那 JavaScript 是怎麼找到這個 method 的？ 根據 JavaScript 的機制；nick 是 Person 的 instance，所以如果在 nick 本身找不到，它會試著從 <code>Person.prototype</code> 去找。可是，JavaScript 怎麼知道要到這邊去找？ 一定是 nick 跟 Person.prototype 會透過某種方式連接起來，才知道要往哪邊去找 log 這個 function，這個連接方式，就是原型鍊。</p>
+<p>假如 JavaScript 在 <code>Person.prototype</code> 還是沒找到 log() method，會繼續依照這個規則，去看 <code>Person.prototype.__proto__</code> (指 Person 的原型物件的原型屬性)裡面有沒有 log() method。就這樣一直不斷找下去，直到找到某個東西的 <code>__proto__</code> 是 <code>null</code> 為止，就表示這邊是最上層了，而這一個不斷串起來的鍊，也就是原型鍊，透過原型鍊可以呼叫自己 parent class 的 method，達到繼承的功能。</p>
+<h1 id="prototype-chain-原型鍊"><a href="#prototype-chain-原型鍊" class="headerlink" title="prototype chain 原型鍊"></a>prototype chain 原型鍊</h1><p>傳統的 OOP 在複製物件時，是先定義了類別，建立物件實例之後，將類型上定義的所有屬性與函式複製到此實例。<br><strong>但 JavaScript 不會複製這些屬性與函式，卻是在物件實例與其建構子之間設定連結 (原型鍊中的連結)，只要順著原型鍊就能在建構子之中找到屬性與函式</strong>。</p>
+<p>新的物件 instance 透過建構子函式 <code>constructor()</code> 產生後，其核心將會透過原型鏈 Prototype chain 的機制傳遞；物件的原型可能也有自己的原型，透過由 prototype 定義的參照鏈連在一起，繼承了其上的函式與屬性。</p>
+<p>這樣不斷繼承的過程，使物件可以使用其他物件的屬性和方法，所以精確來說的話，物件實例的屬性與函式都是透過物件的建構子函式所定義，並非物件實例本身：在 JavaScript 主控台中輸入 <code>Object.prototype.</code> 會看到 Object 的 prototype 屬性中所定義的許多函式，而繼承自 Object 的物件也能找到這些函式。只要試著尋找如 String、Date、Number、Array 等全域物件的原型上定義的函式與屬性，就會看到 JavaScript 中的其他原型鍊繼承範例。</p>
+<h1 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h1><p><a href="https://zh.javascript.info/function-prototype" target="_blank" rel="noopener">javascript.info:function-prototype</a><br><a href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Inheritance_and_the_prototype_chain" target="_blank" rel="noopener">MDN Web Docs:继承与原型链</a></p>
+<p><a href="https://pjchender.blogspot.com/2016/06/javascriptprototypeprototype.html" target="_blank" rel="noopener">了解 JavaScript 中，繼承 inheritance、原型 prototype 和原型鍊 prototype chain 的概念</a><br><a href="https://cythilya.github.io/2018/10/26/prototype/" target="_blank" rel="noopener">你懂 JavaScript 嗎？#19 原型（Prototype）</a><br><a href="https://blog.techbridge.cc/2017/04/22/javascript-prototype/" target="_blank" rel="noopener">該來理解 JavaScript 的原型鍊了</a><br><a href="https://medium.com/@peterchang_82818/javascripter-%E5%BF%85%E9%A0%88%E7%9F%A5%E9%81%93%E7%9A%84%E7%B9%BC%E6%89%BF%E5%9B%A0%E5%AD%90-prototype-prototype-proto-object-class-inheritace-nodejs-%E7%89%A9%E4%BB%B6-%E7%B9%BC%E6%89%BF-54102240a8b4" target="_blank" rel="noopener">Javascripter 必須知道的繼承 prototype, <code>[[prototype]]</code>, <code>__proto__</code></a></p>
 
         
       
@@ -1536,7 +1514,7 @@ JavaScript 中主要的內存管理概念是**可達性 Reachability**，簡言�
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2019-11-20 13:46:11" itemprop="dateModified" datetime="2019-11-20T13:46:11+00:00">2019-11-20</time>
+                <time title="Modified: 2019-11-21 12:07:53" itemprop="dateModified" datetime="2019-11-21T12:07:53+00:00">2019-11-21</time>
               </span>
             
           
@@ -1554,49 +1532,47 @@ JavaScript 中主要的內存管理概念是**可達性 Reachability**，簡言�
       
           <h1 id="JavaScript-Class"><a href="#JavaScript-Class" class="headerlink" title="JavaScript Class"></a>JavaScript Class</h1><p>In Object-oriented programming, a class is an extensible program-code-template for creating objects, providing initial values for state(member variables) and implementations of behavior(member functions or methods).class 是一種可以拓展的編程模板，用來創建對象(object)，提供狀態初始值(變量)和行為實現(函數或方法)。</p>
 <p>JavaScript 雖然具有物件導向程式語言的特性，但與 Java、C++ 等以類別為基礎的程式設計規範不同，JavaScript 是一種以原型(prototype-based)為基礎的語言。</p>
-<p>由於開發上經常需要創建許多相似類型的對象(object)，例如針對 users、goods等。在 JavaScript 中，可以用構造函數(Constructor)和 operator “new” 來達成這個使用目的，但在 ES6 中有一個更進階的用法叫做 “Class”。</p>
-<p>ECMAScript 6 中引入了類別 (class) 作為 JavaScript 現有原型程式(prototype-based)繼承的語法糖。語法糖可以讓現有語法操作變得更容易。類別 (class)語法並不是要引入新的物件導向繼承模型到 JavaScript 中，而是提供一個更簡潔的語法來建立物件和處理繼承。</p>
-<p>Class 允許使用更簡潔的結構語法來定義 prototype-based 的類別。在 prototype-based 類別中，所有 methods 都存在 prototype 屬性中，藉以與其他延伸出去的類別共用，如此可以節省 memory 空間。<br>比較傳統原型繼承的寫法和使用 class 的寫法會發現，class 省略了 prototype chaining 並且整個 class 的宣告定義集中描述在 class 區塊內，幫助讀者了解這段程式的作用範圍，使 class 的目的更為清楚。</p>
+<p>由於開發上經常需要創建許多相似類型的對象，傳統的 JavaScript 寫法，可以用<strong>構造函數(Constructor)和 operator <code>new</code></strong> 來達成這個使用目的，但<strong>在 ES6 中有一個更進階的用法叫做 <code>Class</code></strong>。</p>
+<p>ECMAScript 6 中引入了類別 (class) 作為 JavaScript 現有原型程式(prototype-based)繼承的語法糖。語法糖可以讓現有語法操作變得更容易。類別(class)語法並不是要引入新的物件導向繼承模型到 JavaScript 中，而是提供一個<strong>更簡潔的語法來建立物件和處理繼承</strong>。</p>
+<p>Class 允許使用更簡潔的結構語法來定義 prototype-based 的類別。在 prototype-based 類別中，所有 methods 都存在 prototype 屬性中，藉以與其他延伸出去的類別共用，如此可以節省 memory 空間。<br>比較傳統原型繼承的寫法和使用 class 的寫法會發現；<strong>class 省略了 prototype chaining 並且整個 class 的宣告定義集中描述在 class 區塊內，幫助讀者了解這段程式的作用範圍，使 class 的目的更為清楚</strong>。</p>
 <ul>
 <li><p>Constructor 構造函數</p>
 <ul>
 <li>是一種常規函數，函數名稱首字必須大寫</li>
-<li>創建時必須使用 new 來操作</li>
-<li>需在 prototype 物件上定義方法</li>
+<li>創建時必須使用 <code>new</code> 來操作</li>
+<li>需在 <code>prototype</code> 物件上定義方法</li>
 <li>示範：<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">function User(name) &#123;</span><br><span class="line">  this.name = name;</span><br><span class="line">  this.isAdmin = false;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">User.prototype.sayHi = function() &#123;</span><br><span class="line">  console.log(this.name);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">let user = new User(&quot;Jack&quot;); // 創建一個 User Constructor</span><br><span class="line"></span><br><span class="line">alert(user.name); -&gt; Jack</span><br><span class="line">alert(user.isAdmin); -&gt; false</span><br><span class="line">user.sayHi() -&gt; Jack</span><br></pre></td></tr></table></figure>
 
 </li>
 </ul>
-<p>當一個函數作為 new User(…)執行時，它執行以下步驟：</p>
+<p>當一個函數作為 <code>new User(...)</code>執行時，它執行以下步驟：</p>
 <ol>
-<li>一個新的空對像被創建並分配給 this。</li>
-<li>函數體執行。通常它會修改 this，為其添加新的屬性。</li>
-<li>返回 this 的值。<br>所以 new User(“Jack”) 的结果是相同的對象。</li>
+<li>一個新的空對像被創建並分配給 <code>this</code>。</li>
+<li>函數體執行。通常它會修改 <code>this</code>，為其添加新的屬性。</li>
+<li>返回 <code>this</code> 的值。<br>所以 <code>new User(&quot;Jack&quot;)</code> 的结果是相同的對象</li>
 </ol>
 </li>
-</ul>
+<li><p>Class 用法與特色</p>
 <ul>
-<li><p>Class</p>
-<ul>
-<li>使用 constructor() 建構子來定義初始狀態，而且創建時也必須使用 new 來操作。<br>建構子(constructor)方法是一個特別的方法，用來建立和初始化一個類別的物件，一個類別只能有一個建構子(constructor)。<br>Class 的 constructor()函數是默認的 method，即使沒有寫出來也會自動生成一個默認的空構造函數，並加入到 class.prototype上。<br>class syntax：<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">class User &#123;</span><br><span class="line">  constructor(name) &#123;</span><br><span class="line">    this.name = name;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  sayHi() &#123;</span><br><span class="line">    alert(this.name);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line">let user = new User(&quot;John&quot;);</span><br><span class="line">user.sayHi();</span><br></pre></td></tr></table></figure>
+<li><strong>使用 <code>constructor()</code> 建構子來定義初始狀態，而且創建時也必須使用 <code>new</code> 來操作</strong>。<br>建構子(constructor)方法是一個特別的方法，用來建立和初始化一個類別的物件，一個類別只能有一個建構子(constructor)。<br>Class 的 <code>constructor()</code>函數是默認的 method，即使沒有寫出來也會自動生成一個默認的空構造函數，並加入到 <code>class.prototype</code> 上。<br>class syntax：<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">class User &#123;</span><br><span class="line">  constructor(name) &#123;</span><br><span class="line">    this.name = name;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  sayHi() &#123;</span><br><span class="line">    alert(this.name);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line">let user = new User(&quot;John&quot;);</span><br><span class="line">user.sayHi();</span><br></pre></td></tr></table></figure>
 
 </li>
 </ul>
-<p>此時 User.prototype 包括 constructor 和 sayHi 兩個 methods。</p>
+<p>此時 User.prototype 包括 <code>constructor</code> 和 <code>sayHi</code> 兩個 methods。</p>
 <ul>
-<li><p>class expression 像一般 function 一樣，也可以寫作沒有名稱的表達式</p>
+<li><p><strong>class expression</strong> 像一般 function 一樣，也可以寫作沒有名稱的表達式：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">let User = class &#123;</span><br><span class="line">  sayHi() &#123;</span><br><span class="line">    alert(&quot;Hello&quot;);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">function makeClass(phrase) &#123;</span><br><span class="line">  // 返回並宣告一個 class</span><br><span class="line">  return class &#123;  </span><br><span class="line">    sayHi() &#123;</span><br><span class="line">      alert(phrase);</span><br><span class="line">    &#125;;</span><br><span class="line">  &#125;;</span><br><span class="line">&#125;</span><br><span class="line">let User = makeClass(&quot;Hello&quot;);</span><br><span class="line"></span><br><span class="line">new User().sayHi(); // Hello</span><br></pre></td></tr></table></figure>
 </li>
-<li><p>使用 extend() 以及 super()來繼承父類的參數給子類。<br>關鍵字 extends 是在類別宣告或是類別敘述中建立子類別的方法。若在子類別中有建構子(constructor)，要使用this前則必須先呼叫super()函式：在子類別建構子中用關鍵字 super 來呼叫父類別的建構子。</p>
+<li><p><strong>使用 <code>extends()</code> 以及 <code>super()</code> 來繼承父類的參數</strong>給子類。<br>關鍵字 extends 是在類別宣告或是類別敘述中建立子類別的方法。<br>若在子類別中有建構子(constructor)，要使用<code>this</code>前必須先呼叫<code>super()</code>函式：在子類別建構子中用關鍵字 super 來呼叫父類別的建構子。</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">const createPersonClass = name =&gt; class extends User &#123;</span><br><span class="line">  constructor() &#123;</span><br><span class="line">    super(name)</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 </li>
 <li><p>內部 method 之間不用逗號區分，與一般物件不同，可以避免我們描述二者時產生混淆</p>
 </li>
-<li><p>class 結構中的 code 都自動開啟了嚴格模式(use strict)</p>
+<li><p>Class 結構中自動開啟了嚴格模式 (Use Strict)</p>
 </li>
-<li><p>class 的宣告不會被 hoisting 提升到最高作用區，與函式宣告式不同，編譯器尚未抵達和執行 class 宣告之前無法建立或存取class</p>
+<li><p>Class 的宣告不會被 hoisting 提升到最高作用區，與函式宣告式不同，<strong>編譯器尚未抵達和執行 class 宣告之前無法建立或存取 class</strong>。</p>
 </li>
-<li><p>Just like literal objects, classes may include getters/setters, computed properties etc.</p>
+<li><p>Just like literal objects, classes may include <code>getters/setters</code> computed properties etc. Protection and Control：確保內部才能修改或訪問資料，防止洩漏。</p>
 </li>
 </ul>
 </li>

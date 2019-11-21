@@ -63,7 +63,7 @@
 <meta property="og:site_name" content="Jinny&#39;s blog">
 <meta property="og:description" content="What is Knex.js?Knex.js is a tool in the Database Tools category of a tech stack.Knex.js is an open source tool with 10.8K GitHub stars and 1.3K GitHub forks.  Knex.js is a JavaScript query builder fo">
 <meta property="og:locale" content="zh-tw">
-<meta property="og:updated_time" content="2019-11-20T13:46:11.377Z">
+<meta property="og:updated_time" content="2019-11-21T12:07:53.533Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Knex.js+PostgreSQL">
 <meta name="twitter:description" content="What is Knex.js?Knex.js is a tool in the Database Tools category of a tech stack.Knex.js is an open source tool with 10.8K GitHub stars and 1.3K GitHub forks.  Knex.js is a JavaScript query builder fo">
@@ -237,7 +237,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2019-11-20 13:46:11" itemprop="dateModified" datetime="2019-11-20T13:46:11+00:00">2019-11-20</time>
+                <time title="Modified: 2019-11-21 12:07:53" itemprop="dateModified" datetime="2019-11-21T12:07:53+00:00">2019-11-21</time>
               </span>
             
           
@@ -286,39 +286,62 @@
 
 <p>要小心使用 <code>knex.raw()</code>，避免允許植入 SQL 語句。</p>
 <h1 id="What-is-PostgreSQL-compare-with-MySQL"><a href="#What-is-PostgreSQL-compare-with-MySQL" class="headerlink" title="What is PostgreSQL? compare with MySQL?"></a>What is PostgreSQL? compare with MySQL?</h1><p>PostgreSQL 和 MySQL 兩個資料庫之間有許多相似之處和重疊，但也有非常明顯的差異，使用 PostgreSQL 的優點：</p>
-<p>-Open Source:<br>PostgreSQL 由 PostgreSQL 全球開發小組（PostgreSQL Global Development Group）開發，PostgreSQL 全球開發組由多個公司和個人貢獻者所組成。它是免費的開源軟體。PostgreSQL 是在 PostgreSQL 使用許可發布的，這是一個自由的開源許可，類似於 BSD 或 MIT 使用許可。</p>
-<p>MySQL 開發專案根據 GNU GPL 的條款提供了它的原始碼以及各種各樣的專有協議。它現在由 Oracle 公司擁有，並且提供了幾個商業使用的付費版本。</p>
 <ul>
-<li>ACID Compliance:<br>ACID（Atomicity，Consistency，Isolation，Durability）是一組資料庫交易安全的特性，ACID 要求確保在單一的資料交易中發生多個更新時也不會在整個系統中遺失數據或發生錯誤。<br>PostgreSQL 完全符合 ACID 特性，並確保滿足所有要求。</li>
-</ul>
-<p>MySQL 只有在使用 InnoDB 和 NDB 叢集儲存引擎時，才符合ACID 標準。</p>
+<li><p>Open Source:</p>
 <ul>
-<li>Performance:<br>PostgreSQL 被廣泛應用於讀寫速度至關重要且資料需要驗證的大型系統中。 此外，它在商業解決方案中，還支持各種效能優化，（如地理空間資料支持，不需要讀取鎖定的資料一致性支援，如 Oracle、SQL Server）。 整體來看，PostgreSQL 的效能在需要執行複雜查詢的系統中會得到了最好的展現。 PostgreSQL 在 OLTP / OLAP 系統中運行良好，尤其在需要讀/寫速度和需要大量的資料分析時。 PostgreSQL 也適用於商業智慧應用服務，但更適合需要快速讀/寫速度的資料倉庫和資料分析應用服務。</li>
+<li>PostgreSQL 由 PostgreSQL 全球開發小組（PostgreSQL Global Development Group）開發，PostgreSQL 全球開發組由多個公司和個人貢獻者所組成。它是免費的開源軟體。PostgreSQL 是在 PostgreSQL 使用許可發布的，這是一個自由的開源許可，類似於 BSD 或 MIT 使用許可。</li>
+<li>MySQL 開發專案根據 GNU GPL 的條款提供了它的原始碼以及各種各樣的專有協議。它現在由 Oracle 公司擁有，並且提供了幾個商業使用的付費版本。</li>
 </ul>
-<p>MySQL 被廣泛採用，是由於 Web 應用，只需要一個簡單的資料交易資料庫。然而，在一般的情況下，如果 MySQL 的表現不佳，都是當負載過重或試圖進行複雜查詢的時候。MySQL 在 OLAP / OLTP 系統只需要讀取速度時表現良好。MySQL + InnoDB為 OLTP 場景提供了非常好的讀/寫速度。 整體來說，MySQL在高度資料一致性需求的情況下表現良好。MySQL 是可靠的，並且適用於商業智慧應用服務，因為商業智慧應用服務通常是更重視讀取效能的。</p>
+</li>
+<li><p>ACID Compliance:</p>
 <ul>
-<li>Security:<br>PostgreSQL 具有角色並可繼承角色來設定和維護權限。 PostgreSQL 內建支援 SSL連線來加密客戶端/伺服器通訊。 它具有資料列級的安全性。除此之外，PostgreSQL 還附帶了一個名為 SE-PostgreSQL 的增強功能，可以根據 SELinux 安全策略提供額外的存取控制。</li>
+<li>ACID（Atomicity，Consistency，Isolation，Durability）是一組資料庫交易安全的特性，ACID 要求確保在單一的資料交易中發生多個更新時也不會在整個系統中遺失數據或發生錯誤。<br>PostgreSQL 完全符合 ACID 特性，並確保滿足所有要求。</li>
+<li>MySQL 只有在使用 InnoDB 和 NDB 叢集儲存引擎時，才符合ACID 標準。</li>
 </ul>
-<p>MySQL 為所有連線、查詢和用戶可能嘗試執行的其他操作實作了存取控制列表（ACL）的安全性。 對 MySQL 客戶端和伺服器之間的 SSL 加密連接也有支援。</p>
+</li>
+<li><p>Performance:</p>
 <ul>
-<li>NoSQL Features/JSON Support:<br>NoSQL 和 JSON 都非常流行，NoSQL資料庫變得越來越普及。JSON 是一種簡單的資料格式，它允許程式設計師儲存和傳遞跨系統的資料內容、資料列表和 key-value 對應。<br>PostgreSQL 支援 JSON 和其他 NoSQL 的功能，如內建 XML 支援和 HSTORE 的 key-value 對應。 它還支援將 JSON 資料索引以加快存取速度。</li>
+<li>PostgreSQL 被廣泛應用於讀寫速度至關重要且資料需要驗證的大型系統中。 此外，它在商業解決方案中，還支持各種效能優化，（如地理空間資料支持，不需要讀取鎖定的資料一致性支援，如 Oracle、SQL Server）。 整體來看，PostgreSQL 的效能在需要執行複雜查詢的系統中會得到了最好的展現。 PostgreSQL 在 OLTP / OLAP 系統中運行良好，尤其在需要讀/寫速度和需要大量的資料分析時。 PostgreSQL 也適用於商業智慧應用服務，但更適合需要快速讀/寫速度的資料倉庫和資料分析應用服務。</li>
+<li>MySQL 被廣泛採用，是由於 Web 應用，只需要一個簡單的資料交易資料庫。然而，在一般的情況下，如果 MySQL 的表現不佳，都是當負載過重或試圖進行複雜查詢的時候。MySQL 在 OLAP / OLTP 系統只需要讀取速度時表現良好。MySQL + InnoDB為 OLTP 場景提供了非常好的讀/寫速度。 整體來說，MySQL在高度資料一致性需求的情況下表現良好。MySQL 是可靠的，並且適用於商業智慧應用服務，因為商業智慧應用服務通常是更重視讀取效能的。</li>
 </ul>
-<p>MySQL 具有 JSON 資料類型支援，但沒有其他 NoSQL功能，也不支援 JSON 索引。</p>
+</li>
+<li><p>Security:</p>
 <ul>
-<li>Programming Languages Support:<br>PostgreSQL 支援各種程式語言，包括：C / C ++，Java，JavaScript，.Net，R，Perl，Python，Ruby，Tcl 等等。 甚至可以在單獨的程序中執行用戶提供的程式（即作為背景執行程式）。</li>
+<li>PostgreSQL 具有角色並可繼承角色來設定和維護權限。 PostgreSQL 內建支援 SSL連線來加密客戶端/伺服器通訊。 它具有資料列級的安全性。除此之外，PostgreSQL 還附帶了一個名為 SE-PostgreSQL 的增強功能，可以根據 SELinux 安全策略提供額外的存取控制。</li>
+<li>MySQL 為所有連線、查詢和用戶可能嘗試執行的其他操作實作了存取控制列表（ACL）的安全性。 對 MySQL 客戶端和伺服器之間的 SSL 加密連接也有支援。</li>
 </ul>
-<p>MySQL 一些支援伺服器端不可擴展的程式語言。</p>
+</li>
+<li><p>NoSQL Features/JSON Support:</p>
 <ul>
-<li>Extensible Type System:<br>PostgreSQL有幾個專用於延伸套件的功能，可以增加新的資料型別、新的函數功能、新的索引類型。</li>
+<li>NoSQL 和 JSON 都非常流行，NoSQL資料庫變得越來越普及。JSON 是一種簡單的資料格式，它允許程式設計師儲存和傳遞跨系統的資料內容、資料列表和 key-value 對應。<br>PostgreSQL 支援 JSON 和其他 NoSQL 的功能，如內建 XML 支援和 HSTORE 的 key-value 對應。 它還支援將 JSON 資料索引以加快存取速度。</li>
+<li>MySQL 具有 JSON 資料類型支援，但沒有其他 NoSQL功能，也不支援 JSON 索引。</li>
 </ul>
-<p>MySQL 不支援增加延伸功能。</p>
+</li>
+<li><p>Programming Languages Support:</p>
+<ul>
+<li>PostgreSQL 支援各種程式語言，包括：C / C ++，Java，JavaScript，.Net，R，Perl，Python，Ruby，Tcl 等等。 甚至可以在單獨的程序中執行用戶提供的程式（即作為背景執行程式）。</li>
+<li>MySQL 一些支援伺服器端不可擴展的程式語言。</li>
+</ul>
+</li>
+<li><p>Extensible Type System:</p>
+<ul>
+<li>PostgreSQL有幾個專用於延伸套件的功能，可以增加新的資料型別、新的函數功能、新的索引類型。</li>
+<li>MySQL 不支援增加延伸功能。</li>
+</ul>
+</li>
+</ul>
+<blockquote>
 <p>更多比較可以查看 PostgreSQL官方文件：<a href="https://faq.postgresql.tw/postgresql-vs-mysql" target="_blank" rel="noopener">PostgreSQL vs MySQL</a></p>
-<p>PostgreSQL 相對於 MySQL 的優勢：</p>
-<p>　　1、在 SQL 的標準實現上要比 MySQL 完善，而且功能實現比較嚴謹；<br>　　2、存儲過程的功能支持要比 MySQL 好，具備本地緩存執行計劃的能力；<br>　　3、對表連接支持較完整，優化器的功能較完整，支持的索引類型很多，復雜查詢能力較強；<br>　　4、PG 主表采用堆表存放，MySQL 采用索引組織表，能夠支持比MySQL更大的數據量。<br>　　5、PG 的主備復制屬於物理復制，相對於 MySQL 基於 binlog 的邏輯復制，數據的一致性更加可靠，復制性能更高，對主機性能的影響也更小。<br>　　6、MySQL 的存儲引擎插件化機制，存在鎖機制復雜影響並發的問題，而 PG 不存在。</p>
-<p>　　MySQL 相對於 PG 的優勢：</p>
-<p>　　1、innodb 的基於回滾段實現的 MVCC 機制，相對 PG 新老數據一起存放的基於 XID 的 MVCC 機制，是占優的。新老數據一起存放，需要定時觸發 VACUUM，會帶來多余的 IO和數據庫對象加鎖開銷，引起數據庫整體的並發能力下降。而且 VACUUM清理不及時，還可能會引發數據膨脹；<br>　　2、MySQL采用索引組織表，這種存儲方式非常適合基於主鍵匹配的查詢、刪改操作，但是對表結構設計存在約束；<br>　　3、MySQL的優化器較簡單，系統表、運算符、數據類型的實現都很精簡，非常適合簡單的查詢操作；<br>　　4、MySQL分區表的實現要優於PG的基於繼承表的分區實現，主要體現在分區個數達到上千上萬後的處理性能差異較大。<br>　　5、MySQL的存儲引擎插件化機制，使得它的應用場景更加廣泛，比如除了innodb適合事務處理場景外，myisam適合靜態數據的查詢場景。</p>
-<p>總體上來說，開源數據庫都不是很完善，商業數據庫oracle在架構和功能方面都還是完善很多的。從應用場景來說，PG更加適合嚴格的企業應用場景（比如金融、電信、ERP、CRM），而MySQL更加適合業務邏輯相對簡單、數據可靠性要求較低的互聯網場景（比如Google、facebook、alibaba）。</p>
-<p>雖然有不同的歷史、引擎與工具，不過並沒有明確的參考能夠表明這兩個數據庫哪一個能夠適用於所有情況。很多組織喜歡使用PostgreSQL，因為它的可靠性好，在保護數據方面很擅長，而且是個社區項目，不會陷入廠商的牢籠之中。MySQL更加靈活，提供了更多選項來針對不同的任務進行裁剪。很多時候，對於一個組織來說，對某個軟件使用的熟練程度要比特性上的原因更重要。</p>
+</blockquote>
+<h2 id="小結"><a href="#小結" class="headerlink" title="小結"></a>小結</h2><ul>
+<li>PostgreSQL 相對於 MySQL 的優勢</li>
+</ul>
+<p>　　- 在 SQL 的標準實現上 PostgreSQL 要比 MySQL 完善，而且功能實現比較嚴謹。<br>　　- 存儲過程的功能支持要比 MySQL 好，具備本地緩存執行計劃的能力。<br>　　- 對表連接支持較完整，優化器的功能較完整，支持的索引類型很多，復雜查詢能力較強。<br>　　- PostgreSQL 主表采用堆表存放，MySQL 采用索引組織表，能夠支持比MySQL更大的數據量。<br>　　- PostgreSQL 的主備復制屬於物理復制，相對於 MySQL 基於 binlog 的邏輯復制，數據的一致性更加可靠，復制性能更高，對主機性能的影響也更小。<br>　　6、MySQL 的存儲引擎插件化機制，存在鎖機制復雜影響並發的問題，而 PostgreSQL 不存在。</p>
+<ul>
+<li>MySQL 相對於 PostgreSQL 的優勢：</li>
+</ul>
+<p>　　- innodb 的基於回滾段實現的 MVCC 機制，相對 PostgreSQL 新老數據一起存放的基於 XID 的 MVCC 機制，是占優的。新老數據一起存放，需要定時觸發 VACUUM，會帶來多余的 IO和數據庫對象加鎖開銷，引起數據庫整體的並發能力下降。而且 VACUUM 清理不及時，還可能會引發數據膨脹；<br>　　- MySQL 采用索引組織表，這種存儲方式非常適合基於主鍵匹配的查詢、刪改操作，但是對表結構設計存在約束；<br>　　- MySQL 的優化器較簡單，系統表、運算符、數據類型的實現都很精簡，非常適合簡單的查詢操作；<br>　　- MySQL 分區表的實現要優於PG的基於繼承表的分區實現，主要體現在分區個數達到上千上萬後的處理性能差異較大。<br>　　- MySQL 的存儲引擎插件化機制，使得它的應用場景更加廣泛，比如除了 innodb 適合事務處理場景外，myisam 適合靜態數據的查詢場景。</p>
+<p>總體上來說，開源數據庫都不是很完善，商業數據庫 oracle 在架構和功能方面都還是完善很多的。從應用場景來說，PostgreSQL 更加適合嚴格的企業應用場景（比如金融、電信、ERP、CRM），而 MySQL 更加適合業務邏輯相對簡單、數據可靠性要求較低的互聯網場景（比如 Google、facebook、alibaba）。<br>雖然有不同的歷史、引擎與工具，不過並沒有明確的參考能夠表明這兩個數據庫哪一個能夠適用於所有情況。很多組織喜歡使用 PostgreSQL，因為它的可靠性好，在保護數據方面很擅長，而且是個社區項目，不會陷入廠商的牢籠之中。MySQL 更加靈活，提供了更多選項來針對不同的任務進行裁剪。很多時候對於一個組織來說，對某個軟件使用的熟練程度要比特性上的原因更重要。</p>
 <h1 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h1><p><a href="https://blog.logrocket.com/why-you-should-avoid-orms-with-examples-in-node-js-e0baab73fa5/" target="_blank" rel="noopener">Why you should avoid ORMs (with examples in Node.js)</a><br><a href="http://knexjs.org/" target="_blank" rel="noopener">Knex.js</a><br><a href="https://faq.postgresql.tw/postgresql-vs-mysql" target="_blank" rel="noopener">PostgreSQL vs MySQL</a><br><a href="https://www.itread01.com/articles/1502570301.html" target="_blank" rel="noopener">PostgreSQL 與 MySQL的比較</a></p>
 
     </div>
@@ -395,7 +418,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#What-is-Knex-js"><span class="nav-number">1.</span> <span class="nav-text">What is Knex.js?</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Why-use-Knex-js"><span class="nav-number">2.</span> <span class="nav-text">Why use Knex.js?</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#How-to-use"><span class="nav-number">3.</span> <span class="nav-text">How to use?</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#What-is-PostgreSQL-compare-with-MySQL"><span class="nav-number">4.</span> <span class="nav-text">What is PostgreSQL? compare with MySQL?</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Reference"><span class="nav-number">5.</span> <span class="nav-text">Reference</span></a></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#What-is-Knex-js"><span class="nav-number">1.</span> <span class="nav-text">What is Knex.js?</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Why-use-Knex-js"><span class="nav-number">2.</span> <span class="nav-text">Why use Knex.js?</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#How-to-use"><span class="nav-number">3.</span> <span class="nav-text">How to use?</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#What-is-PostgreSQL-compare-with-MySQL"><span class="nav-number">4.</span> <span class="nav-text">What is PostgreSQL? compare with MySQL?</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#小結"><span class="nav-number">4.1.</span> <span class="nav-text">小結</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Reference"><span class="nav-number">5.</span> <span class="nav-text">Reference</span></a></li></ol></div>
         
       </div>
       <!--/noindex-->

@@ -55,18 +55,18 @@
   };
 </script>
 
-  <meta name="description" content="問題：JavaScript 的 Object 到底是 pass by value 還是 pass by referece？ 根據 JavaScript 的資料型態，可以分為兩大類：基本型別 primitive 和 物件型別 object。基本型別的資料以 純值的形態存在，例如：number、string、boolean、null、undefined、symbol，而 object 的資料可能為 純">
+  <meta name="description" content="問題：JavaScript 到底是 pass by value 還是 pass by referece？ 根據 JavaScript 的資料型態，可以分為兩大類：基本型別 primitive 和 物件型別 object。基本型別的資料以 純值的形態存在，例如：number、string、boolean、null、undefined、symbol，而 object 的資料可能為 純值 或 多種不同型">
 <meta name="keywords" content="JavaScript, React, d3, NodeJS, Web">
 <meta property="og:type" content="article">
 <meta property="og:title" content="JS-pass by value or reference">
 <meta property="og:url" content="https://chinyun.github.io/myblog/2019/11/13/JS-pass-by-value-or-reference/index.html">
 <meta property="og:site_name" content="Jinny&#39;s blog">
-<meta property="og:description" content="問題：JavaScript 的 Object 到底是 pass by value 還是 pass by referece？ 根據 JavaScript 的資料型態，可以分為兩大類：基本型別 primitive 和 物件型別 object。基本型別的資料以 純值的形態存在，例如：number、string、boolean、null、undefined、symbol，而 object 的資料可能為 純">
+<meta property="og:description" content="問題：JavaScript 到底是 pass by value 還是 pass by referece？ 根據 JavaScript 的資料型態，可以分為兩大類：基本型別 primitive 和 物件型別 object。基本型別的資料以 純值的形態存在，例如：number、string、boolean、null、undefined、symbol，而 object 的資料可能為 純值 或 多種不同型">
 <meta property="og:locale" content="zh-tw">
-<meta property="og:updated_time" content="2019-11-20T13:46:11.377Z">
+<meta property="og:updated_time" content="2019-11-21T12:07:53.533Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="JS-pass by value or reference">
-<meta name="twitter:description" content="問題：JavaScript 的 Object 到底是 pass by value 還是 pass by referece？ 根據 JavaScript 的資料型態，可以分為兩大類：基本型別 primitive 和 物件型別 object。基本型別的資料以 純值的形態存在，例如：number、string、boolean、null、undefined、symbol，而 object 的資料可能為 純">
+<meta name="twitter:description" content="問題：JavaScript 到底是 pass by value 還是 pass by referece？ 根據 JavaScript 的資料型態，可以分為兩大類：基本型別 primitive 和 物件型別 object。基本型別的資料以 純值的形態存在，例如：number、string、boolean、null、undefined、symbol，而 object 的資料可能為 純值 或 多種不同型">
   <link rel="canonical" href="https://chinyun.github.io/myblog/2019/11/13/JS-pass-by-value-or-reference/">
 
 
@@ -237,7 +237,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2019-11-20 13:46:11" itemprop="dateModified" datetime="2019-11-20T13:46:11+00:00">2019-11-20</time>
+                <time title="Modified: 2019-11-21 12:07:53" itemprop="dateModified" datetime="2019-11-21T12:07:53+00:00">2019-11-21</time>
               </span>
             
           
@@ -253,57 +253,37 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <p>問題：JavaScript 的 Object 到底是 pass by value 還是 pass by referece？</p>
-<p>根據 JavaScript 的資料型態，可以分為兩大類：基本型別 primitive 和 物件型別 object。<br>基本型別的資料以 純值的形態存在，例如：number、string、boolean、null、undefined、symbol，而 object 的資料可能為 純值或多種不同型別組合而成的物件。</p>
-<h1 id="基本型別的傳值-pass-by-value-vs-object型別的傳址-pass-by-referece"><a href="#基本型別的傳值-pass-by-value-vs-object型別的傳址-pass-by-referece" class="headerlink" title="基本型別的傳值 pass by value  vs. object型別的傳址 pass by referece"></a>基本型別的傳值 pass by value  vs. object型別的傳址 pass by referece</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">var a = 10;</span><br><span class="line">var b = a;</span><br><span class="line">console.log(a === b); //true</span><br><span class="line"></span><br><span class="line">var c = 5;</span><br><span class="line">var d = 5;</span><br><span class="line">console.log(c === d); //true</span><br></pre></td></tr></table></figure>
+        <p>問題：JavaScript 到底是 pass by value 還是 pass by referece？</p>
+<p>根據 JavaScript 的資料型態，可以分為兩大類：基本型別 primitive 和 物件型別 object。<br>基本型別的資料以 純值的形態存在，例如：number、string、boolean、null、undefined、symbol，而 object 的資料可能為 純值 或 多種不同型別組合而成的 物件。</p>
+<h1 id="基本型別傳值-pass-by-value，Object-型別傳址-pass-by-referece"><a href="#基本型別傳值-pass-by-value，Object-型別傳址-pass-by-referece" class="headerlink" title="基本型別傳值 pass by value，Object 型別傳址 pass by referece"></a>基本型別傳值 pass by value，Object 型別傳址 pass by referece</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">var a = 10;</span><br><span class="line">var b = a;</span><br><span class="line">console.log(a === b); //true</span><br><span class="line"></span><br><span class="line">var c = 5;</span><br><span class="line">var d = 5;</span><br><span class="line">console.log(c === d); //true</span><br></pre></td></tr></table></figure>
 
 <p><code>var b = a;</code> 表面上看起來變數 b 的內容是透過複製變數 a 而來，實際上變數 b 是去建立了一個新的值，然後將變數 a 的內容複製了一份存放到記憶體， a 和 b 其實是存在於兩個不同的記憶體位置，因此變數 a 和變數 b 彼此獨立互不相干，即使更改 a 的內容， b 的值也不會變：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">a + 2;</span><br><span class="line">console.log(a); //12</span><br><span class="line">console.log(b); //10</span><br><span class="line">``` </span><br><span class="line">像這種情況，我們通常會稱作「傳值」 (pass by value)。</span><br><span class="line"></span><br><span class="line">如果是物件型別的資料：</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">a + 2;</span><br><span class="line">console.log(a); //12</span><br><span class="line">console.log(b); //10</span><br></pre></td></tr></table></figure>
 
-<p>var obj1 = { a: 10 };<br>var obj2 = { a: 10 };<br>console.log(obj1 === obj2); //false</p>
-<p>var obj3 = { b: 20 };<br>var obj4 = obj3;<br>console.log(obj3 === obj4); //true</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">「物件」這類資料型態，在 JavaScript 中是透過「引用」的方式傳遞資料的。</span><br><span class="line">當建立起一個新的物件並賦值給一個變數(`var obj3 = &#123; b: 20 &#125;;`)的時候，JavaScript 會在記憶體的某處存放這個物件(`&#123; b: 20 &#125;`)，再將變數(`obj3`)指向這個物件的存放位置，因此當`var obj4 = obj3;`的時候，其實是將 obj4 這個變數也指向了 `&#123; b: 20 &#125;`這個實體。</span><br><span class="line">這種透過引用的方式來傳遞資料，接收的其實是引用的「參考」而不是值的副本時，</span><br><span class="line">我們通常會稱作「傳址」 (pass by reference)。</span><br><span class="line"></span><br><span class="line"># 例外情況： pass by sharing</span><br></pre></td></tr></table></figure>
+<p>基本型別是不可變的 (immutable)，當修改、更新值時，與那個值的副本完全無關，像這種情況，我們通常稱作「傳值」 (pass by value)。</p>
+<p>如果是物件型別的資料：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">var obj1 = &#123; a: 10 &#125;;</span><br><span class="line">var obj2 = &#123; a: 10 &#125;;</span><br><span class="line">console.log(obj1 === obj2); //false</span><br><span class="line"></span><br><span class="line">var obj3 = &#123; b: 20 &#125;;</span><br><span class="line">var obj4 = obj3;</span><br><span class="line">console.log(obj3 === obj4); //true</span><br></pre></td></tr></table></figure>
 
-<p>var coin1 = { value: 10 };</p>
-<p>function changeValue(obj) {<br>  obj = { value: 123 };<br>}</p>
-<p>changeValue(coin1);<br>console.log(coin1.value);   // ？</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">答案會是 10，因為當coin1指向的資料被做為 function 的參數傳入 function 時，即使資料在 function 內部被重新賦值，外部變數的內容都不會被影響。</span><br><span class="line">在這種情況底下，就代表你要讓這個 obj 指向一個新的 object`&#123; value: 123 &#125;`。因此不會影響到外部的 coin1 指向的位址的物件內容。</span><br><span class="line"></span><br><span class="line">但是如果不是重新賦值而是直接修改傳入的內容：</span><br></pre></td></tr></table></figure>
+<p>「物件」這類資料型態，在 JavaScript 中是透過「引用」的方式傳遞資料的。<br>當建立起一個新的物件並賦值給一個變數(<code>var obj3 = { b: 20 };</code>)的時候，JavaScript 會在記憶體的某處存放這個物件(<code>{ b: 20 }</code>)，再將變數(<code>obj3</code>)指向這個物件的存放位置，因此當<code>var obj4 = obj3;</code>的時候，其實是將 obj4 這個變數也指向了 <code>{ b: 20 }</code>這個實體。<br>這種透過引用的方式來傳遞資料，接收的其實是引用的「參考」而不是值的副本時，<br>我們通常會稱作「傳址」 (pass by reference)。</p>
+<h1 id="特殊情況："><a href="#特殊情況：" class="headerlink" title="特殊情況："></a>特殊情況：</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">var coin1 = &#123; value: 10 &#125;;</span><br><span class="line"></span><br><span class="line">function changeValue(obj) &#123;</span><br><span class="line">  obj = &#123; value: 123 &#125;;</span><br><span class="line">&#125;</span><br><span class="line">changeValue(coin1);</span><br><span class="line">console.log(coin1.value);   // ？</span><br></pre></td></tr></table></figure>
 
-<p>var coin1 = { value: 10 };</p>
-<p>function changeValue(obj) {<br>  obj.value = 123;<br>}</p>
-<p>changeValue(coin1);<br>console.log(coin1.value);   // 123</p>
-<pre><code>答案是 123。此時變數 coin1 所指向的資料內容被改變，代表你要讓 function 裡面的那個 obj 跟外面的 coin1「共享」同一個 object，所以透過裡面的 obj，你可以去修改「共享到的那個 object」的資料。
+<p>答案會是 10，因為當coin1指向的資料被做為 <strong>function 的參數</strong>傳入 function 時，即使資料在 function 內部被重新賦值，外部變數的內容都不會被影響。<br>在這種情況底下， JavaScript 會將 obj 指向一個新建的 object <code>{ value: 123 }</code>，不會影響到外部的 coin1 指向的位址的物件內容。</p>
+<p>如果不是 重新賦址 而是 修改傳入 的內容：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">var coin1 = &#123; value: 10 &#125;;</span><br><span class="line">function changeValue(obj) &#123;</span><br><span class="line">  obj.value = 123;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">changeValue(coin1);</span><br><span class="line">console.log(coin1.value);   // 123</span><br></pre></td></tr></table></figure>
 
-# 小結
+<p>此時變數 coin1 所指向的資料內容被改變，傳入 function 作為 obj 參數的值的 coin1 在 function 內被修改，改變了 value 的值。</p>
+<h1 id="垃圾回收-Garbage-collection"><a href="#垃圾回收-Garbage-collection" class="headerlink" title="垃圾回收 Garbage collection"></a>垃圾回收 Garbage collection</h1><p>對於開發者來說，JavaScript 的內存管理是自動的、無形的。我們創建的原始值、對象、函數……這一切都會佔用內存。當某個東西我們不再需要時會發生什麼？ JavaScript 引擎如何發現它、清理它？<br>JavaScript 中主要的內存管理概念是<strong>可達性 Reachability</strong>，簡言之，可達值是那些以某種方式可訪問或可用的值，它們保證存儲在內存中。<br>這裡列出固有的可達值基本集合，這些值明顯不能被釋放：</p>
+<ol>
+<li>當前函數的局部變數和參數。Local variables and parameters of the current function.</li>
+<li>嵌套調用時，當前調用鏈上所有函數的變量與參數。Variables and parameters for other functions on the current chain of nested calls.</li>
+<li>全局變數。Global variables.</li>
+<li>還有一些其他的內部變數。(there are some other, internal ones as well)</li>
+</ol>
+<p>這些值被稱作根 root。</p>
+<p>如果一個值可以通過 引用 或 引用鏈，從根值訪問到，則認為這個值是 可達的。<br>比方說，如果局部變量中有一個對象，並且該對象具有引用另一個對象的 property，則該對像被認為是可達的。而且它引用的內容也是可達的。</p>
+<p>在 JavaScript 引擎中有一個被稱作垃圾回收器(garbage collector)的東西在後台執行。它監控著所有對象的狀態，並刪除掉那些已經不可達的。</p>
+<h1 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h1><p><a href="https://blog.techbridge.cc/2018/06/23/javascript-call-by-value-or-reference/" target="_blank" rel="noopener">深入探討 JavaScript 中的參數傳遞：call by value 還是 reference？</a><br><a href="https://ithelp.ithome.com.tw/articles/10191057" target="_blank" rel="noopener">重新認識 JavaScript: Day 05 JavaScript 是「傳值」或「傳址」？</a><br><a href="https://zh.javascript.info/garbage-collection" target="_blank" rel="noopener">Garbage collection</a><br><a href="https://pjchender.blogspot.com/2016/03/javascriptby-referenceby-value.html" target="_blank" rel="noopener">[筆記] 談談 JavaScript 中 by reference 和 by value 的重要觀念</a></p>
 
-在 JavaScript 中的物件類型(object)是可變的 (mutable)，**當物件更新時，會影響到所有引用這個物件的變數與其副本，修改時會變動到原本的參考，但當賦與新值時，會產生新的實體參考**。
-
-而基本型別(primitive)則是不可變的 (immutable)，當你更新了某個基本型別的值時，與那個值的副本完全無關。
-
-# 垃圾回收 Garbage collection
-
-對於開發者來說，JavaScript 的內存管理是自動的、無形的。我們創建的原始值、對象、函數……這一切都會佔用內存。當某個東西我們不再需要時會發生什麼？ JavaScript 引擎如何發現它、清理它？
-JavaScript 中主要的內存管理概念是**可達性 Reachability**，簡言之，可達值是那些以某種方式可訪問或可用的值，它們保證存儲在內存中。
-這裡列出固有的可達值基本集合，這些值明顯不能被釋放：
-
-1. 當前函數的局部變數和參數。Local variables and parameters of the current function.
-2. 嵌套調用時，當前調用鏈上所有函數的變量與參數。Variables and parameters for other functions on the current chain of nested calls.
-3. 全局變數。Global variables.
-4. 還有一些其他的內部變數。(there are some other, internal ones as well)
-
-這些值被稱作根 root。
-
-如果一個值可以通過 引用 或 引用鏈，從根值訪問到，則認為這個值是 可達的。
-比方說，如果局部變量中有一個對象，並且該對象具有引用另一個對象的 property，則該對像被認為是可達的。而且它引用的內容也是可達的。
-
-在 JavaScript 引擎中有一個被稱作垃圾回收器(garbage collector)的東西在後台執行。它監控著所有對象的狀態，並刪除掉那些已經不可達的。
-
-# Reference
-
-[深入探討 JavaScript 中的參數傳遞：call by value 還是 reference？](https://blog.techbridge.cc/2018/06/23/javascript-call-by-value-or-reference/)
-[重新認識 JavaScript: Day 05 JavaScript 是「傳值」或「傳址」？](https://ithelp.ithome.com.tw/articles/10191057)
-[Garbage collection](https://zh.javascript.info/garbage-collection)
-[[筆記] 談談 JavaScript 中 by reference 和 by value 的重要觀念](https://pjchender.blogspot.com/2016/03/javascriptby-referenceby-value.html)</code></pre>
     </div>
 
     
@@ -378,7 +358,7 @@ JavaScript 中主要的內存管理概念是**可達性 Reachability**，簡言�
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#基本型別的傳值-pass-by-value-vs-object型別的傳址-pass-by-referece"><span class="nav-number">1.</span> <span class="nav-text">基本型別的傳值 pass by value  vs. object型別的傳址 pass by referece</span></a></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#基本型別傳值-pass-by-value，Object-型別傳址-pass-by-referece"><span class="nav-number">1.</span> <span class="nav-text">基本型別傳值 pass by value，Object 型別傳址 pass by referece</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#特殊情況："><span class="nav-number">2.</span> <span class="nav-text">特殊情況：</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#垃圾回收-Garbage-collection"><span class="nav-number">3.</span> <span class="nav-text">垃圾回收 Garbage collection</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Reference"><span class="nav-number">4.</span> <span class="nav-text">Reference</span></a></li></ol></div>
         
       </div>
       <!--/noindex-->

@@ -63,7 +63,7 @@
 <meta property="og:site_name" content="Jinny&#39;s blog">
 <meta property="og:description" content="為什麼會有深淺拷貝的差異？因為 JavaScript 中，基本型別(primitve)與物件型別(object)的值的賦予方式不同，基本型別是 pass by value，物件型別是 pass by sharing。相關介紹可看：JS-pass by value or reference 因為值賦予方式的差異，在複製物件例如 object, array 等資料類型時，根據拷貝資料的形式，可以分為淺">
 <meta property="og:locale" content="zh-tw">
-<meta property="og:updated_time" content="2019-11-20T13:46:11.377Z">
+<meta property="og:updated_time" content="2019-11-21T12:07:53.529Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="JS-Shallow Copy &amp; Deep Copy">
 <meta name="twitter:description" content="為什麼會有深淺拷貝的差異？因為 JavaScript 中，基本型別(primitve)與物件型別(object)的值的賦予方式不同，基本型別是 pass by value，物件型別是 pass by sharing。相關介紹可看：JS-pass by value or reference 因為值賦予方式的差異，在複製物件例如 object, array 等資料類型時，根據拷貝資料的形式，可以分為淺">
@@ -237,7 +237,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2019-11-20 13:46:11" itemprop="dateModified" datetime="2019-11-20T13:46:11+00:00">2019-11-20</time>
+                <time title="Modified: 2019-11-21 12:07:53" itemprop="dateModified" datetime="2019-11-21T12:07:53+00:00">2019-11-21</time>
               </span>
             
           
@@ -280,22 +280,18 @@
 </li>
 <li><p>深拷貝方法</p>
 <ul>
-<li><strong>JSON.parse(JSON.stringify(object_array))</strong>:<ul>
+<li><p><strong>JSON.parse(JSON.stringify(object_array))</strong>:</p>
+<ul>
 <li>JSON.parse():把字串轉成物件</li>
-<li>JSON.stringify():把物件轉成字串<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">  let obj1 = &#123; a:&#123;b:10&#125; &#125;;</span><br><span class="line">  let obj2_string = JSON.stringify(obj1);</span><br><span class="line">  console.log(obj2_string); //&quot;&#123;&quot;a&quot;:&#123;&quot;b&quot;:10&#125;&#125;&quot;;</span><br><span class="line">​</span><br><span class="line">  let obj2 = JSON.parse(obj2_string);</span><br><span class="line">  console.log(obj2); //&#123;a:&#123;b:10&#125;&#125;</span><br><span class="line">​</span><br><span class="line">  obj2.a.b = 20;</span><br><span class="line">  console.log(obj1); //&#123;a:&#123;b:10&#125;&#125;</span><br><span class="line">  console.log(obj2); //&#123;a:&#123;b:20&#125;&#125;</span><br><span class="line">  ``` </span><br><span class="line">  只有可以轉成JSON格式的物件才可以這樣用，像 function、Set、Map..等型態就沒辦法轉成 JSON。</span><br><span class="line"></span><br><span class="line">  - **jQuery `$.extend`**</span><br></pre></td></tr></table></figure>
+<li>JSON.stringify():把物件轉成字串<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">  let obj1 = &#123; a:&#123;b:10&#125; &#125;;</span><br><span class="line">  let obj2_string = JSON.stringify(obj1);</span><br><span class="line">  console.log(obj2_string); //&quot;&#123;&quot;a&quot;:&#123;&quot;b&quot;:10&#125;&#125;&quot;;</span><br><span class="line">​</span><br><span class="line">  let obj2 = JSON.parse(obj2_string);</span><br><span class="line">  console.log(obj2); //&#123;a:&#123;b:10&#125;&#125;</span><br><span class="line">​</span><br><span class="line">  obj2.a.b = 20;</span><br><span class="line">  console.log(obj1); //&#123;a:&#123;b:10&#125;&#125;</span><br><span class="line">  console.log(obj2); //&#123;a:&#123;b:20&#125;&#125;</span><br><span class="line">  ``` </span><br><span class="line"></span><br><span class="line">  只有可以轉成JSON格式的物件才可以這樣用，像 function、Set、Map..等型態就沒辦法轉成 JSON。</span><br><span class="line"></span><br><span class="line">- **jQuery `$.extend`**</span><br></pre></td></tr></table></figure>
 
 </li>
 </ul>
-</li>
-</ul>
-<p>var $ = require(‘jquery’);</p>
-<p>var obj1 = {<br>  a: 1,<br>  b: { f: { g: 1 } },<br>  c: [1, 2, 3]<br>};</p>
-<p>var obj2 = $.extend(true, {}, obj1);<br>console.log(obj1.b.f === obj2.b.f); // false</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">- **lodash `_.cloneDeep`**</span><br></pre></td></tr></table></figure>
+<p>var $ = require(‘jquery’);<br>var obj1 = {<br>  a: 1,<br>  b: { f: { g: 1 } },<br>  c: [1, 2, 3]<br>};<br>var obj2 = $.extend(true, {}, obj1);<br>console.log(obj1.b.f === obj2.b.f); // false</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">- **lodash `_.cloneDeep`**</span><br></pre></td></tr></table></figure>
 
-<p>var _ = require(‘lodash’);<br>var obj1 = {<br>  a: 1,<br>  b: { f: { g: 1 } },<br>  c: [1, 2, 3]<br>};</p>
-<p>var obj2 = _.cloneDeep(obj1);<br>console.log(obj1.b.f === obj2.b.f); // false</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">- **自己寫**</span><br><span class="line">例如下面這個在 react app 裡面用 slice() 和 Object.assign(target, ...sources) 來改變深層結構資料的方法：</span><br><span class="line">[GitHub Repo:Tripper-app](https://github.com/chinyun/Tripper-app/blob/master/src/containers/App.js)</span><br></pre></td></tr></table></figure>
+<p>var _ = require(‘lodash’);<br>var obj1 = {<br>  a: 1,<br>  b: { f: { g: 1 } },<br>  c: [1, 2, 3]<br>};<br>var obj2 = _.cloneDeep(obj1);<br>console.log(obj1.b.f === obj2.b.f); // false</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">- **自己寫**</span><br><span class="line">  例如下面這個在 react app 裡面用 slice() 和 Object.assign(target, ...sources) 來改變深層結構資料的方法：</span><br><span class="line">  [GitHub Repo:Tripper-app](https://github.com/chinyun/Tripper-app/blob/master/src/containers/App.js)</span><br></pre></td></tr></table></figure>
 
 <p>updateBudgets = (journey, journeyId) =&gt; {<br>  const index = this.state.journeyList.findIndex(item =&gt; item.id === journeyId);<br>  if (index !== -1) {</p>
 <pre><code>this.setState({
@@ -307,7 +303,10 @@
 })</code></pre><p>  }<br>};</p>
 <pre><code></code></pre></li>
 </ul>
+</li>
+</ul>
 <h1 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h1><p><a href="https://dustinhsiao21.com/2018/01/07/javascript-shallow-copy-and-deep-copy/" target="_blank" rel="noopener">關於JAVASCRIPT中的SHALLOW COPY(淺拷貝)及DEEP COPY(深拷貝)</a><br><a href="https://larry850806.github.io/2016/09/20/shallow-vs-deep-copy/" target="_blank" rel="noopener">[Javascript] 關於 JS 中的淺拷貝和深拷貝</a></p>
+<h1 id="延伸閱讀"><a href="#延伸閱讀" class="headerlink" title="延伸閱讀"></a>延伸閱讀</h1><p><a href="https://chinyun.github.io/myblog/2019/10/12/React-Updating-state-when-state-is-an-array-of-objects/">React: Updating state when state is an array of objects</a></p>
 
     </div>
 
@@ -383,7 +382,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#為什麼會有深淺拷貝的差異？"><span class="nav-number">1.</span> <span class="nav-text">為什麼會有深淺拷貝的差異？</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#如何進行淺拷貝、深拷貝？"><span class="nav-number">2.</span> <span class="nav-text">如何進行淺拷貝、深拷貝？</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Reference"><span class="nav-number">3.</span> <span class="nav-text">Reference</span></a></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#為什麼會有深淺拷貝的差異？"><span class="nav-number">1.</span> <span class="nav-text">為什麼會有深淺拷貝的差異？</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#如何進行淺拷貝、深拷貝？"><span class="nav-number">2.</span> <span class="nav-text">如何進行淺拷貝、深拷貝？</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Reference"><span class="nav-number">3.</span> <span class="nav-text">Reference</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#延伸閱讀"><span class="nav-number">4.</span> <span class="nav-text">延伸閱讀</span></a></li></ol></div>
         
       </div>
       <!--/noindex-->

@@ -58,14 +58,14 @@
   <meta name="description" content="單冒號 (:) 是用在偽類雙冒號 (::) 則是用在偽元素偽類 (pseudo class) 就是在選已經存在的東西，比方說 a:hover 就是選了已經存在的 &amp;lt;a&amp;gt; 的某一個狀態偽元素 (pseudo element) 就是在創造一個新的假元素，因為他不在 DOM 裡面，而是創造的了一個我們看不見的元素。比如說 ::first-line，第一行並沒有被任何的 tag 包住，所以在選">
 <meta name="keywords" content="JavaScript, React, d3, NodeJS, Web">
 <meta property="og:type" content="article">
-<meta property="og:title" content="css pseudo class &amp; pseudo element">
+<meta property="og:title" content="CSS pseudo class &amp; pseudo element">
 <meta property="og:url" content="https://chinyun.github.io/myblog/2019/11/08/css-pseudo-class-pseudo-element/index.html">
 <meta property="og:site_name" content="Jinny&#39;s blog">
 <meta property="og:description" content="單冒號 (:) 是用在偽類雙冒號 (::) 則是用在偽元素偽類 (pseudo class) 就是在選已經存在的東西，比方說 a:hover 就是選了已經存在的 &amp;lt;a&amp;gt; 的某一個狀態偽元素 (pseudo element) 就是在創造一個新的假元素，因為他不在 DOM 裡面，而是創造的了一個我們看不見的元素。比如說 ::first-line，第一行並沒有被任何的 tag 包住，所以在選">
 <meta property="og:locale" content="zh-tw">
-<meta property="og:updated_time" content="2019-11-20T13:46:11.377Z">
+<meta property="og:updated_time" content="2019-11-21T12:07:53.533Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="css pseudo class &amp; pseudo element">
+<meta name="twitter:title" content="CSS pseudo class &amp; pseudo element">
 <meta name="twitter:description" content="單冒號 (:) 是用在偽類雙冒號 (::) 則是用在偽元素偽類 (pseudo class) 就是在選已經存在的東西，比方說 a:hover 就是選了已經存在的 &amp;lt;a&amp;gt; 的某一個狀態偽元素 (pseudo element) 就是在創造一個新的假元素，因為他不在 DOM 裡面，而是創造的了一個我們看不見的元素。比如說 ::first-line，第一行並沒有被任何的 tag 包住，所以在選">
   <link rel="canonical" href="https://chinyun.github.io/myblog/2019/11/08/css-pseudo-class-pseudo-element/">
 
@@ -81,7 +81,7 @@
   };
 </script>
 
-  <title>css pseudo class & pseudo element | Jinny's blog</title>
+  <title>CSS pseudo class & pseudo element | Jinny's blog</title>
   
 
 
@@ -210,7 +210,7 @@
       <meta itemprop="name" content="Jinny's blog">
     </span>
       <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">css pseudo class & pseudo element
+        <h1 class="post-title" itemprop="name headline">CSS pseudo class & pseudo element
 
           
         </h1>
@@ -237,7 +237,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2019-11-20 13:46:11" itemprop="dateModified" datetime="2019-11-20T13:46:11+00:00">2019-11-20</time>
+                <time title="Modified: 2019-11-21 12:07:53" itemprop="dateModified" datetime="2019-11-21T12:07:53+00:00">2019-11-21</time>
               </span>
             
           
@@ -255,7 +255,7 @@
       
         <p>單冒號 (:) 是用在偽類<br>雙冒號 (::) 則是用在偽元素<br>偽類 (pseudo class) 就是在選已經存在的東西，比方說 <code>a:hover</code> 就是選了已經存在的 <code>&lt;a&gt;</code> 的某一個狀態<br>偽元素 (pseudo element) 就是在創造一個新的假元素，因為他不在 DOM 裡面，而是創造的了一個我們看不見的元素。比如說 <code>::first-line</code>，第一行並沒有被任何的 tag 包住，所以在選取的過程就像是用了一個看不到的 tag 把第一行包起來，所以才選得到這行。</p>
 <p>使用偽類元素，一方面可以減少頁面中的節點元素，加速頁面渲染速度，另一方面可以為設計動畫提供很多新思維。</p>
-<h1 id="pseudo-class"><a href="#pseudo-class" class="headerlink" title="pseudo class"></a>pseudo class</h1><p>Pseudo-classes are used to provide styles not for elements, but for various states of elements. The pseudo-class concept is introduced to permit selection based on information that lies outside of the document tree or that cannot be expressed using the other <em>simple selectors</em>.<br>用於定義元素的特殊狀態，為了選擇 DOM tree 之外的信息，或者使用其他簡單選擇器不能表達的信息，不會出現在 DOM tree。</p>
+<h1 id="pseudo-class-偽類"><a href="#pseudo-class-偽類" class="headerlink" title="pseudo class 偽類"></a>pseudo class 偽類</h1><p>Pseudo-classes are used to provide styles not for elements, but for various states of elements. The pseudo-class concept is introduced to permit selection based on information that lies outside of the document tree or that cannot be expressed using the other <em>simple selectors</em>.<br>用於<strong>定義元素的特殊狀態</strong>，為了選擇 DOM tree 之外的信息，或者使用其他簡單選擇器不能表達的信息，不會出現在 DOM tree。</p>
 <p>Simple selectors includes:</p>
 <ul>
 <li>type selector (<code>h1, p, div</code>)</li>
@@ -274,7 +274,7 @@
 </li>
 </ul>
 <p>狀態不存在 DOM 裡面，或是這幾種 simple selectors 選不到的東西，就是 pseudo-class 要去解決的問題。</p>
-<h1 id="pseudo-element"><a href="#pseudo-element" class="headerlink" title="pseudo element"></a>pseudo element</h1><p>Pseudo elements differ from pseudo-classes in that they don’t select states of elements; they select parts of an element. 用於選擇元素的指定部分，創造一個關於 DOM tree 的抽象內容，提供一種方法來引用源文檔中不存在的內容，創造之後會出現在 DOM tree，偽元素也會「繼承」原本元素的屬性。</p>
+<h1 id="pseudo-element-偽元素"><a href="#pseudo-element-偽元素" class="headerlink" title="pseudo element 偽元素"></a>pseudo element 偽元素</h1><p>Pseudo elements differ from pseudo-classes in that they don’t select states of elements; they select parts of an element. 用於選擇元素的指定部分，創造一個關於 DOM tree 的抽象內容，提供一種方法來<strong>引用源文檔中不存在的內容</strong>，創造之後會出現在 DOM tree，偽元素也會「繼承」原本元素的屬性。</p>
 <ul>
 <li><strong>::first-line</strong> 選取第一行</li>
 <li><strong>::first-letter</strong> 選取第一個字</li>
@@ -358,7 +358,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#pseudo-class"><span class="nav-number">1.</span> <span class="nav-text">pseudo class</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#pseudo-element"><span class="nav-number">2.</span> <span class="nav-text">pseudo element</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Reference"><span class="nav-number">3.</span> <span class="nav-text">Reference</span></a></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#pseudo-class-偽類"><span class="nav-number">1.</span> <span class="nav-text">pseudo class 偽類</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#pseudo-element-偽元素"><span class="nav-number">2.</span> <span class="nav-text">pseudo element 偽元素</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Reference"><span class="nav-number">3.</span> <span class="nav-text">Reference</span></a></li></ol></div>
         
       </div>
       <!--/noindex-->

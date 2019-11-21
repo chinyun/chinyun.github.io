@@ -63,7 +63,7 @@
 <meta property="og:site_name" content="Jinny&#39;s blog">
 <meta property="og:description" content="ECMAScript1996 年創造 JavaScript 的 NetScape 公司決定將 JavaScript 提交給標準化組織 ECMA，希望讓這種語言成為國際標準。1997 年 ECMAScript 1.0 發佈，規定了 browser 腳本語言的標準。使用 ECMAScript 這個名稱的原因是：  商標註冊：JAVA 是 Sun 公司的商標，根據授權協議 JavaScript 只有 N">
 <meta property="og:locale" content="zh-tw">
-<meta property="og:updated_time" content="2019-11-20T13:46:11.377Z">
+<meta property="og:updated_time" content="2019-11-21T12:07:53.529Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="JS-ECMAScript">
 <meta name="twitter:description" content="ECMAScript1996 年創造 JavaScript 的 NetScape 公司決定將 JavaScript 提交給標準化組織 ECMA，希望讓這種語言成為國際標準。1997 年 ECMAScript 1.0 發佈，規定了 browser 腳本語言的標準。使用 ECMAScript 這個名稱的原因是：  商標註冊：JAVA 是 Sun 公司的商標，根據授權協議 JavaScript 只有 N">
@@ -237,7 +237,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2019-11-20 13:46:11" itemprop="dateModified" datetime="2019-11-20T13:46:11+00:00">2019-11-20</time>
+                <time title="Modified: 2019-11-21 12:07:53" itemprop="dateModified" datetime="2019-11-21T12:07:53+00:00">2019-11-21</time>
               </span>
             
           
@@ -307,23 +307,23 @@
 </li>
 <li><p><code>String.trimStart()</code> and <code>String.trimEnd()</code> 減少空白字串</p>
 </li>
-<li><p><code>try{} catch{}</code> 可以省略 catch 回傳的表達參數 catch(err){} -&gt; catch{}</p>
+<li><p><code>try{} catch{}</code> 可以省略 catch 回傳的表達參數 <code>catch(err){} -&gt; catch{}</code></p>
 </li>
 <li><p>revised Function#toString：<br>function.toString() 回傳確實的 Function 程式碼，包括空白字元和註解:</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">function exampleFuncton() &#123;</span><br><span class="line">  // Hello, I&apos;m an ordinary function</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">console.log(exampleFunction.toString());</span><br><span class="line">// function exampleFunction() &#123;</span><br><span class="line">//     // Hello, I&apos;m an ordinary function</span><br><span class="line">// &#125;</span><br></pre></td></tr></table></figure>
 </li>
-<li><p>Symbol Description：<br>在建構 symbol 時把 description 作第一個參數傳入，就可以通過 toString() 取得：</p>
+<li><p>Symbol Description：<br>在建構 symbol 時把 description 作第一個參數傳入，就可以通過 <code>toString()</code> 取得：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">const symbolExample = Symbol(&quot;Symbol description&quot;);</span><br><span class="line">console.log(symbolExample.toString());</span><br><span class="line">// &apos;Symbol(Symbol description)&apos;</span><br></pre></td></tr></table></figure>
 </li>
 <li><p>JSON ⊂ ECMAScript<br>The unescaped line separator U+2028 and paragraph separator U+2029 characters were not accepted in the pre-ES10 era.</p>
 </li>
-<li><p>well-formed JSON.stringify<br>JSON.stringify() may return characters between U+D800 and U+DFFF as values for which there are no equivalent UTF-8 characters. However, JSON format requires UTF-8 encoding. The proposed solution is to represent unpaired surrogate code points as JSON escape sequences rather than returning them as single UTF-16 code units.</p>
+<li><p>well-formed JSON.stringify<br><code>JSON.stringify()</code> may return characters between U+D800 and U+DFFF as values for which there are no equivalent UTF-8 characters. However, JSON format requires UTF-8 encoding. The proposed solution is to represent unpaired surrogate code points as JSON escape sequences rather than returning them as single UTF-16 code units.</p>
 </li>
-<li><p>stable Array#sort<br>The previous implementation of V8 used an unstable quick-sort algorithm for arrays containing more than 10 items. A stable sorting algorithm is when two objects with equal keys appear in the same order in the sorted output as they appear in the unsorted input.</p>
+<li><p>stable <code>Array.sort()</code><br>The previous implementation of V8 used an unstable quick-sort algorithm for arrays containing more than 10 items. A stable sorting algorithm is when two objects with equal keys appear in the same order in the sorted output as they appear in the unsorted input.</p>
 </li>
-<li><p>新增數據資料的基本型別：BigInt (stage 3)<br>BigInt is the 7th primitive type: an arbitrary precision integer. The variables can now represent 253 numbers and not just max out at 9007199254740992.</p>
+<li><p>新增數據資料的基本型別：<code>BigInt</code> (stage 3)<br>BigInt is the 7th primitive type: an arbitrary precision integer. The variables can now represent 253 numbers and not just max out at 9007199254740992.</p>
 </li>
-<li><p>Dynamic import (stage 3)<br>Dynamic import() returns a promise for the module namespace object of the requested module. Therefore, imports can now be assigned to a variable using async/await.</p>
+<li><p>Dynamic import (stage 3)<br>Dynamic <code>import()</code> returns a promise for the module namespace object of the requested module. Therefore, imports can now be assigned to a variable using async/await.</p>
 </li>
 <li><p>Standardized <code>globalThis</code> object (stage 3)</p>
 </li>

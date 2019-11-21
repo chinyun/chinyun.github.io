@@ -63,7 +63,7 @@
 <meta property="og:site_name" content="Jinny&#39;s blog">
 <meta property="og:description" content="JavaScript ClassIn Object-oriented programming, a class is an extensible program-code-template for creating objects, providing initial values for state(member variables) and implementations of behavio">
 <meta property="og:locale" content="zh-tw">
-<meta property="og:updated_time" content="2019-11-20T13:46:11.377Z">
+<meta property="og:updated_time" content="2019-11-21T12:07:53.529Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="JS Class">
 <meta name="twitter:description" content="JavaScript ClassIn Object-oriented programming, a class is an extensible program-code-template for creating objects, providing initial values for state(member variables) and implementations of behavio">
@@ -237,7 +237,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2019-11-20 13:46:11" itemprop="dateModified" datetime="2019-11-20T13:46:11+00:00">2019-11-20</time>
+                <time title="Modified: 2019-11-21 12:07:53" itemprop="dateModified" datetime="2019-11-21T12:07:53+00:00">2019-11-21</time>
               </span>
             
           
@@ -255,49 +255,47 @@
       
         <h1 id="JavaScript-Class"><a href="#JavaScript-Class" class="headerlink" title="JavaScript Class"></a>JavaScript Class</h1><p>In Object-oriented programming, a class is an extensible program-code-template for creating objects, providing initial values for state(member variables) and implementations of behavior(member functions or methods).class 是一種可以拓展的編程模板，用來創建對象(object)，提供狀態初始值(變量)和行為實現(函數或方法)。</p>
 <p>JavaScript 雖然具有物件導向程式語言的特性，但與 Java、C++ 等以類別為基礎的程式設計規範不同，JavaScript 是一種以原型(prototype-based)為基礎的語言。</p>
-<p>由於開發上經常需要創建許多相似類型的對象(object)，例如針對 users、goods等。在 JavaScript 中，可以用構造函數(Constructor)和 operator “new” 來達成這個使用目的，但在 ES6 中有一個更進階的用法叫做 “Class”。</p>
-<p>ECMAScript 6 中引入了類別 (class) 作為 JavaScript 現有原型程式(prototype-based)繼承的語法糖。語法糖可以讓現有語法操作變得更容易。類別 (class)語法並不是要引入新的物件導向繼承模型到 JavaScript 中，而是提供一個更簡潔的語法來建立物件和處理繼承。</p>
-<p>Class 允許使用更簡潔的結構語法來定義 prototype-based 的類別。在 prototype-based 類別中，所有 methods 都存在 prototype 屬性中，藉以與其他延伸出去的類別共用，如此可以節省 memory 空間。<br>比較傳統原型繼承的寫法和使用 class 的寫法會發現，class 省略了 prototype chaining 並且整個 class 的宣告定義集中描述在 class 區塊內，幫助讀者了解這段程式的作用範圍，使 class 的目的更為清楚。</p>
+<p>由於開發上經常需要創建許多相似類型的對象，傳統的 JavaScript 寫法，可以用<strong>構造函數(Constructor)和 operator <code>new</code></strong> 來達成這個使用目的，但<strong>在 ES6 中有一個更進階的用法叫做 <code>Class</code></strong>。</p>
+<p>ECMAScript 6 中引入了類別 (class) 作為 JavaScript 現有原型程式(prototype-based)繼承的語法糖。語法糖可以讓現有語法操作變得更容易。類別(class)語法並不是要引入新的物件導向繼承模型到 JavaScript 中，而是提供一個<strong>更簡潔的語法來建立物件和處理繼承</strong>。</p>
+<p>Class 允許使用更簡潔的結構語法來定義 prototype-based 的類別。在 prototype-based 類別中，所有 methods 都存在 prototype 屬性中，藉以與其他延伸出去的類別共用，如此可以節省 memory 空間。<br>比較傳統原型繼承的寫法和使用 class 的寫法會發現；<strong>class 省略了 prototype chaining 並且整個 class 的宣告定義集中描述在 class 區塊內，幫助讀者了解這段程式的作用範圍，使 class 的目的更為清楚</strong>。</p>
 <ul>
 <li><p>Constructor 構造函數</p>
 <ul>
 <li>是一種常規函數，函數名稱首字必須大寫</li>
-<li>創建時必須使用 new 來操作</li>
-<li>需在 prototype 物件上定義方法</li>
+<li>創建時必須使用 <code>new</code> 來操作</li>
+<li>需在 <code>prototype</code> 物件上定義方法</li>
 <li>示範：<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">function User(name) &#123;</span><br><span class="line">  this.name = name;</span><br><span class="line">  this.isAdmin = false;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">User.prototype.sayHi = function() &#123;</span><br><span class="line">  console.log(this.name);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">let user = new User(&quot;Jack&quot;); // 創建一個 User Constructor</span><br><span class="line"></span><br><span class="line">alert(user.name); -&gt; Jack</span><br><span class="line">alert(user.isAdmin); -&gt; false</span><br><span class="line">user.sayHi() -&gt; Jack</span><br></pre></td></tr></table></figure>
 
 </li>
 </ul>
-<p>當一個函數作為 new User(…)執行時，它執行以下步驟：</p>
+<p>當一個函數作為 <code>new User(...)</code>執行時，它執行以下步驟：</p>
 <ol>
-<li>一個新的空對像被創建並分配給 this。</li>
-<li>函數體執行。通常它會修改 this，為其添加新的屬性。</li>
-<li>返回 this 的值。<br>所以 new User(“Jack”) 的结果是相同的對象。</li>
+<li>一個新的空對像被創建並分配給 <code>this</code>。</li>
+<li>函數體執行。通常它會修改 <code>this</code>，為其添加新的屬性。</li>
+<li>返回 <code>this</code> 的值。<br>所以 <code>new User(&quot;Jack&quot;)</code> 的结果是相同的對象</li>
 </ol>
 </li>
-</ul>
+<li><p>Class 用法與特色</p>
 <ul>
-<li><p>Class</p>
-<ul>
-<li>使用 constructor() 建構子來定義初始狀態，而且創建時也必須使用 new 來操作。<br>建構子(constructor)方法是一個特別的方法，用來建立和初始化一個類別的物件，一個類別只能有一個建構子(constructor)。<br>Class 的 constructor()函數是默認的 method，即使沒有寫出來也會自動生成一個默認的空構造函數，並加入到 class.prototype上。<br>class syntax：<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">class User &#123;</span><br><span class="line">  constructor(name) &#123;</span><br><span class="line">    this.name = name;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  sayHi() &#123;</span><br><span class="line">    alert(this.name);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line">let user = new User(&quot;John&quot;);</span><br><span class="line">user.sayHi();</span><br></pre></td></tr></table></figure>
+<li><strong>使用 <code>constructor()</code> 建構子來定義初始狀態，而且創建時也必須使用 <code>new</code> 來操作</strong>。<br>建構子(constructor)方法是一個特別的方法，用來建立和初始化一個類別的物件，一個類別只能有一個建構子(constructor)。<br>Class 的 <code>constructor()</code>函數是默認的 method，即使沒有寫出來也會自動生成一個默認的空構造函數，並加入到 <code>class.prototype</code> 上。<br>class syntax：<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">class User &#123;</span><br><span class="line">  constructor(name) &#123;</span><br><span class="line">    this.name = name;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  sayHi() &#123;</span><br><span class="line">    alert(this.name);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line">let user = new User(&quot;John&quot;);</span><br><span class="line">user.sayHi();</span><br></pre></td></tr></table></figure>
 
 </li>
 </ul>
-<p>此時 User.prototype 包括 constructor 和 sayHi 兩個 methods。</p>
+<p>此時 User.prototype 包括 <code>constructor</code> 和 <code>sayHi</code> 兩個 methods。</p>
 <ul>
-<li><p>class expression 像一般 function 一樣，也可以寫作沒有名稱的表達式</p>
+<li><p><strong>class expression</strong> 像一般 function 一樣，也可以寫作沒有名稱的表達式：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">let User = class &#123;</span><br><span class="line">  sayHi() &#123;</span><br><span class="line">    alert(&quot;Hello&quot;);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">function makeClass(phrase) &#123;</span><br><span class="line">  // 返回並宣告一個 class</span><br><span class="line">  return class &#123;  </span><br><span class="line">    sayHi() &#123;</span><br><span class="line">      alert(phrase);</span><br><span class="line">    &#125;;</span><br><span class="line">  &#125;;</span><br><span class="line">&#125;</span><br><span class="line">let User = makeClass(&quot;Hello&quot;);</span><br><span class="line"></span><br><span class="line">new User().sayHi(); // Hello</span><br></pre></td></tr></table></figure>
 </li>
-<li><p>使用 extend() 以及 super()來繼承父類的參數給子類。<br>關鍵字 extends 是在類別宣告或是類別敘述中建立子類別的方法。若在子類別中有建構子(constructor)，要使用this前則必須先呼叫super()函式：在子類別建構子中用關鍵字 super 來呼叫父類別的建構子。</p>
+<li><p><strong>使用 <code>extends()</code> 以及 <code>super()</code> 來繼承父類的參數</strong>給子類。<br>關鍵字 extends 是在類別宣告或是類別敘述中建立子類別的方法。<br>若在子類別中有建構子(constructor)，要使用<code>this</code>前必須先呼叫<code>super()</code>函式：在子類別建構子中用關鍵字 super 來呼叫父類別的建構子。</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">const createPersonClass = name =&gt; class extends User &#123;</span><br><span class="line">  constructor() &#123;</span><br><span class="line">    super(name)</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 </li>
 <li><p>內部 method 之間不用逗號區分，與一般物件不同，可以避免我們描述二者時產生混淆</p>
 </li>
-<li><p>class 結構中的 code 都自動開啟了嚴格模式(use strict)</p>
+<li><p>Class 結構中自動開啟了嚴格模式 (Use Strict)</p>
 </li>
-<li><p>class 的宣告不會被 hoisting 提升到最高作用區，與函式宣告式不同，編譯器尚未抵達和執行 class 宣告之前無法建立或存取class</p>
+<li><p>Class 的宣告不會被 hoisting 提升到最高作用區，與函式宣告式不同，<strong>編譯器尚未抵達和執行 class 宣告之前無法建立或存取 class</strong>。</p>
 </li>
-<li><p>Just like literal objects, classes may include getters/setters, computed properties etc.</p>
+<li><p>Just like literal objects, classes may include <code>getters/setters</code> computed properties etc. Protection and Control：確保內部才能修改或訪問資料，防止洩漏。</p>
 </li>
 </ul>
 </li>

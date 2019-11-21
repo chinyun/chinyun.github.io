@@ -233,7 +233,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2019-11-20 13:46:11" itemprop="dateModified" datetime="2019-11-20T13:46:11+00:00">2019-11-20</time>
+                <time title="Modified: 2019-11-21 12:07:53" itemprop="dateModified" datetime="2019-11-21T12:07:53+00:00">2019-11-21</time>
               </span>
             
           
@@ -385,7 +385,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2019-11-20 13:46:11" itemprop="dateModified" datetime="2019-11-20T13:46:11+00:00">2019-11-20</time>
+                <time title="Modified: 2019-11-21 12:07:53" itemprop="dateModified" datetime="2019-11-21T12:07:53+00:00">2019-11-21</time>
               </span>
             
           
@@ -401,27 +401,27 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <h1 id="DOM-Document-Object-Model"><a href="#DOM-Document-Object-Model" class="headerlink" title="DOM (Document Object Model)"></a>DOM (Document Object Model)</h1><p>W3C(World Wide Web Consortium) 全球資訊網協會訂定了 DOM 的標準，將 DOM 區分為三部分：core DOM、XML DOM、HTML DOM。HTML DOM 是用來取得、修改、新增、刪除 HTML 元素，有了明確的標準不同瀏覽器才能提供一套相同的操作方式給開發者使用。<br>DOM 的樹狀結構是一種有階層(父子關係)的資料結構，以節點(node)代表一個物件，物件本身具有屬性和方法，上層的節點為父節點(parent)下層節點為子節點(child)，一個父節點可能有很多個子節點，但子節點只會有一個父節點。<br>在 document 之上其實還有一個 window 物件，它不屬於 DOM 但實作時經常會使用到 window 提供的屬性及方法，例如： setInterval, clearIntervel, confirm, alert, location</p>
-<h1 id="DOM-事件傳遞機制"><a href="#DOM-事件傳遞機制" class="headerlink" title="DOM 事件傳遞機制"></a>DOM 事件傳遞機制</h1><p>事件在 DOM 裡面有既定的傳遞順序，假設你有一個 ul 元素，底下有很多 li ，代表不同的 item，當你點擊任何一個 li 的時候，其實也點擊了 ul，因為 ul 把所有的 li 都包住了。假如我在兩個元素上面都加了eventListener，哪一個會先執行？這時候知道事件的執行順序就很重要。</p>
-<p>DOM 事件觸發有三個階段，例如：當點擊事件發生時，會先從 window 開始往下傳遞，一直傳到被點擊的該物件為止，到這邊就叫做 CAPTURING_PHASE 捕獲階段，接著事件傳遞到物件本身，這時候叫做 AT_TARGET，最後事件會從物件一路傳回去 window，這時候叫做 BUBBLING_PHASE 冒泡階段。</p>
+          <h1 id="DOM-Document-Object-Model"><a href="#DOM-Document-Object-Model" class="headerlink" title="DOM (Document Object Model)"></a>DOM (Document Object Model)</h1><p>W3C(World Wide Web Consortium) 全球資訊網協會訂定了 DOM 的標準，將 DOM 區分為三部分：core DOM、XML DOM、HTML DOM。HTML DOM 是用來取得、修改、新增、刪除 HTML 元素，有了明確的標準不同瀏覽器才能提供一套相同的操作方式給開發者使用。<br>DOM 的樹狀結構是一種有階層(父子關係)的資料結構，以節點(node)代表一個物件，物件本身具有屬性和方法，上層的節點為父節點(parent)下層節點為子節點(child)，一個父節點可能有很多個子節點，但子節點只會有一個父節點。<br>在 document 之上其實還有一個 window 物件，它不屬於 DOM 但實作時經常會使用到 window 提供的屬性及方法，例如： <code>setInterval</code>, <code>clearIntervel</code>, <code>confirm</code>, <code>alert</code>…等。</p>
+<h1 id="DOM-事件傳遞機制"><a href="#DOM-事件傳遞機制" class="headerlink" title="DOM 事件傳遞機制"></a>DOM 事件傳遞機制</h1><p>事件在 DOM 裡面有既定的傳遞順序，假設你有一個 <code>ul</code> 元素，底下有很多 <code>li</code> ，代表不同的 item，當你點擊任何一個 <code>li</code> 的時候，其實也點擊了 <code>ul</code>，因為 <code>ul</code> 把所有的 <code>li</code> 都包住了。假如我在兩個元素上面都加了<code>eventListener</code>，哪一個會先執行？這時候知道事件的執行順序就很重要。</p>
+<p>DOM 事件觸發有三個階段；當點擊事件發生時，會先從 window 開始往下傳遞，一直傳到被點擊的該物件為止，到這邊就叫做 <code>CAPTURING_PHASE</code> 捕獲階段；接著事件傳遞到物件本身，這時候叫做 <code>AT_TARGET</code>；最後事件會從物件一路傳回去 window，這時候叫做 <code>BUBBLING_PHASE</code> 冒泡階段。</p>
 <ul>
-<li><p>先捕獲(capturing)再冒泡(bubbling)，當事件傳到 target 本身，沒有分捕獲跟冒泡:<br>一般而言是先捕獲再冒泡，但是當事件傳遞到點擊的真正對象，也就是 event.target 的時候，無論你使用 addEventListener 的第三個參數是 true 還是 false，這邊的 event.eventPhase 都會變成 AT_TARGET，既然這邊已經變成 AT_TARGET ，自然就沒有什麼捕獲跟冒泡之分，所以執行順序就會根據 addEventListener 的順序而定，先添加的先執行，後添加的後執行。</p>
+<li><p>先捕獲再冒泡；當事件傳到 target 本身，沒有分捕獲跟冒泡:<br>一般而言是先捕獲再冒泡，但是當事件傳遞到點擊的真正對象，也就是 <code>event.target</code> 的時候，無論你使用 <code>addEventListener</code> 的第三個參數是 true 還是 false，這邊的 <code>event.eventPhase</code> 都會變成 <code>AT_TARGET</code>，所以執行順序就會根據 <code>addEventListener</code> 的順序而定，先添加的先執行，後添加的後執行。</p>
 </li>
-<li><p>事件註冊，加上監聽機制的方法：<code>target.addEventListener(type, listener[, useCapture]);</code><br>addEventListener 函數的第三個參數是 boolean 值，可以決定事先採取被觸發事件的動作反應，還是其外部元素的觸發動作。設定為 true 代表把這個 listener 添加到捕獲階段，false 代表把這個 listener 添加到冒泡階段，預設為false、在冒泡階段 listen 事件觸發。一個 element可以有多個 eventlistener，監聽不同事件(event)，設置指定動作(function)。</p>
+<li><p>事件註冊，加上監聽機制的方法：<code>target.addEventListener(type, listener[, useCapture]);</code><br><code>addEventListener</code> 函數的第三個參數是 boolean 值，可以決定事先採取被觸發事件的動作反應，還是其外部元素的觸發動作。設定為 <strong>true</strong> 代表把這個 listener 添加到<strong>捕獲階段</strong>，<strong>false</strong> 代表把這個 listener 添加到<strong>冒泡階段</strong>，預設為false；在冒泡階段監聽事件觸發。一個 element 可以有多個 eventlistener，監聽不同事件(event)，設置指定動作(function)。</p>
 </li>
 </ul>
 <h1 id="stopPropagation-amp-preventDefault"><a href="#stopPropagation-amp-preventDefault" class="headerlink" title="stopPropagation &amp; preventDefault"></a>stopPropagation &amp; preventDefault</h1><ul>
-<li><p>stopPropagation：取消事件繼續往下傳遞。加在哪邊，事件的傳遞就斷在哪裡，不會繼續往下傳遞給下一個節點。<br>用法如下：</p>
+<li><p><strong>stopPropagation：取消事件繼續往下傳遞</strong>。<br>加在哪邊，事件的傳遞就斷在哪裡，不會繼續往下傳遞給下一個節點。<br>用法如下：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">$list.addEventListener(&apos;click&apos;, (e) =&gt; &#123;</span><br><span class="line">  console.log(&apos;list capturing&apos;);</span><br><span class="line">  e.stopPropagation();</span><br><span class="line">&#125;, true)</span><br></pre></td></tr></table></figure>
 
-<p>儘管已經用e.stopPropagation，但對於同一個層級，剩下的 listener 還是會被執行到，若是你想要讓其他同一層級的 listener 也不要被執行，可以改用 e.stopImmediatePropagation();</p>
+<p>儘管已經用<code>e.stopPropagation</code>，但對於同一個層級，剩下的 listener 還是會被執行到，若是你想要讓其他同一層級的 listener 也不要被執行，可以改用 <code>e.stopImmediatePropagation()</code>。</p>
 </li>
-<li><p>preventDefault：取消瀏覽器的預設行為。最常見的例子是阻止點擊<code>&lt;a&gt;</code>時新開分頁、跳轉或<code>&lt;form&gt;</code> submit action。<br>preventDefault 跟事件傳遞「一點關係都沒有」，事件還是會繼續往下傳遞。有一個特別值得注意的地方是 W3C 的文件裡面有寫到：Once preventDefault has been called it will remain in effect throughout the remainder of the event’s propagation. 意思就是說一旦 call 了 preventDefault，在之後傳遞下去的事件裡面也會有效果。<br>用法舉例：</p>
+<li><p><strong>preventDefault：取消瀏覽器的預設行為</strong>。<br>最常見的例子是阻止點擊<code>&lt;a&gt;</code>時新開分頁、跳轉或<code>&lt;form&gt;</code> submit action。<br><code>preventDefault</code> 跟事件傳遞「一點關係都沒有」，事件還是會繼續往下傳遞，只是阻止了現在和往後的預設行為。<br>有一個特別值得注意的地方是 W3C 的文件裡面有寫到：Once preventDefault has been called it will remain in effect throughout the remainder of the event’s propagation. 意思就是說一旦 call 了 preventDefault，在之後傳遞下去的事件裡面也會有效果。<br>用法舉例：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">form.addEventListener(&apos;submit&apos;,e=&gt;&#123;</span><br><span class="line">  e.preventDefault(); // 把原生的 Form submit 跳轉行為停掉</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
 
 </li>
 </ul>
-<h1 id="Event-Delegation"><a href="#Event-Delegation" class="headerlink" title="Event Delegation"></a>Event Delegation</h1><p>事件代理機制是將許多事件綁定在同一節點，透過該節點使下層的子節點都可以觸發事件，因為只要綁定一個地方不需要每個子節點或後來新增的節點都綁定所以叫做事件代理。</p>
+<h1 id="Event-Delegation-事件代理機制"><a href="#Event-Delegation-事件代理機制" class="headerlink" title="Event Delegation 事件代理機制"></a>Event Delegation 事件代理機制</h1><p>將許多事件綁定在同一節點，<strong>透過該節點使下層的子節點都可以觸發事件</strong>，因為只要綁定一個地方不需要每個子節點或後來新增的節點都綁定所以叫做事件代理。</p>
 <h1 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h1><p><a href="https://medium.com/@realdennis/javascript-%E4%BA%8B%E4%BB%B6-event-da8104c5c98c" target="_blank" rel="noopener">事件 (Event) 的註冊、觸發與傳遞</a><br><a href="https://blog.techbridge.cc/2017/07/15/javascript-event-propagation/" target="_blank" rel="noopener">DOM 的事件傳遞機制：捕獲與冒泡</a></p>
 
         
@@ -461,7 +461,7 @@
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
             
-            <a href="/myblog/2019/11/08/css-pseudo-class-pseudo-element/" class="post-title-link" itemprop="url">css pseudo class & pseudo element</a>
+            <a href="/myblog/2019/11/08/css-pseudo-class-pseudo-element/" class="post-title-link" itemprop="url">CSS pseudo class & pseudo element</a>
           
         </h1>
 
@@ -487,7 +487,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2019-11-20 13:46:11" itemprop="dateModified" datetime="2019-11-20T13:46:11+00:00">2019-11-20</time>
+                <time title="Modified: 2019-11-21 12:07:53" itemprop="dateModified" datetime="2019-11-21T12:07:53+00:00">2019-11-21</time>
               </span>
             
           
@@ -505,7 +505,7 @@
       
           <p>單冒號 (:) 是用在偽類<br>雙冒號 (::) 則是用在偽元素<br>偽類 (pseudo class) 就是在選已經存在的東西，比方說 <code>a:hover</code> 就是選了已經存在的 <code>&lt;a&gt;</code> 的某一個狀態<br>偽元素 (pseudo element) 就是在創造一個新的假元素，因為他不在 DOM 裡面，而是創造的了一個我們看不見的元素。比如說 <code>::first-line</code>，第一行並沒有被任何的 tag 包住，所以在選取的過程就像是用了一個看不到的 tag 把第一行包起來，所以才選得到這行。</p>
 <p>使用偽類元素，一方面可以減少頁面中的節點元素，加速頁面渲染速度，另一方面可以為設計動畫提供很多新思維。</p>
-<h1 id="pseudo-class"><a href="#pseudo-class" class="headerlink" title="pseudo class"></a>pseudo class</h1><p>Pseudo-classes are used to provide styles not for elements, but for various states of elements. The pseudo-class concept is introduced to permit selection based on information that lies outside of the document tree or that cannot be expressed using the other <em>simple selectors</em>.<br>用於定義元素的特殊狀態，為了選擇 DOM tree 之外的信息，或者使用其他簡單選擇器不能表達的信息，不會出現在 DOM tree。</p>
+<h1 id="pseudo-class-偽類"><a href="#pseudo-class-偽類" class="headerlink" title="pseudo class 偽類"></a>pseudo class 偽類</h1><p>Pseudo-classes are used to provide styles not for elements, but for various states of elements. The pseudo-class concept is introduced to permit selection based on information that lies outside of the document tree or that cannot be expressed using the other <em>simple selectors</em>.<br>用於<strong>定義元素的特殊狀態</strong>，為了選擇 DOM tree 之外的信息，或者使用其他簡單選擇器不能表達的信息，不會出現在 DOM tree。</p>
 <p>Simple selectors includes:</p>
 <ul>
 <li>type selector (<code>h1, p, div</code>)</li>
@@ -524,7 +524,7 @@
 </li>
 </ul>
 <p>狀態不存在 DOM 裡面，或是這幾種 simple selectors 選不到的東西，就是 pseudo-class 要去解決的問題。</p>
-<h1 id="pseudo-element"><a href="#pseudo-element" class="headerlink" title="pseudo element"></a>pseudo element</h1><p>Pseudo elements differ from pseudo-classes in that they don’t select states of elements; they select parts of an element. 用於選擇元素的指定部分，創造一個關於 DOM tree 的抽象內容，提供一種方法來引用源文檔中不存在的內容，創造之後會出現在 DOM tree，偽元素也會「繼承」原本元素的屬性。</p>
+<h1 id="pseudo-element-偽元素"><a href="#pseudo-element-偽元素" class="headerlink" title="pseudo element 偽元素"></a>pseudo element 偽元素</h1><p>Pseudo elements differ from pseudo-classes in that they don’t select states of elements; they select parts of an element. 用於選擇元素的指定部分，創造一個關於 DOM tree 的抽象內容，提供一種方法來<strong>引用源文檔中不存在的內容</strong>，創造之後會出現在 DOM tree，偽元素也會「繼承」原本元素的屬性。</p>
 <ul>
 <li><strong>::first-line</strong> 選取第一行</li>
 <li><strong>::first-letter</strong> 選取第一個字</li>
@@ -597,7 +597,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2019-11-20 13:46:11" itemprop="dateModified" datetime="2019-11-20T13:46:11+00:00">2019-11-20</time>
+                <time title="Modified: 2019-11-21 12:07:53" itemprop="dateModified" datetime="2019-11-21T12:07:53+00:00">2019-11-21</time>
               </span>
             
           
@@ -721,7 +721,7 @@ C --> D(Make changes);</pre>
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2019-11-20 13:46:11" itemprop="dateModified" datetime="2019-11-20T13:46:11+00:00">2019-11-20</time>
+                <time title="Modified: 2019-11-21 12:07:53" itemprop="dateModified" datetime="2019-11-21T12:07:53+00:00">2019-11-21</time>
               </span>
             
           
@@ -739,8 +739,7 @@ C --> D(Make changes);</pre>
       
           <h1 id="What-is-MVC-framework-Why-we-need"><a href="#What-is-MVC-framework-Why-we-need" class="headerlink" title="What is MVC framework? Why we need?"></a>What is MVC framework? Why we need?</h1><p>MVC 架構是為了讓複雜程式碼能夠根據各自負責的功能目的做區分而出現的開發設計模式，分別是 modle、view、controller 三個部分，在權責區分清楚的情況下，可以有更好的擴充性和維護性。</p>
 <p>modle 代表邏輯處理，view 負責 UI 的呈現，controller 則串連 modle 和 view，作為程式的流程控制。</p>
-<p>舉例：</p>
-<p>使用者造訪一個部落格網站，點擊文章列表頁面，瀏覽器發出 request 給伺服器，server side 處理 request；將請求丟給對應的 controller，controller 向 model 存取資料，model 回應傳回資料並 render html 交給 controller，controller 再回傳一整份 html 檔給瀏覽器，瀏覽器顯示包含資料內容的 html 畫面。</p>
+<p>舉例：使用者造訪一個部落格網站，點擊文章列表頁面，瀏覽器發出 request 給伺服器，server side 處理 request；將請求丟給對應的 controller，controller 向 model 存取資料，model 回應傳回資料並 render html 交給 controller，controller 再回傳一整份 html 檔給瀏覽器，瀏覽器顯示包含資料內容的 html 畫面。</p>
 <h1 id="前後端分離"><a href="#前後端分離" class="headerlink" title="前後端分離"></a>前後端分離</h1><p>後端專注在提供資料，前端專注在顯示資料，把 data 跟 view 完全切開來，這樣要替換語言或框架時也比較方便，後端只要確保 API 接口一致，就不會影響前端，反之也是一樣。</p>
 <p>假如 server 有一天掛了，API 也跟著掛了，使用者依然可以造訪網頁，只是看不到資料而已，或者是你可以顯示出一個錯誤的圖案。但如果是舊的那種綁在一起的架構，server 一旦掛掉，你連畫面都渲染不出來。</p>
 <p>而這樣的做法會讓前端自己管理 URL 的狀態，去決定現在要顯示哪一個頁面。</p>
@@ -783,32 +782,25 @@ C --> D(View);</pre>
 <p>事實上，MVC 跟 Flux 都只是一個概念，因此有各種不同的實作，加上MVC在資料流的處理上，並不像Flux一般有較為明確的定義，多數時候Model的更動與View的刷新可能會透過Controller來管理，讓Model單純存放data。</p>
 <p>如此一來，假若今天 View 的操作更動了 Model，而 Model 的變化又刷新了 View，在系統龐大的時候，一來一往，就會讓資料與頁面狀態變得非常複雜，要追蹤某個頁面的變動到底是誰觸發的，或是哪個資料改變了，必須從 Controller 去慢慢 trace。而若是遵照 Flux 的流程，任何 View 的 update 都只要去追蹤其 State 的來源 Store 即可，有一個明確的 flow 可以遵循，並且每個 View 所需要監聽的資料來源，可以依照 Store 來區分，資料流不會互相干擾，而且 Flux 能夠更輕鬆的做出更小單元的 Unit test，這是複雜的 Controller 難以達成的。</p>
 <h1 id="React-Redux-gt-解決-MVC-架構問題"><a href="#React-Redux-gt-解決-MVC-架構問題" class="headerlink" title="React + Redux =&gt; 解決 MVC 架構問題"></a>React + Redux =&gt; 解決 MVC 架構問題</h1><ul>
-<li>React 解決什麼問題？<br>React 是專注在 MVC 架構中的 view，以 state 來管理介面變化的開發框架，透過 virtualDOM 在 state 改變時只重新 render 改變的地方，不需要在頁面切換或資料狀態更新、介面變化時重新 render 整個畫面，有效增進了應用程式的效能和使用者體驗。</li>
-</ul>
-<p>React 把更改 state 的邏輯寫在各自的 component，然而當項目的邏輯變得越來越複雜的時候，將難以釐清 state 和 view 之間的對應關係：一個 state 的變化可能引起多個 view 的變化，一個 view 上面觸發的事件可能引起多個 state 的改變，需要對所有引起 state 變化的情況進行統一管理，於是就需要 Redux。</p>
-<ul>
-<li>Redux 解決什麼問題？<br>Redux 受到幾個 Flux Pattern 重要特質的影響，Redux 透過單一的狀態樹將所有 state 存於一個物件中，並由 Store 去管理；一律透過 action 描述更新動作，經過 Reducer 來變更 state。<br>Reducer 根據 action 物件和舊資料回傳新資料，因此你可以紀錄 action，並重新調用 reducer 函數來得到一樣的狀態，幫助我們做可預測的狀態管理，能夠追蹤 state 和資料變化，更好維護而且資料之間不會互相干擾。</li>
-</ul>
-<p>Redux Pattern:</p>
+<li><p>React 解決什麼問題？<br>React 是專注在 MVC 架構中的 view，以 state 來管理介面變化的開發框架，透過 virtualDOM 在 state 改變時只重新 render 改變的地方，不需要在頁面切換或資料狀態更新、介面變化時重新 render 整個畫面，有效增進了應用程式的效能和使用者體驗。<br>React 把更改 state 的邏輯寫在各自的 component，然而當項目的邏輯變得越來越複雜的時候，將難以釐清 state 和 view 之間的對應關係：一個 state 的變化可能引起多個 view 的變化，一個 view 上面觸發的事件可能引起多個 state 的改變，需要對所有引起 state 變化的情況進行統一管理，於是就需要 Redux。</p>
+</li>
+<li><p>Redux 解決什麼問題？<br>Redux 受到幾個 Flux Pattern 重要特質的影響，Redux 透過單一的狀態樹將所有 state 存於一個物件中，並由 Store 去管理；一律透過 action 描述更新動作，經過 Reducer 來變更 state。<br>Reducer 根據 action 物件和舊資料回傳新資料，因此你可以紀錄 action，並重新調用 reducer 函數來得到一樣的狀態，幫助我們做可預測的狀態管理，能夠追蹤 state 和資料變化，更好維護而且資料之間不會互相干擾。<br>Redux Pattern:</p>
 <pre class="mermaid">graph LR;
 A(Action) -- Middleware --> B(Reducer);
 B --> C(Store);
-C --> D(Make changes);</pre>
-
+C --> D(Make changes);</pre></li>
+</ul>
 <p><strong>所以使用 Redux + React，可以促進維護性和可擴展性。</strong></p>
-<p>Redux 和 Flux pattern 不同的地方在於： </p>
-<ol>
-<li><p>Redux 只有一個 store，業務資料都存於一個狀態物件中，並由 Store 去管理；Flux 裡面會有多個 store，分別管理不同資料。</p>
-</li>
-<li><p>Redux 中更新的邏輯不在 store 中執行而是由 reducer 負責執行；Flux 在 store 裡面執行更新邏輯，當 store 變化的時候再通知 controller-view 更新自己的數據。</p>
-</li>
+<ul>
+<li>Redux 和 Flux pattern 不同的地方在於： <ol>
+<li>Redux 只有一個 store，業務資料都存於一個狀態物件中，並由 Store 去管理；Flux 裡面會有多個 store，分別管理不同資料。</li>
+<li>Redux 中更新的邏輯不在 store 中執行而是由 reducer 負責執行；Flux 在 store 裡面執行更新邏輯，當 store 變化的時候再通知 controller-view 更新自己的數據。<br>reducer 是一個純函數，這個函數被表述為(previousState, action) =&gt; newState，它根據應用的狀態和當前的 action 推導出新的 state 。 Redux 中有多個 reducer，每個 reducer 負責維護應用整體 state 樹中的某一部分，多個 reducer 可以通過 combineReducers 方法合成一個根 reducer，這個根 reducer 負責維護完整的 state，當一個 action 被觸發，store 會調用 dispatch 方法向某個特定的 reducer 傳遞該 action，reducer 收到 action 之後執行對應的更新邏輯然後返回一個新的 state，state 的更新最終會傳遞到根 reducer 處，返回一個全新的完整的 state，然後傳遞給 view。</li>
+<li>Redux 沒有 Dispatcher 的概念，它使用 reducer 來進行事件的處理，Store 提供 dispatch API 來傳遞 action 物件；Flux 的 Dispatcher 負責將 action 物件傳遞給每個 Store。<br>Redux 和 Flux 之間最大的區別就是對 <strong>store/reducer</strong> 的抽象，Flux 中 store 是各自為陣的，每個 store 只對對應的 controller-view 負責，每次更新都只通知對應的 controller-view；而 Redux 中各子 reducer 都是由根 reducer 統一管理的，每個子 reducer 的變化都要經過根 reducer 的整合。</li>
 </ol>
-<p>reducer 是一個純函數，這個函數被表述為(previousState, action) =&gt; newState，它根據應用的狀態和當前的 action 推導出新的 state 。 Redux 中有多個 reducer，每個 reducer 負責維護應用整體 state 樹中的某一部分，多個 reducer 可以通過 combineReducers 方法合成一個根 reducer，這個根 reducer 負責維護完整的 state，當一個 action 被觸發，store 會調用 dispatch 方法向某個特定的 reducer 傳遞該 action，reducer 收到 action 之後執行對應的更新邏輯然後返回一個新的 state，state 的更新最終會傳遞到根 reducer 處，返回一個全新的完整的 state，然後傳遞給 view。</p>
-<ol start="2">
-<li>Redux 沒有 Dispatcher 的概念，它使用 reducer 來進行事件的處理，Store 提供 dispatch API 來傳遞 action 物件；<br>Flux 的 Dispatcher 負責將 action 物件傳遞給每個 Store</li>
-</ol>
-<p>Redux 和 Flux 之間最大的區別就是對 store/reducer 的抽象，Flux 中 store 是各自為陣的，每個 store 只對對應的 controller-view 負責，每次更新都只通知對應的 controller-view；而 Redux 中各子 reducer 都是由根 reducer 統一管理的，每個子 reducer 的變化都要經過根 reducer 的整合。</p>
+</li>
+</ul>
 <h1 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h1><p><a href="https://medium.com/@hulitw/introduction-mvc-spa-and-ssr-545c941669e9" target="_blank" rel="noopener">跟著小明一起搞懂技術名詞：MVC、SPA 與 SSR 2018</a><br><a href="https://ithelp.ithome.com.tw/articles/10194968" target="_blank" rel="noopener">Node.js-Backend見聞錄(10)：關於後端觀念(六)-關於MVC 2017</a><br><a href="https://blog.techbridge.cc/2017/09/16/frontend-backend-mvc/" target="_blank" rel="noopener">前後端分離與 SPA 2017</a><br><a href="https://blog.techbridge.cc/2016/04/29/introduce-flux-from-flux-and-mvc/" target="_blank" rel="noopener">從 Flux 與 MVC 的差異來簡介 Flux 2016</a><br><a href="http://blog.turn.tw/?p=1539" target="_blank" rel="noopener">MVC是一個巨大誤會 2015</a><br><a href="https://imweb.io/topic/57711e37f0a5487b05f325b5" target="_blank" rel="noopener">浅谈 React、Flux 与 Redux 2016</a><br><a href="https://medium.com/4cats-io/%E6%B7%B1%E5%85%A5%E6%B7%BA%E5%87%BA-redux-7b08403c4957" target="_blank" rel="noopener">深入淺出 Redux 2016</a></p>
+<h1 id="延伸閱讀"><a href="#延伸閱讀" class="headerlink" title="延伸閱讀"></a>延伸閱讀</h1><p><a href="https://chinyun.github.io/myblog/2019/11/05/Redux-connect-Redux-part-to-React/">Connect Redux part to React</a></p>
 
         
       
@@ -873,7 +865,7 @@ C --> D(Make changes);</pre>
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2019-11-20 13:46:11" itemprop="dateModified" datetime="2019-11-20T13:46:11+00:00">2019-11-20</time>
+                <time title="Modified: 2019-11-21 12:07:53" itemprop="dateModified" datetime="2019-11-21T12:07:53+00:00">2019-11-21</time>
               </span>
             
           
@@ -922,39 +914,62 @@ C --> D(Make changes);</pre>
 
 <p>要小心使用 <code>knex.raw()</code>，避免允許植入 SQL 語句。</p>
 <h1 id="What-is-PostgreSQL-compare-with-MySQL"><a href="#What-is-PostgreSQL-compare-with-MySQL" class="headerlink" title="What is PostgreSQL? compare with MySQL?"></a>What is PostgreSQL? compare with MySQL?</h1><p>PostgreSQL 和 MySQL 兩個資料庫之間有許多相似之處和重疊，但也有非常明顯的差異，使用 PostgreSQL 的優點：</p>
-<p>-Open Source:<br>PostgreSQL 由 PostgreSQL 全球開發小組（PostgreSQL Global Development Group）開發，PostgreSQL 全球開發組由多個公司和個人貢獻者所組成。它是免費的開源軟體。PostgreSQL 是在 PostgreSQL 使用許可發布的，這是一個自由的開源許可，類似於 BSD 或 MIT 使用許可。</p>
-<p>MySQL 開發專案根據 GNU GPL 的條款提供了它的原始碼以及各種各樣的專有協議。它現在由 Oracle 公司擁有，並且提供了幾個商業使用的付費版本。</p>
 <ul>
-<li>ACID Compliance:<br>ACID（Atomicity，Consistency，Isolation，Durability）是一組資料庫交易安全的特性，ACID 要求確保在單一的資料交易中發生多個更新時也不會在整個系統中遺失數據或發生錯誤。<br>PostgreSQL 完全符合 ACID 特性，並確保滿足所有要求。</li>
-</ul>
-<p>MySQL 只有在使用 InnoDB 和 NDB 叢集儲存引擎時，才符合ACID 標準。</p>
+<li><p>Open Source:</p>
 <ul>
-<li>Performance:<br>PostgreSQL 被廣泛應用於讀寫速度至關重要且資料需要驗證的大型系統中。 此外，它在商業解決方案中，還支持各種效能優化，（如地理空間資料支持，不需要讀取鎖定的資料一致性支援，如 Oracle、SQL Server）。 整體來看，PostgreSQL 的效能在需要執行複雜查詢的系統中會得到了最好的展現。 PostgreSQL 在 OLTP / OLAP 系統中運行良好，尤其在需要讀/寫速度和需要大量的資料分析時。 PostgreSQL 也適用於商業智慧應用服務，但更適合需要快速讀/寫速度的資料倉庫和資料分析應用服務。</li>
+<li>PostgreSQL 由 PostgreSQL 全球開發小組（PostgreSQL Global Development Group）開發，PostgreSQL 全球開發組由多個公司和個人貢獻者所組成。它是免費的開源軟體。PostgreSQL 是在 PostgreSQL 使用許可發布的，這是一個自由的開源許可，類似於 BSD 或 MIT 使用許可。</li>
+<li>MySQL 開發專案根據 GNU GPL 的條款提供了它的原始碼以及各種各樣的專有協議。它現在由 Oracle 公司擁有，並且提供了幾個商業使用的付費版本。</li>
 </ul>
-<p>MySQL 被廣泛採用，是由於 Web 應用，只需要一個簡單的資料交易資料庫。然而，在一般的情況下，如果 MySQL 的表現不佳，都是當負載過重或試圖進行複雜查詢的時候。MySQL 在 OLAP / OLTP 系統只需要讀取速度時表現良好。MySQL + InnoDB為 OLTP 場景提供了非常好的讀/寫速度。 整體來說，MySQL在高度資料一致性需求的情況下表現良好。MySQL 是可靠的，並且適用於商業智慧應用服務，因為商業智慧應用服務通常是更重視讀取效能的。</p>
+</li>
+<li><p>ACID Compliance:</p>
 <ul>
-<li>Security:<br>PostgreSQL 具有角色並可繼承角色來設定和維護權限。 PostgreSQL 內建支援 SSL連線來加密客戶端/伺服器通訊。 它具有資料列級的安全性。除此之外，PostgreSQL 還附帶了一個名為 SE-PostgreSQL 的增強功能，可以根據 SELinux 安全策略提供額外的存取控制。</li>
+<li>ACID（Atomicity，Consistency，Isolation，Durability）是一組資料庫交易安全的特性，ACID 要求確保在單一的資料交易中發生多個更新時也不會在整個系統中遺失數據或發生錯誤。<br>PostgreSQL 完全符合 ACID 特性，並確保滿足所有要求。</li>
+<li>MySQL 只有在使用 InnoDB 和 NDB 叢集儲存引擎時，才符合ACID 標準。</li>
 </ul>
-<p>MySQL 為所有連線、查詢和用戶可能嘗試執行的其他操作實作了存取控制列表（ACL）的安全性。 對 MySQL 客戶端和伺服器之間的 SSL 加密連接也有支援。</p>
+</li>
+<li><p>Performance:</p>
 <ul>
-<li>NoSQL Features/JSON Support:<br>NoSQL 和 JSON 都非常流行，NoSQL資料庫變得越來越普及。JSON 是一種簡單的資料格式，它允許程式設計師儲存和傳遞跨系統的資料內容、資料列表和 key-value 對應。<br>PostgreSQL 支援 JSON 和其他 NoSQL 的功能，如內建 XML 支援和 HSTORE 的 key-value 對應。 它還支援將 JSON 資料索引以加快存取速度。</li>
+<li>PostgreSQL 被廣泛應用於讀寫速度至關重要且資料需要驗證的大型系統中。 此外，它在商業解決方案中，還支持各種效能優化，（如地理空間資料支持，不需要讀取鎖定的資料一致性支援，如 Oracle、SQL Server）。 整體來看，PostgreSQL 的效能在需要執行複雜查詢的系統中會得到了最好的展現。 PostgreSQL 在 OLTP / OLAP 系統中運行良好，尤其在需要讀/寫速度和需要大量的資料分析時。 PostgreSQL 也適用於商業智慧應用服務，但更適合需要快速讀/寫速度的資料倉庫和資料分析應用服務。</li>
+<li>MySQL 被廣泛採用，是由於 Web 應用，只需要一個簡單的資料交易資料庫。然而，在一般的情況下，如果 MySQL 的表現不佳，都是當負載過重或試圖進行複雜查詢的時候。MySQL 在 OLAP / OLTP 系統只需要讀取速度時表現良好。MySQL + InnoDB為 OLTP 場景提供了非常好的讀/寫速度。 整體來說，MySQL在高度資料一致性需求的情況下表現良好。MySQL 是可靠的，並且適用於商業智慧應用服務，因為商業智慧應用服務通常是更重視讀取效能的。</li>
 </ul>
-<p>MySQL 具有 JSON 資料類型支援，但沒有其他 NoSQL功能，也不支援 JSON 索引。</p>
+</li>
+<li><p>Security:</p>
 <ul>
-<li>Programming Languages Support:<br>PostgreSQL 支援各種程式語言，包括：C / C ++，Java，JavaScript，.Net，R，Perl，Python，Ruby，Tcl 等等。 甚至可以在單獨的程序中執行用戶提供的程式（即作為背景執行程式）。</li>
+<li>PostgreSQL 具有角色並可繼承角色來設定和維護權限。 PostgreSQL 內建支援 SSL連線來加密客戶端/伺服器通訊。 它具有資料列級的安全性。除此之外，PostgreSQL 還附帶了一個名為 SE-PostgreSQL 的增強功能，可以根據 SELinux 安全策略提供額外的存取控制。</li>
+<li>MySQL 為所有連線、查詢和用戶可能嘗試執行的其他操作實作了存取控制列表（ACL）的安全性。 對 MySQL 客戶端和伺服器之間的 SSL 加密連接也有支援。</li>
 </ul>
-<p>MySQL 一些支援伺服器端不可擴展的程式語言。</p>
+</li>
+<li><p>NoSQL Features/JSON Support:</p>
 <ul>
-<li>Extensible Type System:<br>PostgreSQL有幾個專用於延伸套件的功能，可以增加新的資料型別、新的函數功能、新的索引類型。</li>
+<li>NoSQL 和 JSON 都非常流行，NoSQL資料庫變得越來越普及。JSON 是一種簡單的資料格式，它允許程式設計師儲存和傳遞跨系統的資料內容、資料列表和 key-value 對應。<br>PostgreSQL 支援 JSON 和其他 NoSQL 的功能，如內建 XML 支援和 HSTORE 的 key-value 對應。 它還支援將 JSON 資料索引以加快存取速度。</li>
+<li>MySQL 具有 JSON 資料類型支援，但沒有其他 NoSQL功能，也不支援 JSON 索引。</li>
 </ul>
-<p>MySQL 不支援增加延伸功能。</p>
+</li>
+<li><p>Programming Languages Support:</p>
+<ul>
+<li>PostgreSQL 支援各種程式語言，包括：C / C ++，Java，JavaScript，.Net，R，Perl，Python，Ruby，Tcl 等等。 甚至可以在單獨的程序中執行用戶提供的程式（即作為背景執行程式）。</li>
+<li>MySQL 一些支援伺服器端不可擴展的程式語言。</li>
+</ul>
+</li>
+<li><p>Extensible Type System:</p>
+<ul>
+<li>PostgreSQL有幾個專用於延伸套件的功能，可以增加新的資料型別、新的函數功能、新的索引類型。</li>
+<li>MySQL 不支援增加延伸功能。</li>
+</ul>
+</li>
+</ul>
+<blockquote>
 <p>更多比較可以查看 PostgreSQL官方文件：<a href="https://faq.postgresql.tw/postgresql-vs-mysql" target="_blank" rel="noopener">PostgreSQL vs MySQL</a></p>
-<p>PostgreSQL 相對於 MySQL 的優勢：</p>
-<p>　　1、在 SQL 的標準實現上要比 MySQL 完善，而且功能實現比較嚴謹；<br>　　2、存儲過程的功能支持要比 MySQL 好，具備本地緩存執行計劃的能力；<br>　　3、對表連接支持較完整，優化器的功能較完整，支持的索引類型很多，復雜查詢能力較強；<br>　　4、PG 主表采用堆表存放，MySQL 采用索引組織表，能夠支持比MySQL更大的數據量。<br>　　5、PG 的主備復制屬於物理復制，相對於 MySQL 基於 binlog 的邏輯復制，數據的一致性更加可靠，復制性能更高，對主機性能的影響也更小。<br>　　6、MySQL 的存儲引擎插件化機制，存在鎖機制復雜影響並發的問題，而 PG 不存在。</p>
-<p>　　MySQL 相對於 PG 的優勢：</p>
-<p>　　1、innodb 的基於回滾段實現的 MVCC 機制，相對 PG 新老數據一起存放的基於 XID 的 MVCC 機制，是占優的。新老數據一起存放，需要定時觸發 VACUUM，會帶來多余的 IO和數據庫對象加鎖開銷，引起數據庫整體的並發能力下降。而且 VACUUM清理不及時，還可能會引發數據膨脹；<br>　　2、MySQL采用索引組織表，這種存儲方式非常適合基於主鍵匹配的查詢、刪改操作，但是對表結構設計存在約束；<br>　　3、MySQL的優化器較簡單，系統表、運算符、數據類型的實現都很精簡，非常適合簡單的查詢操作；<br>　　4、MySQL分區表的實現要優於PG的基於繼承表的分區實現，主要體現在分區個數達到上千上萬後的處理性能差異較大。<br>　　5、MySQL的存儲引擎插件化機制，使得它的應用場景更加廣泛，比如除了innodb適合事務處理場景外，myisam適合靜態數據的查詢場景。</p>
-<p>總體上來說，開源數據庫都不是很完善，商業數據庫oracle在架構和功能方面都還是完善很多的。從應用場景來說，PG更加適合嚴格的企業應用場景（比如金融、電信、ERP、CRM），而MySQL更加適合業務邏輯相對簡單、數據可靠性要求較低的互聯網場景（比如Google、facebook、alibaba）。</p>
-<p>雖然有不同的歷史、引擎與工具，不過並沒有明確的參考能夠表明這兩個數據庫哪一個能夠適用於所有情況。很多組織喜歡使用PostgreSQL，因為它的可靠性好，在保護數據方面很擅長，而且是個社區項目，不會陷入廠商的牢籠之中。MySQL更加靈活，提供了更多選項來針對不同的任務進行裁剪。很多時候，對於一個組織來說，對某個軟件使用的熟練程度要比特性上的原因更重要。</p>
+</blockquote>
+<h2 id="小結"><a href="#小結" class="headerlink" title="小結"></a>小結</h2><ul>
+<li>PostgreSQL 相對於 MySQL 的優勢</li>
+</ul>
+<p>　　- 在 SQL 的標準實現上 PostgreSQL 要比 MySQL 完善，而且功能實現比較嚴謹。<br>　　- 存儲過程的功能支持要比 MySQL 好，具備本地緩存執行計劃的能力。<br>　　- 對表連接支持較完整，優化器的功能較完整，支持的索引類型很多，復雜查詢能力較強。<br>　　- PostgreSQL 主表采用堆表存放，MySQL 采用索引組織表，能夠支持比MySQL更大的數據量。<br>　　- PostgreSQL 的主備復制屬於物理復制，相對於 MySQL 基於 binlog 的邏輯復制，數據的一致性更加可靠，復制性能更高，對主機性能的影響也更小。<br>　　6、MySQL 的存儲引擎插件化機制，存在鎖機制復雜影響並發的問題，而 PostgreSQL 不存在。</p>
+<ul>
+<li>MySQL 相對於 PostgreSQL 的優勢：</li>
+</ul>
+<p>　　- innodb 的基於回滾段實現的 MVCC 機制，相對 PostgreSQL 新老數據一起存放的基於 XID 的 MVCC 機制，是占優的。新老數據一起存放，需要定時觸發 VACUUM，會帶來多余的 IO和數據庫對象加鎖開銷，引起數據庫整體的並發能力下降。而且 VACUUM 清理不及時，還可能會引發數據膨脹；<br>　　- MySQL 采用索引組織表，這種存儲方式非常適合基於主鍵匹配的查詢、刪改操作，但是對表結構設計存在約束；<br>　　- MySQL 的優化器較簡單，系統表、運算符、數據類型的實現都很精簡，非常適合簡單的查詢操作；<br>　　- MySQL 分區表的實現要優於PG的基於繼承表的分區實現，主要體現在分區個數達到上千上萬後的處理性能差異較大。<br>　　- MySQL 的存儲引擎插件化機制，使得它的應用場景更加廣泛，比如除了 innodb 適合事務處理場景外，myisam 適合靜態數據的查詢場景。</p>
+<p>總體上來說，開源數據庫都不是很完善，商業數據庫 oracle 在架構和功能方面都還是完善很多的。從應用場景來說，PostgreSQL 更加適合嚴格的企業應用場景（比如金融、電信、ERP、CRM），而 MySQL 更加適合業務邏輯相對簡單、數據可靠性要求較低的互聯網場景（比如 Google、facebook、alibaba）。<br>雖然有不同的歷史、引擎與工具，不過並沒有明確的參考能夠表明這兩個數據庫哪一個能夠適用於所有情況。很多組織喜歡使用 PostgreSQL，因為它的可靠性好，在保護數據方面很擅長，而且是個社區項目，不會陷入廠商的牢籠之中。MySQL 更加靈活，提供了更多選項來針對不同的任務進行裁剪。很多時候對於一個組織來說，對某個軟件使用的熟練程度要比特性上的原因更重要。</p>
 <h1 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h1><p><a href="https://blog.logrocket.com/why-you-should-avoid-orms-with-examples-in-node-js-e0baab73fa5/" target="_blank" rel="noopener">Why you should avoid ORMs (with examples in Node.js)</a><br><a href="http://knexjs.org/" target="_blank" rel="noopener">Knex.js</a><br><a href="https://faq.postgresql.tw/postgresql-vs-mysql" target="_blank" rel="noopener">PostgreSQL vs MySQL</a><br><a href="https://www.itread01.com/articles/1502570301.html" target="_blank" rel="noopener">PostgreSQL 與 MySQL的比較</a></p>
 
         
@@ -1020,7 +1035,7 @@ C --> D(Make changes);</pre>
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2019-11-20 13:46:11" itemprop="dateModified" datetime="2019-11-20T13:46:11+00:00">2019-11-20</time>
+                <time title="Modified: 2019-11-21 12:07:53" itemprop="dateModified" datetime="2019-11-21T12:07:53+00:00">2019-11-21</time>
               </span>
             
           
@@ -1192,13 +1207,9 @@ C --> D(Make changes);</pre>
 </ul>
 <p>Making HTTP calls from the client-side wasn’t this easy a decade ago. A front-end developer would have to rely on XMLHttpRequest which was hard to use and implement. The modern libraries and HTTP clients make the front-end features like user interactions, animations, asynchronous file uploads, etc., easier. </p>
 <h1 id="RESTful-API"><a href="#RESTful-API" class="headerlink" title="RESTful API"></a>RESTful API</h1><ul>
-<li>API (Application Programming Interface) 應用程式介面<br>是一種廣義的稱呼，主要是指 Application 與資料庫的互動介面。透過這個介面，開發者可以了解如何和提供這個介面的 Application 互動。<br>其中一種 API 又可以稱作 Web API，也是現在最廣泛出現的，他是指程式開發者提供一個網址 url 來讓其他開發者訪問，並提供使用這個 API 的文件（說明書），這樣其他開發者就可以閱讀文件了解如何使用這個 API 來存取所需的資料。</li>
-</ul>
-<p>串接 API 指的就是在開發時透過程式介面操作資料；一個應用程式通常會開發其程式介面提供串接、讀取資料或應用服務，提供一套標準讓任何想接入應用程式服務的開發者，可以遵循規範、根據介面的設計撰寫程式碼，來得到想要的服務或資料。串接 API 的本質就是交換資料，通常我們會根據文件說明來使用他人寫好的 API，若要主動提供 API 時則需定義要給什麼資料。</p>
-<ul>
-<li>Web API 或 HTTP API<br>透過 HTTP 協定的 API，也就是用 HTTP 格式來提供資料的 API 可以稱為 Web API/HTTP API。根據 HTTP 規範，伺服器端和客戶端進行請求和回應時，會使用定義明確的請求格式(request format)和回應格式(response format)，request format 指的是 client-side 需使用特定的 HTTP verb 對 url 發出請求，response format 則是指 server-side 回應時採用的資料格式，有可能是 XML、JSON等。</li>
-</ul>
-<p>HTTP 的組成元素：</p>
+<li><p>API (Application Programming Interface) 應用程式介面<br>是一種廣義的稱呼，主要是指 Application 與資料庫的互動介面。透過這個介面，開發者可以了解如何和提供這個介面的 Application 互動。<br>其中一種 API 又可以稱作 Web API，也是現在最廣泛出現的，他是指程式開發者提供一個網址 url 來讓其他開發者訪問，並提供使用這個 API 的文件（說明書），這樣其他開發者就可以閱讀文件了解如何使用這個 API 來存取所需的資料。<br>串接 API 指的就是在開發時透過程式介面操作資料；一個應用程式通常會開發其程式介面提供串接、讀取資料或應用服務，提供一套標準讓任何想接入應用程式服務的開發者，可以遵循規範、根據介面的設計撰寫程式碼，來得到想要的服務或資料。串接 API 的本質就是交換資料，通常我們會根據文件說明來使用他人寫好的 API，若要主動提供 API 時則需定義要給什麼資料。</p>
+</li>
+<li><p>Web API 或 HTTP API<br>透過 HTTP 協定的 API，也就是用 HTTP 格式來提供資料的 API 可以稱為 Web API/HTTP API。根據 HTTP 規範，伺服器端和客戶端進行請求和回應時，會使用定義明確的請求格式(request format)和回應格式(response format)，request format 指的是 client-side 需使用特定的 HTTP verb 對 url 發出請求，response format 則是指 server-side 回應時採用的資料格式，有可能是 XML、JSON等。<br>HTTP 的組成元素：</p>
 <table>
 <thead>
 <tr>
@@ -1218,20 +1229,25 @@ C --> D(Make changes);</pre>
 <td>Request Body</td>
 <td>Response Body</td>
 </tr>
+<tr>
+<td>HTTP URL 組成：例如<code>https://www.example.com/photos?page=1</code></td>
+<td></td>
+</tr>
+<tr>
+<td>通訊協定 <code>https://</code>、網域名稱 DNS <code>www.example.com</code>、路徑 path <code>/photos</code>、參數 parameter<code>?page=1</code>(又稱 query string)</td>
+<td></td>
+</tr>
 </tbody></table>
-<p>HTTP URL 組成：例如<code>https://www.example.com/photos?page=1</code><br>通訊協定 <code>https://</code>、網域名稱 DNS <code>www.example.com</code>、路徑 path <code>/photos</code>、參數 parameter<code>?page=1</code>(又稱 query string)</p>
-<ul>
+</li>
 <li><p>RESTful API<br>RESTful 風格也是一種格式(format)，<strong>RESTful API 就是指一種寫 API 格式的風格建議，目的是讓大家的寫法更有一致性。</strong></p>
 <ul>
-<li>REST<br>REST 是 Representational State Transfer 的縮寫，由 Roy Fielding 博士在 2000 年的博士論文中所提出。他同時也是 HTTP 規範的主要作者之一。REST 是一種軟體架構風格（並非標準），目的是幫助在世界各地不同軟體、程式在網際網路中能夠互相傳遞訊息。而每一個網頁都可視為一個資源（resource）提供使用者使用，以資源操作的概念(指的是對某項資源，譬如 User、Post 等，指派 Show、Edit 等動作)，結合 URL path 與 HTTP Method ，目的是使 URL path 更為簡潔、容易被理解，除了介面簡潔之外，尚有增加快取 cache 效率、提升 api 活用性等優點。換句話說， REST 風格可以單從 HTTP request 就能看出如何操作伺服器的資料。</li>
-</ul>
-<p>REST 的一個最重要的觀念就是 resources (特定資訊的資源)，每一個 resource 由一個 global identifier (即 URL)所表示。為了操作這些 resources，網路的 components (client 跟 server) 透過標準化的介面 (HTTP) 來溝通並交換這些 resources 的 representations (實際上傳達資訊的文件)。<br>任意數量的 connectors (如 clients, servers, caches, tunnels 等) 可以居中 request，但是都不可以 “seeing past” (不需要其他layer層)。這樣的應用程式跟一個 resource 互動根據兩件事情: resource 的 URL 跟要做的動作 — 它不需要知道是否有 caches, proxies, gateways, firewalls, tunnels, 或其他任何藏在 sever 之間的東西。這個應用程式只需要知道資訊的格式 (representation)，通常是 HTML 或 XML 或圖片什麼的。</p>
-<ul>
-<li>RESTful<br>設計為 REST 的系統稱為 RESTful。RESTful 路由便是充分應用 REST 風格的路由設置。而你可以透過 HTTP URL(Uniform Resource Locator)，也就是這些資源的地址(俗稱網址)，來取得這些資源並在你的瀏覽器上使用。<br>RESTful API 建議我們使用 Standard HTTP Verb 來撰寫 API，並根據 API 接口的提供目的規劃 URL，例如 /resouces、/resouces/:id 來代表 resource collection 以及 individual resource 的 path 來規劃 API 介面。<br>路由(routing)是指定義 app 如何將 client requset 指向一個正確的接口(endpoint)並做出相應的後續處理(給予 response)，一個 route 通常由下組成：<br><code>app.METHOD(PATH, HANDLER)</code><br>METHOD means HTTP request method, PATH is a path on the server and the HANDLER is the function executed when the routes is matched. PATH 是開放給 client 的 route，透過不同 path 導向不同動作。<br>舉例：一個簡單的 route based on express.js：<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">app.get(&apos;/&apos;, function(req, res)&#123;</span><br><span class="line">  res.send(&apos;hello world&apos;);</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+<li><p>REST<br>REST 是 Representational State Transfer 的縮寫，由 Roy Fielding 博士在 2000 年的博士論文中所提出。他同時也是 HTTP 規範的主要作者之一。REST 是一種軟體架構風格（並非標準），目的是幫助在世界各地不同軟體、程式在網際網路中能夠互相傳遞訊息。而每一個網頁都可視為一個資源（resource）提供使用者使用，以資源操作的概念(指的是對某項資源，譬如 User、Post 等，指派 Show、Edit 等動作)，結合 URL path 與 HTTP Method ，目的是使 URL path 更為簡潔、容易被理解，除了介面簡潔之外，尚有增加快取 cache 效率、提升 api 活用性等優點。換句話說， REST 風格可以單從 HTTP request 就能看出如何操作伺服器的資料。<br>REST 的一個最重要的觀念就是 resources (特定資訊的資源)，每一個 resource 由一個 global identifier (即 URL)所表示。為了操作這些 resources，網路的 components (client 跟 server) 透過標準化的介面 (HTTP) 來溝通並交換這些 resources 的 representations (實際上傳達資訊的文件)。<br>任意數量的 connectors (如 clients, servers, caches, tunnels 等) 可以居中 request，但是都不可以 “seeing past” (不需要其他layer層)。這樣的應用程式跟一個 resource 互動根據兩件事情: resource 的 URL 跟要做的動作 — 它不需要知道是否有 caches, proxies, gateways, firewalls, tunnels, 或其他任何藏在 sever 之間的東西。這個應用程式只需要知道資訊的格式 (representation)，通常是 HTML 或 XML 或圖片什麼的。</p>
+</li>
+<li><p>RESTful<br>設計為 REST 的系統稱為 RESTful。RESTful 路由便是充分應用 REST 風格的路由設置。而你可以透過 HTTP URL(Uniform Resource Locator)，也就是這些資源的地址(俗稱網址)，來取得這些資源並在你的瀏覽器上使用。<br>RESTful API 建議我們使用 Standard HTTP Verb 來撰寫 API，並根據 API 接口的提供目的規劃 URL，例如 /resouces、/resouces/:id 來代表 resource collection 以及 individual resource 的 path 來規劃 API 介面。<br>路由(routing)是指定義 app 如何將 client requset 指向一個正確的接口(endpoint)並做出相應的後續處理(給予 response)，一個 route 通常由下組成：<br><code>app.METHOD(PATH, HANDLER)</code><br>METHOD means HTTP request method, PATH is a path on the server and the HANDLER is the function executed when the routes is matched. PATH 是開放給 client 的 route，透過不同 path 導向不同動作。<br>舉例：一個簡單的 route based on express.js，<code>&#39;/&#39;</code>表示根目錄(root route)：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">app.get(&apos;/&apos;, function(req, res)&#123;</span><br><span class="line">  res.send(&apos;hello world&apos;);</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
 
 </li>
 </ul>
-<p><code>&#39;/&#39;</code>表示根目錄(root route)</p>
 </li>
 </ul>
 <h1 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h1><p><a href="https://dzone.com/articles/top-javascript-libraries-for-making-ajax-calls" target="_blank" rel="noopener">Top JavaScript Libraries for Making AJAX Calls</a><br><a href="https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API" target="_blank" rel="noopener">Fetch API</a><br><a href="https://www.awoo.com.tw/blog/https-seo/" target="_blank" rel="noopener">HTTPS的威力？「S」對SEO與網站經營的四大重要性</a><br><a href="https://www.websecurity.digicert.com/zh/hk/security-topics/what-is-ssl-tls-https" target="_blank" rel="noopener">SSL 憑證</a><br><a href="https://progressbar.tw/posts/98" target="_blank" rel="noopener">為何HTTPS憑證有貴有便宜還更可以免費？讓我們從CA原理開始講起。</a></p>
@@ -1299,7 +1315,7 @@ C --> D(Make changes);</pre>
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2019-11-20 13:46:11" itemprop="dateModified" datetime="2019-11-20T13:46:11+00:00">2019-11-20</time>
+                <time title="Modified: 2019-11-21 12:07:53" itemprop="dateModified" datetime="2019-11-21T12:07:53+00:00">2019-11-21</time>
               </span>
             
           
@@ -1416,7 +1432,7 @@ C --> D(Make changes);</pre>
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2019-11-20 13:46:11" itemprop="dateModified" datetime="2019-11-20T13:46:11+00:00">2019-11-20</time>
+                <time title="Modified: 2019-11-21 12:07:53" itemprop="dateModified" datetime="2019-11-21T12:07:53+00:00">2019-11-21</time>
               </span>
             
           
@@ -1433,8 +1449,7 @@ C --> D(Make changes);</pre>
 
       
           <p>Web Security 網頁安全泛指針對網頁、網站上的資訊安全，涵蓋程式漏洞、邏輯漏洞、資訊洩漏等。</p>
-<p>#Cross Site Request Forgery(XSRF or CSRF)</p>
-<p>指在受害者不知情狀況下，被其他網域借用身份來完成未經同意的 HTTP Request。<br>當網站使用 cookie-based authentication，會把 session id 和 session data 存在 cookie 中，剛使用者曾在其他網站登入而未登出，並且進入惡意網站操作時，攻擊者利用可以進行跨域 http 請求的 http tag(ex: img、iframe等)埋入惡意的 request 程式碼，觸發後因為使用者未登出，因此攻擊者獲得 cookie 資料，攻擊者得以冒用使用者身份通過驗證。得以任意改變使者者在資料庫的資料。</p>
+<h1 id="Cross-Site-Request-Forgery-XSRF-or-CSRF"><a href="#Cross-Site-Request-Forgery-XSRF-or-CSRF" class="headerlink" title="Cross Site Request Forgery(XSRF or CSRF)"></a>Cross Site Request Forgery(XSRF or CSRF)</h1><p>指在受害者不知情狀況下，被其他網域借用身份來完成未經同意的 HTTP Request。<br>當網站使用 cookie-based authentication，會把 session id 和 session data 存在 cookie 中，剛使用者曾在其他網站登入而未登出，並且進入惡意網站操作時，攻擊者利用可以進行跨域 http 請求的 http tag(ex: img、iframe等)埋入惡意的 request 程式碼，觸發後因為使用者未登出，因此攻擊者獲得 cookie 資料，攻擊者得以冒用使用者身份通過驗證。得以任意改變使者者在資料庫的資料。</p>
 <p>同源政策對於連結(links)、重新導向(redirect)、表單(form)等的跨來源存取都是寬鬆的，因此駭客利用此特性做 CSRF 攻擊。</p>
 <p>如何防範：</p>
 <ol>
@@ -1447,7 +1462,7 @@ C --> D(Make changes);</pre>
 <h1 id="Cross-Site-Scripting-XSS"><a href="#Cross-Site-Scripting-XSS" class="headerlink" title="Cross Site Scripting(XSS)"></a>Cross Site Scripting(XSS)</h1><p>「XSS攻擊通常指的是通過利用網頁開發時留下的漏洞，通過巧妙的方法注入惡意指令程式碼到網頁，使用戶載入並執行攻擊者惡意製造的網頁程式。 這些惡意網頁程式通常是JavaScript，但實際上也可以包括Java，VBScript，ActiveX，Flash或者甚至是普通的HTML。」–wikipedia</p>
 <p>使用者以為安全進入網站後反而被導向到釣魚網站、甚至被竊取帳號密碼、個人資料。<br>目前 XSS 攻擊的種類大致可以分成以下幾種類型：</p>
 <ul>
-<li><p>Stored XSS (儲存型)：<br>會被保存在伺服器資料庫中的 JavaScript 代碼引起的攻擊即為 Stored XSS，最常見的就是論壇文章、留言板等等，因為使用者可以輸入任意內容，若沒有確實檢查，那使用者輸入如 ｀<code>&lt;script&gt;</code> 等關鍵字就會被當成正常的 HTML 執行，標籤的內容也會被正常的作為 JavaScript 代碼執行。</p>
+<li><p>Stored XSS (儲存型)：<br>會被保存在伺服器資料庫中的 JavaScript 代碼引起的攻擊即為 Stored XSS，最常見的就是論壇文章、留言板等等，因為使用者可以輸入任意內容，若沒有確實檢查，那使用者輸入如 <code>&lt;script&gt;</code> 等關鍵字就會被當成正常的 HTML 執行，標籤的內容也會被正常的作為 JavaScript 代碼執行。</p>
 </li>
 <li><p>Reflected XSS (反射型)：<br>由網頁後端直接嵌入由前端使用者所傳送過來的內容造成的，最常見的就是以 GET 方法傳送資料給伺服器時，伺服器未檢查就將內容回應到網頁上所產生的漏洞。</p>
 </li>
@@ -1461,7 +1476,7 @@ C --> D(Make changes);</pre>
 <li><p>DOM-Based 則必須由前端來防範，但基本上還是跟前面的原則相同。<br>另外不同的一點就是應該選擇正確的方法、屬性來操作 DOM，譬如<code>document.getElementById(&#39;show_name&#39;).innerHTML = name;</code> 中的<code>innerHTML</code>屬性代表插入的內容是合法的 HTML 字串，所以字串會解析成 DOM 物件，此處使用<code>innerText</code>會被保證作為純粹的文字，也就不可能被插入惡意代碼執行了。</p>
 </li>
 </ol>
-<p>Cross Site Scripting attacks occur when an outside entity is able to execute code within your website or app. The most common attack vector here is if your website allows <strong>inputs</strong> that are not properly sanitized. <strong>If an attacker can execute code on your domain, your JWT tokens are vulnerable.</strong> Our CTO has argued in the past that XSS attacks are much easier to deal with compared to XSRF attacks because they are generally better understood. <strong>Many frameworks, including Angular, automatically sanitize inputs and prevent arbitrary code execution.</strong> If you are not using a framework that sanitizes input/output out-of-the-box, you can look at plugins like caja developed by Google to assist. Sanitizing inputs is a solved issue in many frameworks and languages and I would recommend using a framework or plugin vs building your own.</p>
+<p>Cross Site Scripting attacks occur when an outside entity is able to execute code within your website or app. The most common attack vector here is if your website allows <strong>inputs</strong> that are not properly sanitized. <strong>If an attacker can execute code on your domain, your JWT tokens are vulnerable. Many frameworks, including Angular, automatically sanitize inputs and prevent arbitrary code execution.</strong> If you are not using a framework that sanitizes input/output out-of-the-box, you can look at plugins like caja developed by Google to assist. Sanitizing inputs is a solved issue in many frameworks and languages and I would recommend using a framework or plugin vs building your own.</p>
 <h1 id="SQL-injection"><a href="#SQL-injection" class="headerlink" title="SQL injection"></a>SQL injection</h1><p>「Injection 是一種駭客常用的攻擊概念，透過注入惡意的程式碼的方式，破壞原本程式碼的語意，來達到攻擊的效果。SQL 是網站常用來取得資料的程式語法，SQL Injection 便是駭客透過修改 SQL 語句，改變他的語意，達成竊取資料/破壞資料的行為。」<br>–<a href="https://medium.com/@jaydenlin/淺談駭客攻擊-網站安全-一次看懂-sql-injection-的攻擊原理-b1994fd2392a" target="_blank" rel="noopener">一次看懂 SQL Injection 的攻擊原理</a></p>
 <p>「在輸入的字串之中夾帶SQL指令，在設計不良的程式當中忽略了字元檢查，那麼這些夾帶進去的惡意指令就會被資料庫伺服器誤認為是正常的SQL指令而執行，因此遭到破壞或是入侵。」<br>–wikipedia</p>
 <p>「在 SQL 語法中常會出現攻擊者可以透過更改語法邏輯或加入特殊指令的方式，在未設定過濾惡意程式碼的情況下，資料庫伺服器（DataBase）會直接接收使用者所輸入的 SQL 指令並執行攻擊代碼，使攻擊者能夠取得最高權限，得以擅自竊取、修改、挪動或刪除資料的可能。此類漏洞無疑的會對公司或商號造成相當大的損傷。」<br>–<a href="https://ithelp.ithome.com.tw/articles/10189201" target="_blank" rel="noopener">攻擊行為－SQL 資料隱碼攻擊 SQL injection</a></p>
@@ -1473,10 +1488,7 @@ C --> D(Make changes);</pre>
 </ul>
 <p>防範手法：</p>
 <ul>
-<li>使用 SQL query builder for JavaScript - knex.js：</li>
-</ul>
-<p>Read carefully from knex documentation how to pass values to knex raw (<a href="http://knexjs.org/#Raw" target="_blank" rel="noopener">http://knexjs.org/#Raw</a>).</p>
-<p>If you are passing values as parameter binding to raw like:</p>
+<li><p>使用 SQL query builder for JavaScript - knex.js：<br>Read carefully from knex documentation how to pass values to knex raw (<a href="http://knexjs.org/#Raw" target="_blank" rel="noopener">http://knexjs.org/#Raw</a>).<br>If you are passing values as parameter binding to raw like:</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">knex.raw(&apos;select * from foo where id = ?&apos;, [1])</span><br></pre></td></tr></table></figure>
 
 <p>In that case parameters and query string are passed separately to database driver protecting query from SQL injection.</p>
@@ -1486,7 +1498,7 @@ C --> D(Make changes);</pre>
 
 <p>One thing to note is that knex table/identifier names cannot be passed as bindings to driver, so with those one should be extra careful to not read table / column names from user and use them without properly validating them first.</p>
 <p>Refer from:<a href="https://stackoverflow.com/questions/49665023/does-knex-js-prevent-sql-injection/49665379" target="_blank" rel="noopener">Does Knex.js prevent sql injection?</a></p>
-<ul>
+</li>
 <li><p>使用 ORM(object relational mapping)：<br>在資料庫和 model資料容器之間的框架，他可以幫助開發者更簡便安全的去資料庫讀取資料，透過 ruby, java 等程式語言，去操作資料庫語言。同時因為是操作程式語言，若 query 中的值不符合預期格式，框架會自動擋掉而不會讓 SQL injection 成功。目前大部分的網站都是使用框架來開發，而這些框架都是使用 ORM 來處理他們的資料庫，因此在 ORM 的保護下，不是我們預期的資料格式，而是 SQL 語法的話，具有基本的保護能力。</p>
 </li>
 <li><p>參數化查詢（parameterized query 或 parameterized statement）：<br>是指在設計與資料庫連結並存取資料時，在需要填入數值或資料的地方，使用參數（parameter）來給值，這個方法目前已被視為最有效可預防SQL注入攻擊的攻擊手法的防禦方式。 – <a href="https://www.wikiwand.com/zh-tw/%E5%8F%83%E6%95%B8%E5%8C%96%E6%9F%A5%E8%A9%A2" target="_blank" rel="noopener">參數化查詢</a></p>
@@ -1563,7 +1575,7 @@ C --> D(Make changes);</pre>
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2019-11-20 13:46:11" itemprop="dateModified" datetime="2019-11-20T13:46:11+00:00">2019-11-20</time>
+                <time title="Modified: 2019-11-21 12:07:53" itemprop="dateModified" datetime="2019-11-21T12:07:53+00:00">2019-11-21</time>
               </span>
             
           
