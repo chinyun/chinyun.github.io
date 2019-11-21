@@ -135,30 +135,25 @@ Making HTTP calls from the client-side wasn’t this easy a decade ago. A front-
 # RESTful API
 
 - API (Application Programming Interface) 應用程式介面
-是一種廣義的稱呼，主要是指 Application 與資料庫的互動介面。透過這個介面，開發者可以了解如何和提供這個介面的 Application 互動。
-其中一種 API 又可以稱作 Web API，也是現在最廣泛出現的，他是指程式開發者提供一個網址 url 來讓其他開發者訪問，並提供使用這個 API 的文件（說明書），這樣其他開發者就可以閱讀文件了解如何使用這個 API 來存取所需的資料。
-
-串接 API 指的就是在開發時透過程式介面操作資料；一個應用程式通常會開發其程式介面提供串接、讀取資料或應用服務，提供一套標準讓任何想接入應用程式服務的開發者，可以遵循規範、根據介面的設計撰寫程式碼，來得到想要的服務或資料。串接 API 的本質就是交換資料，通常我們會根據文件說明來使用他人寫好的 API，若要主動提供 API 時則需定義要給什麼資料。
+  是一種廣義的稱呼，主要是指 Application 與資料庫的互動介面。透過這個介面，開發者可以了解如何和提供這個介面的 Application 互動。
+  其中一種 API 又可以稱作 Web API，也是現在最廣泛出現的，他是指程式開發者提供一個網址 url 來讓其他開發者訪問，並提供使用這個 API 的文件（說明書），這樣其他開發者就可以閱讀文件了解如何使用這個 API 來存取所需的資料。
+  串接 API 指的就是在開發時透過程式介面操作資料；一個應用程式通常會開發其程式介面提供串接、讀取資料或應用服務，提供一套標準讓任何想接入應用程式服務的開發者，可以遵循規範、根據介面的設計撰寫程式碼，來得到想要的服務或資料。串接 API 的本質就是交換資料，通常我們會根據文件說明來使用他人寫好的 API，若要主動提供 API 時則需定義要給什麼資料。
 
 - Web API 或 HTTP API
-透過 HTTP 協定的 API，也就是用 HTTP 格式來提供資料的 API 可以稱為 Web API/HTTP API。根據 HTTP 規範，伺服器端和客戶端進行請求和回應時，會使用定義明確的請求格式(request format)和回應格式(response format)，request format 指的是 client-side 需使用特定的 HTTP verb 對 url 發出請求，response format 則是指 server-side 回應時採用的資料格式，有可能是 XML、JSON等。
-
-HTTP 的組成元素：
-
-| HTTP request | HTTP response | 
-| -------- | -------- | 
-| HTTP Method | Response Status |
-| HTTP Headers | Response Headers |
-| Request Body | Response Body | 
-
-HTTP URL 組成：例如`https://www.example.com/photos?page=1`
-通訊協定 `https://`、網域名稱 DNS `www.example.com`、路徑 path `/photos`、參數 parameter` ?page=1`(又稱 query string)
+  透過 HTTP 協定的 API，也就是用 HTTP 格式來提供資料的 API 可以稱為 Web API/HTTP API。根據 HTTP 規範，伺服器端和客戶端進行請求和回應時，會使用定義明確的請求格式(request format)和回應格式(response format)，request format 指的是 client-side 需使用特定的 HTTP verb 對 url 發出請求，response format 則是指 server-side 回應時採用的資料格式，有可能是 XML、JSON等。
+  HTTP 的組成元素：
+  | HTTP request | HTTP response | 
+  | -------- | -------- | 
+  | HTTP Method | Response Status |
+  | HTTP Headers | Response Headers |
+  | Request Body | Response Body | 
+  HTTP URL 組成：例如`https://www.example.com/photos?page=1`
+  通訊協定 `https://`、網域名稱 DNS `www.example.com`、路徑 path `/photos`、參數 parameter` ?page=1`(又稱 query string)
 
 - RESTful API
 RESTful 風格也是一種格式(format)，**RESTful API 就是指一種寫 API 格式的風格建議，目的是讓大家的寫法更有一致性。**
   - REST 
   REST 是 Representational State Transfer 的縮寫，由 Roy Fielding 博士在 2000 年的博士論文中所提出。他同時也是 HTTP 規範的主要作者之一。REST 是一種軟體架構風格（並非標準），目的是幫助在世界各地不同軟體、程式在網際網路中能夠互相傳遞訊息。而每一個網頁都可視為一個資源（resource）提供使用者使用，以資源操作的概念(指的是對某項資源，譬如 User、Post 等，指派 Show、Edit 等動作)，結合 URL path 與 HTTP Method ，目的是使 URL path 更為簡潔、容易被理解，除了介面簡潔之外，尚有增加快取 cache 效率、提升 api 活用性等優點。換句話說， REST 風格可以單從 HTTP request 就能看出如何操作伺服器的資料。
-
   REST 的一個最重要的觀念就是 resources (特定資訊的資源)，每一個 resource 由一個 global identifier (即 URL)所表示。為了操作這些 resources，網路的 components (client 跟 server) 透過標準化的介面 (HTTP) 來溝通並交換這些 resources 的 representations (實際上傳達資訊的文件)。
   任意數量的 connectors (如 clients, servers, caches, tunnels 等) 可以居中 request，但是都不可以 “seeing past” (不需要其他layer層)。這樣的應用程式跟一個 resource 互動根據兩件事情: resource 的 URL 跟要做的動作 — 它不需要知道是否有 caches, proxies, gateways, firewalls, tunnels, 或其他任何藏在 sever 之間的東西。這個應用程式只需要知道資訊的格式 (representation)，通常是 HTML 或 XML 或圖片什麼的。
 
@@ -168,13 +163,12 @@ RESTful 風格也是一種格式(format)，**RESTful API 就是指一種寫 API 
   路由(routing)是指定義 app 如何將 client requset 指向一個正確的接口(endpoint)並做出相應的後續處理(給予 response)，一個 route 通常由下組成：
   `app.METHOD(PATH, HANDLER)`
   METHOD means HTTP request method, PATH is a path on the server and the HANDLER is the function executed when the routes is matched. PATH 是開放給 client 的 route，透過不同 path 導向不同動作。
-  舉例：一個簡單的 route based on express.js：
+  舉例：一個簡單的 route based on express.js，`'/'`表示根目錄(root route)：
   ```
   app.get('/', function(req, res){
     res.send('hello world');
   })
   ```
-  `'/'`表示根目錄(root route)
 
 # Reference
 

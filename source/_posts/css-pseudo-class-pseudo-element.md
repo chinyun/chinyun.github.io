@@ -1,5 +1,5 @@
 ---
-title: css pseudo class & pseudo element
+title: CSS pseudo class & pseudo element
 date: 2019-11-08 18:39:38
 tags:
 ---
@@ -11,10 +11,10 @@ tags:
 
 使用偽類元素，一方面可以減少頁面中的節點元素，加速頁面渲染速度，另一方面可以為設計動畫提供很多新思維。
 
-# pseudo class
+# pseudo class 偽類 
 
 Pseudo-classes are used to provide styles not for elements, but for various states of elements. The pseudo-class concept is introduced to permit selection based on information that lies outside of the document tree or that cannot be expressed using the other *simple selectors*.
-用於定義元素的特殊狀態，為了選擇 DOM tree 之外的信息，或者使用其他簡單選擇器不能表達的信息，不會出現在 DOM tree。
+用於**定義元素的特殊狀態**，為了選擇 DOM tree 之外的信息，或者使用其他簡單選擇器不能表達的信息，不會出現在 DOM tree。
 
 Simple selectors includes:
 - type selector (`h1, p, div`)
@@ -32,9 +32,9 @@ Simple selectors includes:
 
 狀態不存在 DOM 裡面，或是這幾種 simple selectors 選不到的東西，就是 pseudo-class 要去解決的問題。
 
-# pseudo element
+# pseudo element 偽元素
 
-Pseudo elements differ from pseudo-classes in that they don’t select states of elements; they select parts of an element. 用於選擇元素的指定部分，創造一個關於 DOM tree 的抽象內容，提供一種方法來引用源文檔中不存在的內容，創造之後會出現在 DOM tree，偽元素也會「繼承」原本元素的屬性。
+Pseudo elements differ from pseudo-classes in that they don’t select states of elements; they select parts of an element. 用於選擇元素的指定部分，創造一個關於 DOM tree 的抽象內容，提供一種方法來**引用源文檔中不存在的內容**，創造之後會出現在 DOM tree，偽元素也會「繼承」原本元素的屬性。
 
 - **::first-line** 選取第一行
 - **::first-letter** 選取第一個字

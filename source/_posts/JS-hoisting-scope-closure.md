@@ -8,7 +8,7 @@ Hoisting、Scope 和 Closure 在 JavaScript 中是很重要的觀念，因爲會
 
 # Hoisting
 
-在執行任何程式碼前，JavaScript 會把變數和函數的宣告在編譯階段就放入記憶體，如此即便我們先寫調用某一函式的程式碼，再寫該函式的內容，JavaScript 也還是可以知道這段程式碼的意義：
+JavaScript 內文執行的運作方式有一個機制叫做：Hoisting 提升，在執行任何程式碼前，JavaScript 會把**變數和函數的宣告**在編譯階段就放入記憶體，編譯後執行時因為已經宣告了，所以如此即便我們先寫調用某一函式的程式碼，再寫該函式的內容，JavaScript 也還是可以知道這段程式碼的意義，程式碼仍然可以運作：
 ```
 catName("Chloe");
 
@@ -17,31 +17,26 @@ function catName(name) {
 }
 /*上面程式的結果是: "My cat's name is Chloe"*/
 ```
-
-即使我們函式的程式碼之前就先呼叫它，程式碼仍然可以運作。這是出於 JavaScript 內文執行的運作原理。
-提升也適用於其他型別和變數。變數可以在宣告之前進行初始化和使用，但如果沒有初始化，就不能使用它們。
-
 ```
 num = 6;
 num + 7;
 var num; 
 /* 只要 num 有被宣告，就不會有錯誤 */
 ```
-
-JavaScript 僅提升宣告的部分，而不是初始化。如果在使用該變數後才宣告和初始化，那麼該值將是 undefined。以下兩個範例顯示了這個特性。
-
+JavaScript 僅提升宣告的部分，而尚未賦值。如果在使用該變數後才宣告和初始化，那麼該值將是 undefined，以下範例顯示了這個特性。
 ```
-var x = 1; // 初始化 x
-console.log(x + " " + y);  // '1 undefined'
+var x = 1; // 給予 x 值
+console.log(x + " " + y);  // '1 undefined'，此階段 y 尚未被賦予值
 var y = 2;
 ```
+上述程式碼其實是這樣運作的：
 ```
-var x = 1; // 初始化 x
+var x = 1; 
 var y; // 宣告 y
 console.log(x + " " + y);  // '1 undefined'
-y = 2; // 初始化 y
+y = 2; // 賦值 y
 ```
-函數宣告的優先權比變數宣告高，如果 function 調用時有傳參數進來，就會宣告該參數代表的變數意義並賦值。
+**函數宣告的優先權比變數宣告高**，如果 function 調用時有傳參數進來，就會先宣告該參數代表的變數意義並賦值。
 ```
 function test(v) {
   var v
@@ -50,7 +45,7 @@ function test(v) {
 }
 test(10) // 10
 ```
-需要注意的是，只有 declaration 宣告式的 function (ex:`function func(){...}`)會被在編譯階段提升，而 expression 表達式宣告的 function (ex:`let func = function(){...}`)會在執行階段才被存放到記憶體中。
+需要注意的是，**只有 declaration 宣告式的 function (ex:`function func(){...}`)會被在編譯階段提升**，而 expression 表達式宣告的 function (ex:`let func = function(){...}`)會在執行階段才被存放到記憶體中。
 
 # Scope 作用域
 
@@ -63,7 +58,7 @@ Execution Context is a fancy word for describing the environment in which your J
 
 執行環境在建立時會經歷兩個階段，分別是 ：
 - Creation Phase 創造階段：變數宣告和函數宣告提升，自動跳過函式裡的程式碼。
-- Execution Phase 執行階段：由上到下、一行一行地執行程式
+- Execution Phase 執行階段：由上到下、一行一行地執行程式，賦值也是在這階段。
 
 當 JavaScript engine 看到 function name() 函數被執行，就會創建一個 function name() execution context，新的 function execution context 會被加入到**Execution stack 執行堆疊**，並依序執行(Javascript 是單一執行緒，一次只能做一件事)，執行環境 的堆疊過程是具有 順序性 的：first in last out。
 
@@ -102,9 +97,9 @@ from the practical viewpoint: those functions are interesting which:
 - use free variables.」--[ECMA-262-3 in detail. Chapter 6. Closures.](http://dmitrysoshnikov.com/ecmascript/chapter-6-closures/)
 
 scopeChain 把每一層的 AO 和 VO 記錄下來，而變數就紀錄在AO 或 VO 裡，也因為 return 才把 AO 和 VO 保留下來。
-closure 其實就是因為 scopeChain 有 reference 到其他 Execution Context 的 AO(active object) 或是 VO(variable object)，所以在離開之後還是可以存取到上層的變數，如果你是以會記住上層資訊的角度來看 closure，那所有的 function 都是 closure
+closure 其實就是因為 scopeChain 有 reference 到其他 Execution Context 的 AO(active object) 或是 VO(variable object)，所以在離開之後還是可以存取到上層的變數，如果你是以會記住上層資訊的角度來看 closure，那所有的 function 其實都是 closure。
 
-- 閉包是函式記得並存取 Lexical Scope 語彙範疇的能力，可說是指向特定 scope 的參考，因此當函式是在其宣告的 Lexical Scope 語彙範疇之外執行時也能正常運作。
+- **閉包是函式記得並存取 Lexical Scope 語彙範疇的能力，可說是指向特定 scope 的參考，因此當函式是在其宣告的 Lexical Scope 語彙範疇之外執行時也能正常運作**。
 
 - 迴圈與閉包搭配使用時的謬誤與陷阱。
   ```
@@ -115,9 +110,9 @@ closure 其實就是因為 scopeChain 有 reference 到其他 Execution Context 
   }
   ```
   由於 console.log(i) 中的 i 會存取的範疇是 for 所在的範疇（目前看起來是全域範疇，因為 var 宣告的變數不具區塊範疇的特性），因此當 1 秒、2 秒…5 秒後執行 console.log(i) 時，就會去取 i 的值，而此時 for 迴圈已跑完，i 變成 6，因此就會每隔一秒印出一個「6」。
-  解決方法可以利用 IIFE（Immediately Invoked Function Expression）把一個 function 包起來並傳入 i 立即執行，所以迴圈每跑一圈其實就會立刻呼叫一個新的 function，因此就產生了新的作用域。如果你都覺得太麻煩不想用，恭喜，在 ES6 裡面有了 block scope 以後，你只要簡單地把迴圈裡面用的 var 改成 let 就行了：因為 let 的特性，所以其實迴圈每跑一圈都會產生一個新的作用域，因此 alert 出來的值就會是你想要的那個值。
+  解決方法可以利用 IIFE（Immediately Invoked Function Expression）把一個 function 包起來並傳入 i 立即執行，所以迴圈每跑一圈其實就會立刻呼叫一個新的 function，因此就產生了新的作用域。不過在 ES6 裡面有了 block scope 的概念以後，你只要簡單地把迴圈裡面用的 var 改成 let 就行了：因為 let 的特性，所以其實迴圈每跑一圈都會產生一個新的作用域。
 
-- 模組模式可經由建立一個模組實體來調用內層函式，而內層函式由於具有閉包的特性，因此可存取外層的變數和函式。透過模組模式，可隱藏私密資訊，並選擇對外公開的 API。
+- 模組模式可經由**建立一個模組實體來調用內層函式，而內層函式由於具有閉包的特性，因此可存取外層的變數和函式。透過模組模式，可隱藏私密資訊，並選擇對外公開的 API**。
 - 利用模組依存性載入器或管理器或 ES6 模組來管理模組。
 
 # Reference

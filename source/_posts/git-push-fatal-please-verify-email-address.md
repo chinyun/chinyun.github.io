@@ -49,11 +49,11 @@ Homebrew 安裝過程預設 HTTPS 通訊協定情況使用 osxkeychain 輔助工
 
 修改方式如下：
 
-用這行命令找出所有 credential.helper 在電腦中的位置：
+1. 用這行命令找出所有 credential.helper 在電腦中的位置：
 ```
 git config --show-origin --get credential.helper
 ```
->通常可能是在…/usr/share/git-core/gitconfig
+> 通常可能是在…/usr/share/git-core/gitconfig
 
 2. 找到 .gitconfig 文件後，將下面這段文字修改後儲存：
 ```

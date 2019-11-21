@@ -80,7 +80,7 @@ ES10 在 2019 年 2 月中推出，在新版的 Nodejs 和 Chrome 已經可以�
   ```
 - `String.trimStart()` and `String.trimEnd()` 減少空白字串
 
-- `try{} catch{}` 可以省略 catch 回傳的表達參數 catch(err){} -> catch{}
+- `try{} catch{}` 可以省略 catch 回傳的表達參數 `catch(err){} -> catch{}`
 
 - revised Function#toString：
   function.toString() 回傳確實的 Function 程式碼，包括空白字元和註解:
@@ -96,7 +96,7 @@ ES10 在 2019 年 2 月中推出，在新版的 Nodejs 和 Chrome 已經可以�
   ```
 
 - Symbol Description：
-  在建構 symbol 時把 description 作第一個參數傳入，就可以通過 toString() 取得：
+  在建構 symbol 時把 description 作第一個參數傳入，就可以通過 `toString()` 取得：
   ```
   const symbolExample = Symbol("Symbol description");
   console.log(symbolExample.toString());
@@ -107,16 +107,16 @@ ES10 在 2019 年 2 月中推出，在新版的 Nodejs 和 Chrome 已經可以�
   The unescaped line separator U+2028 and paragraph separator U+2029 characters were not accepted in the pre-ES10 era.
 
 - well-formed JSON.stringify
-  JSON.stringify() may return characters between U+D800 and U+DFFF as values for which there are no equivalent UTF-8 characters. However, JSON format requires UTF-8 encoding. The proposed solution is to represent unpaired surrogate code points as JSON escape sequences rather than returning them as single UTF-16 code units.
+  `JSON.stringify()` may return characters between U+D800 and U+DFFF as values for which there are no equivalent UTF-8 characters. However, JSON format requires UTF-8 encoding. The proposed solution is to represent unpaired surrogate code points as JSON escape sequences rather than returning them as single UTF-16 code units.
 
-- stable Array#sort
+- stable `Array.sort()`
   The previous implementation of V8 used an unstable quick-sort algorithm for arrays containing more than 10 items. A stable sorting algorithm is when two objects with equal keys appear in the same order in the sorted output as they appear in the unsorted input.
 
-- 新增數據資料的基本型別：BigInt (stage 3)
+- 新增數據資料的基本型別：`BigInt` (stage 3)
   BigInt is the 7th primitive type: an arbitrary precision integer. The variables can now represent 253 numbers and not just max out at 9007199254740992.
 
 - Dynamic import (stage 3)
-  Dynamic import() returns a promise for the module namespace object of the requested module. Therefore, imports can now be assigned to a variable using async/await.
+  Dynamic `import()` returns a promise for the module namespace object of the requested module. Therefore, imports can now be assigned to a variable using async/await.
 
 - Standardized `globalThis` object (stage 3)
 

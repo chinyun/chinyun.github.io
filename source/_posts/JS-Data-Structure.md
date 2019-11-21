@@ -25,9 +25,9 @@ The key distinctions between primitives and objects:
 在 Ruby 語言中，使用 index 的叫做 Array，使用 key-value-pair 的叫做 Hash。
 而在 JavaScript 中，使用 index 的也叫做 Array，使用 key-value-pair 的有兩種： Object 和 Map。
 
-這些資料結構內建一些方法來方便開發者使用、管理資料。
+JavaScript 為這些資料結構內建了一些方法來方便開發者使用、管理資料:
 
-# JavaScrip Objects & methods list
+## JavaScrip Objects methods list
 
 - Array 陣列
   - 其他資料結構：
@@ -99,7 +99,7 @@ The key distinctions between primitives and objects:
     - 但不支持 keys()、values()、entries()，我們不能對它進行迭代，所以沒有辦法獲取它的所有鍵值。
     - WeakMap 的目的是，我們可以僅**當該對象存在時，為對象存儲一些內容**。但我們並不會因為存儲了對象的一些內容，就強制對像一直保留在內存中。
 
-# 基本型別資料的 methods
+## 基本型別的 methods list
 
 There are many things one would want to do with a primitive. So JavaScript provides methods to call. JavaScript allows us to work with primitives (strings, numbers, etc.) as if they were objects. 
 
@@ -143,7 +143,7 @@ JavaScript 允許訪問字符串，數字，布爾值和符號的方法和屬性
     - substring(start [, end]) 返回 start 和 end 之間的字符串部分。這與 slice 幾乎相同，但它允許 start 大於 end。
     - substr(start [, length]) 從 start 開始返回給定 length 的字符串部分。
 
-# reference
+# Reference
 
 [javascript.info/map-set-weakmap-weakset](https://zh.javascript.info/map-set-weakmap-weakset)
 [javascript.info/primitives-methods](https://javascript.info/primitives-methods)

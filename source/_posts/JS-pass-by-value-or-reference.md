@@ -4,12 +4,12 @@ date: 2019-11-13 17:35:56
 tags:
 ---
 
-問題：JavaScript 的 Object 到底是 pass by value 還是 pass by referece？
+問題：JavaScript 到底是 pass by value 還是 pass by referece？
 
 根據 JavaScript 的資料型態，可以分為兩大類：基本型別 primitive 和 物件型別 object。
-基本型別的資料以 純值的形態存在，例如：number、string、boolean、null、undefined、symbol，而 object 的資料可能為 純值或多種不同型別組合而成的物件。
+基本型別的資料以 純值的形態存在，例如：number、string、boolean、null、undefined、symbol，而 object 的資料可能為 純值 或 多種不同型別組合而成的 物件。
 
-# 基本型別的傳值 pass by value  vs. object型別的傳址 pass by referece
+# 基本型別傳值 pass by value，Object 型別傳址 pass by referece
 
 ```
 var a = 10;
@@ -21,14 +21,17 @@ var d = 5;
 console.log(c === d); //true
 ```
 `var b = a;` 表面上看起來變數 b 的內容是透過複製變數 a 而來，實際上變數 b 是去建立了一個新的值，然後將變數 a 的內容複製了一份存放到記憶體， a 和 b 其實是存在於兩個不同的記憶體位置，因此變數 a 和變數 b 彼此獨立互不相干，即使更改 a 的內容， b 的值也不會變：
+
 ```
 a + 2;
 console.log(a); //12
 console.log(b); //10
-``` 
-像這種情況，我們通常會稱作「傳值」 (pass by value)。
+```
+
+基本型別是不可變的 (immutable)，當修改、更新值時，與那個值的副本完全無關，像這種情況，我們通常稱作「傳值」 (pass by value)。
 
 如果是物件型別的資料：
+
 ```
 var obj1 = { a: 10 };
 var obj2 = { a: 10 };
@@ -38,12 +41,13 @@ var obj3 = { b: 20 };
 var obj4 = obj3;
 console.log(obj3 === obj4); //true
 ```
+
 「物件」這類資料型態，在 JavaScript 中是透過「引用」的方式傳遞資料的。
 當建立起一個新的物件並賦值給一個變數(`var obj3 = { b: 20 };`)的時候，JavaScript 會在記憶體的某處存放這個物件(`{ b: 20 }`)，再將變數(`obj3`)指向這個物件的存放位置，因此當`var obj4 = obj3;`的時候，其實是將 obj4 這個變數也指向了 `{ b: 20 }`這個實體。
 這種透過引用的方式來傳遞資料，接收的其實是引用的「參考」而不是值的副本時，
 我們通常會稱作「傳址」 (pass by reference)。
 
-# 例外情況： pass by sharing
+# 特殊情況：
 
 ```
 var coin1 = { value: 10 };
@@ -51,17 +55,17 @@ var coin1 = { value: 10 };
 function changeValue(obj) {
   obj = { value: 123 };
 }
-
 changeValue(coin1);
 console.log(coin1.value);   // ？
 ```
-答案會是 10，因為當coin1指向的資料被做為 function 的參數傳入 function 時，即使資料在 function 內部被重新賦值，外部變數的內容都不會被影響。
-在這種情況底下，就代表你要讓這個 obj 指向一個新的 object`{ value: 123 }`。因此不會影響到外部的 coin1 指向的位址的物件內容。
 
-但是如果不是重新賦值而是直接修改傳入的內容：
+答案會是 10，因為當coin1指向的資料被做為 **function 的參數**傳入 function 時，即使資料在 function 內部被重新賦值，外部變數的內容都不會被影響。
+在這種情況底下， JavaScript 會將 obj 指向一個新建的 object `{ value: 123 }`，不會影響到外部的 coin1 指向的位址的物件內容。
+
+如果不是 重新賦址 而是 修改傳入 的內容：
+
 ```
 var coin1 = { value: 10 };
-
 function changeValue(obj) {
   obj.value = 123;
 }
@@ -69,13 +73,7 @@ function changeValue(obj) {
 changeValue(coin1);
 console.log(coin1.value);   // 123
 ```
-答案是 123。此時變數 coin1 所指向的資料內容被改變，代表你要讓 function 裡面的那個 obj 跟外面的 coin1「共享」同一個 object，所以透過裡面的 obj，你可以去修改「共享到的那個 object」的資料。
-
-# 小結
-
-在 JavaScript 中的物件類型(object)是可變的 (mutable)，**當物件更新時，會影響到所有引用這個物件的變數與其副本，修改時會變動到原本的參考，但當賦與新值時，會產生新的實體參考**。
-
-而基本型別(primitive)則是不可變的 (immutable)，當你更新了某個基本型別的值時，與那個值的副本完全無關。
+此時變數 coin1 所指向的資料內容被改變，傳入 function 作為 obj 參數的值的 coin1 在 function 內被修改，改變了 value 的值。
 
 # 垃圾回收 Garbage collection
 

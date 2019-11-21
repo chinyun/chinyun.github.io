@@ -76,64 +76,68 @@ console.log(obj2); // { a: 10, b: 100, c: 30 }
   - **JSON.parse(JSON.stringify(object_array))**:
     - JSON.parse():把字串轉成物件
     - JSON.stringify():把物件轉成字串
-  ```
-  let obj1 = { a:{b:10} };
-  let obj2_string = JSON.stringify(obj1);
-  console.log(obj2_string); //"{"a":{"b":10}}";
-​
-  let obj2 = JSON.parse(obj2_string);
-  console.log(obj2); //{a:{b:10}}
-​
-  obj2.a.b = 20;
-  console.log(obj1); //{a:{b:10}}
-  console.log(obj2); //{a:{b:20}}
-  ``` 
-  只有可以轉成JSON格式的物件才可以這樣用，像 function、Set、Map..等型態就沒辦法轉成 JSON。
+    ```
+    let obj1 = { a:{b:10} };
+    let obj2_string = JSON.stringify(obj1);
+    console.log(obj2_string); //"{"a":{"b":10}}";
+  ​
+    let obj2 = JSON.parse(obj2_string);
+    console.log(obj2); //{a:{b:10}}
+  ​
+    obj2.a.b = 20;
+    console.log(obj1); //{a:{b:10}}
+    console.log(obj2); //{a:{b:20}}
+    ``` 
+
+    只有可以轉成JSON格式的物件才可以這樣用，像 function、Set、Map..等型態就沒辦法轉成 JSON。
 
   - **jQuery `$.extend`**
-  ```
-  var $ = require('jquery');
+    ```
+    var $ = require('jquery');
+    var obj1 = {
+      a: 1,
+      b: { f: { g: 1 } },
+      c: [1, 2, 3]
+    };
+    var obj2 = $.extend(true, {}, obj1);
+    console.log(obj1.b.f === obj2.b.f); // false
+    ```
 
-  var obj1 = {
-    a: 1,
-    b: { f: { g: 1 } },
-    c: [1, 2, 3]
-  };
-
-  var obj2 = $.extend(true, {}, obj1);
-  console.log(obj1.b.f === obj2.b.f); // false
-  ```
   - **lodash `_.cloneDeep`**
-  ```
-  var _ = require('lodash');
-  var obj1 = {
-    a: 1,
-    b: { f: { g: 1 } },
-    c: [1, 2, 3]
-  };
+    ```
+    var _ = require('lodash');
+    var obj1 = {
+      a: 1,
+      b: { f: { g: 1 } },
+      c: [1, 2, 3]
+    };
+    var obj2 = _.cloneDeep(obj1);
+    console.log(obj1.b.f === obj2.b.f); // false
+    ```
 
-  var obj2 = _.cloneDeep(obj1);
-  console.log(obj1.b.f === obj2.b.f); // false
-  ```
   - **自己寫**
-  例如下面這個在 react app 裡面用 slice() 和 Object.assign(target, ...sources) 來改變深層結構資料的方法：
-  [GitHub Repo:Tripper-app](https://github.com/chinyun/Tripper-app/blob/master/src/containers/App.js)
-  ```
-  updateBudgets = (journey, journeyId) => {
-    const index = this.state.journeyList.findIndex(item => item.id === journeyId);
-    if (index !== -1) {
-      this.setState({
-        journeys: [
-          ...this.state.journeys.slice(0, index),
-          Object.assign({}, this.state.journeys[index], journey[0]),
-          ...this.state.journeys.slice(index + 1)
-        ]
-      })
-    }
-  };
-  ```
+    例如下面這個在 react app 裡面用 slice() 和 Object.assign(target, ...sources) 來改變深層結構資料的方法：
+    [GitHub Repo:Tripper-app](https://github.com/chinyun/Tripper-app/blob/master/src/containers/App.js)
+    ```
+    updateBudgets = (journey, journeyId) => {
+      const index = this.state.journeyList.findIndex(item => item.id === journeyId);
+      if (index !== -1) {
+        this.setState({
+          journeys: [
+            ...this.state.journeys.slice(0, index),
+            Object.assign({}, this.state.journeys[index], journey[0]),
+            ...this.state.journeys.slice(index + 1)
+          ]
+        })
+      }
+    };
+    ```
 
 # Reference
 
 [關於JAVASCRIPT中的SHALLOW COPY(淺拷貝)及DEEP COPY(深拷貝)](https://dustinhsiao21.com/2018/01/07/javascript-shallow-copy-and-deep-copy/)
 [[Javascript] 關於 JS 中的淺拷貝和深拷貝](https://larry850806.github.io/2016/09/20/shallow-vs-deep-copy/)
+
+# 延伸閱讀
+
+[React: Updating state when state is an array of objects](https://chinyun.github.io/myblog/2019/10/12/React-Updating-state-when-state-is-an-array-of-objects/)

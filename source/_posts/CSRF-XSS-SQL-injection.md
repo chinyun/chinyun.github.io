@@ -6,7 +6,7 @@ tags:
 
 Web Security 網頁安全泛指針對網頁、網站上的資訊安全，涵蓋程式漏洞、邏輯漏洞、資訊洩漏等。
 
-#Cross Site Request Forgery(XSRF or CSRF)
+# Cross Site Request Forgery(XSRF or CSRF)
 
 指在受害者不知情狀況下，被其他網域借用身份來完成未經同意的 HTTP Request。
 當網站使用 cookie-based authentication，會把 session id 和 session data 存在 cookie 中，剛使用者曾在其他網站登入而未登出，並且進入惡意網站操作時，攻擊者利用可以進行跨域 http 請求的 http tag(ex: img、iframe等)埋入惡意的 request 程式碼，觸發後因為使用者未登出，因此攻擊者獲得 cookie 資料，攻擊者得以冒用使用者身份通過驗證。得以任意改變使者者在資料庫的資料。
@@ -29,7 +29,7 @@ One of the best ways to protect your users and servers is to have a **short expi
 使用者以為安全進入網站後反而被導向到釣魚網站、甚至被竊取帳號密碼、個人資料。
 目前 XSS 攻擊的種類大致可以分成以下幾種類型：
 - Stored XSS (儲存型)：
-會被保存在伺服器資料庫中的 JavaScript 代碼引起的攻擊即為 Stored XSS，最常見的就是論壇文章、留言板等等，因為使用者可以輸入任意內容，若沒有確實檢查，那使用者輸入如 ｀`<script>` 等關鍵字就會被當成正常的 HTML 執行，標籤的內容也會被正常的作為 JavaScript 代碼執行。
+會被保存在伺服器資料庫中的 JavaScript 代碼引起的攻擊即為 Stored XSS，最常見的就是論壇文章、留言板等等，因為使用者可以輸入任意內容，若沒有確實檢查，那使用者輸入如 `<script>` 等關鍵字就會被當成正常的 HTML 執行，標籤的內容也會被正常的作為 JavaScript 代碼執行。
 
 - Reflected XSS (反射型)：
 由網頁後端直接嵌入由前端使用者所傳送過來的內容造成的，最常見的就是以 GET 方法傳送資料給伺服器時，伺服器未檢查就將內容回應到網頁上所產生的漏洞。
@@ -43,7 +43,7 @@ One of the best ways to protect your users and servers is to have a **short expi
 2. DOM-Based 則必須由前端來防範，但基本上還是跟前面的原則相同。
 另外不同的一點就是應該選擇正確的方法、屬性來操作 DOM，譬如`document.getElementById('show_name').innerHTML = name;` 中的`innerHTML `屬性代表插入的內容是合法的 HTML 字串，所以字串會解析成 DOM 物件，此處使用` innerText`會被保證作為純粹的文字，也就不可能被插入惡意代碼執行了。
 
-Cross Site Scripting attacks occur when an outside entity is able to execute code within your website or app. The most common attack vector here is if your website allows **inputs** that are not properly sanitized. **If an attacker can execute code on your domain, your JWT tokens are vulnerable.** Our CTO has argued in the past that XSS attacks are much easier to deal with compared to XSRF attacks because they are generally better understood. **Many frameworks, including Angular, automatically sanitize inputs and prevent arbitrary code execution.** If you are not using a framework that sanitizes input/output out-of-the-box, you can look at plugins like caja developed by Google to assist. Sanitizing inputs is a solved issue in many frameworks and languages and I would recommend using a framework or plugin vs building your own.
+Cross Site Scripting attacks occur when an outside entity is able to execute code within your website or app. The most common attack vector here is if your website allows **inputs** that are not properly sanitized. **If an attacker can execute code on your domain, your JWT tokens are vulnerable. Many frameworks, including Angular, automatically sanitize inputs and prevent arbitrary code execution.** If you are not using a framework that sanitizes input/output out-of-the-box, you can look at plugins like caja developed by Google to assist. Sanitizing inputs is a solved issue in many frameworks and languages and I would recommend using a framework or plugin vs building your own.
 
 # SQL injection
 
@@ -63,24 +63,22 @@ Cross Site Scripting attacks occur when an outside entity is able to execute cod
 
 防範手法：
 - 使用 SQL query builder for JavaScript - knex.js：
+  Read carefully from knex documentation how to pass values to knex raw (http://knexjs.org/#Raw).
+  If you are passing values as parameter binding to raw like:
+  ```
+  knex.raw('select * from foo where id = ?', [1])
+  ```
+  In that case parameters and query string are passed separately to database driver protecting query from SQL injection.
 
-Read carefully from knex documentation how to pass values to knex raw (http://knexjs.org/#Raw).
+  Other query builder methods always uses binding format internally so they are safe too.
 
-If you are passing values as parameter binding to raw like:
-```
-knex.raw('select * from foo where id = ?', [1])
-```
-In that case parameters and query string are passed separately to database driver protecting query from SQL injection.
+  Biggest mistake that one can do with knex raw queries is to use javascript template string and interpolate variables directly to SQL string format like:
+  ```
+  knex.raw(`select * from foo where id = ${id}`) // NEVER DO THIS 
+  ```
+  One thing to note is that knex table/identifier names cannot be passed as bindings to driver, so with those one should be extra careful to not read table / column names from user and use them without properly validating them first.
 
-Other query builder methods always uses binding format internally so they are safe too.
-
-Biggest mistake that one can do with knex raw queries is to use javascript template string and interpolate variables directly to SQL string format like:
-```
-knex.raw(`select * from foo where id = ${id}`) // NEVER DO THIS 
-```
-One thing to note is that knex table/identifier names cannot be passed as bindings to driver, so with those one should be extra careful to not read table / column names from user and use them without properly validating them first.
-
-Refer from:[Does Knex.js prevent sql injection?](https://stackoverflow.com/questions/49665023/does-knex-js-prevent-sql-injection/49665379)
+  Refer from:[Does Knex.js prevent sql injection?](https://stackoverflow.com/questions/49665023/does-knex-js-prevent-sql-injection/49665379)
 
 - 使用 ORM(object relational mapping)：
 在資料庫和 model資料容器之間的框架，他可以幫助開發者更簡便安全的去資料庫讀取資料，透過 ruby, java 等程式語言，去操作資料庫語言。同時因為是操作程式語言，若 query 中的值不符合預期格式，框架會自動擋掉而不會讓 SQL injection 成功。目前大部分的網站都是使用框架來開發，而這些框架都是使用 ORM 來處理他們的資料庫，因此在 ORM 的保護下，不是我們預期的資料格式，而是 SQL 語法的話，具有基本的保護能力。

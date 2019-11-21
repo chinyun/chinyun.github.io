@@ -128,3 +128,9 @@ Redux uses a concept of state reducers which each work on a specific slice of th
 [React 性能優化大挑戰](https://blog.techbridge.cc/2018/01/05/react-render-optimization/)
 
 [關於JAVASCRIPT中的SHALLOW COPY(淺拷貝)及DEEP COPY(深拷貝)](https://dustinhsiao21.com/2018/01/07/javascript-shallow-copy-and-deep-copy/)
+
+# 延伸閱讀
+
+[JS-Shallow Copy & Deep Copy](https://chinyun.github.io/myblog/2019/11/13/JS-Shallow-Copy-Deep-Copy/)
+[JS-pass by value or reference](https://chinyun.github.io/myblog/2019/11/13/JS-pass-by-value-or-reference/)
+[React State Management & Redux](https://chinyun.github.io/myblog/2019/10/12/React-Updating-state-when-state-is-an-array-of-objects/)
