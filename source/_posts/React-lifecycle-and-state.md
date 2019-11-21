@@ -4,8 +4,27 @@ date: 2019-10-12 20:15:41
 tags:
 ---
 
-# React lifecycle method & state updating 
+# React lifecycle methods & state updating 
 
+lifecycle methods 可以在 react component 中使用的調用方法，當 react app 被 render 時，會按照 lifecycle 的順序檢查每個 methods，如果開發者有寫到就會執行裡面的調用方法：
+
+- Mounting
+  - constructor()
+  - componentWillMount()
+  - render()
+  - **componentDidMount()**
+  在 component 完成第一次 Mounting 的時候呼叫
+- Updating
+  Everytime the state got changed, it runs updating.
+  - componentWillReceviceProps()
+  - shouldComponentUpdate()
+  - componentWillUpdate()
+  - render()
+  - **componentDidUpdate()**
+  當 component 完成 updating
+- Unmounting
+  - componentWillUnmount()
+  This method is called when a component is being removed from the DOM.
 
 # 提升 React 效能：保持 virtual DOM 的一致
 
@@ -17,7 +36,6 @@ DOM 文件物件模型，是 Html, XML, SVG 等文件的程式介面，提供一
 
 由於讀取更新 DOM 損耗 browser 的執行率，每一次改變便 render 整個頁面在 JavaScript 是很慢的，React 使用 Virtual DOM 虛擬 DOM 的一個強大的 Render 系統，只需更新 DOM 而不需要從 DOM 讀取，以減少運算。
 同時， React 的 diff 演算法，當 render function running 得時候，讓 virtual dom 和 real dom 比對只重繪有更新的部分，做出最低必要的更新。
-
 官方文件：
 When you use React, at a single point in time you can think of the render() function as creating a tree of React elements. On the next state or props update, that render() function will return a different tree of React elements. React then needs to figure out how to efficiently update the UI to match the most recent tree.
 
