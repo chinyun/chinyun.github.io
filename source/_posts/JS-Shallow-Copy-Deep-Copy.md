@@ -76,6 +76,7 @@ console.log(obj2); // { a: 10, b: 100, c: 30 }
   - **JSON.parse(JSON.stringify(object_array))**:
     - JSON.parse():把字串轉成物件
     - JSON.stringify():把物件轉成字串
+
     ```
     let obj1 = { a:{b:10} };
     let obj2_string = JSON.stringify(obj1);
@@ -92,6 +93,7 @@ console.log(obj2); // { a: 10, b: 100, c: 30 }
     只有可以轉成JSON格式的物件才可以這樣用，像 function、Set、Map..等型態就沒辦法轉成 JSON。
 
   - **jQuery `$.extend`**
+    
     ```
     var $ = require('jquery');
     var obj1 = {
@@ -104,6 +106,7 @@ console.log(obj2); // { a: 10, b: 100, c: 30 }
     ```
 
   - **lodash `_.cloneDeep`**
+    
     ```
     var _ = require('lodash');
     var obj1 = {
@@ -118,6 +121,7 @@ console.log(obj2); // { a: 10, b: 100, c: 30 }
   - **自己寫**
     例如下面這個在 react app 裡面用 slice() 和 Object.assign(target, ...sources) 來改變深層結構資料的方法：
     [GitHub Repo:Tripper-app](https://github.com/chinyun/Tripper-app/blob/master/src/containers/App.js)
+    
     ```
     updateBudgets = (journey, journeyId) => {
       const index = this.state.journeyList.findIndex(item => item.id === journeyId);
