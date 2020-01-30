@@ -12,7 +12,7 @@ JavaScript 的資料類型總共有七種，其中 6 種被稱為 **原始型別
   - **string**：string for strings. A string may have one or more characters, there’s no separate single-character type.
   - **boolean**：boolean for true/false.
   - **null**：null for unknown values – a stand alone type that has a single value null.
-  - **indefined**：undefined for unassigned values – a standalone type that has a single value undefined.
+  - **undefined**：undefined for unassigned values – a standalone type that has a single value undefined.
   - **object**：object for more complex data structures. 包括 function`function(){}`, array`[]`, object`{key:value}`等不同對象物件資料類型。
   - **symbol**：symbol for unique identifiers.
 
@@ -63,6 +63,8 @@ let value = true;
 alert(typeof value);  -> boolean
 value = String(value); -> "true"
 alert(typeof value); -> string
+String({}); -> "[object object]"
+String([]); -> "" 空字串
 ```
 
 - Number()
@@ -92,7 +94,7 @@ alert(typeof value); -> string
 
 - null 表示無、空值，未知的特殊值，typeof(null) -> object，這是一個誤解，因為 typeof 用型別標籤來辨別，null的型別標籤為 000，符合 object 的 type 所以會產生這個結果，這可以說是一種 bug，詳見:[typeof](https://developer.mozilla.org/zh-TW/docs/Web/JavaScript/Reference/Operators/typeof)
 - NaN 表示不是一個數字(not a number)，typeof(NaN) -> number
-- undefined 表示未被賦值，有宣告但未給予數值、字串等值，typeof(undefined) -> undefined，不等於 not defined，not defined 是沒有宣告系統不認得的意思
+- undefined 表示未被賦值，有宣告但未給予數值、字串等值，typeof(undefined) -> undefined，不等於 not defined，not defined 是沒有宣告所以系統不認得的意思
 
 # Reference
 

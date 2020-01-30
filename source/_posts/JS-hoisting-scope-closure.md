@@ -111,6 +111,7 @@ closure 其實就是因為 scopeChain 有 reference 到其他 Execution Context 
   ```
   由於 console.log(i) 中的 i 會存取的範疇是 for 所在的範疇（目前看起來是全域範疇，因為 var 宣告的變數不具區塊範疇的特性），因此當 1 秒、2 秒…5 秒後執行 console.log(i) 時，就會去取 i 的值，而此時 for 迴圈已跑完，i 變成 6，因此就會每隔一秒印出一個「6」。
   解決方法可以利用 IIFE（Immediately Invoked Function Expression）把一個 function 包起來並傳入 i 立即執行，所以迴圈每跑一圈其實就會立刻呼叫一個新的 function，因此就產生了新的作用域。不過在 ES6 裡面有了 block scope 的概念以後，你只要簡單地把迴圈裡面用的 var 改成 let 就行了：因為 let 的特性，所以其實迴圈每跑一圈都會產生一個新的作用域。
+  關於此題的其他參考：[for迴圈 setTimeout 結合一些示例](https://codertw.com/%E5%89%8D%E7%AB%AF%E9%96%8B%E7%99%BC/231181/)
 
 - 模組模式可經由**建立一個模組實體來調用內層函式，而內層函式由於具有閉包的特性，因此可存取外層的變數和函式。透過模組模式，可隱藏私密資訊，並選擇對外公開的 API**。
 - 利用模組依存性載入器或管理器或 ES6 模組來管理模組。
