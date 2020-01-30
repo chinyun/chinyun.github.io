@@ -63,7 +63,7 @@
 <meta property="og:site_name" content="Jinny&#39;s blog">
 <meta property="og:description" content="JavaScript Data TypeJavaScript 的資料類型總共有七種，其中 6 種被稱為 原始型別 primitive data types: string, number, boolean, null, undefined, symbol (new in ECMAScript 2015)，以及最後一種 Object 對象資料型別。  number：number for number">
 <meta property="og:locale" content="zh-tw">
-<meta property="og:updated_time" content="2019-12-05T11:03:26.264Z">
+<meta property="og:updated_time" content="2020-01-30T14:02:07.903Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="JS Data Type">
 <meta name="twitter:description" content="JavaScript Data TypeJavaScript 的資料類型總共有七種，其中 6 種被稱為 原始型別 primitive data types: string, number, boolean, null, undefined, symbol (new in ECMAScript 2015)，以及最後一種 Object 對象資料型別。  number：number for number">
@@ -237,7 +237,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2019-12-05 11:03:26" itemprop="dateModified" datetime="2019-12-05T11:03:26+00:00">2019-12-05</time>
+                <time title="Modified: 2020-01-30 14:02:07" itemprop="dateModified" datetime="2020-01-30T14:02:07+00:00">2020-01-30</time>
               </span>
             
           
@@ -259,7 +259,7 @@
 <li><strong>string</strong>：string for strings. A string may have one or more characters, there’s no separate single-character type.</li>
 <li><strong>boolean</strong>：boolean for true/false.</li>
 <li><strong>null</strong>：null for unknown values – a stand alone type that has a single value null.</li>
-<li><strong>indefined</strong>：undefined for unassigned values – a standalone type that has a single value undefined.</li>
+<li><strong>undefined</strong>：undefined for unassigned values – a standalone type that has a single value undefined.</li>
 <li><strong>object</strong>：object for more complex data structures. 包括 function<code>function(){}</code>, array<code>[]</code>, object<code>{key:value}</code>等不同對象物件資料類型。</li>
 <li><strong>symbol</strong>：symbol for unique identifiers.</li>
 </ul>
@@ -282,7 +282,7 @@
 
 <h1 id="Type-Conversions-類型轉換"><a href="#Type-Conversions-類型轉換" class="headerlink" title="Type Conversions 類型轉換"></a>Type Conversions 類型轉換</h1><ul>
 <li><p>String()</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">let value = true;</span><br><span class="line">alert(typeof value);  -&gt; boolean</span><br><span class="line">value = String(value); -&gt; &quot;true&quot;</span><br><span class="line">alert(typeof value); -&gt; string</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">let value = true;</span><br><span class="line">alert(typeof value);  -&gt; boolean</span><br><span class="line">value = String(value); -&gt; &quot;true&quot;</span><br><span class="line">alert(typeof value); -&gt; string</span><br><span class="line">String(&#123;&#125;); -&gt; &quot;[object object]&quot;</span><br><span class="line">String([]); -&gt; &quot;&quot; 空字串</span><br></pre></td></tr></table></figure>
 </li>
 <li><p>Number()</p>
 <ul>
@@ -322,7 +322,7 @@
 <h1 id="null-NaN-undefined"><a href="#null-NaN-undefined" class="headerlink" title="null, NaN, undefined"></a>null, NaN, undefined</h1><ul>
 <li>null 表示無、空值，未知的特殊值，typeof(null) -&gt; object，這是一個誤解，因為 typeof 用型別標籤來辨別，null的型別標籤為 000，符合 object 的 type 所以會產生這個結果，這可以說是一種 bug，詳見:<a href="https://developer.mozilla.org/zh-TW/docs/Web/JavaScript/Reference/Operators/typeof" target="_blank" rel="noopener">typeof</a></li>
 <li>NaN 表示不是一個數字(not a number)，typeof(NaN) -&gt; number</li>
-<li>undefined 表示未被賦值，有宣告但未給予數值、字串等值，typeof(undefined) -&gt; undefined，不等於 not defined，not defined 是沒有宣告系統不認得的意思</li>
+<li>undefined 表示未被賦值，有宣告但未給予數值、字串等值，typeof(undefined) -&gt; undefined，不等於 not defined，not defined 是沒有宣告所以系統不認得的意思</li>
 </ul>
 <h1 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h1><p><a href="https://zh.javascript.info/type-conversions" target="_blank" rel="noopener">javascript.info:type-conversions</a><br><a href="https://developer.mozilla.org/zh-TW/docs/Web/JavaScript/Data_structures" target="_blank" rel="noopener">JavaScript 的資料型別與資料結構</a><br><a href="https://cythilya.github.io/2018/10/24/object/" target="_blank" rel="noopener">型別（Type）</a><br><a href="https://cythilya.github.io/2018/10/15/coercion/" target="_blank" rel="noopener">強制轉型（Coercion）</a></p>
 
@@ -438,7 +438,7 @@
 
     <footer id="footer" class="footer">
       <div class="footer-inner">
-        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2020</span>
   <span class="with-love" id="animate">
     <i class="fa fa-user"></i>
   </span>

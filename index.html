@@ -233,7 +233,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2019-12-05 11:03:26" itemprop="dateModified" datetime="2019-12-05T11:03:26+00:00">2019-12-05</time>
+                <time title="Modified: 2020-01-30 14:02:07" itemprop="dateModified" datetime="2020-01-30T14:02:07+00:00">2020-01-30</time>
               </span>
             
           
@@ -382,7 +382,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2019-12-05 11:03:26" itemprop="dateModified" datetime="2019-12-05T11:03:26+00:00">2019-12-05</time>
+                <time title="Modified: 2020-01-30 14:02:07" itemprop="dateModified" datetime="2020-01-30T14:02:07+00:00">2020-01-30</time>
               </span>
             
           
@@ -539,7 +539,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2019-12-05 11:03:26" itemprop="dateModified" datetime="2019-12-05T11:03:26+00:00">2019-12-05</time>
+                <time title="Modified: 2020-01-30 14:02:07" itemprop="dateModified" datetime="2020-01-30T14:02:07+00:00">2020-01-30</time>
               </span>
             
           
@@ -665,7 +665,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2019-12-05 11:03:26" itemprop="dateModified" datetime="2019-12-05T11:03:26+00:00">2019-12-05</time>
+                <time title="Modified: 2020-01-30 14:02:07" itemprop="dateModified" datetime="2020-01-30T14:02:07+00:00">2020-01-30</time>
               </span>
             
           
@@ -901,7 +901,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2019-12-05 11:03:26" itemprop="dateModified" datetime="2019-12-05T11:03:26+00:00">2019-12-05</time>
+                <time title="Modified: 2020-01-30 14:02:07" itemprop="dateModified" datetime="2020-01-30T14:02:07+00:00">2020-01-30</time>
               </span>
             
           
@@ -1035,7 +1035,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2019-12-05 11:03:26" itemprop="dateModified" datetime="2019-12-05T11:03:26+00:00">2019-12-05</time>
+                <time title="Modified: 2020-01-30 14:02:07" itemprop="dateModified" datetime="2020-01-30T14:02:07+00:00">2020-01-30</time>
               </span>
             
           
@@ -1145,7 +1145,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2019-12-05 11:03:26" itemprop="dateModified" datetime="2019-12-05T11:03:26+00:00">2019-12-05</time>
+                <time title="Modified: 2020-01-30 14:02:07" itemprop="dateModified" datetime="2020-01-30T14:02:07+00:00">2020-01-30</time>
               </span>
             
           
@@ -1218,7 +1218,7 @@
 <li><p>迴圈與閉包搭配使用時的謬誤與陷阱。</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">for (var i = 1; i &lt;= 5; i++) &#123;</span><br><span class="line">  setTimeout(function timer() &#123;</span><br><span class="line">    console.log(i);</span><br><span class="line">  &#125;, i * 1000 );</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-<p>由於 console.log(i) 中的 i 會存取的範疇是 for 所在的範疇（目前看起來是全域範疇，因為 var 宣告的變數不具區塊範疇的特性），因此當 1 秒、2 秒…5 秒後執行 console.log(i) 時，就會去取 i 的值，而此時 for 迴圈已跑完，i 變成 6，因此就會每隔一秒印出一個「6」。<br>解決方法可以利用 IIFE（Immediately Invoked Function Expression）把一個 function 包起來並傳入 i 立即執行，所以迴圈每跑一圈其實就會立刻呼叫一個新的 function，因此就產生了新的作用域。不過在 ES6 裡面有了 block scope 的概念以後，你只要簡單地把迴圈裡面用的 var 改成 let 就行了：因為 let 的特性，所以其實迴圈每跑一圈都會產生一個新的作用域。</p>
+<p>由於 console.log(i) 中的 i 會存取的範疇是 for 所在的範疇（目前看起來是全域範疇，因為 var 宣告的變數不具區塊範疇的特性），因此當 1 秒、2 秒…5 秒後執行 console.log(i) 時，就會去取 i 的值，而此時 for 迴圈已跑完，i 變成 6，因此就會每隔一秒印出一個「6」。<br>解決方法可以利用 IIFE（Immediately Invoked Function Expression）把一個 function 包起來並傳入 i 立即執行，所以迴圈每跑一圈其實就會立刻呼叫一個新的 function，因此就產生了新的作用域。不過在 ES6 裡面有了 block scope 的概念以後，你只要簡單地把迴圈裡面用的 var 改成 let 就行了：因為 let 的特性，所以其實迴圈每跑一圈都會產生一個新的作用域。<br>關於此題的其他參考：<a href="https://codertw.com/%E5%89%8D%E7%AB%AF%E9%96%8B%E7%99%BC/231181/" target="_blank" rel="noopener">for迴圈 setTimeout 結合一些示例</a></p>
 </li>
 <li><p>模組模式可經由<strong>建立一個模組實體來調用內層函式，而內層函式由於具有閉包的特性，因此可存取外層的變數和函式。透過模組模式，可隱藏私密資訊，並選擇對外公開的 API</strong>。</p>
 </li>
@@ -1293,7 +1293,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2019-12-05 11:03:26" itemprop="dateModified" datetime="2019-12-05T11:03:26+00:00">2019-12-05</time>
+                <time title="Modified: 2020-01-30 14:02:07" itemprop="dateModified" datetime="2020-01-30T14:02:07+00:00">2020-01-30</time>
               </span>
             
           
@@ -1410,7 +1410,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2019-12-05 11:03:26" itemprop="dateModified" datetime="2019-12-05T11:03:26+00:00">2019-12-05</time>
+                <time title="Modified: 2020-01-30 14:02:07" itemprop="dateModified" datetime="2020-01-30T14:02:07+00:00">2020-01-30</time>
               </span>
             
           
@@ -1514,7 +1514,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2019-12-05 11:03:26" itemprop="dateModified" datetime="2019-12-05T11:03:26+00:00">2019-12-05</time>
+                <time title="Modified: 2020-01-30 14:02:07" itemprop="dateModified" datetime="2020-01-30T14:02:07+00:00">2020-01-30</time>
               </span>
             
           
@@ -1667,7 +1667,7 @@
 
     <footer id="footer" class="footer">
       <div class="footer-inner">
-        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2020</span>
   <span class="with-love" id="animate">
     <i class="fa fa-user"></i>
   </span>
