@@ -193,6 +193,113 @@
   
   
   <div class="post-block home">
+    <link itemprop="mainEntityOfPage" href="https://chinyun.github.io/myblog/myblog/2020/04/26/how-to-use-lottie-with-react/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="chinyun">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/myblog/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Jinny's blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+            
+            <a href="/myblog/2020/04/26/how-to-use-lottie-with-react/" class="post-title-link" itemprop="url">How to use lottie with React?</a>
+          
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              
+                
+              
+
+              <time title="Created: 2020-04-26 15:01:00 / Modified: 08:32:31" itemprop="dateCreated datePublished" datetime="2020-04-26T15:01:00+00:00">2020-04-26</time>
+            </span>
+          
+            
+
+            
+          
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>最近開始幫公司重新設計官方網站，同時也負責開發，觀察近期網站 UI 趨勢，Micro Interactions &amp; Animated Illustrations 成為現代網頁的特色，而且更能夠吸引瀏覽者的眼球，於是在規劃網站的時候打算使用由 Airbnb 開源的 <a href="https://github.com/airbnb/lottie-web" target="_blank" rel="noopener">lottie-web</a> Library 來產生 svg 動畫， svg 不但可以節省網路資源也比 gif 看起來更順暢。</p>
+<h1 id="使用-Adobe-illustrator-和-Adobe-Effect-製作動畫"><a href="#使用-Adobe-illustrator-和-Adobe-Effect-製作動畫" class="headerlink" title="使用 Adobe illustrator 和 Adobe Effect 製作動畫"></a>使用 Adobe illustrator 和 Adobe Effect 製作動畫</h1><p>首先我用 illustrator 繪製好基礎向量素材，再 import 進 After Effect 去製作動畫效果，並不斷調整讓它看起來更順暢。<br>將 illustrator 檔案 import 進去 After Effect 的時候，有幾種方式，可以參考這個連結：<a href="https://www.schoolofmotion.com/blog/import-adobe-illustrator-files-into-after-effects" target="_blank" rel="noopener">A Guide to Importing Adobe Illustrator Files into After Effects</a><br>但因為 Bodymovin 無法轉出 AI (.ai) 的圖層，會變成 missing image and vector ，所以必須將 AI (.ai) 圖層轉換成 shape layer，方法是選取要轉換的圖層，然後到 <strong>Layer &gt; Create &gt; Create Shapes from Vector Layer</strong>，他就會產生一個新的 shape layer。<br>-<a href="https://helpx.adobe.com/tw/after-effects/how-to/convert-illustrator-layers-to-shape-layers.html" target="_blank" rel="noopener">Learn how to convert Illustrator layers into shape layers in a composition.</a></p>
+<p>BTW 如果不使用 illustrator 畫，直接在 AE 裡面製作 shape layer 就沒有這個困擾了。</p>
+<p>另外，版本與系統的相符也是一個需要注意的地方，這次在使用 AE 之前先花了一段時間升級 mac 系統 和重新安裝 AE XD</p>
+<p>目前在 After Effect 中使用 Bodymovin 時需要注意 After Effect 版本須在 15.0 以上，如果使用 mac 系統的話目前至少 要 macOS versions 10.12 (Sierra), 10.13 (High Sierra), 10.14 (Mojave)等版本之系統才支援，並需要在 After Effect 的 Preference 設定中打勾這項：<strong>Allow Scripts To Write Files And Access Network option</strong> 否則 Bodymovin 無法運作。</p>
+<ul>
+<li>Bodymovin 官方網站有標示支援的 After Effect 版本：<a href="https://exchange.adobe.com/creativecloud.details.12557.bodymovin.html" target="_blank" rel="noopener">Bodymovin Adobe exchange</a></li>
+</ul>
+<p>To allow scripts to write files and communicate over a network, choose Edit &gt; Preferences &gt; General (Windows) or After Effects &gt; Preferences &gt; General (Mac OS), and select the Allow Scripts To Write Files And Access Network option.</p>
+<ul>
+<li><a href="https://helpx.adobe.com/after-effects/using/scripts.html" target="_blank" rel="noopener">Adobe After Effect</a></li>
+</ul>
+<p>在 After Effect 2019 以後的版本，該選項被移到 scrtiping &amp; expressions 的 pannel 裡了，可以參考以下連結說明：<br>The following existing preferences related to scripting and expressions have been moved from the General preferences panel to the new Scripting &amp; Expressions panel.<br>-<a href="https://community.adobe.com/t5/after-effects/can-t-see-quot-allow-scripts-to-write-file-and-access-network-quot-in-preferences/td-p/10421465?page=1" target="_blank" rel="noopener">adobe support community</a></p>
+<h1 id="透過-plug-in-‘Bodymovin’-輸出動畫-JSON-檔，在專案中引用-lottie-library-使動畫運行在-web-頁面上"><a href="#透過-plug-in-‘Bodymovin’-輸出動畫-JSON-檔，在專案中引用-lottie-library-使動畫運行在-web-頁面上" class="headerlink" title="透過 plug-in ‘Bodymovin’ 輸出動畫 JSON 檔，在專案中引用 lottie library 使動畫運行在 web 頁面上"></a>透過 plug-in ‘Bodymovin’ 輸出動畫 JSON 檔，在專案中引用 lottie library 使動畫運行在 web 頁面上</h1><p>把動畫修改的差不多後就可以透過 Bodymovin 來輸出 JSON 檔案，來運用到專案裡實際跑在 Browser 中看看，我用以下方法將 Bodymovin 轉出的 JSON 檔運用到專案中：</p>
+<ol>
+<li><p>開啟 Bodymovin (Navigate to Windows -&gt; Extensions -&gt; Bodymovin)，選好 export 設定與指定路徑資料夾<br>關於如何設定 Bodymovin：<a href="https://medium.com/@chenclaire/airbnb-lottie-after-effects-plug-in-bodymovin-d5473e4ab7cd" target="_blank" rel="noopener">How to Use Lottie ? | After Effects Plug-in ‘Bodymovin’</a></p>
+</li>
+<li><p>可以打開 demo.html 在瀏覽器中先看看 demo 是否沒有問題</p>
+</li>
+<li><p>在專案資料夾路徑底下執行： <code>npm install lottie-web</code> 安裝運行動畫的 js script</p>
+</li>
+<li><p>在動畫運行的 js 檔中（ex: app.js）<code>import lottie from &#39;lottie-web&#39;</code></p>
+</li>
+<li><p>並將 json 檔也 import 進來： <code>import animationData from &#39;../lottie/data.json&#39;</code></p>
+</li>
+<li><p>call <code>lottie.loadAnimation()</code> to start an animation<br>for example:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">let animObj = lottie.loadAnimation(&#123;</span><br><span class="line">  container: this.animBox, // the dom element that will contain the animation</span><br><span class="line">  renderer: &apos;svg&apos;,</span><br><span class="line">  loop: true,</span><br><span class="line">  autoplay: true,</span><br><span class="line">  animationData: animationData  //the path to the animation json</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>在 react JSX 的 html 描述部分用 react 的 ref 屬性指定要產生動畫的 dom element：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;div style=&#123;&#123;width: 300, margin: &apos;0 auto&apos;&#125;&#125; ref=&#123;ref =&gt; this.animBox = ref&#125;&gt;&lt;/div&gt;</span><br></pre></td></tr></table></figure>
+
+</li>
+</ol>
+<p>關於除了用 npm install 來安裝 package 的使用方法，airbnb 的官方 github 有詳細的文件說明其他使用方法，例如 CDN 或透過 Bodymovin getPlayer 來取得 js script 後再引用到專案中，可以參考以下連結：<br><a href="https://github.com/airbnb/lottie-web" target="_blank" rel="noopener">lottie github documentation</a></p>
+<h1 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h1><p><a href="https://josephkhan.me/lottie-web/" target="_blank" rel="noopener">Lottie animations for Web 2019</a><br><a href="https://www.youtube.com/watch?v=5XMUJdjI0L8" target="_blank" rel="noopener">How to export an animation with Bodymovin 2017</a></p>
+
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+          <div class="post-eof"></div>
+        
+      </footer>
+  </div>
+  
+  
+  
+  </article>
+
+    
+        <article itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block home">
     <link itemprop="mainEntityOfPage" href="https://chinyun.github.io/myblog/myblog/2019/11/18/JS-Asynchronous-Synchronous/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -233,7 +340,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-01-30 14:02:07" itemprop="dateModified" datetime="2020-01-30T14:02:07+00:00">2020-01-30</time>
+                <time title="Modified: 2020-04-26 08:32:31" itemprop="dateModified" datetime="2020-04-26T08:32:31+00:00">2020-04-26</time>
               </span>
             
           
@@ -382,7 +489,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-01-30 14:02:07" itemprop="dateModified" datetime="2020-01-30T14:02:07+00:00">2020-01-30</time>
+                <time title="Modified: 2020-04-26 08:32:31" itemprop="dateModified" datetime="2020-04-26T08:32:31+00:00">2020-04-26</time>
               </span>
             
           
@@ -539,7 +646,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-01-30 14:02:07" itemprop="dateModified" datetime="2020-01-30T14:02:07+00:00">2020-01-30</time>
+                <time title="Modified: 2020-04-26 08:32:31" itemprop="dateModified" datetime="2020-04-26T08:32:31+00:00">2020-04-26</time>
               </span>
             
           
@@ -665,7 +772,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-01-30 14:02:07" itemprop="dateModified" datetime="2020-01-30T14:02:07+00:00">2020-01-30</time>
+                <time title="Modified: 2020-04-26 08:32:31" itemprop="dateModified" datetime="2020-04-26T08:32:31+00:00">2020-04-26</time>
               </span>
             
           
@@ -901,7 +1008,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-01-30 14:02:07" itemprop="dateModified" datetime="2020-01-30T14:02:07+00:00">2020-01-30</time>
+                <time title="Modified: 2020-04-26 08:32:31" itemprop="dateModified" datetime="2020-04-26T08:32:31+00:00">2020-04-26</time>
               </span>
             
           
@@ -1035,7 +1142,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-01-30 14:02:07" itemprop="dateModified" datetime="2020-01-30T14:02:07+00:00">2020-01-30</time>
+                <time title="Modified: 2020-04-26 08:32:31" itemprop="dateModified" datetime="2020-04-26T08:32:31+00:00">2020-04-26</time>
               </span>
             
           
@@ -1145,7 +1252,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-01-30 14:02:07" itemprop="dateModified" datetime="2020-01-30T14:02:07+00:00">2020-01-30</time>
+                <time title="Modified: 2020-04-26 08:32:31" itemprop="dateModified" datetime="2020-04-26T08:32:31+00:00">2020-04-26</time>
               </span>
             
           
@@ -1293,7 +1400,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-01-30 14:02:07" itemprop="dateModified" datetime="2020-01-30T14:02:07+00:00">2020-01-30</time>
+                <time title="Modified: 2020-04-26 08:32:31" itemprop="dateModified" datetime="2020-04-26T08:32:31+00:00">2020-04-26</time>
               </span>
             
           
@@ -1410,7 +1517,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-01-30 14:02:07" itemprop="dateModified" datetime="2020-01-30T14:02:07+00:00">2020-01-30</time>
+                <time title="Modified: 2020-04-26 08:32:31" itemprop="dateModified" datetime="2020-04-26T08:32:31+00:00">2020-04-26</time>
               </span>
             
           
@@ -1450,134 +1557,6 @@
 <p>這樣不斷繼承的過程，使物件可以使用其他物件的屬性和方法，所以精確來說的話，物件實例的屬性與函式都是透過物件的建構子函式所定義，並非物件實例本身：在 JavaScript 主控台中輸入 <code>Object.prototype.</code> 會看到 Object 的 prototype 屬性中所定義的許多函式，而繼承自 Object 的物件也能找到這些函式。只要試著尋找如 String、Date、Number、Array 等全域物件的原型上定義的函式與屬性，就會看到 JavaScript 中的其他原型鍊繼承範例。</p>
 <h1 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h1><p><a href="https://zh.javascript.info/function-prototype" target="_blank" rel="noopener">javascript.info:function-prototype</a><br><a href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Inheritance_and_the_prototype_chain" target="_blank" rel="noopener">MDN Web Docs:继承与原型链</a></p>
 <p><a href="https://pjchender.blogspot.com/2016/06/javascriptprototypeprototype.html" target="_blank" rel="noopener">了解 JavaScript 中，繼承 inheritance、原型 prototype 和原型鍊 prototype chain 的概念</a><br><a href="https://cythilya.github.io/2018/10/26/prototype/" target="_blank" rel="noopener">你懂 JavaScript 嗎？#19 原型（Prototype）</a><br><a href="https://blog.techbridge.cc/2017/04/22/javascript-prototype/" target="_blank" rel="noopener">該來理解 JavaScript 的原型鍊了</a><br><a href="https://medium.com/@peterchang_82818/javascripter-%E5%BF%85%E9%A0%88%E7%9F%A5%E9%81%93%E7%9A%84%E7%B9%BC%E6%89%BF%E5%9B%A0%E5%AD%90-prototype-prototype-proto-object-class-inheritace-nodejs-%E7%89%A9%E4%BB%B6-%E7%B9%BC%E6%89%BF-54102240a8b4" target="_blank" rel="noopener">Javascripter 必須知道的繼承 prototype, <code>[[prototype]]</code>, <code>__proto__</code></a></p>
-
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-          <div class="post-eof"></div>
-        
-      </footer>
-  </div>
-  
-  
-  
-  </article>
-
-    
-        <article itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block home">
-    <link itemprop="mainEntityOfPage" href="https://chinyun.github.io/myblog/myblog/2019/11/11/JS-Class/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="chinyun">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/myblog/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Jinny's blog">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-            
-            <a href="/myblog/2019/11/11/JS-Class/" class="post-title-link" itemprop="url">JS Class</a>
-          
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              
-                
-              
-
-              <time title="Created: 2019-11-11 18:30:54" itemprop="dateCreated datePublished" datetime="2019-11-11T18:30:54+00:00">2019-11-11</time>
-            </span>
-          
-            
-
-            
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-01-30 14:02:07" itemprop="dateModified" datetime="2020-01-30T14:02:07+00:00">2020-01-30</time>
-              </span>
-            
-          
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="JavaScript-Class"><a href="#JavaScript-Class" class="headerlink" title="JavaScript Class"></a>JavaScript Class</h1><p>In Object-oriented programming, a class is an extensible program-code-template for creating objects, providing initial values for state(member variables) and implementations of behavior(member functions or methods).class 是一種可以拓展的編程模板，用來創建對象(object)，提供狀態初始值(變量)和行為實現(函數或方法)。</p>
-<p>JavaScript 雖然具有物件導向程式語言的特性，但與 Java、C++ 等以類別為基礎的程式設計規範不同，JavaScript 是一種以原型(prototype-based)為基礎的語言。</p>
-<p>由於開發上經常需要創建許多相似類型的對象，傳統的 JavaScript 寫法，可以用<strong>構造函數(Constructor)和 operator <code>new</code></strong> 來達成這個使用目的，但<strong>在 ES6 中有一個更進階的用法叫做 <code>Class</code></strong>。</p>
-<p>ECMAScript 6 中引入了類別 (class) 作為 JavaScript 現有原型程式(prototype-based)繼承的語法糖。語法糖可以讓現有語法操作變得更容易。類別(class)語法並不是要引入新的物件導向繼承模型到 JavaScript 中，而是提供一個<strong>更簡潔的語法來建立物件和處理繼承</strong>。</p>
-<p>Class 允許使用更簡潔的結構語法來定義 prototype-based 的類別。在 prototype-based 類別中，所有 methods 都存在 prototype 屬性中，藉以與其他延伸出去的類別共用，如此可以節省 memory 空間。<br>比較傳統原型繼承的寫法和使用 class 的寫法會發現；<strong>class 省略了 prototype chaining 並且整個 class 的宣告定義集中描述在 class 區塊內，幫助讀者了解這段程式的作用範圍，使 class 的目的更為清楚</strong>。</p>
-<ul>
-<li><p>Constructor 構造函數</p>
-<ul>
-<li>是一種常規函數，函數名稱首字必須大寫</li>
-<li>創建時必須使用 <code>new</code> 來操作</li>
-<li>需在 <code>prototype</code> 物件上定義方法</li>
-<li>示範：<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">function User(name) &#123;</span><br><span class="line">  this.name = name;</span><br><span class="line">  this.isAdmin = false;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">User.prototype.sayHi = function() &#123;</span><br><span class="line">  console.log(this.name);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">let user = new User(&quot;Jack&quot;); // 創建一個 User Constructor</span><br><span class="line"></span><br><span class="line">alert(user.name); -&gt; Jack</span><br><span class="line">alert(user.isAdmin); -&gt; false</span><br><span class="line">user.sayHi() -&gt; Jack</span><br></pre></td></tr></table></figure>
-
-</li>
-</ul>
-<p>當一個函數作為 <code>new User(...)</code>執行時，它執行以下步驟：</p>
-<ol>
-<li>一個新的空對像被創建並分配給 <code>this</code>。</li>
-<li>函數體執行。通常它會修改 <code>this</code>，為其添加新的屬性。</li>
-<li>返回 <code>this</code> 的值。<br>所以 <code>new User(&quot;Jack&quot;)</code> 的结果是相同的對象</li>
-</ol>
-</li>
-<li><p>Class 用法與特色</p>
-<ul>
-<li><strong>使用 <code>constructor()</code> 建構子來定義初始狀態，而且創建時也必須使用 <code>new</code> 來操作</strong>。<br>建構子(constructor)方法是一個特別的方法，用來建立和初始化一個類別的物件，一個類別只能有一個建構子(constructor)。<br>Class 的 <code>constructor()</code>函數是默認的 method，即使沒有寫出來也會自動生成一個默認的空構造函數，並加入到 <code>class.prototype</code> 上。<br>class syntax：<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">class User &#123;</span><br><span class="line">  constructor(name) &#123;</span><br><span class="line">    this.name = name;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  sayHi() &#123;</span><br><span class="line">    alert(this.name);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line">let user = new User(&quot;John&quot;);</span><br><span class="line">user.sayHi();</span><br></pre></td></tr></table></figure>
-
-</li>
-</ul>
-<p>此時 User.prototype 包括 <code>constructor</code> 和 <code>sayHi</code> 兩個 methods。</p>
-<ul>
-<li><p><strong>class expression</strong> 像一般 function 一樣，也可以寫作沒有名稱的表達式：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">let User = class &#123;</span><br><span class="line">  sayHi() &#123;</span><br><span class="line">    alert(&quot;Hello&quot;);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">function makeClass(phrase) &#123;</span><br><span class="line">  // 返回並宣告一個 class</span><br><span class="line">  return class &#123;  </span><br><span class="line">    sayHi() &#123;</span><br><span class="line">      alert(phrase);</span><br><span class="line">    &#125;;</span><br><span class="line">  &#125;;</span><br><span class="line">&#125;</span><br><span class="line">let User = makeClass(&quot;Hello&quot;);</span><br><span class="line"></span><br><span class="line">new User().sayHi(); // Hello</span><br></pre></td></tr></table></figure>
-</li>
-<li><p><strong>使用 <code>extends()</code> 以及 <code>super()</code> 來繼承父類的參數</strong>給子類。<br>關鍵字 extends 是在類別宣告或是類別敘述中建立子類別的方法。<br>若在子類別中有建構子(constructor)，要使用<code>this</code>前必須先呼叫<code>super()</code>函式：在子類別建構子中用關鍵字 super 來呼叫父類別的建構子。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">const createPersonClass = name =&gt; class extends User &#123;</span><br><span class="line">  constructor() &#123;</span><br><span class="line">    super(name)</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>內部 method 之間不用逗號區分，與一般物件不同，可以避免我們描述二者時產生混淆</p>
-</li>
-<li><p>Class 結構中自動開啟了嚴格模式 (Use Strict)</p>
-</li>
-<li><p>Class 的宣告不會被 hoisting 提升到最高作用區，與函式宣告式不同，<strong>編譯器尚未抵達和執行 class 宣告之前無法建立或存取 class</strong>。</p>
-</li>
-<li><p>Just like literal objects, classes may include <code>getters/setters</code> computed properties etc. Protection and Control：確保內部才能修改或訪問資料，防止洩漏。</p>
-</li>
-</ul>
-</li>
-</ul>
-<h1 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h1><p><a href="https://javascript.info/class" target="_blank" rel="noopener">javascript.info</a><br><a href="https://developer.mozilla.org/zh-TW/docs/Web/JavaScript/Reference/Classes" target="_blank" rel="noopener">mozilla.org - MDN Web Docs</a></p>
 
         
       
@@ -1645,7 +1624,7 @@
         
           <a href="/myblog/archives/">
         
-          <span class="site-state-item-count">31</span>
+          <span class="site-state-item-count">32</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
