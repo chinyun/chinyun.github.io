@@ -193,6 +193,110 @@
   
   
   <div class="post-block home">
+    <link itemprop="mainEntityOfPage" href="https://chinyun.github.io/myblog/myblog/2019/11/11/JS-prototype/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="chinyun">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/myblog/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Jinny's blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+            
+            <a href="/myblog/2019/11/11/JS-prototype/" class="post-title-link" itemprop="url">JS prototype</a>
+          
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              
+                
+              
+
+              <time title="Created: 2019-11-11 21:09:26" itemprop="dateCreated datePublished" datetime="2019-11-11T21:09:26+00:00">2019-11-11</time>
+            </span>
+          
+            
+
+            
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2021-02-17 09:18:43" itemprop="dateModified" datetime="2021-02-17T09:18:43+00:00">2021-02-17</time>
+              </span>
+            
+          
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>筆記 JavaScript 中非常重要的概念：繼承 inheritance、原型 prototype 和原型鍊 prototype chain。</p>
+<h1 id="Object-oriented-programming-OOP-物件導向程式設計"><a href="#Object-oriented-programming-OOP-物件導向程式設計" class="headerlink" title="Object-oriented programming(OOP) 物件導向程式設計"></a>Object-oriented programming(OOP) 物件導向程式設計</h1><p>JavaScript 並不像 Java、C++ 這些典型的物件導向語言具有「類別」（class）來區分概念與實體（instance）或天生具有繼承的能力，而 JavaScript 只有「物件」，因此只能利用設計模式來模擬這些功能。在 JavaScript 世界中，到底是怎麼實現物件導向的概念的？ JavaScript 的物件透過原型 (Prototype) 機制相互繼承功能，與典型的物件導向程式語言相較，運作方式有所差異。<br>在討論 <strong>物件導向 JavaScript</strong> 之前，需要先知道物件導向程式設計的意義：OOP 基本概念是<strong>採用物件（objects）來模塑真實的實物世界</strong>；也就是在程式中透過 objects 來塑造模型，並提供簡單方式存取「難以或不可能採用的功能」，物件可裝載相關的資料與程式碼，資料部分是你塑造某個模型的資訊，而程式碼部分則用是操作行為(Method)實現。</p>
+<p>為了簡化程式撰寫，我們可以為某個複雜東西建立簡單的模型，藉以代表其最重要的概念或特質，且該模型建立方式極易於搭配我們的程式設計用途：譬如<strong>用「類別」建立物件實體 Object instance — 該物件包含了類別中所定義的資料與功能</strong>。</p>
+<p>在根據類別建立物件實體時，就是執行類別的「建構子 Constructor 函式」所建立，而這個「根據類別來建立物件實體」的過程即稱為「實體化 Instantiation」，物件實體就是從類別實體化而來。我們可根據某一個類別建立許多新的子類別，新的子類別可繼承 (Inherit) 其母類別的資料與程式碼特性。你可重複使用所有物件類型共有的功能，而不需再複製之。若功能需與類別有所差異，則可直接於其上定義特殊功能。</p>
+<h1 id="inheritance-繼承"><a href="#inheritance-繼承" class="headerlink" title="inheritance 繼承"></a>inheritance 繼承</h1><p><strong>一個物件可以存取其他物件的屬性 properties、方法 methods，就叫做繼承 inheritance</strong>。<br>繼承可以分成兩種，一種是 classical inheritance 類別繼承，這種方式用在 C# 或 JAVA 當中；另一種則是 JavaScript 使用的 prototypal inheritance 原型繼承。<br>在「典型 OO」中，你必須定義特定的類別物件，才能定義哪些類別所要繼承的類別，而 JavaScript 使用不同的系統：「繼承」的物件並不會一併複製功能過來，而是<strong>透過原型鍊連接其所繼承的功能，亦即所謂的原型繼承 (Prototypal inheritance)</strong>。<br>基於 JavaScript 運作的方式 (原型鍊)，物件之間的功能共享一般稱為「委託 (Delegation)」，即特定物件將功能委託至通用物件類型。「委託」其實比繼承更精確一點。因為「所繼承的功能」並不會複製到「進行繼承的物件」之上，卻是保留在通用物件之中。</p>
+<h1 id="Prototype原型-與-proto-＆-Prototype-的意義"><a href="#Prototype原型-與-proto-＆-Prototype-的意義" class="headerlink" title="Prototype原型 與 __proto__ ＆ [[Prototype]] 的意義"></a>Prototype原型 與 <code>__proto__</code> ＆ <code>[[Prototype]]</code> 的意義</h1><ul>
+<li>Prototype原型</li>
+</ul>
+<p><strong>物件之間可以互相成為各自的 Prototype 原型，被繼承的物件將會繼承 父物件本身的屬性和方法 以及 它的 Prototype 的所有屬性</strong>，原型鍊上可追溯的物件都可以找到其屬性、方法。</p>
+<p><strong>每個物件都有一個隱藏的內部屬性(internal property) <code>[[Prototype]]</code>，這個屬性指向一個物件，也就是繼承的物件；也可以說是該物件的原型</strong>。</p>
+<p>所謂的原型繼承就是指繼承上一個物件的 prototype 屬性 (你也能稱之為 子命名空間 sub namespace) 中定義的成員，也就是以「<code>Object.prototype.</code>」開頭的屬性內容。<code>Object.prototype.</code> 屬性值就是一個物件，儲存了許多我們想「讓原型鍊上的物件一路繼承下去」的屬性與函式。</p>
+<p><code>[[Prototype]]</code> 不允許外部存取，從 ES6 開始，[[Prototype]] 可以通過 <code>Object.getPrototypeOf()</code> 和 <code>Object.setPrototypeOf()</code> 訪問器來訪問，也可以使用物件屬性 <code>__proto__</code> 呼叫。</p>
+<p><code>__proto__</code> 發音 dunder prototype，它原先並非標準但許多瀏覽器實現，最先被 Firefox 使用，後來在 ES6 被列為 Javascript 的標準內建屬性的。它的出現是為了解決讀寫 <code>Object.prototype</code> 的麻煩，提供一個快捷讀寫的 API，而且它是透過連結內部屬性 <code>[[Prototype]]</code> 完成這個功能。</p>
+<p>舉例：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">function Person(name, age) &#123;</span><br><span class="line">  this.name = name;</span><br><span class="line">  this.age = age;</span><br><span class="line">&#125;</span><br><span class="line">  </span><br><span class="line">Person.prototype.log = function () &#123;</span><br><span class="line">  console.log(this.name + &apos;, age:&apos; + this.age);</span><br><span class="line">&#125;</span><br><span class="line">  </span><br><span class="line">var nick = new Person(&apos;nick&apos;, 18);</span><br><span class="line">console.log(nick.__proto__ === Person.prototype) // true</span><br><span class="line">console.log(nick.__proto__ === Object.getPrototypeOf(nick)) // true</span><br><span class="line"></span><br><span class="line">var peter = new Person(&apos;peter&apos;, 20);</span><br><span class="line">console.log(nick.log === peter.log) // true</span><br></pre></td></tr></table></figure>
+
+<p>使用 <code>__proto__</code> 屬性可以透過這個接口指向 class 的原型 也就是 <code>nick.__proto__</code> 會指向 <code>Person.prototype</code> 指向的物件；<code>Person.prototype</code> 指向 Person 的原型屬性。</p>
+<p>上述範例中，當呼叫 <code>nick.log()</code> 的時候，nick 這個 instance 本身並沒有 log 這個 function，那 JavaScript 是怎麼找到這個 method 的？ 根據 JavaScript 的機制；nick 是 Person 的 instance，所以如果在 nick 本身找不到，它會試著從 <code>Person.prototype</code> 去找。可是，JavaScript 怎麼知道要到這邊去找？ 一定是 nick 跟 Person.prototype 會透過某種方式連接起來，才知道要往哪邊去找 log 這個 function，這個連接方式，就是原型鍊。</p>
+<p>假如 JavaScript 在 <code>Person.prototype</code> 還是沒找到 log() method，會繼續依照這個規則，去看 <code>Person.prototype.__proto__</code> (指 Person 的原型物件的原型屬性)裡面有沒有 log() method。就這樣一直不斷找下去，直到找到某個東西的 <code>__proto__</code> 是 <code>null</code> 為止，就表示這邊是最上層了，而這一個不斷串起來的鍊，也就是原型鍊，透過原型鍊可以呼叫自己 parent class 的 method，達到繼承的功能。</p>
+<h1 id="prototype-chain-原型鍊"><a href="#prototype-chain-原型鍊" class="headerlink" title="prototype chain 原型鍊"></a>prototype chain 原型鍊</h1><p>傳統的 OOP 在複製物件時，是先定義了類別，建立物件實例之後，將類型上定義的所有屬性與函式複製到此實例。<br><strong>但 JavaScript 不會複製這些屬性與函式，卻是在物件實例與其建構子之間設定連結 (原型鍊中的連結)，只要順著原型鍊就能在建構子之中找到屬性與函式</strong>。</p>
+<p>新的物件 instance 透過建構子函式 <code>constructor()</code> 產生後，其核心將會透過原型鏈 Prototype chain 的機制傳遞；物件的原型可能也有自己的原型，透過由 prototype 定義的參照鏈連在一起，繼承了其上的函式與屬性。</p>
+<p>這樣不斷繼承的過程，使物件可以使用其他物件的屬性和方法，所以精確來說的話，物件實例的屬性與函式都是透過物件的建構子函式所定義，並非物件實例本身：在 JavaScript 主控台中輸入 <code>Object.prototype.</code> 會看到 Object 的 prototype 屬性中所定義的許多函式，而繼承自 Object 的物件也能找到這些函式。只要試著尋找如 String、Date、Number、Array 等全域物件的原型上定義的函式與屬性，就會看到 JavaScript 中的其他原型鍊繼承範例。</p>
+<h1 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h1><p><a href="https://zh.javascript.info/function-prototype" target="_blank" rel="noopener">javascript.info:function-prototype</a><br><a href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Inheritance_and_the_prototype_chain" target="_blank" rel="noopener">MDN Web Docs:继承与原型链</a></p>
+<p><a href="https://pjchender.blogspot.com/2016/06/javascriptprototypeprototype.html" target="_blank" rel="noopener">了解 JavaScript 中，繼承 inheritance、原型 prototype 和原型鍊 prototype chain 的概念</a><br><a href="https://cythilya.github.io/2018/10/26/prototype/" target="_blank" rel="noopener">你懂 JavaScript 嗎？#19 原型（Prototype）</a><br><a href="https://blog.techbridge.cc/2017/04/22/javascript-prototype/" target="_blank" rel="noopener">該來理解 JavaScript 的原型鍊了</a><br><a href="https://medium.com/@peterchang_82818/javascripter-%E5%BF%85%E9%A0%88%E7%9F%A5%E9%81%93%E7%9A%84%E7%B9%BC%E6%89%BF%E5%9B%A0%E5%AD%90-prototype-prototype-proto-object-class-inheritace-nodejs-%E7%89%A9%E4%BB%B6-%E7%B9%BC%E6%89%BF-54102240a8b4" target="_blank" rel="noopener">Javascripter 必須知道的繼承 prototype, <code>[[prototype]]</code>, <code>__proto__</code></a></p>
+
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+          <div class="post-eof"></div>
+        
+      </footer>
+  </div>
+  
+  
+  
+  </article>
+
+    
+        <article itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block home">
     <link itemprop="mainEntityOfPage" href="https://chinyun.github.io/myblog/myblog/2019/11/11/JS-Class/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -233,7 +337,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-04-26 08:32:31" itemprop="dateModified" datetime="2020-04-26T08:32:31+00:00">2020-04-26</time>
+                <time title="Modified: 2021-02-17 09:18:43" itemprop="dateModified" datetime="2021-02-17T09:18:43+00:00">2021-02-17</time>
               </span>
             
           
@@ -361,7 +465,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-04-26 08:32:31" itemprop="dateModified" datetime="2020-04-26T08:32:31+00:00">2020-04-26</time>
+                <time title="Modified: 2021-02-17 09:18:43" itemprop="dateModified" datetime="2021-02-17T09:18:43+00:00">2021-02-17</time>
               </span>
             
           
@@ -513,7 +617,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-04-26 08:32:31" itemprop="dateModified" datetime="2020-04-26T08:32:31+00:00">2020-04-26</time>
+                <time title="Modified: 2021-02-17 09:18:43" itemprop="dateModified" datetime="2021-02-17T09:18:43+00:00">2021-02-17</time>
               </span>
             
           
@@ -615,7 +719,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-04-26 08:32:31" itemprop="dateModified" datetime="2020-04-26T08:32:31+00:00">2020-04-26</time>
+                <time title="Modified: 2021-02-17 09:18:43" itemprop="dateModified" datetime="2021-02-17T09:18:43+00:00">2021-02-17</time>
               </span>
             
           
@@ -725,7 +829,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-04-26 08:32:31" itemprop="dateModified" datetime="2020-04-26T08:32:31+00:00">2020-04-26</time>
+                <time title="Modified: 2021-02-17 09:18:43" itemprop="dateModified" datetime="2021-02-17T09:18:43+00:00">2021-02-17</time>
               </span>
             
           
@@ -849,7 +953,7 @@ C --> D(Make changes);</pre>
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-04-26 08:32:31" itemprop="dateModified" datetime="2020-04-26T08:32:31+00:00">2020-04-26</time>
+                <time title="Modified: 2021-02-17 09:18:43" itemprop="dateModified" datetime="2021-02-17T09:18:43+00:00">2021-02-17</time>
               </span>
             
           
@@ -993,7 +1097,7 @@ C --> D(Make changes);</pre></li>
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-04-26 08:32:31" itemprop="dateModified" datetime="2020-04-26T08:32:31+00:00">2020-04-26</time>
+                <time title="Modified: 2021-02-17 09:18:43" itemprop="dateModified" datetime="2021-02-17T09:18:43+00:00">2021-02-17</time>
               </span>
             
           
@@ -1163,7 +1267,7 @@ C --> D(Make changes);</pre></li>
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-04-26 08:32:31" itemprop="dateModified" datetime="2020-04-26T08:32:31+00:00">2020-04-26</time>
+                <time title="Modified: 2021-02-17 09:18:43" itemprop="dateModified" datetime="2021-02-17T09:18:43+00:00">2021-02-17</time>
               </span>
             
           
@@ -1443,7 +1547,7 @@ C --> D(Make changes);</pre></li>
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-04-26 08:32:31" itemprop="dateModified" datetime="2020-04-26T08:32:31+00:00">2020-04-26</time>
+                <time title="Modified: 2021-02-17 09:18:43" itemprop="dateModified" datetime="2021-02-17T09:18:43+00:00">2021-02-17</time>
               </span>
             
           
@@ -1515,149 +1619,6 @@ C --> D(Make changes);</pre></li>
   </article>
 
     
-        <article itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block home">
-    <link itemprop="mainEntityOfPage" href="https://chinyun.github.io/myblog/myblog/2019/11/02/CSRF-XSS-SQL-injection/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="chinyun">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/myblog/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Jinny's blog">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-            
-            <a href="/myblog/2019/11/02/CSRF-XSS-SQL-injection/" class="post-title-link" itemprop="url">CSRF, XSS, SQL injection</a>
-          
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              
-                
-              
-
-              <time title="Created: 2019-11-02 20:32:24" itemprop="dateCreated datePublished" datetime="2019-11-02T20:32:24+00:00">2019-11-02</time>
-            </span>
-          
-            
-
-            
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-04-26 08:32:31" itemprop="dateModified" datetime="2020-04-26T08:32:31+00:00">2020-04-26</time>
-              </span>
-            
-          
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>Web Security 網頁安全泛指針對網頁、網站上的資訊安全，涵蓋程式漏洞、邏輯漏洞、資訊洩漏等。</p>
-<h1 id="Cross-Site-Request-Forgery-XSRF-or-CSRF"><a href="#Cross-Site-Request-Forgery-XSRF-or-CSRF" class="headerlink" title="Cross Site Request Forgery(XSRF or CSRF)"></a>Cross Site Request Forgery(XSRF or CSRF)</h1><p>指在受害者不知情狀況下，被其他網域借用身份來完成未經同意的 HTTP Request。<br>當網站使用 cookie-based authentication，會把 session id 和 session data 存在 cookie 中，剛使用者曾在其他網站登入而未登出，並且進入惡意網站操作時，攻擊者利用可以進行跨域 http 請求的 http tag(ex: img、iframe等)埋入惡意的 request 程式碼，觸發後因為使用者未登出，因此攻擊者獲得 cookie 資料，攻擊者得以冒用使用者身份通過驗證。得以任意改變使者者在資料庫的資料。</p>
-<p>同源政策對於連結(links)、重新導向(redirect)、表單(form)等的跨來源存取都是寬鬆的，因此駭客利用此特性做 CSRF 攻擊。</p>
-<p>如何防範：</p>
-<ol>
-<li>使用 token-based authentication</li>
-<li>使用 HttpOnly 來防止 Cookie 被 JavaScript 讀取</li>
-<li>目前各大成熟的框架，都有針對傳遞資料做 CSRF 驗證，網站會產生的一組密碼，並在請求送出時，檢查那組密碼是否正確。</li>
-</ol>
-<p>Cross Site Request Forgery attacks are not an issue if you are using JWT with local storage. On the other hand, if your use case requires you to store the JWT in a cookie, you will need to protect against XSRF. XSRF are not as easily understood as XSS attacks. Explaining how XSRF attacks work can be time-consuming, so instead, check out this really good guide that explains in-depth how XSRF attacks work. Luckily, preventing XSRF attacks is a fairly simple matter. To over-simplify, protecting against an XSRF attack, your server, upon establishing a session with a client will generate a unique token (note this is not a JWT). Then, anytime data is submitted to your server, a hidden input field will contain this token and the server will check to make sure the tokens match. Again, as our recommendation is to store the JWT in <strong>local storage</strong>, you probably will not have to worry about XSRF attacks.</p>
-<p>One of the best ways to protect your users and servers is to have a <strong>short expiration time</strong> for tokens. That way, even if a token is compromised, it will quickly become useless. Additionally, you may maintain a blacklist of compromised tokens and not allow those tokens access to the system. Finally, the nuclear approach would be to change the signing algorithm, which would invalidate all active tokens and require all of your users to log in again. This approach is not easily recommended, but is available in the event of a severe breach.</p>
-<h1 id="Cross-Site-Scripting-XSS"><a href="#Cross-Site-Scripting-XSS" class="headerlink" title="Cross Site Scripting(XSS)"></a>Cross Site Scripting(XSS)</h1><p>「XSS攻擊通常指的是通過利用網頁開發時留下的漏洞，通過巧妙的方法注入惡意指令程式碼到網頁，使用戶載入並執行攻擊者惡意製造的網頁程式。 這些惡意網頁程式通常是JavaScript，但實際上也可以包括Java，VBScript，ActiveX，Flash或者甚至是普通的HTML。」–wikipedia</p>
-<p>使用者以為安全進入網站後反而被導向到釣魚網站、甚至被竊取帳號密碼、個人資料。<br>目前 XSS 攻擊的種類大致可以分成以下幾種類型：</p>
-<ul>
-<li><p>Stored XSS (儲存型)：<br>會被保存在伺服器資料庫中的 JavaScript 代碼引起的攻擊即為 Stored XSS，最常見的就是論壇文章、留言板等等，因為使用者可以輸入任意內容，若沒有確實檢查，那使用者輸入如 <code>&lt;script&gt;</code> 等關鍵字就會被當成正常的 HTML 執行，標籤的內容也會被正常的作為 JavaScript 代碼執行。</p>
-</li>
-<li><p>Reflected XSS (反射型)：<br>由網頁後端直接嵌入由前端使用者所傳送過來的內容造成的，最常見的就是以 GET 方法傳送資料給伺服器時，伺服器未檢查就將內容回應到網頁上所產生的漏洞。</p>
-</li>
-<li><p>DOM-Based XSS (基於 DOM 的類型):<br>網頁上的 JavaScript 在執行過程中，沒有詳細檢查，輸入任意的內容都會被建立成有效的 DOM 物件，包含嵌入的代碼也會被執行，使得操作 DOM 的過程代入了惡意指令。但這樣的攻擊除非攻擊者親自到受害者電腦前輸入，否則不可能讓受害者輸入這種惡意代碼，通常需要搭配前兩個手法；讓內容保存在伺服器資料庫中、或是以反射型的方式製造出內容，再藉由JavaScript 動態產生有效的 DOM 物件來運行惡意代碼。</p>
-</li>
-</ul>
-<p>如何防範：</p>
-<ol>
-<li><p>前兩種 Stored、Reflected 的類型都必須由後端進行防範，除了必要的 HTML 代碼，任何允許使用者輸入的內容都需要檢查，刪除所有「<code>&lt;script&gt;</code>」、「 <code>onerror=</code>」及其他任何可能執行代碼的字串。</p>
-</li>
-<li><p>DOM-Based 則必須由前端來防範，但基本上還是跟前面的原則相同。<br>另外不同的一點就是應該選擇正確的方法、屬性來操作 DOM，譬如<code>document.getElementById(&#39;show_name&#39;).innerHTML = name;</code> 中的<code>innerHTML</code>屬性代表插入的內容是合法的 HTML 字串，所以字串會解析成 DOM 物件，此處使用<code>innerText</code>會被保證作為純粹的文字，也就不可能被插入惡意代碼執行了。</p>
-</li>
-</ol>
-<p>Cross Site Scripting attacks occur when an outside entity is able to execute code within your website or app. The most common attack vector here is if your website allows <strong>inputs</strong> that are not properly sanitized. <strong>If an attacker can execute code on your domain, your JWT tokens are vulnerable. Many frameworks, including Angular, automatically sanitize inputs and prevent arbitrary code execution.</strong> If you are not using a framework that sanitizes input/output out-of-the-box, you can look at plugins like caja developed by Google to assist. Sanitizing inputs is a solved issue in many frameworks and languages and I would recommend using a framework or plugin vs building your own.</p>
-<h1 id="SQL-injection"><a href="#SQL-injection" class="headerlink" title="SQL injection"></a>SQL injection</h1><p>「Injection 是一種駭客常用的攻擊概念，透過注入惡意的程式碼的方式，破壞原本程式碼的語意，來達到攻擊的效果。SQL 是網站常用來取得資料的程式語法，SQL Injection 便是駭客透過修改 SQL 語句，改變他的語意，達成竊取資料/破壞資料的行為。」<br>–<a href="https://medium.com/@jaydenlin/淺談駭客攻擊-網站安全-一次看懂-sql-injection-的攻擊原理-b1994fd2392a" target="_blank" rel="noopener">一次看懂 SQL Injection 的攻擊原理</a></p>
-<p>「在輸入的字串之中夾帶SQL指令，在設計不良的程式當中忽略了字元檢查，那麼這些夾帶進去的惡意指令就會被資料庫伺服器誤認為是正常的SQL指令而執行，因此遭到破壞或是入侵。」<br>–wikipedia</p>
-<p>「在 SQL 語法中常會出現攻擊者可以透過更改語法邏輯或加入特殊指令的方式，在未設定過濾惡意程式碼的情況下，資料庫伺服器（DataBase）會直接接收使用者所輸入的 SQL 指令並執行攻擊代碼，使攻擊者能夠取得最高權限，得以擅自竊取、修改、挪動或刪除資料的可能。此類漏洞無疑的會對公司或商號造成相當大的損傷。」<br>–<a href="https://ithelp.ithome.com.tw/articles/10189201" target="_blank" rel="noopener">攻擊行為－SQL 資料隱碼攻擊 SQL injection</a></p>
-<p>常見攻擊手法：</p>
-<ul>
-<li>Authorization Bypass（略過權限檢查）</li>
-<li>Injecting SQL Sub-Statements into SQL Queries（注入 SQL 子語法）</li>
-<li>Exploiting Stored Procedures（利用預存程序）</li>
-</ul>
-<p>防範手法：</p>
-<ul>
-<li><p>使用 SQL query builder for JavaScript - knex.js：<br>Read carefully from knex documentation how to pass values to knex raw (<a href="http://knexjs.org/#Raw" target="_blank" rel="noopener">http://knexjs.org/#Raw</a>).<br>If you are passing values as parameter binding to raw like:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">knex.raw(&apos;select * from foo where id = ?&apos;, [1])</span><br></pre></td></tr></table></figure>
-
-<p>In that case parameters and query string are passed separately to database driver protecting query from SQL injection.</p>
-<p>Other query builder methods always uses binding format internally so they are safe too.</p>
-<p>Biggest mistake that one can do with knex raw queries is to use javascript template string and interpolate variables directly to SQL string format like:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">knex.raw(`select * from foo where id = $&#123;id&#125;`) // NEVER DO THIS</span><br></pre></td></tr></table></figure>
-
-<p>One thing to note is that knex table/identifier names cannot be passed as bindings to driver, so with those one should be extra careful to not read table / column names from user and use them without properly validating them first.</p>
-<p>Refer from:<a href="https://stackoverflow.com/questions/49665023/does-knex-js-prevent-sql-injection/49665379" target="_blank" rel="noopener">Does Knex.js prevent sql injection?</a></p>
-</li>
-<li><p>使用 ORM(object relational mapping)：<br>在資料庫和 model資料容器之間的框架，他可以幫助開發者更簡便安全的去資料庫讀取資料，透過 ruby, java 等程式語言，去操作資料庫語言。同時因為是操作程式語言，若 query 中的值不符合預期格式，框架會自動擋掉而不會讓 SQL injection 成功。目前大部分的網站都是使用框架來開發，而這些框架都是使用 ORM 來處理他們的資料庫，因此在 ORM 的保護下，不是我們預期的資料格式，而是 SQL 語法的話，具有基本的保護能力。</p>
-</li>
-<li><p>參數化查詢（parameterized query 或 parameterized statement）：<br>是指在設計與資料庫連結並存取資料時，在需要填入數值或資料的地方，使用參數（parameter）來給值，這個方法目前已被視為最有效可預防SQL注入攻擊的攻擊手法的防禦方式。 – <a href="https://www.wikiwand.com/zh-tw/%E5%8F%83%E6%95%B8%E5%8C%96%E6%9F%A5%E8%A9%A2" target="_blank" rel="noopener">參數化查詢</a></p>
-</li>
-<li><p>使用 Regular expression 驗證過濾輸入值與參數中惡意代碼，將輸入值中的單引號置換為雙引號。</p>
-</li>
-<li><p>限制輸入字元格式並檢查輸入長度。</p>
-</li>
-<li><p>資料庫設定使用者帳號權限，限制某些管道使用者無法作資料庫存取。</p>
-</li>
-</ul>
-<h1 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h1><p><a href="https://www.gnucitizen.org/blog/csrf-demystified/" target="_blank" rel="noopener">CSRF</a><br><a href="https://forum.gamer.com.tw/Co.php?bsn=60292&sn=11267" target="_blank" rel="noopener">網頁安全】給網頁開發新人的 XSS 攻擊 介紹與防範</a><br><a href="https://ithelp.ithome.com.tw/articles/10209227" target="_blank" rel="noopener">資安常見攻擊( Web ) 與學習方法</a></p>
-
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-          <div class="post-eof"></div>
-        
-      </footer>
-  </div>
-  
-  
-  
-  </article>
-
-    
   </div>
 
   
@@ -1706,7 +1667,7 @@ C --> D(Make changes);</pre></li>
         
           <a href="/myblog/archives/">
         
-          <span class="site-state-item-count">32</span>
+          <span class="site-state-item-count">33</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
@@ -1728,7 +1689,7 @@ C --> D(Make changes);</pre></li>
 
     <footer id="footer" class="footer">
       <div class="footer-inner">
-        <div class="copyright">&copy; <span itemprop="copyrightYear">2020</span>
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2021</span>
   <span class="with-love" id="animate">
     <i class="fa fa-user"></i>
   </span>
